@@ -15,15 +15,11 @@ import com.tda367.game.Model.RoundHandler;
 public class App extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
-	private RoundHandler roundHandler;
-	private GameTimer gameTimer;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		gameTimer = GameTimer.GetInstance();
-		roundHandler = RoundHandler.GetInstance();
 	}
 
 	@Override
@@ -32,8 +28,6 @@ public class App extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(img, 0, 0);
 		batch.end();
-		gameTimer.UpdateTime();
-		gameTimer.GetTime();
 	}
 	
 	@Override
