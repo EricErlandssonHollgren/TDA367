@@ -2,36 +2,31 @@ package com.tda367.game.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector;
+import com.badlogic.gdx.math.Vector2;
+import com.tda367.game.Controller.KeyController;
 
 public class Player {
-    private int posX;
+    KeyController key;
+    private Vector2 position;
+    private Vector2 velocity;
+    private Texture player;
+    private float speed = 5.0f;
 
-    public Player(int x){
-        this.posX = x;
+    public Player(Vector2 position, Vector2 velocity) {
+        this.position = position;
+        this.velocity = velocity;
+
     }
 
-    public boolean pressedKey(){
-        float moveAmount;
-        boolean keyD = Gdx.input.isKeyPressed(Input.Keys.D);
-        boolean keyA = Gdx.input.isKeyPressed(Input.Keys.A);
-        if(keyD){
-            moveAmount = 5.0f;
-            if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)){
-                posX += moveAmount;
-            }
+   /* public void Move(){
+        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+            position.x += Gdx.graphics.getDeltaTime()*speed;
         }
-        if(keyA){
-            moveAmount = 10.0f;
-            if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT));
-            {
-                posX -= moveAmount;
-            }
+        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+            position.x -= Gdx.graphics.getDeltaTime()*speed;
         }
+    }*/
 
-        return true;
-    }
-
-    public void Move(){
-        pressedKey();
-    }
 }
