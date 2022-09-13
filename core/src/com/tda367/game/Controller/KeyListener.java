@@ -8,12 +8,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.tda367.game.App;
+import com.tda367.game.Interfaces.PlayerPositionSubscriber;
 import com.tda367.game.Model.Player;
 
 import javax.sound.midi.ShortMessage;
 
 
-public class KeyListener  {
+public class KeyListener implements PlayerPositionSubscriber {
     private Player player;
     private App app;
     private static KeyListener keyListener;
@@ -22,15 +23,15 @@ public class KeyListener  {
     private float frameTime = 1/15f;
     private Vector2 playerVelocity;
 
-    private KeyListener(Player player, App app){
-        this.player = player;
-        this.app = app;
-        keyListener = new KeyListener(player, app);
+    private KeyListener(){
+        //this.player = player;
+        //this.app = app;
+        keyListener = new KeyListener();
     }
 
     public static KeyListener getInstance(){
         if(keyListener == null){
-            keyListener = new KeyListener(getInstance().player, getInstance().app);
+            keyListener = new KeyListener();
         }
         return keyListener;
     }
@@ -44,5 +45,11 @@ public class KeyListener  {
         }
     }
 
+    @Override
+    public void updatePosition(float x, float y) {
 
+        //I vyn ska positionen sedan uppdateras
+        //view.updatePosition(model.x, model.y) - kanske att jag kallar på Update metoden här?
+        updatePosition(x,y);
+    }
 }

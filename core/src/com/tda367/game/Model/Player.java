@@ -17,7 +17,7 @@ public class Player  {
 
     List<PlayerPositionSubscriber> subscriberList = new ArrayList<>();
     private Sprite playerSprite;
-    private Vector2 velocity = new Vector2();
+
     private float frameTime = 15f;
     private float x;
     private float y;
@@ -59,7 +59,7 @@ public class Player  {
 
     public Texture getPlayerTexture(){
         //TODO: Using this for now until I have done the other parts.
-        return new Texture(Gdx.files.internal("badlogic.jpg"));
+        return new Texture("adventurer-stand-01.png");
     }
 
 
