@@ -8,9 +8,14 @@ public class PointHandler extends MainHandler {
         if (request.getDescription() == HandlerItemDefiners.POINTS) {
             addPoints(request.getValue());
         }
+        else if (m_successor != null)
+        {
+            m_successor.handleRequest(request);
+        }
     }
 
     private void addPoints(int amount){
+        System.out.println(amount);
         points+=amount;
     }
 
@@ -18,6 +23,8 @@ public class PointHandler extends MainHandler {
         return (this.points);
         // add time passed
     }
+
+
 }
 
 /*

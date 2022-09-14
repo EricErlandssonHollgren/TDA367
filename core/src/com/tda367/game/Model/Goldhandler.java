@@ -9,11 +9,16 @@ public class Goldhandler extends MainHandler {
         if (request.getDescription() == HandlerItemDefiners.GOLD) {
             addGold(request.getValue());
         }
-
+        else if (m_successor != null)
+        {
+            m_successor.handleRequest(request);
+        }
     }
 
     private void addGold(int amount){
+        System.out.println(amount);
         this.gold+=amount;
     }
 
+    public int getGold() {return gold;}
 }
