@@ -21,7 +21,7 @@ public class RenderEnemy extends ApplicationAdapter {
     public void render() {
         ScreenUtils.clear(Color.BLACK);
         batch.begin();
-        batch.draw(img, 200,200);
+        batch.draw(img, 800,0, (float) Math.ceil(img.getHeight()*0.2), (float) Math.ceil(img.getWidth()*0.25));
         batch.end();
     }
 
