@@ -59,6 +59,7 @@ project(":core") {
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation files ('libs/gradle-wrapper.jar')
         
     }
 }
