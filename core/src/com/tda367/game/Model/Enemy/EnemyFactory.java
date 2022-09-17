@@ -1,7 +1,11 @@
-package com.tda367.game.Model.Enemy;
+package Model.Enemy;
 
-import com.tda367.game.Model.Enemy.Enemies.Enemy1;
 
+import Model.Enemy.Enemies.Enemy1;
+
+/**
+ *
+ */
 public class EnemyFactory {
 
     public static Enemy createEnemy1() {

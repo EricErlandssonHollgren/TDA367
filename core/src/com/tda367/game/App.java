@@ -1,8 +1,8 @@
-package com.tda367.game;
+package game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.tda367.game.View.RenderEnemy;
+import View.RenderEnemy;
 
 public class App extends ApplicationAdapter {
 
@@ -16,7 +16,7 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
-		enemy1.render();
+		enemy1.render(800,0);
 	}
 	
 	@Override
