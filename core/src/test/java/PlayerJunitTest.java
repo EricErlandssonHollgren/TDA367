@@ -1,4 +1,4 @@
-package java;
+package test.java;
 
 import Model.Player;
 import com.badlogic.gdx.Gdx;
@@ -16,5 +16,15 @@ public class PlayerJunitTest {
 
         assertTrue(player.getPosX() < posX);
 
+    }
+
+    @Test
+    public void playerMoveRightShouldBeMoreThanCurrentPositionIfMoveRight(){
+        Player player = new Player(40f, 50f);
+
+        float posX = player.getPosX();
+        player.moveRight();
+
+        assertTrue(player.getPosX() > posX);
     }
 }
