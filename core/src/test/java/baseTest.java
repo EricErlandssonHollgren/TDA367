@@ -1,4 +1,3 @@
-package java;
 import com.tda367.game.Model.Base;
 import com.tda367.game.Model.Turret;
 import org.junit.jupiter.api.Test;
@@ -13,20 +12,20 @@ import org.junit.jupiter.api.Test;
 public class baseTest {
 
     @Test
-    public void testLocation() {
+    public void testBaseHasSpecifiedLocation() {
         Base base1 = new Base(0,1,1,0);
         assertEquals(base1.getPositionX(), 1);
         assertEquals(base1.getPositionY(), 1);
     }
 
     @Test
-    public void testHealth() {
+    public void testBaseHasSpecifiedHealth() {
         Base base2 = new Base(100, 0,0, 0);
         assertTrue(base2.getHealth() == 100);
     }
 
     @Test
-    public void testTurrets() {
+    public void testBaseContainsSpecifiedTurret() {
         Base base3 = new Base(0,0,0,1);
         Turret turret = new Turret(0,0);
         base3.buildTurret(turret);
