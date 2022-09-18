@@ -30,6 +30,7 @@ public class Base implements Build {
     Gets the current base health
      */
     public double getHealth(){
+
         return health;
     }
 
@@ -37,6 +38,7 @@ public class Base implements Build {
     Gets the current maximum turret capacity
      */
     public int getMax_capacity(){
+
         return max_capacity;
     }
 
@@ -44,10 +46,12 @@ public class Base implements Build {
     Gets the base position
      */
     public double getPosition(){
+
         return position;
     }
 
     public ArrayList<Turret> getTurrets() {
+
         return turrets;
     }
 
@@ -55,11 +59,11 @@ public class Base implements Build {
         Builds a turret on the base if the base has available space for a turret
          */
     public void buildTurret(Turret turret){
-        if (!this.isFull()){
-            turrets.add(turret);
+        if (this.isFull()){
+            throw new IllegalStateException("There is no space for a Turret");
         }
         else{
-            throw new IllegalStateException("There is no space for a Turret");
+            turrets.add(turret);
         }
     }
 
@@ -70,7 +74,9 @@ public class Base implements Build {
         if (this.turrets.contains(turret)){
             this.turrets.remove(turret);
         }
-        else;
+        else{
+            throw new IllegalStateException("You don't have any turrets to be sold");
+        }
     }
 
     /*
