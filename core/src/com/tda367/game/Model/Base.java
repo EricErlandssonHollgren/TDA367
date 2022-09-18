@@ -11,7 +11,8 @@ import java.util.ArrayList;
 public class Base implements Build {
 
     private double health;
-    private double position;
+    private double positionX;
+    private double positionY;
     private int max_capacity;
     private ArrayList turrets;
 
@@ -19,9 +20,10 @@ public class Base implements Build {
     /*
     This creates a player base, which requires arguments for its health, location and maximum turrets capacity
      */
-    public Base(double health, double position, int max_capacity){
+    public Base(double health, double positionX, double positionY, int max_capacity){
         this.health = health;
-        this.position = position;
+        this.positionX = positionX;
+        this.positionY = positionY;
         this.max_capacity = max_capacity;
         turrets = new ArrayList<Turret>();
     }
@@ -43,11 +45,19 @@ public class Base implements Build {
     }
 
     /*
-    Gets the base position
+    Gets the base position x
      */
-    public double getPosition(){
+    public double getPositionX(){
 
-        return position;
+        return positionX;
+    }
+
+    /*
+    Gets the base position y
+     */
+    public double getPositionY(){
+
+        return positionY;
     }
 
     public ArrayList<Turret> getTurrets() {
