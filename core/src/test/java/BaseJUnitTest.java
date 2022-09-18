@@ -1,15 +1,15 @@
 import com.tda367.game.Model.Base;
 import com.tda367.game.Model.Turret;
-import org.junit.jupiter.api.Test;
 
-        import static org.junit.jupiter.api.Assertions.assertEquals;
-        import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Testing that the base has a location, health value and contains a turret upon building a turret.
  */
 
-public class baseTest {
+public class BaseJUnitTest {
 
     @Test
     public void testBaseHasSpecifiedLocation() {
