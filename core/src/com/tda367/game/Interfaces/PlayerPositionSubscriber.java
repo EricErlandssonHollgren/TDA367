@@ -1,4 +1,4 @@
-package com.tda367.game.Interfaces;
+package Interfaces;
 
 public interface PlayerPositionSubscriber {
 

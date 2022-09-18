@@ -3,9 +3,9 @@ package com.tda367.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.tda367.game.Controller.KeyListener;
-import com.tda367.game.Model.Player;
-import com.tda367.game.View.PlayerView;
+import Controller.KeyListener;
+import Model.Player;
+import View.PlayerView;
 
 public class App extends ApplicationAdapter {
 	SpriteBatch batch;

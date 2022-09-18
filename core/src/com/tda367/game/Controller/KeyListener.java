@@ -1,7 +1,7 @@
-package com.tda367.game.Controller;
+package Controller;
 
 import com.badlogic.gdx.*;
-import com.tda367.game.Model.Player;
+import Model.Player;
 
 
 

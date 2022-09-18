@@ -1,9 +1,9 @@
-package com.tda367.game.View;
+package View;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.tda367.game.Interfaces.PlayerPositionSubscriber;
-import com.tda367.game.Model.Player;
+import Interfaces.PlayerPositionSubscriber;
+import Model.Player;
 
 public class PlayerView implements PlayerPositionSubscriber {
     Sprite playerSprite;

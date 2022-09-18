@@ -1,13 +1,12 @@
-package com.tda367.game.Model;
+package Model;
 
 import com.badlogic.gdx.Gdx;
-import com.tda367.game.Interfaces.PlayerPositionSubscriber;
+import Interfaces.PlayerPositionSubscriber;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
     List<PlayerPositionSubscriber> subscriberList = new ArrayList<>();
-    private float frameTime = 15f;
     private float x;
     private float y;
 
@@ -22,14 +21,14 @@ public class Player {
     }
 
     public void moveLeft(){
-        x -= Gdx.graphics.getDeltaTime()*frameTime;
+        x -= 15f;
         for (PlayerPositionSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
     }
 
     public void moveRight(){
-        x += Gdx.graphics.getDeltaTime()*frameTime;
+        x += 15f;
         for (PlayerPositionSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
