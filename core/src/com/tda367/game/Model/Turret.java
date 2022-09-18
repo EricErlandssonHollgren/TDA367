@@ -19,6 +19,9 @@ public class Turret implements Shoot {
         return shootingSpeed;
     }
 
+    public void shootProjectile() {
+
+    }
 
 
 }
