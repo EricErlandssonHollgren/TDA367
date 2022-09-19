@@ -1,11 +1,14 @@
 package Model;
 
+import Interfaces.IObservers;
 import com.badlogic.gdx.Gdx;
 import Interfaces.PlayerPositionSubscriber;
+import com.badlogic.gdx.Input;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements IObservers {
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
@@ -70,4 +73,13 @@ public class Player {
         return x;
     }
 
+    @Override
+    public void keyPressed(int key) {
+        if(key == Input.Keys.LEFT){
+            moveLeft();
+        }
+        if(key == Input.Keys.RIGHT){
+            moveRight();
+        }
+    }
 }

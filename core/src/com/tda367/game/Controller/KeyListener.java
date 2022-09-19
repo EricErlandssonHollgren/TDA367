@@ -1,22 +1,19 @@
 package Controller;
 
+import Interfaces.IObservers;
 import com.badlogic.gdx.*;
 import Model.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class KeyListener{
-    Player player;
+    List<IObservers> observers = new ArrayList<>();
 
-    /**
-     * Constructor when creating a KeyListener. The constructor is mainly used for
-     * creating a KeyListener which listens to when keys are being pressed.
-     * @param player represents the player
-     */
-    public KeyListener(Player player){
-        this.player = player;
+    public void addSubscribers(IObservers observer){
+        observers.add(observer);
     }
-
     /**
      * UpdatePlayerPosition listens to inputs depending on which key is pressed.
      * When being listened it tells the player to either use moveLeft()-
@@ -24,10 +21,14 @@ public class KeyListener{
      */
     public void UpdatePlayerPosition(){
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
-            player.moveLeft();
+            for (IObservers o: observers) {
+                o.keyPressed(Input.Keys.LEFT);
+            }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
-            player.moveRight();
+            for (IObservers o: observers) {
+                o.keyPressed(Input.Keys.RIGHT);
+            }
         }
     }
 

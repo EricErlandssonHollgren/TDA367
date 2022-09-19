@@ -7,15 +7,12 @@ import Model.Player;
 
 public class PlayerView implements PlayerPositionSubscriber {
     Sprite playerSprite;
-    Player player;
 
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
-     * the player and a sprite for the player.
-     * @param player represents the player
+     * the sprite for the player.
      */
-    public PlayerView(Player player){
-        this.player = player;
+    public PlayerView(){
         this.playerSprite = new Sprite(getPlayerTexture());
     }
 

@@ -16,8 +16,9 @@ public class App extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		player = new Player(40f, 50f);
-		keyListener = new KeyListener(player);
-		view = new PlayerView(player);
+		keyListener = new KeyListener();
+		view = new PlayerView();
+		keyListener.addSubscribers(player);
 		player.positionSubscriber(view);
 	}
 
