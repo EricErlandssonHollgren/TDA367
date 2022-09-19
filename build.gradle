@@ -57,19 +57,9 @@ project(":core") {
     apply plugin: "java-library"
 
 
-    repositories{
-        mavenCentral()
-    }
-
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
-        implementation files ('libs/gradle-wrapper.jar')
-        testImplementation('org.junit.jupiter:junit-jupiter-api:5.1.1')
-        testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.1.1')
-    }
-
-    test {
-        useJUnitPlatform()
+        
     }
 }
 
