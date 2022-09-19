@@ -1,6 +1,6 @@
-package com.tda367.game.Interfaces;
+package Interfaces;
 
-import com.tda367.game.Model.Turret;
+import Model.Turret;
 
 /**
  * A class with this interface should be able to build turrets

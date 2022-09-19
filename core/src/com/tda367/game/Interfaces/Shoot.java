@@ -1,4 +1,4 @@
-package com.tda367.game.Interfaces;
+package Interfaces;
 
 /**
  * A class with this interface should be able to shoot projectiles

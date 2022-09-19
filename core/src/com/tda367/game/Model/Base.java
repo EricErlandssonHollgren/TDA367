@@ -1,12 +1,11 @@
-package com.tda367.game.Model;
+package Model;
+import Interfaces.Build;
 
+import java.util.ArrayList;
 /*
 A player base
  */
 
-import com.tda367.game.Interfaces.Build;
-
-import java.util.ArrayList;
 
 public class Base implements Build {
 

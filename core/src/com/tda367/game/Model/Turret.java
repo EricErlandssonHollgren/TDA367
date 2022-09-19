@@ -1,6 +1,6 @@
-package com.tda367.game.Model;
+package Model;
 
-import com.tda367.game.Interfaces.Shoot;
+import Interfaces.Shoot;
 
 /*
     This creates a Turret, which requires arguments for its damage, and its shooting speed

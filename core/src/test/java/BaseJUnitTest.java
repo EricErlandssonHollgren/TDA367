@@ -1,6 +1,5 @@
-import com.tda367.game.Model.Base;
-import com.tda367.game.Model.Turret;
-
+import Model.Base;
+import Model.Turret;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,7 +20,7 @@ public class BaseJUnitTest {
     @Test
     public void testBaseHasSpecifiedHealth() {
         Base base2 = new Base(100, 0,0, 0);
-        assertTrue(base2.getHealth() == 100);
+        assertEquals(100, base2.getHealth());
     }
 
     @Test
