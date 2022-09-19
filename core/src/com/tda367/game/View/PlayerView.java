@@ -1,20 +1,13 @@
 package View;
-import Controller.KeyListener;
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import Interfaces.PlayerPositionSubscriber;
 import Model.Player;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
-public class PlayerView extends ApplicationAdapter implements PlayerPositionSubscriber {
-    private Sprite playerSprite;
-    private SpriteBatch batch;
-    private Player player;
-    private KeyListener keyListener = new KeyListener(player);
-    private Texture texture;
+public class PlayerView implements PlayerPositionSubscriber {
+    Sprite playerSprite;
+    Player player;
 
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
@@ -23,27 +16,24 @@ public class PlayerView extends ApplicationAdapter implements PlayerPositionSubs
      */
     public PlayerView(Player player){
         this.player = player;
-        this.playerSprite = new Sprite();
+        this.playerSprite = new Sprite(getPlayerTexture());
     }
 
-    public void create(){
-        batch = new SpriteBatch();
-        player = new Player(40f, 50f);
-        texture = new Texture("adventurer-stand-01.png");
-        keyListener = new KeyListener(player);
+    /**
+     * The draw method for a playerSprite should draw the player.
+     * @param playerBatchSprite is the batch of a player
+     */
+    public void draw(Batch playerBatchSprite) {
+        playerSprite.draw(playerBatchSprite);
     }
 
-    public void render(){
-        ScreenUtils.clear(0, 0, 0, 0);
-        batch.begin();
-        batch.draw(texture, player.getPosX(), player.getPosY());
-        keyListener.UpdatePlayerPosition();
-        batch.end();
-    }
-
-    public void dispose(){
-        batch.dispose();
-
+    /**
+     *Method should be creating the character's look
+     * @return the characters texture
+     */
+    public Texture getPlayerTexture(){
+        //TODO: Using this for now
+        return new Texture("adventurer-stand-01.png");
     }
 
     /**
