@@ -13,8 +13,9 @@ public class PlayerView extends ApplicationAdapter implements PlayerPositionSubs
     private Sprite playerSprite;
     private SpriteBatch batch;
     private Player player;
+    private KeyListener keyListener = new KeyListener(player);
     private Texture texture;
-    private KeyListener keyListener;
+    private PlayerPositionSubscriber subscriber;
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
      * the player and a sprite for the player.
@@ -29,7 +30,7 @@ public class PlayerView extends ApplicationAdapter implements PlayerPositionSubs
         batch = new SpriteBatch();
         player = new Player(40f, 50f);
         texture = new Texture("adventurer-stand-01.png");
-        keyListener = new KeyListener(player);
+        player.positionSubscriber(subscriber);
     }
 
     public void render(){

@@ -2,8 +2,6 @@ package Model;
 
 import Controller.KeyListener;
 import Interfaces.PlayerPositionSubscriber;
-
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +10,6 @@ public class Player {
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
     List<PlayerPositionSubscriber> subscriberList = new ArrayList<>();
-    private KeyListener keyListener = new KeyListener(this);
     private float x;
     private float y;
 
@@ -71,4 +68,5 @@ public class Player {
     public float getPosX(){
         return x;
     }
+
 }
