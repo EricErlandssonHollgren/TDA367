@@ -1,6 +1,6 @@
 package Model;
 
-import com.badlogic.gdx.Gdx;
+import Controller.KeyListener;
 import Interfaces.PlayerPositionSubscriber;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,6 @@ public class Player {
 
     /**
      * A subscriber to handle the playerPosition. It should be updating its position
-     * @param subscriber for the subscriberList
      */
     public void positionSubscriber(PlayerPositionSubscriber subscriber){
         subscriberList.add(subscriber);
