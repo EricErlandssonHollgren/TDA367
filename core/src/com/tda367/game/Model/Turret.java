@@ -2,6 +2,9 @@ package com.tda367.game.Model;
 
 import com.tda367.game.Interfaces.Shoot;
 
+/*
+    This creates a Turret, which requires arguments for its damage, and its shooting speed
+     */
 public class Turret implements Shoot {
     private double damage;
     private double shootingSpeed;
@@ -19,6 +22,9 @@ public class Turret implements Shoot {
         return shootingSpeed;
     }
 
+    /*
+    This is going to be a method for the turret to shoot a projectile
+     */
     public void shootProjectile() {
 
     }

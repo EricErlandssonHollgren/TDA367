@@ -60,6 +60,9 @@ public class Base implements Build {
         return positionY;
     }
 
+    /*
+    Gets the base position y
+     */
     public ArrayList<Turret> getTurrets() {
 
         return turrets;
