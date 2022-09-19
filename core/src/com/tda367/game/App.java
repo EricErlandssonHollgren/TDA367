@@ -8,30 +8,21 @@ import Model.Player;
 import View.PlayerView;
 
 public class App extends ApplicationAdapter {
-	SpriteBatch batch;
-	Player player;
-	PlayerView view;
-	KeyListener keyListener;
+
+	PlayerView view = new PlayerView(new Player(40f, 50f));
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		player = new Player(40f, 50f);
-		keyListener = new KeyListener(player);
-		view = new PlayerView(player);
-		player.positionSubscriber(view);
+		view.create();
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 0);
-		batch.begin();
-		view.draw(batch);
-		keyListener.UpdatePlayerPosition();
-		batch.end();
+		view.render();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
+		view.dispose();
 	}
 }
