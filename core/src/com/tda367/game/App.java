@@ -1,31 +1,38 @@
 package com.tda367.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import Controller.KeyListener;
+import Model.Player;
+import View.PlayerView;
 
 public class App extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
-	
+	Player player;
+	PlayerView view;
+	KeyListener keyListener;
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		player = new Player(40f, 50f);
+		keyListener = new KeyListener();
+		view = new PlayerView();
+		keyListener.addSubscribers(player);
+		player.positionSubscriber(view);
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		view.draw(batch);
+		keyListener.UpdatePlayerPosition();
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 }
