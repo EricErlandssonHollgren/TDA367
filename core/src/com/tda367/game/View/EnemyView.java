@@ -1,6 +1,7 @@
 package View;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import Interfaces.IView;
+import Model.Enemy.Enemy;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,20 +12,25 @@ import Model.Enemy.EnemyFactory;
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
-public class RenderEnemy extends ApplicationAdapter {
+public class EnemyView implements IView {
 
+    private Enemy enemy;
     private SpriteBatch batch;
     private Texture img;
 
-    public void create() {
+    /**
+     * A constructor for creating an Enemy.
+     */
+    public EnemyView(Enemy enemy) {
+        this.enemy = enemy;
         batch = new SpriteBatch();
         img = new Texture(Gdx.files.internal(EnemyFactory.createEnemy1().getSpritePath()));
     }
-
-    public void render(float x, float y) {
+    @Override
+    public void render() {
         ScreenUtils.clear(Color.BLACK);
         batch.begin();
-        batch.draw(img, x,y, (float) Math.ceil(img.getHeight()*0.2), (float) Math.ceil(img.getWidth()*0.25));
+        batch.draw(img, 800, 0, (float) Math.ceil(img.getHeight()*0.2), (float) Math.ceil(img.getWidth()*0.25));
         batch.end();
     }
 
