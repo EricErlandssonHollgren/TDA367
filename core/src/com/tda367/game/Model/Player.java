@@ -2,7 +2,7 @@ package Model;
 
 import Interfaces.IObservers;
 import com.badlogic.gdx.Gdx;
-import Interfaces.PlayerPositionSubscriber;
+import Interfaces.IPlayerSubscriber;
 import com.badlogic.gdx.Input;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class Player implements IObservers {
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
-    List<PlayerPositionSubscriber> subscriberList = new ArrayList<>();
+    List<IPlayerSubscriber> subscriberList = new ArrayList<>();
     private float x;
     private float y;
 
@@ -30,7 +30,7 @@ public class Player implements IObservers {
      * A subscriber to handle the playerPosition. It should be updating its position
      * @param subscriber for the subscriberList
      */
-    public void positionSubscriber(PlayerPositionSubscriber subscriber){
+    public void positionSubscriber(IPlayerSubscriber subscriber){
         subscriberList.add(subscriber);
         subscriber.updatePosition(x, y);
     }
@@ -40,7 +40,7 @@ public class Player implements IObservers {
      */
     public void moveLeft(){
         x -= 15f;
-        for (PlayerPositionSubscriber playerPositionSubscriber : subscriberList) {
+        for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
     }
@@ -52,7 +52,7 @@ public class Player implements IObservers {
      */
     public void moveRight(){
         x += 15f;
-        for (PlayerPositionSubscriber playerPositionSubscriber : subscriberList) {
+        for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
     }

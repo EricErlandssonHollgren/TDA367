@@ -1,6 +1,6 @@
 package Interfaces;
 
-public interface PlayerPositionSubscriber {
+public interface IPlayerSubscriber {
 
     void updatePosition(float x, float y);
 

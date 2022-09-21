@@ -3,12 +3,12 @@ import Interfaces.IView;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import Interfaces.PlayerPositionSubscriber;
+import Interfaces.IPlayerSubscriber;
 import Model.Player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class PlayerView implements IView, PlayerPositionSubscriber {
+public class PlayerView implements IView, IPlayerSubscriber {
     Sprite playerSprite;
     private Batch batch;
     private Texture texture;
