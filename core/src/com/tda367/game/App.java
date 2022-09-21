@@ -3,7 +3,6 @@ package game;
 import Controller.KeyListener;
 import Interfaces.IView;
 import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
 import Model.Player;
 import View.PlayerView;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -20,8 +19,6 @@ public class App extends ApplicationAdapter {
 	Player player;
 	PlayerView view;
 	KeyListener keyListener;
-
-	Enemy enemy = new Enemy1();
 	@Override
 	public void create () {
 		views = new ArrayList<>();
@@ -31,7 +28,7 @@ public class App extends ApplicationAdapter {
 		view = new PlayerView();
 		keyListener.addSubscribers(player);
 		player.positionSubscriber(view);
-		views.add(new EnemyView(enemy));
+		views.add(new EnemyView(new Enemy1()));
 	}
 
 	@Override

@@ -18,6 +18,7 @@ public class EnemyView implements IView {
     private SpriteBatch batch;
     private Texture img;
 
+
     /**
      * A constructor for creating an Enemy.
      */
@@ -26,11 +27,15 @@ public class EnemyView implements IView {
         batch = new SpriteBatch();
         img = new Texture(Gdx.files.internal(EnemyFactory.createEnemy1().getSpritePath()));
     }
+
     @Override
     public void render() {
+        float positionX = EnemyFactory.createEnemy1().getPositionX().x;
+        float positionY = EnemyFactory.createEnemy1().getPositionY().y;
         ScreenUtils.clear(Color.BLACK);
         batch.begin();
-        batch.draw(img, 300, 0, (float) Math.ceil(img.getHeight()*0.2), (float) Math.ceil(img.getWidth()*0.25));
+        //updatePosition();
+        batch.draw(img, positionX, positionY, (float) Math.ceil(img.getHeight() * 0.2), (float) Math.ceil(img.getWidth() * 0.25));
         batch.end();
     }
 

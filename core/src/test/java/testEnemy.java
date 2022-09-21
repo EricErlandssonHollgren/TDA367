@@ -1,5 +1,6 @@
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
+import com.badlogic.gdx.math.Vector2;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,8 +15,8 @@ public class testEnemy {
     @Test
     public void testPosition() {
         Enemy enemy = new Enemy1();
-        assertEquals(enemy.getPositionX(), 800);
-        assertEquals(enemy.getPositionY(), 0);
+        assertEquals(enemy.getPositionX(), new Vector2(800,0));
+        assertEquals(enemy.getPositionY(), new Vector2(0,0));
     }
 
     @Test

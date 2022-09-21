@@ -1,5 +1,7 @@
 package Model.Enemy;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * All methods and parameters that an Enemy might need.
  */
@@ -10,9 +12,9 @@ public abstract class Enemy {
     private int worth;
     private int HP;
 
-    private float positionX;
+    private Vector2 positionX;
 
-    private float positionY;
+    private Vector2 positionY;
 
     private String projectile;
 
@@ -24,7 +26,7 @@ public abstract class Enemy {
      * @param HP = every enemy has a number of "health points" that will decrease as it is being attacked.
 
      */
-    public Enemy(int worth, int HP, String projectile, String spritePath, float positionX, float positionY) {
+    public Enemy(int worth, int HP, String projectile, String spritePath, Vector2 positionX, Vector2 positionY) {
         this.worth = worth;
         this.HP = HP;
         this.projectile = projectile;
@@ -45,11 +47,11 @@ public abstract class Enemy {
         return spritePath;
     }
 
-    public float getPositionX() {
+    public Vector2 getPositionX() {
         return positionX;
     }
 
-    public float getPositionY() {
+    public Vector2 getPositionY() {
         return positionY;
     }
 }

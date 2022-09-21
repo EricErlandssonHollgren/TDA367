@@ -1,6 +1,7 @@
 package Model.Enemy.Enemies;
 
 import Model.Enemy.Enemy;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * First instance of an enemy to be rendered on the screen.
@@ -12,8 +13,8 @@ public class Enemy1 extends Enemy {
     private static final int HP = 5;
     private static final String projectile = "bomb";
     private static final String spritePath = "koopaTroopa.png";
-    private static final float positionX = 800;
-    private static final float positionY = 0;
+    private static final Vector2 positionX = new Vector2(230,0);
+    private static final Vector2 positionY = new Vector2(0,0);
 
     public Enemy1() {
         super(worth, HP, projectile, spritePath, positionX, positionY);
