@@ -1,5 +1,6 @@
 package com.tda367.game;
 
+import Interfaces.IView;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -7,32 +8,44 @@ import Controller.KeyListener;
 import Model.Player;
 import View.PlayerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class App extends ApplicationAdapter {
+
+	List<IView> views;
 	SpriteBatch batch;
-	Player player;
-	PlayerView view;
 	KeyListener keyListener;
 	@Override
 	public void create () {
+
+		views = new ArrayList<>();
 		batch = new SpriteBatch();
-		player = new Player(40f, 50f);
+		Player player = new Player(40f, 50f);
 		keyListener = new KeyListener();
-		view = new PlayerView();
+		PlayerView playerView = new PlayerView();
+
 		keyListener.addSubscribers(player);
-		player.positionSubscriber(view);
+		player.positionSubscriber(playerView);
+		views.add(playerView);
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
-		view.draw(batch);
 		keyListener.UpdatePlayerPosition();
+		for (int i = 0; i <=views.size()-1; i++) {
+			views.get(i).render();
+
+		}
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
+		for (int i = 0; i <= views.size()-1; i++) {
+			views.get(i).dispose();
+		}
 	}
 }
