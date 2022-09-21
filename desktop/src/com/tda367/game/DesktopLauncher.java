@@ -8,7 +8,6 @@ import game.App;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setWindowedMode(1500,1000);
 		config.setForegroundFPS(60);
 		config.setTitle("TDA367");
 		new Lwjgl3Application(new App(), config);

@@ -49,7 +49,7 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		for (int i = 0; i <= views.size(); i++) {
+		for (int i = 0; i <= views.size()-1; i++) {
 			views.get(i).dispose();
 		}
 	}
