@@ -1,4 +1,4 @@
-package com.tda367.game.Model;
+package Model;
 
 public abstract class MainHandler {
     protected MainHandler m_successor;

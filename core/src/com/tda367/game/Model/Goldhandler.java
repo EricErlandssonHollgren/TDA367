@@ -1,4 +1,4 @@
-package com.tda367.game.Model;
+package Model;
 
 public class Goldhandler extends MainHandler {
     private int gold = 0;

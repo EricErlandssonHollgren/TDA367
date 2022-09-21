@@ -1,4 +1,4 @@
-package com.tda367.game.Model;
+package Model;
 
 public class Request {
     private int m_value;
