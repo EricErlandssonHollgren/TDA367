@@ -13,11 +13,11 @@ public class GameTimer {
         }
         return instance;
     }
-    //Called once every frame
+    //Called once every frame from app do not use
     public void UpdateTime(double deltaTime){
         timer += deltaTime;
     }
-
+    //Gets the time
     public double GetTime(){
         return this.timer;
     }
