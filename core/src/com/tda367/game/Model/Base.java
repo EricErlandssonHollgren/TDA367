@@ -95,7 +95,7 @@ public class Base implements Build {
     Checks if the base is at max capacity
      */
     private boolean isFull(){
-        return turrets.size() == max_capacity;
+        return turrets.size() == getMax_capacity();
     }
 
 
