@@ -2,6 +2,8 @@ package Model.Enemy;
 
 import com.badlogic.gdx.math.Vector2;
 
+import java.awt.geom.Point2D;
+
 /**
  * All methods and parameters that an Enemy might need.
  */
@@ -12,9 +14,9 @@ public abstract class Enemy {
     private int worth;
     private int HP;
 
-    private Vector2 positionX;
+    private Point2D positionX;
 
-    private Vector2 positionY;
+    private Point2D positionY;
 
     private String projectile;
 
@@ -26,7 +28,7 @@ public abstract class Enemy {
      * @param HP = every enemy has a number of "health points" that will decrease as it is being attacked.
 
      */
-    public Enemy(int worth, int HP, String projectile, String spritePath, Vector2 positionX, Vector2 positionY) {
+    public Enemy(int worth, int HP, String projectile, String spritePath, Point2D positionX, Point2D positionY) {
         this.worth = worth;
         this.HP = HP;
         this.projectile = projectile;
@@ -47,11 +49,11 @@ public abstract class Enemy {
         return spritePath;
     }
 
-    public Vector2 getPositionX() {
+    public Point2D getPositionX() {
         return positionX;
     }
 
-    public Vector2 getPositionY() {
+    public Point2D getPositionY() {
         return positionY;
     }
 }
