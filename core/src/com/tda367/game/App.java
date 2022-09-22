@@ -14,40 +14,44 @@ import View.EnemyView;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class App extends ApplicationAdapter {
 	List<IView> views;
 	SpriteBatch batch;
-	Player player;
-	PlayerView view;
 	KeyListener keyListener;
 
 	Enemy enemy = new Enemy1();
 	@Override
 	public void create () {
-		views = new ArrayList<>();
+    views = new ArrayList<>();
 		batch = new SpriteBatch();
-		player = new Player(40f, 50f);
+		Player player = new Player(40f, 50f);
 		keyListener = new KeyListener();
-		view = new PlayerView();
+		PlayerView playerView = new PlayerView();
+
 		keyListener.addSubscribers(player);
-		player.positionSubscriber(view);
 		views.add(new EnemyView(enemy));
+		player.positionSubscriber(playerView);
+		views.add(playerView);
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
-		view.draw(batch);
 		keyListener.UpdatePlayerPosition();
-		batch.end();
-		for (int i = 0; i <= views.size()-1; i++) {
+		for (int i = 0; i <=views.size()-1; i++) {
 			views.get(i).render();
+
 		}
+		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
+
 		batch.dispose();
 		for (int i = 0; i <= views.size()-1; i++) {
 			views.get(i).dispose();
