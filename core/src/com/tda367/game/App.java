@@ -23,9 +23,11 @@ import View.EnemyView;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class App extends ApplicationAdapter {
 	SpriteBatch batch;
-
 	Texture img;
 	World world;
 	GameTimer timer;
@@ -39,7 +41,6 @@ public class App extends ApplicationAdapter {
 		timer = GameTimer.GetInstance();
 		img = new Texture("badlogic.jpg");
 		//TODO
-
 	}
 
 	@Override
@@ -52,6 +53,7 @@ public class App extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
+
 		batch.dispose();
 		img.dispose();
 		views.dispose();
