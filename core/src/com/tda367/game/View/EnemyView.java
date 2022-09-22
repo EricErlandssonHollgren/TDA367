@@ -24,16 +24,15 @@ public class EnemyView implements IView {
     public EnemyView(Enemy enemy) {
         this.enemy = enemy;
         batch = new SpriteBatch();
-        img = new Texture(Gdx.files.internal(EnemyFactory.createEnemy1().getSpritePath()));
+        img = new Texture(this.enemy.getSpritePath());
     }
     @Override
     public void render() {
-        ScreenUtils.clear(Color.BLACK);
         batch.begin();
         batch.draw(img, 300, 0, (float) Math.ceil(img.getHeight()*0.2), (float) Math.ceil(img.getWidth()*0.25));
         batch.end();
     }
-
+    @Override
     public void dispose() {
         batch.dispose();
         img.dispose();

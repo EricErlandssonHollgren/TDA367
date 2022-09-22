@@ -4,5 +4,4 @@ sourceCompatibility = 1.7
 sourceSets.main.java.srcDirs = [ "src/com/tda367/game/" ]
 sourceSets.test.java.srcDirs = ["src/test/java/"]
 
-
 eclipse.project.name = appName + "-core"

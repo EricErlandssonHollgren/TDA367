@@ -12,7 +12,7 @@ public class ProjectileView implements IView{
     private SpriteBatch batch;
     private Texture img;
     private Vector2 gravity;
-    //everything should be a Ientity
+    //everything should be a Ientity?
     public ProjectileView(Projectile projectile, Vector2 gravity) {
         this.gravity = gravity;
         batch = new SpriteBatch();

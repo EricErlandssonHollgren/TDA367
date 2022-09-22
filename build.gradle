@@ -66,17 +66,18 @@ project(":core") {
         testImplementation('org.junit.jupiter:junit-jupiter-api:5.1.1')
         testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.1.1')
     }
-}
 
     test {
         useJUnitPlatform()
     }
+}
 
-    project(":html") {
-        apply plugin: "java-library"
-        apply plugin: "gwt"
-        apply plugin: "war"
-        apply plugin: "org.gretty"
+project(":html") {
+    apply plugin: "java-library"
+    apply plugin: "gwt"
+    apply plugin: "war"
+    apply plugin: "org.gretty"
+
 
     dependencies {
         implementation project(":core")
