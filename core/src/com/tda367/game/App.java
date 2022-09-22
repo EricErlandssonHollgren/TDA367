@@ -1,30 +1,56 @@
-package com.tda367.game;
+package game;
+
+import Controller.KeyListener;
+import Interfaces.IView;
+import Model.Enemy.Enemies.Enemy1;
+import Model.Enemy.Enemy;
+import Model.Player;
+import View.PlayerView;
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import View.EnemyView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class App extends ApplicationAdapter {
+	List<IView> views;
 	SpriteBatch batch;
-	Texture img;
-	
+	Player player;
+	PlayerView view;
+	KeyListener keyListener;
+
+	Enemy enemy = new Enemy1();
 	@Override
 	public void create () {
+		views = new ArrayList<>();
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		player = new Player(40f, 50f);
+		keyListener = new KeyListener();
+		view = new PlayerView();
+		keyListener.addSubscribers(player);
+		player.positionSubscriber(view);
+		views.add(new EnemyView(enemy));
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		view.draw(batch);
+		keyListener.UpdatePlayerPosition();
 		batch.end();
+		for (int i = 0; i <= views.size()-1; i++) {
+			views.get(i).render();
+		}
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		for (int i = 0; i <= views.size()-1; i++) {
+			views.get(i).dispose();
+		}
 	}
 }
