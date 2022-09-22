@@ -11,6 +11,7 @@ import Model.GameTimer;
 import Model.Projectile;
 import Model.ViewHolder;
 import View.ProjectileView;
+import Interfaces.IView;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -22,10 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App extends ApplicationAdapter {
+
 	List<IView> views;
 	SpriteBatch batch;
-	Player player;
-	PlayerView view;
 	KeyListener keyListener;
 
 	Enemy enemy = new Enemy1();
@@ -38,6 +38,13 @@ public class App extends ApplicationAdapter {
 		views = new ViewHolder();
 		world = new World(new Vector2(0,-0.5f),true);
 		batch = new SpriteBatch();
+		Player player = new Player(40f, 50f);
+		keyListener = new KeyListener();
+		PlayerView playerView = new PlayerView();
+
+		keyListener.addSubscribers(player);
+		player.positionSubscriber(playerView);
+		views.add(playerView);
 		timer = GameTimer.GetInstance();
 		img = new Texture("badlogic.jpg");
 		//TODO
@@ -49,6 +56,11 @@ public class App extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();
+		keyListener.UpdatePlayerPosition();
+		for (int i = 0; i <=views.size()-1; i++) {
+			views.get(i).render();
+
+		}
 		batch.end();
 		for (int i = 0; i <= views.size()-1; i++) {
 			views.get(i).render();
