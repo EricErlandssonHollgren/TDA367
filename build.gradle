@@ -72,12 +72,15 @@ project(":core") {
     }
 }
 
-project(":html") {
-    apply plugin: "java-library"
-    apply plugin: "gwt"
-    apply plugin: "war"
-    apply plugin: "org.gretty"
+    test {
+        useJUnitPlatform()
+    }
 
+    project(":html") {
+        apply plugin: "java-library"
+        apply plugin: "gwt"
+        apply plugin: "war"
+        apply plugin: "org.gretty"
 
     dependencies {
         implementation project(":core")
