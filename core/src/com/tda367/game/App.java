@@ -15,7 +15,7 @@ public class App extends ApplicationAdapter {
 
 	List<IView> views;
 	SpriteBatch batch;
-	KeyListener keyListener;
+	private KeyListener keyListener;
 	@Override
 	public void create () {
 
@@ -24,6 +24,8 @@ public class App extends ApplicationAdapter {
 		Player player = new Player(40f, 50f);
 		keyListener = new KeyListener();
 		PlayerView playerView = new PlayerView();
+
+
 
 		keyListener.addSubscribers(player);
 		player.positionSubscriber(playerView);
@@ -34,7 +36,7 @@ public class App extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
-		keyListener.UpdatePlayerPosition();
+		keyListener.UpdatePlayerMovement();
 		for (int i = 0; i <=views.size()-1; i++) {
 			views.get(i).render();
 

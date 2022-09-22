@@ -19,7 +19,7 @@ public class KeyListener{
      * When being listened it tells the player to either use moveLeft()-
      * or moveRight()-method.
      */
-    public void UpdatePlayerPosition(){
+    public void UpdatePlayerMovement(){
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
             for (IObservers o: observers) {
                 o.keyPressed(Input.Keys.LEFT);

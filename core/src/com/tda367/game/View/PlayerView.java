@@ -1,4 +1,5 @@
 package View;
+import Interfaces.IRectangle;
 import Interfaces.IView;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,10 +9,15 @@ import Model.Player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class PlayerView implements IView, IPlayerSubscriber {
-    Sprite playerSprite;
-    private Batch batch;
-    private Texture texture;
+import java.awt.*;
+
+public class PlayerView implements IView, IPlayerSubscriber, IRectangle {
+    private static Sprite playerSprite;
+    private static Batch batch;
+    private static Texture texture;
+    private Rectangle rectangle;
+    private int x;
+    private int y;
 
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
@@ -20,6 +26,7 @@ public class PlayerView implements IView, IPlayerSubscriber {
     public PlayerView(){
         playerSprite = new Sprite();
         batch = new SpriteBatch();
+        rectangle = new Rectangle(x, y, 40, 64);
         texture = new Texture("adventurer-stand-01.png");
     }
 
@@ -31,6 +38,10 @@ public class PlayerView implements IView, IPlayerSubscriber {
     @Override
     public void updatePosition(float x, float y) {
         playerSprite.setPosition(x,y);
+    }
+    @Override
+    public void updateMovement(){
+
     }
 
     @Override
@@ -45,5 +56,11 @@ public class PlayerView implements IView, IPlayerSubscriber {
     public void dispose() {
         batch.dispose();
         texture.dispose();
+    }
+
+    @Override
+    public Rectangle rectangle() {
+        return new Rectangle((int)playerSprite.getX(), (int) playerSprite.getY(), playerSprite.getRegionWidth(),
+                playerSprite.getRegionHeight());
     }
 }

@@ -1,10 +1,9 @@
 package Model;
-
 import Interfaces.IObservers;
-import com.badlogic.gdx.Gdx;
 import Interfaces.IPlayerSubscriber;
 import com.badlogic.gdx.Input;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +14,9 @@ public class Player implements IObservers {
     List<IPlayerSubscriber> subscriberList = new ArrayList<>();
     private float x;
     private float y;
+    private int width;
+    private int height;
+    private int health = 100;
 
     /**
      * When creating a player it should have two variables which defines its position.
@@ -22,8 +24,8 @@ public class Player implements IObservers {
      * @param y represents the player's position on the y-axis
      */
     public Player(float x, float y){
-        this.x = x;
-        this.y = y;
+         this.x = x;
+         this.y = y;
     }
 
     /**
@@ -34,6 +36,13 @@ public class Player implements IObservers {
         subscriberList.add(subscriber);
         subscriber.updatePosition(x, y);
     }
+
+    public void playerAttack(){
+        for (IPlayerSubscriber playerAttackSubscriber: subscriberList) {
+            playerAttackSubscriber.updateMovement();
+        }
+    }
+
     /**
      * The moveLeft() method is allowing the character to move to the right side,
      * for each subscriber in a subscriber list.
@@ -72,6 +81,7 @@ public class Player implements IObservers {
     public float getPosX(){
         return x;
     }
+
 
     @Override
     public void keyPressed(int key) {
