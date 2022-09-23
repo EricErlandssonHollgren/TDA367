@@ -10,9 +10,6 @@ import Interfaces.IView;
 import View.ProjectileView;
 import Interfaces.IView;
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -32,22 +29,16 @@ public class App extends ApplicationAdapter {
 	World world;
 	GameTimer timer;
 	ViewHolder views;
-	OrthographicCamera camera;
-	Ground ground;
-
-
+	@Override
 	public void create () {
-		world = new World(new Vector2(0, -10), true);
+		world = new World(new Vector2(0,-0.5f),true);
 		views = new ViewHolder(world);
 		batch = new SpriteBatch();
 
 		timer = GameTimer.GetInstance();
 		img = new Texture("badlogic.jpg");
-
-		ground = new Ground();
-		Box2D.init();
-
 		//TODO
+
 
 	}
 
@@ -56,7 +47,6 @@ public class App extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();
-
 		batch.end();
 	}
 	
