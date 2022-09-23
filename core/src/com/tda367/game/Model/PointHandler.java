@@ -3,7 +3,9 @@ package Model;
 public class PointHandler extends MainHandler {
     private int points = 0;
 
-
+    // Checks if the request is meant for this handler.
+    // If it´s the correct handler it will add the Points.
+    // If it isn't the correct handler it will give it to the next handler.
     public void handleRequest(Request request){
         if (request.getDescription() == HandlerItemDefiners.POINTS) {
             addPoints(request.getValue());
@@ -14,41 +16,15 @@ public class PointHandler extends MainHandler {
         }
     }
 
+    // adds the bonus points
     private void addPoints(int amount){
         System.out.println(amount);
         points+=amount;
     }
 
+    // Returns the
     public int getPoints() {
         return (this.points);
         // add time passed
     }
-
-
 }
-
-/*
-
-Måste sätta successor
-
-public class Main
-{
-	public static void main(String[] args)
-	{
-		// Setup Chain of Responsibility
-		Handler h1 = new ConcreteHandlerOne();
-		Handler h2 = new ConcreteHandlerTwo();
-		Handler h3 = new ConcreteHandlerThree();
-		h1.setSuccessor(h2);
-		h2.setSuccessor(h3);
-
-		// Send requests to the chain
-		h1.handleRequest(new Request("Negative Value ", -1));
-		h1.handleRequest(new Request("Negative Value ",  0));
-		h1.handleRequest(new Request("Negative Value ",  1));
-		h1.handleRequest(new Request("Negative Value ",  2));
-		h1.handleRequest(new Request("Negative Value ", -5));
-	}
-}
-
- */
