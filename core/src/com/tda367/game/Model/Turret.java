@@ -1,11 +1,11 @@
 package Model;
 
-import Interfaces.Shoot;
+import Interfaces.IShoot;
 
 /*
     This creates a Turret, which requires arguments for its damage, and its shooting speed
      */
-public class Turret implements Shoot {
+public class Turret implements IShoot {
     private double damage;
     private double shootingSpeed;
 

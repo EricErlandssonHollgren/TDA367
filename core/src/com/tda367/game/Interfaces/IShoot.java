@@ -4,7 +4,7 @@ package Interfaces;
  * A class with this interface should be able to shoot projectiles
  */
 
-public interface Shoot {
+public interface IShoot {
 
     void shootProjectile();
 

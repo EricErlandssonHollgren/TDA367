@@ -1,5 +1,5 @@
 package Model;
-import Interfaces.Build;
+import Interfaces.IBuild;
 
 import java.util.ArrayList;
 /*
@@ -7,7 +7,7 @@ A player base
  */
 
 
-public class Base implements Build {
+public class Base implements IBuild {
 
     private double health;
     private double positionX;
