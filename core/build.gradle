@@ -1,7 +1,13 @@
 sourceCompatibility = 1.7
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
+<<<<<<<<< Temporary merge branch 1
+sourceSets.main.java.srcDirs = [ "src/com/tda367/game" ]
+sourceSets.test.java.srcDirs = [ "src/test/java/" ]
+
+=========
 sourceSets.main.java.srcDirs = [ "src/com/tda367/game/" ]
 sourceSets.test.java.srcDirs = ["src/test/java/"]
+>>>>>>>>> Temporary merge branch 2
 
 eclipse.project.name = appName + "-core"

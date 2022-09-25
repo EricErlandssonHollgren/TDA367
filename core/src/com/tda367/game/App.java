@@ -2,11 +2,14 @@ package com.tda367.game;
 
 import Controller.KeyListener;
 import Interfaces.IView;
-import Model.*;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
+import Model.Player;
 import View.PlayerView;
 import Interfaces.IView;
+import Model.GameTimer;
+import Model.Projectile;
+import Model.ViewHolder;
 import View.ProjectileView;
 import Interfaces.IView;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -48,6 +51,9 @@ public class App extends ApplicationAdapter {
 		batch.begin();
 		views.render();
 		batch.end();
+		for (int i = 0; i <= views.size()-1; i++) {
+			views.get(i).render();
+		}
 	}
 	
 	@Override

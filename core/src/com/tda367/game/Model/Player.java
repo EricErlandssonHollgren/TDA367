@@ -2,8 +2,6 @@ package Model;
 import Interfaces.IObservers;
 import Interfaces.IPlayerSubscriber;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,26 +12,21 @@ public class Player implements IObservers {
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
     List<IPlayerSubscriber> subscriberList = new ArrayList<>();
+    private float x;
+    private float y;
     private int width;
     private int height;
     private int health = 100;
-    BodyDef bodyDef = new BodyDef();
-
 
     /**
      * When creating a player it should have two variables which defines its position.
      * @param x represents the player's position on the x-axis
      * @param y represents the player's position on the y-axis
      */
-    public Player(float x, float y, int height, int width){
-         this.height = height;
-         this.width = width;
-         bodyDef.type = BodyDef.BodyType.DynamicBody;
-         bodyDef.position.x = x;
-         bodyDef.position.y = y;
-
+    public Player(float x, float y){
+         this.x = x;
+         this.y = y;
     }
-
 
     /**
      * A subscriber to handle the playerPosition. It should be updating its position
@@ -41,7 +34,7 @@ public class Player implements IObservers {
      */
     public void positionSubscriber(IPlayerSubscriber subscriber){
         subscriberList.add(subscriber);
-        subscriber.updatePosition(bodyDef.position.x, bodyDef.position.y);
+        subscriber.updatePosition(x, y);
     }
 
     public void playerAttack(){
@@ -55,9 +48,9 @@ public class Player implements IObservers {
      * for each subscriber in a subscriber list.
      */
     public void moveLeft(){
-        bodyDef.position.x -= 15f;
+        x -= 15f;
         for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-            playerPositionSubscriber.updatePosition(bodyDef.position.x,bodyDef.position.y);
+            playerPositionSubscriber.updatePosition(x,y);
         }
     }
 
@@ -67,9 +60,9 @@ public class Player implements IObservers {
      * for each subscriber in a subscriber list.
      */
     public void moveRight(){
-        bodyDef.position.x += 15f;
+        x += 15f;
         for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-            playerPositionSubscriber.updatePosition(bodyDef.position.x,bodyDef.position.y);
+            playerPositionSubscriber.updatePosition(x,y);
         }
     }
 
@@ -78,7 +71,7 @@ public class Player implements IObservers {
      * @return y-coordinate of the object
      */
     public float getPosY(){
-        return bodyDef.position.y;
+        return y;
     }
 
     /**
@@ -86,16 +79,8 @@ public class Player implements IObservers {
      * @return x-coordinate of the object
      */
     public float getPosX(){
-        return bodyDef.position.x;
+        return x;
     }
-
-    public int getWidth(){
-        return width;
-    }
-    public int getHeight(){
-        return height;
-    }
-
 
 
     @Override

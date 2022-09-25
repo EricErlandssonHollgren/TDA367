@@ -11,10 +11,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.awt.*;
 
-public class PlayerView implements IView, IPlayerSubscriber{
+public class PlayerView implements IView, IPlayerSubscriber, IRectangle {
     private static Sprite playerSprite;
     private static Batch batch;
     private static Texture texture;
+    private Rectangle rectangle;
     private int x;
     private int y;
 
@@ -25,8 +26,10 @@ public class PlayerView implements IView, IPlayerSubscriber{
     public PlayerView(){
         playerSprite = new Sprite();
         batch = new SpriteBatch();
+        rectangle = new Rectangle(x, y, 40, 64);
         texture = new Texture("adventurer-stand-01.png");
     }
+
     /**
      * The updatePosition should set the sprite of a player's x and y coordinates.
      * @param x is the coordinate on the x-axis
@@ -55,4 +58,9 @@ public class PlayerView implements IView, IPlayerSubscriber{
         texture.dispose();
     }
 
+    @Override
+    public Rectangle rectangle() {
+        return new Rectangle((int)playerSprite.getX(), (int) playerSprite.getY(), playerSprite.getRegionWidth(),
+                playerSprite.getRegionHeight());
+    }
 }

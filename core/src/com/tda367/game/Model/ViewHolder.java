@@ -28,7 +28,7 @@ public class ViewHolder {
         IView projectileView = new ProjectileView(new Projectile(new Vector2(50,100), new Vector2(10,10), "badlogic.jpg"),this.world.getGravity());
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
-        Player player = new Player(10, 40,40,50);
+        Player player = new Player(40f, 50f);
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
@@ -46,7 +46,7 @@ public class ViewHolder {
         views.remove(view);
     }
     public void render(){
-        keyListener.UpdatePlayerMovement();
+        keyListener.UpdatePlayerPosition();
         for (IView views: views) {
             views.render();
         }
