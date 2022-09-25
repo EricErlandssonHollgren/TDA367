@@ -55,41 +55,27 @@ project(":desktop") {
 
 project(":core") {
     apply plugin: "java-library"
-    
-    repositories{
+
+    repositories {
         mavenCentral()
     }
 
     dependencies {
-        api "com.badlogicgames.gdx:gdx:$gdxVersion"
-<<<<<<<<< Temporary merge branch 1
+        api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         implementation files('libs/gradle-wrapper.jar')
         testImplementation('org.junit.jupiter:junit-jupiter-api:5.1.1')
         testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.1.1')
-=========
-        api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        implementation files ('libs/gradle-wrapper.jar')
-        testImplementation('org.junit.jupiter:junit-jupiter-api:5.1.1')
-        testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.1.1')
     }
 
     test {
         useJUnitPlatform()
->>>>>>>>> Temporary merge branch 2
     }
-
-<<<<<<<<< Temporary merge branch 1
-    test {
-        useJUnitPlatform()
-    }
-}
 
     project(":html") {
         apply plugin: "java-library"
         apply plugin: "gwt"
         apply plugin: "war"
         apply plugin: "org.gretty"
-}
 
 
         dependencies {
@@ -97,24 +83,8 @@ project(":core") {
             api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
             api "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
             api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-
+            api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion:sources"
+            api "com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion:sources"
         }
     }
-=========
-project(":html") {
-    apply plugin: "java-library"
-    apply plugin: "gwt"
-    apply plugin: "war"
-    apply plugin: "org.gretty"
-
-
-    dependencies {
-        implementation project(":core")
-        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
-        api "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
-        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-        api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion:sources"
-        api "com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion:sources"
-    }
->>>>>>>>> Temporary merge branch 2
 }

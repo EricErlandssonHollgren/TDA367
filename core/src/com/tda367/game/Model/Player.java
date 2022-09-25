@@ -1,32 +1,35 @@
 package Model;
 import Interfaces.IObservers;
 import Interfaces.IPlayerSubscriber;
+import Interfaces.IRectangle;
 import com.badlogic.gdx.Input;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements IObservers {
+public class Player implements IObservers, IRectangle {
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
     List<IPlayerSubscriber> subscriberList = new ArrayList<>();
-    private float x;
-    private float y;
+    private int x;
+    private int y;
     private int width;
     private int height;
-    private int health = 100;
 
     /**
      * When creating a player it should have two variables which defines its position.
      * @param x represents the player's position on the x-axis
      * @param y represents the player's position on the y-axis
      */
-    public Player(float x, float y){
+    public Player(int x, int y, int width, int height){
          this.x = x;
          this.y = y;
+         this.width = width;
+         this.height = height;
     }
+
 
     /**
      * A subscriber to handle the playerPosition. It should be updating its position
@@ -48,7 +51,7 @@ public class Player implements IObservers {
      * for each subscriber in a subscriber list.
      */
     public void moveLeft(){
-        x -= 15f;
+        x -= 15;
         for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
@@ -60,7 +63,7 @@ public class Player implements IObservers {
      * for each subscriber in a subscriber list.
      */
     public void moveRight(){
-        x += 15f;
+        x += 15;
         for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
@@ -70,7 +73,7 @@ public class Player implements IObservers {
      * Gets the y-coordinate of the object of float
      * @return y-coordinate of the object
      */
-    public float getPosY(){
+    public int getPosY(){
         return y;
     }
 
@@ -78,8 +81,16 @@ public class Player implements IObservers {
      * Gets the x-coordinate of the object of float
      * @return x-coordinate of the object
      */
-    public float getPosX(){
+    public int getPosX(){
         return x;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    public int getWidth(){
+        return width;
     }
 
 
@@ -91,5 +102,10 @@ public class Player implements IObservers {
         if(key == Input.Keys.RIGHT){
             moveRight();
         }
+    }
+
+    @Override
+    public Rectangle getRectangle() {
+        return new Rectangle(x, y, width, height);
     }
 }

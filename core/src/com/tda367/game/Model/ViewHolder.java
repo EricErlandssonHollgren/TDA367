@@ -6,6 +6,7 @@ import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
 import View.EnemyView;
+import View.GroundView;
 import View.PlayerView;
 import View.ProjectileView;
 import com.badlogic.gdx.math.Vector2;
@@ -27,17 +28,19 @@ public class ViewHolder {
         //Create views and objects
         IView projectileView = new ProjectileView(new Projectile(new Vector2(50,100), new Vector2(10,10), "badlogic.jpg"),this.world.getGravity());
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
+        IView groundView = new GroundView();
         PlayerView playerView = new PlayerView();
-        Player player = new Player(40f, 50f);
+        Player player = new Player(9, 2, 10, 10);
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
         player.positionSubscriber(playerView);
 
         //Add views to list and they will be rendered. Views must implement IView
-        addView(enemyView);
+        addView(groundView);
+        //addView(enemyView);
         addView(playerView);
-        addView(projectileView);
+        //addView(projectileView);
     }
     private void addView(IView view){
         views.add(view);
@@ -46,7 +49,7 @@ public class ViewHolder {
         views.remove(view);
     }
     public void render(){
-        keyListener.UpdatePlayerPosition();
+        keyListener.UpdatePlayerMovement();
         for (IView views: views) {
             views.render();
         }

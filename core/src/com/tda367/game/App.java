@@ -51,9 +51,6 @@ public class App extends ApplicationAdapter {
 		batch.begin();
 		views.render();
 		batch.end();
-		for (int i = 0; i <= views.size()-1; i++) {
-			views.get(i).render();
-		}
 	}
 	
 	@Override

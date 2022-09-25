@@ -4,5 +4,5 @@ import java.awt.*;
 
 
 public interface IRectangle {
-    Rectangle rectangle();
+    Rectangle getRectangle();
 }

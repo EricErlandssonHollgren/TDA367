@@ -11,23 +11,21 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.awt.*;
 
-public class PlayerView implements IView, IPlayerSubscriber, IRectangle {
+public class PlayerView implements IView, IPlayerSubscriber{
     private static Sprite playerSprite;
     private static Batch batch;
     private static Texture texture;
-    private Rectangle rectangle;
-    private int x;
-    private int y;
-
+    private Rectangle playerRectangle;
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
     public PlayerView(){
+        //playerRectangle = new Rectangle(playerRectangle.x, playerRectangle.y, playerRectangle.width, playerRectangle.height);
         playerSprite = new Sprite();
         batch = new SpriteBatch();
-        rectangle = new Rectangle(x, y, 40, 64);
         texture = new Texture("adventurer-stand-01.png");
+
     }
 
     /**
@@ -46,7 +44,6 @@ public class PlayerView implements IView, IPlayerSubscriber, IRectangle {
 
     @Override
     public void render() {
-        ScreenUtils.clear(0, 0, 0, 0);
         batch.begin();
         batch.draw(texture, playerSprite.getX(), playerSprite.getY());
         batch.end();
@@ -58,9 +55,4 @@ public class PlayerView implements IView, IPlayerSubscriber, IRectangle {
         texture.dispose();
     }
 
-    @Override
-    public Rectangle rectangle() {
-        return new Rectangle((int)playerSprite.getX(), (int) playerSprite.getY(), playerSprite.getRegionWidth(),
-                playerSprite.getRegionHeight());
-    }
 }
