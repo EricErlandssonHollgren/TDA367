@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import Interfaces.IPlayerSubscriber;
 import Model.Player;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.awt.*;
@@ -28,23 +30,19 @@ public class PlayerView implements IView, IPlayerSubscriber{
     }
 
     /**
-     * The updatePosition should set the sprite of a player's x and y coordinates.
-     * @param x is the coordinate on the x-axis
-     * @param y is the coordinate on the y-axis
+     * The updatePosition should update the sprite of a player's position
+     * x and y coordinates.
+     * @param pos is the position which can either set the x or y.
      */
     @Override
-    public void updatePosition(float x, float y) {
-        playerSprite.setPosition(x,y);
+    public void updatePosition(Vector2 pos) {
+        playerSprite.setPosition(pos.x, pos.y);
     }
-    @Override
-    public void updateMovement(){
 
-    }
 
     public Player getPlayer() {
         return player;
     }
-
 
     @Override
     public void render() {
