@@ -55,7 +55,6 @@ project(":desktop") {
 
 project(":core") {
     apply plugin: "java-library"
-    
     repositories{
         mavenCentral()
     }
@@ -70,16 +69,15 @@ project(":core") {
 
     test {
         useJUnitPlatform()
-       }
     }
 }
 
-    project(":html") {
-        apply plugin: "java-library"
-        apply plugin: "gwt"
-        apply plugin: "war"
-        apply plugin: "org.gretty"
-}
+project(":html") {
+    apply plugin: "java-library"
+    apply plugin: "gwt"
+    apply plugin: "war"
+    apply plugin: "org.gretty"
+
 
     dependencies {
         implementation project(":core")
