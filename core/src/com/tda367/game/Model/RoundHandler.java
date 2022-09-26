@@ -2,12 +2,10 @@ package Model;
 
 public class RoundHandler {
     private static RoundHandler instance;
-    private float multiplier;
     private GameTimer timer;
 
     private RoundHandler(){
         timer = GameTimer.GetInstance();
-        this.multiplier = 1;
     }
 
     public static RoundHandler GetInstance(){
