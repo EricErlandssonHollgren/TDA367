@@ -12,12 +12,11 @@ public class Block {
     }
 
     Vector2 position = new Vector2();
+    Rectangle bounds = new Rectangle();
 
     public Rectangle getBounds() {
         return bounds;
     }
-
-    Rectangle bounds = new Rectangle();
 
     public Block(Vector2 pos){
         this.position = pos;

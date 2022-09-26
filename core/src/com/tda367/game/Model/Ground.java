@@ -27,6 +27,9 @@ public class Ground {
     }
 
     public void createGround(){
-      blocks.add(new Block(new Vector2(15,50)));
+        for (int i = 0; i < 800 ; i++) {
+            blocks.add(new Block(new Vector2(i,2)));
+
+        }
     }
 }

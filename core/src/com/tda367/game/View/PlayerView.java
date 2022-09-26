@@ -15,13 +15,12 @@ public class PlayerView implements IView, IPlayerSubscriber{
     private static Sprite playerSprite;
     private static Batch batch;
     private static Texture texture;
-    private Rectangle playerRectangle;
+    private Player player;
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
     public PlayerView(){
-        //playerRectangle = new Rectangle(playerRectangle.x, playerRectangle.y, playerRectangle.width, playerRectangle.height);
         playerSprite = new Sprite();
         batch = new SpriteBatch();
         texture = new Texture("adventurer-stand-01.png");
@@ -41,6 +40,11 @@ public class PlayerView implements IView, IPlayerSubscriber{
     public void updateMovement(){
 
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
 
     @Override
     public void render() {

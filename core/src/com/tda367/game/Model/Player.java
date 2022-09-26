@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements IObservers, IRectangle {
+public class Player implements IObservers {
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
@@ -17,17 +17,20 @@ public class Player implements IObservers, IRectangle {
     private int y;
     private int width;
     private int height;
+    private int size = 1;
+
+    private Rectangle bounds = new Rectangle();
 
     /**
      * When creating a player it should have two variables which defines its position.
      * @param x represents the player's position on the x-axis
      * @param y represents the player's position on the y-axis
      */
-    public Player(int x, int y, int width, int height){
+    public Player(int x, int y){
          this.x = x;
          this.y = y;
-         this.width = width;
-         this.height = height;
+         this.bounds.height = size;
+         this.bounds.width = size;
     }
 
 
@@ -104,8 +107,4 @@ public class Player implements IObservers, IRectangle {
         }
     }
 
-    @Override
-    public Rectangle getRectangle() {
-        return new Rectangle(x, y, width, height);
-    }
 }

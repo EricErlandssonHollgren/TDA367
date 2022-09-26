@@ -30,7 +30,7 @@ public class ViewHolder {
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         IView groundView = new GroundView();
         PlayerView playerView = new PlayerView();
-        Player player = new Player(9, 2, 10, 10);
+        Player player = new Player(9, 100);
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
