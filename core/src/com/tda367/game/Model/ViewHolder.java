@@ -6,6 +6,7 @@ import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
 import View.EnemyView;
+import View.HealthBarView;
 import View.PlayerView;
 import View.ProjectileView;
 import com.badlogic.gdx.math.Vector2;
@@ -29,6 +30,8 @@ public class ViewHolder {
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
         Player player = new Player(40f, 50f);
+        IView healhBarView = new HealthBarView(player.healthBar);
+
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
@@ -38,6 +41,7 @@ public class ViewHolder {
         addView(enemyView);
         addView(playerView);
         addView(projectileView);
+        addView(healhBarView);
     }
     private void addView(IView view){
         views.add(view);

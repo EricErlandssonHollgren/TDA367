@@ -32,6 +32,7 @@ public class App extends ApplicationAdapter {
 	World world;
 	GameTimer timer;
 	ViewHolder views;
+
 	@Override
 	public void create () {
 		world = new World(new Vector2(0,-0.5f),true);

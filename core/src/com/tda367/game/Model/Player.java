@@ -1,7 +1,6 @@
 package Model;
 
 import Interfaces.IObservers;
-import com.badlogic.gdx.Gdx;
 import Interfaces.PlayerPositionSubscriber;
 import com.badlogic.gdx.Input;
 
@@ -16,6 +15,8 @@ public class Player implements IObservers {
     private float x;
     private float y;
 
+    public HealthBar healthBar;
+
     /**
      * When creating a player it should have two variables which defines its position.
      * @param x represents the player's position on the x-axis
@@ -24,7 +25,10 @@ public class Player implements IObservers {
     public Player(float x, float y){
         this.x = x;
         this.y = y;
+
+        healthBar = new HealthBar(this.x, this.y, 100);
     }
+
 
     /**
      * A subscriber to handle the playerPosition. It should be updating its position
@@ -42,6 +46,7 @@ public class Player implements IObservers {
         x -= 15f;
         for (PlayerPositionSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
+            healthBar.updatePosition(x,y);
         }
     }
 
@@ -54,6 +59,8 @@ public class Player implements IObservers {
         x += 15f;
         for (PlayerPositionSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
+            healthBar.updatePosition(x,y);
+
         }
     }
 
