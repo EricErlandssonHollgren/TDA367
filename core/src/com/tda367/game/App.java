@@ -48,16 +48,8 @@ public class App extends ApplicationAdapter {
 		//TODO
 	}
   
-  //	StatsView a = new StatsView();
-
-	@Override
-	public void create () {
-		a.create();
-    */
-
 	@Override
 	public void render () {
-		a.render();
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();
@@ -66,7 +58,6 @@ public class App extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
-		a.dispose();
 		batch.dispose();
 		img.dispose();
 		views.dispose();
