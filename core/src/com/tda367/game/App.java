@@ -1,5 +1,7 @@
 package com.tda367.game;
 
+import Model.*;
+import View.StatsView;
 import Controller.KeyListener;
 import Interfaces.IView;
 import Model.Enemy.Enemies.Enemy1;
@@ -18,6 +20,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import View.EnemyView;
 
 import java.util.ArrayList;
@@ -25,7 +31,6 @@ import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class App extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
@@ -42,9 +47,17 @@ public class App extends ApplicationAdapter {
 		img = new Texture("badlogic.jpg");
 		//TODO
 	}
+  
+  //	StatsView a = new StatsView();
+
+	@Override
+	public void create () {
+		a.create();
+    */
 
 	@Override
 	public void render () {
+		a.render();
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();
@@ -53,9 +66,10 @@ public class App extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
-
+		a.dispose();
 		batch.dispose();
 		img.dispose();
 		views.dispose();
+
 	}
 }
