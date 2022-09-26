@@ -1,5 +1,6 @@
-package Model;
+package Model.Tower;
 import Interfaces.IBuild;
+import Model.Turret.*;
 
 import java.util.ArrayList;
 /*
@@ -7,24 +8,33 @@ A player base
  */
 
 
-public class Tower implements IBuild {
+public abstract class Tower implements IBuild {
 
-    private double health;
-    private double positionX;
-    private double positionY;
-    private int maxCapacity;
-    private ArrayList turrets;
+    private final String spritePath;
+    private final double health;
+    private static double positionX;
+    private static double positionY;
+    private final int maxCapacity;
+    private final ArrayList turrets;
 
 
     /*
     This creates a player base, which requires arguments for its health, location and maximum turrets capacity
      */
-    public Tower(double health, double positionX, double positionY, int maxCapacity){
+    public Tower(double health, int maxCapacity){
+        this.spritePath = "spritePath";
         this.health = health;
-        this.positionX = positionX;
-        this.positionY = positionY;
+        positionX = 0;
+        positionY = 0;
         this.maxCapacity = maxCapacity;
-        turrets = new ArrayList<Turret>();
+        this.turrets = new ArrayList<Turret>();
+    }
+
+    /*
+    Gets the towers spritePath
+     */
+    public String getSpritePath() {
+        return spritePath;
     }
 
     /*
@@ -97,12 +107,6 @@ public class Tower implements IBuild {
     private boolean isFull(){
         return turrets.size() == getMaxCapacity();
     }
-
-
-
-
-
-
 
 
 }

@@ -1,4 +1,7 @@
-import Model.*;
+import Model.Tower.*;
+import Model.Tower.Towers.*;
+import Model.Turret.*;
+import Model.Turret.Turrets.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,23 +14,26 @@ public class TowerJUnitTest {
 
     @Test
     public void testTowerHasSpecifiedLocation() {
-        Tower tower1 = new Tower(0,1,1,0);
-        assertEquals(tower1.getPositionX(), 1);
-        assertEquals(tower1.getPositionY(), 1);
+        Tower tower1 = new basicTower(0,0);
+        assertEquals(tower1.getPositionX(), 0);
+        assertEquals(tower1.getPositionY(), 0);
     }
 
     @Test
     public void testTowerHasSpecifiedHealth() {
-        Tower tower2 = new Tower(100, 0,0, 0);
+        Tower tower2 = new basicTower(100,0);
         assertEquals(100, tower2.getHealth());
     }
 
     @Test
     public void testTowerContainsSpecifiedTurret() {
-        Tower tower3 = new Tower(0,0,0,1);
-        Turret turret = new Turret(0,0);
-        tower3.buildTurret(turret);
-        assertTrue(tower3.getTurrets().contains(turret));
+        Tower tower3 = new basicTower(0,2);
+        Turret turret1 = TurretFactory.createBasicTurret();
+        Turret turret2 = TurretFactory.createAdvTurret();
+        tower3.buildTurret(turret1);
+        tower3.buildTurret(turret2);
+        assertTrue(tower3.getTurrets().contains(turret1));
+        assertTrue(tower3.getTurrets().contains(turret2));
     }
 
 
