@@ -9,7 +9,6 @@ public class WorldBoundaries {
     public WorldBoundaries(){
         createGround();
         createWalls();
-        createLeftWall();
 
     }
     public List<Block> getBlocks(){
@@ -28,7 +27,4 @@ public class WorldBoundaries {
         blocks.add(new Block(0,40,400,10));
     }
 
-    public void createLeftWall(){
-
-    }
 }
