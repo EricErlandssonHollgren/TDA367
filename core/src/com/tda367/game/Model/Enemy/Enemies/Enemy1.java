@@ -1,6 +1,7 @@
 package Model.Enemy.Enemies;
 
 import Model.Enemy.Enemy;
+import Model.Vector;
 import com.badlogic.gdx.math.Vector2;
 
 import java.awt.geom.Point2D;
@@ -15,8 +16,8 @@ public class Enemy1 extends Enemy {
     private static final int HP = 5;
     private static final String projectile = "bomb";
     private static final String spritePath = "koopaTroopa.png";
-    private static final Point2D positionX = new Point2D.Float(230, 0);
-    private static final Point2D positionY = new Point2D.Float(0, 0);
+    private static final Vector positionX = new Vector(700, 0);
+    private static final Vector positionY = new Vector(0, 0);
 
     public Enemy1() {
         super(worth, HP, projectile, spritePath, positionX, positionY);
