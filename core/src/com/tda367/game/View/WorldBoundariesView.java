@@ -2,33 +2,30 @@ package View;
 
 import Interfaces.IView;
 import Model.Block;
-import Model.Ground;
-import com.badlogic.gdx.Gdx;
+import Model.WorldBoundaries;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
-import java.awt.*;
-
-public class GroundView implements IView {
-    private Ground ground;
+public class WorldBoundariesView implements IView {
+    private WorldBoundaries worldBoundaries;
     private Block block;
     ShapeRenderer debugRenderer = new ShapeRenderer();
 
-    public GroundView(){
-        this.ground = new Ground();
+    public WorldBoundariesView(){
+        this.worldBoundaries = new WorldBoundaries();
 
     }
     @Override
     public void render() {
         debugRenderer.begin(ShapeType.Filled);
-        for(Block block : ground.getBlocks()){
-            Rectangle rect = block.getBounds();
-            float x1 = block.getPosition().x + rect.x;
-            float y1 = block.getPosition().y + rect.y;
+        for(Block block : worldBoundaries.getBlocks()){
+            int rectX = block.getX();
+            int rectY = block.getY();
+            float x1 = block.getX() + rectX;
+            float y1 = block.getY() + rectY;
             debugRenderer.setColor(new Color(Color.BROWN));
-           debugRenderer.rect(x1,y1, rect.width, rect.height);
+           debugRenderer.rect(x1,y1, block.getWidth(), block.getHeight());
         }
         debugRenderer.end();
     }
