@@ -1,11 +1,6 @@
 package Model;
 import Interfaces.IObservers;
 import Interfaces.IPlayerSubscriber;
-import Interfaces.IRectangle;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Vector2;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,22 +9,15 @@ public class Player implements IObservers {
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
     List<IPlayerSubscriber> subscriberList = new ArrayList<>();
-    private Vector2 position;
+    private float x;
+    private float y;
     private int width;
     private int height;
-    private int size = 1;
 
-    private Rectangle bounds = new Rectangle();
 
-    /**
-     * The player constructor takes an position of a Vector2 as parameter.
-     * It defines the player's height, width and position.
-     * @param position represents the player's position
-     */
-    public Player(Vector2 position){
-         this.position = position;
-         this.bounds.height = size;
-         this.bounds.width = size;
+    public Player(float x, float y){
+         this.x = x;
+         this.y = y;
     }
 
 
@@ -39,7 +27,7 @@ public class Player implements IObservers {
      */
     public void positionSubscriber(IPlayerSubscriber subscriber){
         subscriberList.add(subscriber);
-        subscriber.updatePosition(position);
+        subscriber.updatePosition(x,y);
     }
 
 
@@ -48,9 +36,9 @@ public class Player implements IObservers {
      * for each subscriber in a subscriber list.
      */
     public void moveLeft(){
-        position.x -= 15;
+        x -= 15;
         for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-            playerPositionSubscriber.updatePosition(position);
+            playerPositionSubscriber.updatePosition(x,y);
         }
     }
 
@@ -60,9 +48,9 @@ public class Player implements IObservers {
      * for each subscriber in a subscriber list.
      */
     public void moveRight(){
-        position.x += 15;
+        x += 15;
         for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-            playerPositionSubscriber.updatePosition(position);
+            playerPositionSubscriber.updatePosition(x,y);
         }
     }
 
@@ -71,7 +59,7 @@ public class Player implements IObservers {
      * @return y-coordinate of the object
      */
     public float getPosY(){
-        return position.y;
+        return y;
     }
 
     /**
@@ -79,7 +67,7 @@ public class Player implements IObservers {
      * @return x-coordinate of the object
      */
     public float getPosX(){
-        return position.x;
+        return x;
     }
 
     public int getHeight(){
@@ -90,13 +78,12 @@ public class Player implements IObservers {
         return width;
     }
 
-
     @Override
-    public void keyPressed(float key) {
-        if(key == Input.Keys.LEFT){
+    public void keyPressed(MovementDirection key) {
+        if(key == MovementDirection.LEFT){
             moveLeft();
         }
-        if(key == Input.Keys.RIGHT){
+        if(key == MovementDirection.RIGHT){
             moveRight();
         }
     }

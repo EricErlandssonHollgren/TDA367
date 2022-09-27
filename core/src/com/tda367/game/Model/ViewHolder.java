@@ -28,7 +28,7 @@ public class ViewHolder {
         IView groundView = new GroundView();
         IView wallsView = new WallsView();
         PlayerView playerView = new PlayerView();
-        Player player = new Player(new Vector2(9,100));
+        Player player = new Player(9, 100);
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
@@ -37,9 +37,9 @@ public class ViewHolder {
         //Add views to list and they will be rendered. Views must implement IView
         addView(groundView);
         addView(wallsView);
-        //addView(enemyView);
+        addView(enemyView);
         addView(playerView);
-        //addView(projectileView);
+        addView(projectileView);
     }
     private void addView(IView view){
         views.add(view);

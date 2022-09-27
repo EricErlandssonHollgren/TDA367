@@ -1,11 +1,12 @@
 package Model;
-
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Block {
+import java.awt.*;
 
-    private float size = 100f;
+public class Block {
+    private int size = 100;
+    private int x;
+    private int y;
 
     public Vector2 getPosition() {
         return position;
@@ -18,8 +19,9 @@ public class Block {
         return bounds;
     }
 
-    public Block(Vector2 pos){
-        this.position = pos;
+    public Block(int x, int y){
+        this.x = x;
+        this.y = y;
         this.bounds.width = size;
         this.bounds.height = size;
     }

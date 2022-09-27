@@ -2,12 +2,12 @@ package View;
 
 import Interfaces.IView;
 import Model.Block;
-import Model.Ground;
 import Model.Walls;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
+
+import java.awt.*;
 
 public class WallsView implements IView {
     private Walls walls;

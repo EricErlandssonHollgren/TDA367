@@ -55,7 +55,7 @@ project(":desktop") {
 
 project(":core") {
     apply plugin: "java-library"
-    repositories{
+    repositories {
         mavenCentral()
     }
 
@@ -69,6 +69,7 @@ project(":core") {
     test {
         useJUnitPlatform()
     }
+}
 
 project(":html") {
     apply plugin: "java-library"
