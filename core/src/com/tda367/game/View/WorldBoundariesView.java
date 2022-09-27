@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class WorldBoundariesView implements IView {
     private WorldBoundaries worldBoundaries;
-    private Block block;
     ShapeRenderer debugRenderer = new ShapeRenderer();
 
     public WorldBoundariesView(){
