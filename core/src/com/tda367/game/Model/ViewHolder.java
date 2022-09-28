@@ -5,6 +5,7 @@ import Interfaces.IView;
 import Model.Enemy.EnemyFactory;
 import View.EnemyView;
 import View.PlayerView;
+import View.WorldBoundariesView;
 
 import java.util.ArrayList;
 import java.util.List;
