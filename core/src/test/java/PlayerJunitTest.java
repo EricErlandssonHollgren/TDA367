@@ -10,22 +10,22 @@ public class PlayerJunitTest {
 
     @Test
     public void playerMoveLeftShouldBeLessThanCurrentPositionIfMoveLeft(){
-        Player player = new Player(new Vector2(9,100));
+        Player player = new Player(9,100);
 
-        float posX = player.getPosX();
+        float posX = player.getX();
         player.moveLeft();
 
-        assertTrue(player.getPosX() < posX);
+        assertTrue(player.getX() < posX);
 
     }
 
     @Test
     public void playerMoveRightShouldBeMoreThanCurrentPositionIfMoveRight(){
-        Player player = new Player(new Vector2(9,100));
+        Player player = new Player(9,100);
 
-        float posX = player.getPosX();
+        float posX = player.getX();
         player.moveRight();
 
-        assertTrue(player.getPosX() > posX);
+        assertTrue(player.getX() > posX);
     }
 }

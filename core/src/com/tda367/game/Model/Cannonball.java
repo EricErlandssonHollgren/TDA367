@@ -1,8 +1,9 @@
 package Model;
 
+import Interfaces.IEntity;
 import Interfaces.IProjectile;
 
-public class Cannonball implements IProjectile {
+public class Cannonball implements IProjectile, IEntity{
     private float x,y,vx,vy,gravity;
     private String texturePath;
 

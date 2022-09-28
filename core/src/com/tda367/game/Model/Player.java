@@ -1,10 +1,11 @@
 package Model;
+import Interfaces.IEntity;
 import Interfaces.IObservers;
 import Interfaces.IPlayerSubscriber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements IObservers {
+public class Player implements IObservers, IEntity {
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
@@ -56,9 +57,10 @@ public class Player implements IObservers {
 
     /**
      * Gets the y-coordinate of the object of float
+     *
      * @return y-coordinate of the object
      */
-    public float getPosY(){
+    public float getY(){
         return y;
     }
 
@@ -66,7 +68,7 @@ public class Player implements IObservers {
      * Gets the x-coordinate of the object of float
      * @return x-coordinate of the object
      */
-    public float getPosX(){
+    public float getX(){
         return x;
     }
 

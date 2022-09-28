@@ -16,10 +16,7 @@ public class WorldBoundaries {
     }
 
     public void createGround(){
-        for (int i = 0; i < 100 ; i++) {
-            blocks.add(new Block(i,1, 100, 450));
-
-        }
+        blocks.add(new Block(0,1, 100, 1000));
     }
 
     public void createWalls(){

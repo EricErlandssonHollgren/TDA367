@@ -1,11 +1,13 @@
 package Model.Enemy;
 
+import Interfaces.IEntity;
+
 /**
  * All methods and parameters that an Enemy might need.
  */
 
 
-public abstract class Enemy {
+public abstract class Enemy implements IEntity {
 
     private int worth;
     private int HP;
@@ -45,11 +47,10 @@ public abstract class Enemy {
         return spritePath;
     }
 
-    public float getPositionX() {
+    public float getX() {
         return positionX;
     }
-
-    public float getPositionY() {
+    public float getY() {
         return positionY;
     }
 }
