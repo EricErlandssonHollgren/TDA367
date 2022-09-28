@@ -1,20 +1,9 @@
 package com.tda367.game;
 
-import Model.*;
-import View.StatsView;
-import Controller.KeyListener;
-import Interfaces.IView;
-import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
-import Model.Player;
-import View.PlayerView;
-import Interfaces.IView;
 import Model.GameTimer;
-import Model.Projectile;
 import Model.ViewHolder;
-import View.ProjectileView;
-import Interfaces.IView;
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -44,14 +33,14 @@ public class App extends ApplicationAdapter {
 		batch = new SpriteBatch();
 
 		timer = GameTimer.GetInstance();
+
 		img = new Texture("badlogic.jpg");
 		//TODO
-
-
 	}
   
 	@Override
 	public void render () {
+		timer.UpdateTime(Gdx.graphics.getDeltaTime());
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();
