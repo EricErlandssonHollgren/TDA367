@@ -55,10 +55,4 @@ public abstract class Enemy {
         return positionY;
     }
 
-    public void moveEnemy() {
-        double velocity = 1;
-        positionX.setLocation(positionX.getX()-velocity, positionY.getY());
-    }
-
-
 }

@@ -1,5 +1,7 @@
+import Interfaces.IEnemy;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
+import Model.Vector;
 import com.badlogic.gdx.math.Vector2;
 import org.junit.jupiter.api.Test;
 
@@ -11,18 +13,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 
 public class testEnemy {
+    IEnemy enemy = new Enemy1(new Vector(800,0), new Vector(0,0));
 
     @Test
     public void testPosition() {
-        Enemy enemy = new Enemy1();
-        assertEquals(enemy.getPositionX(), new Vector2(800,0));
-        assertEquals(enemy.getPositionY(), new Vector2(0,0));
+        assertEquals(enemy.getX(), new Vector2(800,0));
+        assertEquals(enemy.getY(), new Vector2(0,0));
     }
 
     @Test
     public void testRendering() {
-        Enemy enemy = new Enemy1();
-        assertTrue(enemy.getSpritePath() == "koopaTroopa.png");
+        assertTrue(enemy.getTexturePath() == "koopaTroopa.png");
     }
 
 }

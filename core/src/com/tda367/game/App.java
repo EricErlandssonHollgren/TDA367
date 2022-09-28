@@ -13,6 +13,7 @@ import Model.ViewHolder;
 import View.ProjectileView;
 import Interfaces.IView;
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -48,6 +49,8 @@ public class App extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();
+		timer.UpdateTime(Gdx.graphics.getDeltaTime());
+		//System.out.println(timer.GetTime());
 		batch.end();
 	}
 	

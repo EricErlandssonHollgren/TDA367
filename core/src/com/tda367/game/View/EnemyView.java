@@ -1,5 +1,6 @@
 package View;
 
+import Interfaces.IEnemy;
 import Interfaces.IView;
 import Model.Enemy.Enemy;
 import Model.GameTimer;
@@ -19,7 +20,9 @@ import java.awt.geom.Point2D;
  */
 public class EnemyView implements IView {
 
-    private Enemy enemy;
+    private IEnemy enemy;
+
+    //private Enemy enemy;
     private SpriteBatch batch;
 
     private Waves wave;
@@ -28,20 +31,20 @@ public class EnemyView implements IView {
     /**
      * A constructor for creating an Enemy.
      */
-    public EnemyView(Enemy enemy) {
+    public EnemyView(IEnemy enemy) {
         this.enemy = enemy;
         batch = new SpriteBatch();
-        img = new Texture(this.enemy.getSpritePath());
+        img = new Texture(this.enemy.getTexturePath());
         wave = new Waves();
     }
     @Override
     public void render() {
-        float positionX = (float) enemy.getPositionX().getX();
-        float positionY = (float) enemy.getPositionX().getY();
+        float positionX = enemy.getX().x;
+        float positionY = enemy.getY().y;
         batch.begin();
-        //wave.enemyWave();
-        enemy.moveEnemy();
-        batch.draw(img, positionX, positionY, (float) Math.ceil(img.getHeight()*0.2), (float) Math.ceil(img.getWidth()*0.25));
+        enemy.move();
+        batch.draw(img, positionX, positionY, (float) Math.ceil(img.getHeight()*0.15), (float) Math.ceil(img.getWidth()*0.25));
+        //wave.spawnWave();
         batch.end();
     }
     @Override
