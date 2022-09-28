@@ -1,14 +1,6 @@
 package com.tda367.game;
 
-import Controller.KeyListener;
-import Interfaces.IView;
 import Model.*;
-import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
-import View.PlayerView;
-import Interfaces.IView;
-import View.ProjectileView;
-import Interfaces.IView;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,10 +8,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
-import View.EnemyView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class App extends ApplicationAdapter {
 	SpriteBatch batch;

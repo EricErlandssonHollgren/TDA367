@@ -35,7 +35,6 @@ public class PlayerView implements IView, PlayerPositionSubscriber {
 
     @Override
     public void render() {
-        ScreenUtils.clear(0, 0, 0, 0);
         batch.begin();
         batch.draw(texture, playerSprite.getX(), playerSprite.getY());
         batch.end();

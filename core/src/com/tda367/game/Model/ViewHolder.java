@@ -21,6 +21,8 @@ public class ViewHolder {
 
         //Create views and objects
         IView projectileView = ViewFactory.createProjectileView(ProjectileFactory.createCannonball(50,200,3,10,gravity));
+        IView projectileView2 = ViewFactory.createProjectileView(ProjectileFactory.createCannonball(25,200,6,10,gravity));
+        IView projectileView3 = ViewFactory.createProjectileView(ProjectileFactory.createCannonball(70,200,3,19,gravity));
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
         Player player = new Player(40f, 50f);
@@ -30,9 +32,12 @@ public class ViewHolder {
         player.positionSubscriber(playerView);
 
         //Add views to list and they will be rendered. Views must implement IView
+
         addView(enemyView);
         addView(playerView);
         addView(projectileView);
+        addView(projectileView2);
+        addView(projectileView3);
     }
     public void addView(IView view){
         views.add(view);
