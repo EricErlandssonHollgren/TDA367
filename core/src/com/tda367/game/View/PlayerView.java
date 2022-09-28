@@ -18,6 +18,7 @@ public class PlayerView implements IView, PlayerPositionSubscriber {
      * the sprite for the player.
      */
     public PlayerView(){
+
         playerSprite = new Sprite();
         batch = new SpriteBatch();
         texture = new Texture("adventurer-stand-01.png");

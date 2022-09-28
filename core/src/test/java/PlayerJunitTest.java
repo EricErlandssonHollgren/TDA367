@@ -1,4 +1,3 @@
-package test.java;
 
 import Model.Player;
 import com.badlogic.gdx.Gdx;
@@ -9,7 +8,7 @@ public class PlayerJunitTest {
 
     @Test
     public void playerMoveLeftShouldBeLessThanCurrentPositionIfMoveLeft(){
-        Player player = new Player(40f, 50f);
+        Player player = new Player(40f, 50f, 100);
 
         float posX = player.getPosX();
         player.moveLeft();
@@ -20,7 +19,7 @@ public class PlayerJunitTest {
 
     @Test
     public void playerMoveRightShouldBeMoreThanCurrentPositionIfMoveRight(){
-        Player player = new Player(40f, 50f);
+        Player player = new Player(40f, 50f, 100);
 
         float posX = player.getPosX();
         player.moveRight();

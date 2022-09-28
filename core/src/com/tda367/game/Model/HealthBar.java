@@ -8,6 +8,8 @@ public class HealthBar {
 
     private float positionX;
     private float positionY;
+    private float entityHeight;
+    private float entityWidth;
     private static final float aboveY = 10;
     private float maxHealth;
     private float health;
@@ -15,17 +17,19 @@ public class HealthBar {
     private Texture healthBarImg;
 
 
-    public HealthBar(float x, float y, float health) {
+    public HealthBar(float x, float y, float health, float entityHeight, float entityWidth) {
         healthBarHolderImg = new Texture("grayhealthbar.png");
         healthBarImg = new Texture("healthBar/redhealthbar.png");
-        positionX = x;
-        positionY = y + aboveY;
+        positionX = x + entityWidth/2;
+        positionY = y + entityHeight;
         this.health = health;
+        this.entityHeight = entityHeight;
+        this.entityWidth = entityWidth;
     }
 
     public void updatePosition(float x, float y){
-        positionX = x;
-        positionY = y + aboveY;
+        positionX = x+(entityWidth/2);
+        positionY = y + entityHeight;
     }
 
     public void updateHealth(int currentHeahlth) {
