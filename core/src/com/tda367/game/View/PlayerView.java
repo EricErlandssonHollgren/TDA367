@@ -12,7 +12,6 @@ public class PlayerView implements IView, IPlayerSubscriber{
     private static Sprite playerSprite;
     private static Batch batch;
     private static Texture texture;
-    private Player player;
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
@@ -28,6 +27,7 @@ public class PlayerView implements IView, IPlayerSubscriber{
     public void updatePosition(float x, float y) {
         playerSprite.setPosition(x, y);
     }
+
 
 
     @Override

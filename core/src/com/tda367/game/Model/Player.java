@@ -15,6 +15,8 @@ public class Player implements IObservers, IEntity {
     private int width;
     private int height;
 
+    private float velocity = 15;
+
 
     public Player(float x, float y){
          this.x = x;
@@ -37,7 +39,7 @@ public class Player implements IObservers, IEntity {
      * for each subscriber in a subscriber list.
      */
     public void moveLeft(){
-        x -= 15;
+        x -= velocity;
         for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
@@ -49,7 +51,7 @@ public class Player implements IObservers, IEntity {
      * for each subscriber in a subscriber list.
      */
     public void moveRight(){
-        x += 15;
+        x += velocity;
         for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
@@ -72,6 +74,14 @@ public class Player implements IObservers, IEntity {
         return x;
     }
 
+    public float getVelocity() {
+        return velocity;
+    }
+
+    public float stopVelocity(){
+        return velocity = 0;
+    }
+
     public int getHeight(){
         return height;
     }
@@ -89,5 +99,7 @@ public class Player implements IObservers, IEntity {
             moveRight();
         }
     }
+
+
 
 }

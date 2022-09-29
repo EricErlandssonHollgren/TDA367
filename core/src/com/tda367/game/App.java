@@ -1,5 +1,6 @@
 package com.tda367.game;
 
+import Model.CollisionDetection;
 import Model.GameTimer;
 import Model.ViewHolder;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -15,11 +16,13 @@ public class App extends ApplicationAdapter {
 	World world;
 	GameTimer timer;
 	ViewHolder views;
+	CollisionDetection cd;
 	@Override
 	public void create () {
 		world = new World(new Vector2(0,-0.5f),true);
 		views = new ViewHolder(world.getGravity().y);
 		batch = new SpriteBatch();
+		cd = new CollisionDetection(Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
 
 		timer = GameTimer.GetInstance();
 
@@ -30,6 +33,7 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
+		cd.CheckCollisionPlayerAndBoundaries();
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();

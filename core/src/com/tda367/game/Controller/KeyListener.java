@@ -3,7 +3,6 @@ package Controller;
 import Interfaces.IObservers;
 import Model.MovementDirection;
 import com.badlogic.gdx.*;
-import Model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
