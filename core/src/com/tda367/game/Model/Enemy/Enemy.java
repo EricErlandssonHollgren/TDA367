@@ -20,6 +20,8 @@ public abstract class Enemy implements IEntity {
 
     private String spritePath;
 
+    private int damage = 10;
+
     /**
      *
      * @param worth = is what the enemy is "worth". int will be transferred to the player when the enemy has been killed
@@ -53,4 +55,5 @@ public abstract class Enemy implements IEntity {
     public float getY() {
         return positionY;
     }
+    public int getDamage(){return damage;}
 }

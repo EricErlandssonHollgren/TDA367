@@ -2,6 +2,7 @@ package com.tda367.game;
 
 import Model.CollisionDetection;
 import Model.GameTimer;
+import Model.EntityHolder;
 import Model.ViewHolder;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
+
 public class App extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
@@ -17,12 +19,12 @@ public class App extends ApplicationAdapter {
 	GameTimer timer;
 	ViewHolder views;
 	CollisionDetection cd;
+	EntityHolder ph;
 	@Override
 	public void create () {
 		world = new World(new Vector2(0,-0.5f),true);
 		views = new ViewHolder(world.getGravity().y);
 		batch = new SpriteBatch();
-		cd = new CollisionDetection(Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
 
 		timer = GameTimer.GetInstance();
 
@@ -33,7 +35,7 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
-		cd.CheckCollisionPlayerAndBoundaries();
+		//cd.CheckCollisionPlayerAndBoundaries();
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();

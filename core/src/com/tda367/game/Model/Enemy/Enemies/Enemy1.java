@@ -12,7 +12,7 @@ public class Enemy1 extends Enemy {
     private static final int HP = 5;
     private static final String projectile = "bomb";
     private static final String spritePath = "koopaTroopa.png";
-    private static final float positionX = 800;
+    private static final float positionX = 200;
     private static final float positionY = 0;
 
     public Enemy1() {
