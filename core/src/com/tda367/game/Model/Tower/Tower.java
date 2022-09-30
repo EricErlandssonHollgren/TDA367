@@ -10,7 +10,6 @@ A player base
 
 public abstract class Tower implements IBuild {
 
-    private final String spritePath;
     private final double health;
     private static double positionX;
     private static double positionY;
@@ -22,19 +21,11 @@ public abstract class Tower implements IBuild {
     This creates a player base, which requires arguments for its health, location and maximum turrets capacity
      */
     public Tower(double health, int maxCapacity){
-        this.spritePath = "spritePath";
         this.health = health;
         positionX = 0;
         positionY = 0;
         this.maxCapacity = maxCapacity;
         this.turrets = new ArrayList<Turret>();
-    }
-
-    /*
-    Gets the towers spritePath
-     */
-    public String getSpritePath() {
-        return spritePath;
     }
 
     /*

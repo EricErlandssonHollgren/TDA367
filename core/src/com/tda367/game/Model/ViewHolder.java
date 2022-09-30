@@ -5,9 +5,12 @@ import Interfaces.IView;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
+import Model.Tower.*;
+import Model.Tower.Towers.*;
 import View.EnemyView;
 import View.PlayerView;
 import View.ProjectileView;
+import View.TowerView;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -29,6 +32,7 @@ public class ViewHolder {
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
         Player player = new Player(40f, 50f);
+        TowerView towerView = new TowerView();
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
@@ -38,6 +42,7 @@ public class ViewHolder {
         addView(enemyView);
         addView(playerView);
         addView(projectileView);
+        addView(towerView);
     }
     private void addView(IView view){
         views.add(view);
