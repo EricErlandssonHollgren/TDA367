@@ -1,17 +1,17 @@
-package Model.Turret;
+package Model;
 
 import Interfaces.IShoot;
 
 /*
     This creates a Turret, which requires arguments for its damage, and its shooting speed
      */
-public abstract class Turret implements IShoot {
+public class Turret implements IShoot{
     private final double damage;
     private final double shootingSpeed;
 
-    public Turret(double damage, double shootingSpeed){
-        this.damage = damage;
-        this.shootingSpeed = shootingSpeed;
+    public Turret(){
+        this.damage = 10;
+        this.shootingSpeed = 5;
     }
 
     public double getDamage() {
@@ -28,6 +28,4 @@ public abstract class Turret implements IShoot {
     public void shootProjectile() {
 
     }
-
-
 }

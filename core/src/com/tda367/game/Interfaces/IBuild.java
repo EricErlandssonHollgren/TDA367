@@ -1,6 +1,6 @@
 package Interfaces;
 
-import Model.Turret.Turret;
+import Model.Turret;
 
 /**
  * A class with this interface should be able to build turrets

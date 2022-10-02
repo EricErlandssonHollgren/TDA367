@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /*
     A constructor for creating a view for the model of a Turret, might be redundant.
- */
+
 
 public class TurretView implements IView {
 
@@ -19,3 +19,4 @@ public class TurretView implements IView {
 
     public void dispose(){};
 }
+*/

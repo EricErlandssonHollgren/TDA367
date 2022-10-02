@@ -2,11 +2,7 @@ package Model;
 
 import Controller.KeyListener;
 import Interfaces.IView;
-import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
-import Model.Tower.*;
-import Model.Tower.Towers.*;
 import View.EnemyView;
 import View.PlayerView;
 import View.ProjectileView;
@@ -32,10 +28,12 @@ public class ViewHolder {
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
         Player player = new Player(40f, 50f);
-        TowerView towerView = new TowerView();
+        Tower tower = new Tower();
+        TowerView towerView = new TowerView(tower);
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
+        keyListener.addSubscribers(tower);
         player.positionSubscriber(playerView);
 
         //Add views to list and they will be rendered. Views must implement IView
@@ -51,6 +49,8 @@ public class ViewHolder {
         views.remove(view);
     }
     public void render(){
+        keyListener.upgradeTower();
+        keyListener.buildTurret();
         keyListener.UpdatePlayerPosition();
         for (IView views: views) {
             views.render();
