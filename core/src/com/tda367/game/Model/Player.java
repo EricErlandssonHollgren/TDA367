@@ -15,7 +15,10 @@ public class Player implements IObservers, IEntity {
     private int width;
     private int height;
 
-    private float velocity = 15;
+    private boolean isAbleToMoveRight = false;
+    private boolean isAbleToMoveLeft = false;
+
+    private float velocity = 7;
 
 
     public Player(float x, float y){
@@ -39,9 +42,11 @@ public class Player implements IObservers, IEntity {
      * for each subscriber in a subscriber list.
      */
     public void moveLeft(){
-        x -= velocity;
-        for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-            playerPositionSubscriber.updatePosition(x,y);
+        if(isAbleToMoveLeft) {
+            x -= velocity;
+            for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
+                playerPositionSubscriber.updatePosition(x, y);
+            }
         }
     }
 
@@ -51,10 +56,29 @@ public class Player implements IObservers, IEntity {
      * for each subscriber in a subscriber list.
      */
     public void moveRight(){
-        x += velocity;
-        for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-            playerPositionSubscriber.updatePosition(x,y);
+        if(isAbleToMoveRight){
+            x += velocity;
+            for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
+                playerPositionSubscriber.updatePosition(x,y);
+            }
         }
+    }
+
+    /**
+     * The setter enables the player to move right
+     * @param ableToMoveRight is a boolean to allow the player move right.
+     */
+    public void setAbleToMoveRight(boolean ableToMoveRight) {
+        isAbleToMoveRight = ableToMoveRight;
+    }
+
+
+    /**
+     * The setter enbles the player to move left.
+     * @param ableToMoveLeft is a boolean to allow the player move left.
+     */
+    public void setAbleToMoveLeft(boolean ableToMoveLeft) {
+        isAbleToMoveLeft = ableToMoveLeft;
     }
 
     /**
@@ -74,12 +98,12 @@ public class Player implements IObservers, IEntity {
         return x;
     }
 
+    /**
+     * Gets the velocity of the player
+     * @return the velocity of the player
+     */
     public float getVelocity() {
         return velocity;
-    }
-
-    public float stopVelocity(){
-        return velocity = 0;
     }
 
     public int getHeight(){
@@ -90,6 +114,10 @@ public class Player implements IObservers, IEntity {
         return width;
     }
 
+    /**
+     * The method allows the player to move left or right depending on the key that is pressed.
+     * @param key uses the moveLeft() or moveRight() method
+     */
     @Override
     public void keyPressed(MovementDirection key) {
         if(key == MovementDirection.LEFT){

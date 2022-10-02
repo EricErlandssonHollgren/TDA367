@@ -4,8 +4,6 @@ import java.util.List;
 
 public class WorldBoundaries {
 
-
-
     List<Block> blocks = new ArrayList<>();
 
     public WorldBoundaries(){
@@ -18,12 +16,12 @@ public class WorldBoundaries {
     }
 
     public void createGround(){
-        blocks.add(new Block(0,1, 100, 1000));
+        blocks.add(new Block(0,0, 100, 780));
     }
 
     public void createWalls(){
-        blocks.add(new Block(315, 40, 400, 10));
-        blocks.add(new Block(0,40,400,10));
+        blocks.add(new Block(630, 40, 450, 10));
+        blocks.add(new Block(0,40,450,10));
     }
 
 }

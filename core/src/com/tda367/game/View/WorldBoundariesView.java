@@ -21,10 +21,8 @@ public class WorldBoundariesView implements IView {
         for(Block block : worldBoundaries.getBlocks()){
             int rectX = block.getX();
             int rectY = block.getY();
-            float x1 = block.getX() + rectX;
-            float y1 = block.getY() + rectY;
             debugRenderer.setColor(new Color(Color.BROWN));
-           debugRenderer.rect(x1,y1, block.getWidth(), block.getHeight());
+           debugRenderer.rect(rectX,rectY, block.getWidth(), block.getHeight());
         }
         debugRenderer.end();
     }

@@ -30,7 +30,7 @@ public class ViewHolder {
         IView enemyView = new EnemyView(enemy);
         IView worldBoundariesView = new WorldBoundariesView();
         PlayerView playerView = new PlayerView();
-        Player player = new Player(9, 100);
+        Player player = new Player(10, 100);
         cd = CollisionDetection.getInstance(player);
 
         keyListener = new KeyListener();
@@ -54,6 +54,7 @@ public class ViewHolder {
     public void render(){
         keyListener.UpdatePlayerMovement();
         cd.CheckCollisionPlayerAndEnemy();
+        cd.CheckCollisionPlayerAndBoundaries();
         for (IView views: views) {
             views.render();
         }
