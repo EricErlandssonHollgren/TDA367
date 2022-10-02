@@ -2,10 +2,7 @@ package Model;
 
 import Controller.KeyListener;
 import Interfaces.IView;
-import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
-import View.EnemyView;
 import View.PlayerView;
 import View.ProjectileView;
 import com.badlogic.gdx.math.Vector2;

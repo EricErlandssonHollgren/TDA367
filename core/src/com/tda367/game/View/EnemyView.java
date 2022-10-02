@@ -2,18 +2,10 @@ package View;
 
 import Interfaces.IEnemy;
 import Interfaces.IView;
-import Model.Enemy.Enemy;
 import Model.GameTimer;
-import Model.RoundHandler;
 import Model.Waves;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
-import Model.Enemy.EnemyFactory;
-
-import java.awt.geom.Point2D;
 
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
@@ -22,7 +14,6 @@ public class EnemyView implements IView {
 
     private IEnemy enemy;
 
-    //private Enemy enemy;
     private SpriteBatch batch;
 
     private Waves wave;
@@ -34,17 +25,23 @@ public class EnemyView implements IView {
     public EnemyView(IEnemy enemy) {
         this.enemy = enemy;
         batch = new SpriteBatch();
-        img = new Texture(this.enemy.getTexturePath());
+        img = new Texture("koopaTroopa.png");
         wave = new Waves();
     }
+
+    /**
+     * A method for rendering, and moving, an enemy across the screen every 40 seconds.
+     */
     @Override
     public void render() {
         float positionX = enemy.getX().x;
         float positionY = enemy.getY().y;
         batch.begin();
-        enemy.move();
         batch.draw(img, positionX, positionY, (float) Math.ceil(img.getHeight()*0.15), (float) Math.ceil(img.getWidth()*0.25));
-        //wave.spawnWave();
+        if (Math.ceil(GameTimer.GetInstance().GetTime()) % 40 == 0) {
+            enemy = wave.getEnemyFromQueue();
+        }
+        enemy.move();
         batch.end();
     }
     @Override
