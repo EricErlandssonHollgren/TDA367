@@ -31,5 +31,17 @@ public class TowerJUnitTest {
         assertTrue(tower3.getTurrets().contains(turret1));
     }
 
+    @Test
+    public void testTowerUpgrades(){
+        Tower tower4 = new Tower();
+        tower4.upgrade();
+        Turret turret1 = new Turret();
+        Turret turret2 = new Turret();
+        tower4.buildTurret(turret1);
+        tower4.buildTurret(turret2);
+        assertEquals(2, tower4.getTurrets().size());
+        assertEquals(700, tower4.getHealth());
+    }
+
 
 }

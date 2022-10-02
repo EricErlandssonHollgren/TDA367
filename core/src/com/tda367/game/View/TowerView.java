@@ -45,17 +45,17 @@ public class TowerView implements IView {
             if (this.tower.getTurrets().size() == 1){
                 return new Texture("Tower2_1Turret_Sprite.png");
             }
-            else if (this.tower.getTurrets().size() == 2) {
+            else if (this.tower.getTurrets().size() > 1) {
                 return new Texture("Tower2_2Turret_Sprite.png");
             }
             else {
-                return new Texture("Tower2Sprite");
+                return new Texture("Tower2Sprite.png");
             }
         }
 
         else{
             if (this.tower.getTurrets().size() > 0){
-                return new Texture("Tower1_1Turret_Sprite");
+                return new Texture("Tower1_1Turret_Sprite.png");
             }
             else {
                 return this.texture;
