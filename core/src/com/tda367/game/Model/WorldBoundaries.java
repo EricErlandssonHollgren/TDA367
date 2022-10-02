@@ -15,13 +15,13 @@ public class WorldBoundaries {
         return blocks;
     }
 
-    private void createGround(){
-        blocks.add(new Block(0,1, 100, 1000));
+    public void createGround(){
+        blocks.add(new Block(0,0, 100, 780));
     }
 
-    private void createWalls(){
-        blocks.add(new Block(315, 40, 400, 10));
-        blocks.add(new Block(0,40,400,10));
+    public void createWalls(){
+        blocks.add(new Block(630, 40, 450, 10));
+        blocks.add(new Block(0,40,450,10));
     }
 
 }
