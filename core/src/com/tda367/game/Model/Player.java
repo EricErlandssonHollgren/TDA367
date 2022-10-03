@@ -1,10 +1,6 @@
 package Model;
-
 import Interfaces.IObservers;
-import com.badlogic.gdx.Gdx;
-import Interfaces.PlayerPositionSubscriber;
-import com.badlogic.gdx.Input;
-
+import Interfaces.IPlayerSubscriber;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,35 +8,36 @@ public class Player implements IObservers {
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
-    List<PlayerPositionSubscriber> subscriberList = new ArrayList<>();
+    List<IPlayerSubscriber> subscriberList = new ArrayList<>();
     private float x;
     private float y;
+    private int width;
+    private int height;
 
-    /**
-     * When creating a player it should have two variables which defines its position.
-     * @param x represents the player's position on the x-axis
-     * @param y represents the player's position on the y-axis
-     */
+
     public Player(float x, float y){
-        this.x = x;
-        this.y = y;
+         this.x = x;
+         this.y = y;
     }
+
 
     /**
      * A subscriber to handle the playerPosition. It should be updating its position
      * @param subscriber for the subscriberList
      */
-    public void positionSubscriber(PlayerPositionSubscriber subscriber){
+    public void positionSubscriber(IPlayerSubscriber subscriber){
         subscriberList.add(subscriber);
-        subscriber.updatePosition(x, y);
+        subscriber.updatePosition(x,y);
     }
+
+
     /**
      * The moveLeft() method is allowing the character to move to the right side,
      * for each subscriber in a subscriber list.
      */
     public void moveLeft(){
-        x -= 15f;
-        for (PlayerPositionSubscriber playerPositionSubscriber : subscriberList) {
+        x -= 15;
+        for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
     }
@@ -51,8 +48,8 @@ public class Player implements IObservers {
      * for each subscriber in a subscriber list.
      */
     public void moveRight(){
-        x += 15f;
-        for (PlayerPositionSubscriber playerPositionSubscriber : subscriberList) {
+        x += 15;
+        for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
             playerPositionSubscriber.updatePosition(x,y);
         }
     }
@@ -73,13 +70,22 @@ public class Player implements IObservers {
         return x;
     }
 
+    public int getHeight(){
+        return height;
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
     @Override
-    public void keyPressed(int key) {
-        if(key == Input.Keys.LEFT){
+    public void keyPressed(MovementDirection key) {
+        if(key == MovementDirection.LEFT){
             moveLeft();
         }
-        if(key == Input.Keys.RIGHT){
+        if(key == MovementDirection.RIGHT){
             moveRight();
         }
     }
+
 }

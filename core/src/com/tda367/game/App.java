@@ -26,6 +26,8 @@ public class App extends ApplicationAdapter {
 		timer = GameTimer.GetInstance();
 		img = new Texture("badlogic.jpg");
 		//TODO
+
+
 	}
 
 	@Override
@@ -39,6 +41,7 @@ public class App extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
+
 		batch.dispose();
 		img.dispose();
 		views.dispose();
