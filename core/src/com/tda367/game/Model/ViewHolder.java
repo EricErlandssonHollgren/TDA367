@@ -19,14 +19,13 @@ public class ViewHolder {
     //
     private List<IView> views;
     private KeyListener keyListener;
-    private World world;
-    public ViewHolder(World world){
+    private float gravity;
+    public ViewHolder(float gravity){
         //Instantiate world and views list
-        this.world = world;
+        this.gravity = gravity;
         views = new ArrayList<>();
 
         //Create views and objects
-        IView projectileView = new ProjectileView(new Projectile(new Vector2(50,100), new Vector2(10,10), "badlogic.jpg"),this.world.getGravity());
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
         Player player = new Player(9, 100);
@@ -44,9 +43,8 @@ public class ViewHolder {
         //Add views to list and they will be rendered. Views must implement IView
         addView(enemyView);
         addView(playerView);
-        addView(projectileView);
     }
-    private void addView(IView view){
+    public void addView(IView view){
         views.add(view);
     }
     public void removeView(IView view){
