@@ -105,10 +105,17 @@ public class Player implements IObservers, IEntity {
     public float getVelocity() {
         return velocity;
     }
-
+    /**
+     * Gets the height of the object of int
+     * @return the height of a player
+     */
     public int getHeight(){
         return height;
     }
+    /**
+     * Gets the width of the object of int
+     * @return the width of a player
+     */
 
     public int getWidth(){
         return width;

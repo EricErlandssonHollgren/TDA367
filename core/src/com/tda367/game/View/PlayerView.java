@@ -23,13 +23,20 @@ public class PlayerView implements IView, IPlayerSubscriber{
 
     }
 
+    /**
+     * Updates the position of a player's sprite
+     * @param x is the player sprite's x-coordinate
+     * @param y is the player sprite's y-coordinate
+     */
     @Override
     public void updatePosition(float x, float y) {
         playerSprite.setPosition(x, y);
     }
 
 
-
+    /**
+     * Render for the player sprite which paints the player sprite's texture
+     */
     @Override
     public void render() {
         batch.begin();
