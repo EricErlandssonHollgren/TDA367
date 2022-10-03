@@ -31,6 +31,8 @@ public class KeyListener{
             }
         }
     }
+    
+
     /**
      * UpdatePlayerPosition listens to inputs depending on which key is pressed.
      * When being listened it tells the player to either use moveLeft()-
