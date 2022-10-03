@@ -8,7 +8,7 @@ public abstract class Entity {
     protected float positionY;
     protected HealthBar healthBar;
     protected Texture entityImg;
-
+    protected STATE State;
 
     public Entity(float positionX, float positionY, int health) {
         this.positionX = positionX;
