@@ -2,6 +2,8 @@ package Model;
 
 import Controller.KeyListener;
 import Interfaces.IView;
+import Model.Enemy.Enemies.Enemy1;
+import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
 import View.EnemyView;
 import View.PlayerView;
@@ -34,6 +36,9 @@ public class ViewHolder {
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
         keyListener.addSubscribers(tower);
+
+        keyListener = new KeyListener();
+        keyListener.addSubscribers(player);
         player.positionSubscriber(playerView);
 
         //Add views to list and they will be rendered. Views must implement IView
@@ -41,6 +46,7 @@ public class ViewHolder {
         addView(playerView);
         addView(projectileView);
         addView(towerView);
+
     }
     private void addView(IView view){
         views.add(view);
