@@ -2,7 +2,6 @@ package com.tda367.game;
 
 import Model.GameTimer;
 import Model.ViewHolder;
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,30 +19,29 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		world = new World(new Vector2(0,-0.5f),true);
-		views = new ViewHolder(world);
+		views = new ViewHolder(world.getGravity().y);
 		batch = new SpriteBatch();
 
 		timer = GameTimer.GetInstance();
+
 		img = new Texture("badlogic.jpg");
 		//TODO
-
-
 	}
-
+  
 	@Override
 	public void render () {
+		timer.UpdateTime(Gdx.graphics.getDeltaTime());
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();
-		timer.UpdateTime(Gdx.graphics.getDeltaTime());
 		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
-
 		batch.dispose();
 		img.dispose();
 		views.dispose();
+
 	}
 }
