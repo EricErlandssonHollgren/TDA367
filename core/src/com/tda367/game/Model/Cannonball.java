@@ -3,21 +3,20 @@ package Model;
 import Interfaces.IProjectile;
 
 public class Cannonball implements IProjectile {
-    private float x,y,vx,vy,gravity;
-    private String texturePath;
+    private float x,y,vx,vy,gravity, damage;
 
-    public Cannonball(float x, float y, float vx, float vy, String texturePath, float gravity){
+    public Cannonball(float x, float y, float vx, float vy, float gravity, float damage){
         this.gravity = gravity;
         this.x = x;
         this.y = y;
         this.vx = vx;
         this.vy = vy;
-        this.texturePath = texturePath;
+        this.damage = damage;
     }
 
     @Override
-    public String getTexturePath(){
-        return texturePath;
+    public float getDamage() {
+        return this.damage;
     }
     @Override
     public float getX(){

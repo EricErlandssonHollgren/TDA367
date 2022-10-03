@@ -1,7 +1,7 @@
 package Interfaces;
 
 public interface IProjectile {
-    String getTexturePath();
+    float getDamage();
     float getX();
     float getY();
     void move();
