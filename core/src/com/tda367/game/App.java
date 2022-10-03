@@ -46,6 +46,8 @@ public class App extends ApplicationAdapter {
 		timer = GameTimer.GetInstance();
 		img = new Texture("badlogic.jpg");
 		//TODO
+
+
 	}
   
 	@Override

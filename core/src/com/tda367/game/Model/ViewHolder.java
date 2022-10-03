@@ -29,7 +29,7 @@ public class ViewHolder {
         IView projectileView = new ProjectileView(new Projectile(new Vector2(50,100), new Vector2(10,10), "badlogic.jpg"),this.world.getGravity());
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
-        Player player = new Player(40f, 50f);
+        Player player = new Player(9, 100);
         Tower tower = new Tower();
         TowerView towerView = new TowerView(tower);
 
@@ -45,8 +45,6 @@ public class ViewHolder {
         addView(enemyView);
         addView(playerView);
         addView(projectileView);
-        addView(towerView);
-
     }
     private void addView(IView view){
         views.add(view);
@@ -55,9 +53,7 @@ public class ViewHolder {
         views.remove(view);
     }
     public void render(){
-        keyListener.upgradeTower();
-        keyListener.buildTurret();
-        keyListener.UpdatePlayerPosition();
+        keyListener.UpdatePlayerMovement();
         for (IView views: views) {
             views.render();
         }

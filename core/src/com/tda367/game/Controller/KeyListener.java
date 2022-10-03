@@ -1,6 +1,7 @@
 package Controller;
 
 import Interfaces.IObservers;
+import Model.MovementDirection;
 import com.badlogic.gdx.*;
 import Model.Player;
 
@@ -35,15 +36,15 @@ public class KeyListener{
      * When being listened it tells the player to either use moveLeft()-
      * or moveRight()-method.
      */
-    public void UpdatePlayerPosition(){
+    public void UpdatePlayerMovement(){
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
             for (IObservers o: observers) {
-                o.keyPressed(Input.Keys.LEFT);
+                o.keyPressed(MovementDirection.LEFT);
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
             for (IObservers o: observers) {
-                o.keyPressed(Input.Keys.RIGHT);
+                o.keyPressed(MovementDirection.RIGHT);
             }
         }
     }
