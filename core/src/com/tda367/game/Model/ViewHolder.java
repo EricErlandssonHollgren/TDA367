@@ -16,13 +16,13 @@ public class ViewHolder {
     private List<IView> views;
     private KeyListener keyListener;
     private float gravity;
-    private CollisionDetection cd;
     public ViewHolder(float gravity){
         //Instantiate world and views list
         this.gravity = gravity;
         views = new ArrayList<>();
 
         //Create views and objects
+        IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         IView projectileView = ViewFactory.createProjectileView(ProjectileFactory.createCannonball(50,200,3,10,gravity));
         IView projectileView2 = ViewFactory.createProjectileView(ProjectileFactory.createCannonball(25,200,6,10,gravity));
         IView projectileView3 = ViewFactory.createProjectileView(ProjectileFactory.createCannonball(70,200,3,19,gravity));
@@ -30,6 +30,13 @@ public class ViewHolder {
         IView enemyView = new EnemyView(enemy);
         IView worldBoundariesView = new WorldBoundariesView();
         PlayerView playerView = new PlayerView();
+        Player player = new Player(9, 100);
+        Tower tower = new Tower();
+        TowerView towerView = new TowerView(tower);
+
+        keyListener = new KeyListener();
+        keyListener.addSubscribers(player);
+        keyListener.addSubscribers(tower);
         Player player = new Player(10, 100);
         cd = CollisionDetection.getInstance(player);
 
@@ -41,9 +48,6 @@ public class ViewHolder {
         addView(worldBoundariesView);
         addView(enemyView);
         addView(playerView);
-        addView(projectileView);
-        addView(projectileView2);
-        addView(projectileView3);
     }
     public void addView(IView view){
         views.add(view);

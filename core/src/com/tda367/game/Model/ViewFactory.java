@@ -6,6 +6,6 @@ import View.ProjectileView;
 
 public class ViewFactory {
     public static IView createProjectileView(IProjectile p){
-        return new ProjectileView(p);
+        return new ProjectileView(p, "Cannonball.png");
     }
 }
