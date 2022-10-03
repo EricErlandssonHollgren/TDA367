@@ -34,11 +34,11 @@ public class EnemyView implements IView {
      */
     @Override
     public void render() {
-        float positionX = enemy.getX().x;
-        float positionY = enemy.getY().y;
+        float positionX = enemy.getX();
+        float positionY = enemy.getY();
         batch.begin();
         batch.draw(img, positionX, positionY, (float) Math.ceil(img.getHeight()*0.15), (float) Math.ceil(img.getWidth()*0.25));
-        if (Math.ceil(GameTimer.GetInstance().GetTime()) % 40 == 0) {
+        if (Math.ceil(GameTimer.GetInstance().GetTime()) % 60 == 0) {
             enemy = wave.getEnemyFromQueue();
         }
         enemy.move();

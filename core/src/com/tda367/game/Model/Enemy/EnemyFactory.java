@@ -12,8 +12,8 @@ import Model.Vector;
 public class EnemyFactory {
 
 
-    public static IEnemy createEnemy1(Vector x, Vector y) {
-        return new Enemy1(x, y);
+    public static IEnemy createEnemy1(Vector position) {
+        return new Enemy1(position.x, position.y);
     }
 
 }

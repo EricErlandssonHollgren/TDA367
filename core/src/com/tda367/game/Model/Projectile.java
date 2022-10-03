@@ -2,7 +2,6 @@ package Model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import jdk.incubator.vector.VectorOperators;
 
 import java.awt.geom.Point2D;
 

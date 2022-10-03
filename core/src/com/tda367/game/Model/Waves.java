@@ -14,7 +14,7 @@ public class Waves {
     public Queue<IEnemy> addEnemies(int count) {
         Queue<IEnemy> queue = new LinkedList<>();
         for (int i = 0; i <= count; i++) {
-            queue.add(EnemyFactory.createEnemy1(new Vector(1000,0), new Vector(0,0)));
+            queue.add(EnemyFactory.createEnemy1(new Vector(1560,0)));
         }
         return queue;
     }

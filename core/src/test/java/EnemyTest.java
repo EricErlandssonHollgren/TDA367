@@ -10,15 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class EnemyTest {
-    IEnemy enemy = new Enemy1(new Vector(800,0), new Vector(0,0));
+    Vector position = new Vector(800,0);
+    IEnemy enemy = new Enemy1(position.x, position.y);
 
     /**
      * Checks if the enemy is being rendered at the right position on the screen.
      */
     @Test
     public void testPosition() {
-        assertEquals(enemy.getX().x, new Vector(800,0).x);
-        assertEquals(enemy.getY().y, new Vector(0,0).y);
+        assertEquals(enemy.getX(), new Vector(800,0).x);
+        assertEquals(enemy.getY(), new Vector(0,0).y);
     }
 
     /**
@@ -27,10 +28,10 @@ public class EnemyTest {
      */
     @Test
     public void testMovementX() {
-        float oldPositionX = enemy.getX().x;
+        float oldPositionX = enemy.getX();
         enemy.move();
-        for (int i = 1; i <= 1000; i++) {
-            if (oldPositionX >= enemy.getX().x) {
+        for (int i = 1; i <= 1560; i++) {
+            if (oldPositionX >= enemy.getX()) {
                 assertTrue(true);
             }
             oldPositionX = oldPositionX - (float) 0.5;
@@ -42,10 +43,10 @@ public class EnemyTest {
      */
     @Test
     public void testMovementY() {
-        float oldPositionY = enemy.getY().y;
+        float oldPositionY = enemy.getY();
         enemy.move();
-        for (int i = 1; i <= 1000; i++) {
-            if (oldPositionY == enemy.getX().x) {
+        for (int i = 1; i <= 1560; i++) {
+            if (oldPositionY == enemy.getX()) {
                 assertTrue(true);
             }
         }
