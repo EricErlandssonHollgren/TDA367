@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class App extends ApplicationAdapter {
 	SpriteBatch batch;
-
 	Texture img;
 	World world;
 	GameTimer timer;
@@ -27,9 +26,8 @@ public class App extends ApplicationAdapter {
 
 		img = new Texture("badlogic.jpg");
 		//TODO
-
 	}
-
+  
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
@@ -44,5 +42,6 @@ public class App extends ApplicationAdapter {
 		batch.dispose();
 		img.dispose();
 		views.dispose();
+
 	}
 }

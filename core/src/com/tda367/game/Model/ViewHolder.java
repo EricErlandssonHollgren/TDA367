@@ -2,9 +2,15 @@ package Model;
 
 import Controller.KeyListener;
 import Interfaces.IView;
+import Model.Enemy.Enemies.Enemy1;
+import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
 import View.EnemyView;
 import View.PlayerView;
+import View.ProjectileView;
+import View.TowerView;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +28,13 @@ public class ViewHolder {
         //Create views and objects
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
-        Player player = new Player(40f, 50f);
+        Player player = new Player(9, 100);
+        Tower tower = new Tower();
+        TowerView towerView = new TowerView(tower);
+
+        keyListener = new KeyListener();
+        keyListener.addSubscribers(player);
+        keyListener.addSubscribers(tower);
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
@@ -39,7 +51,7 @@ public class ViewHolder {
         views.remove(view);
     }
     public void render(){
-        keyListener.UpdatePlayerPosition();
+        keyListener.UpdatePlayerMovement();
         for (IView views: views) {
             views.render();
         }
