@@ -8,6 +8,7 @@ import Model.Enemy.EnemyFactory;
 import View.EnemyView;
 import View.PlayerView;
 import View.ProjectileView;
+import View.TowerView;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -29,7 +30,6 @@ public class ViewHolder {
         IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
         Player player = new Player(9, 100);
-        Player player = new Player(40f, 50f);
         Tower tower = new Tower();
         TowerView towerView = new TowerView(tower);
 
@@ -53,7 +53,7 @@ public class ViewHolder {
         views.remove(view);
     }
     public void render(){
-        keyListener.UpdatePlayerPosition();
+        keyListener.UpdatePlayerMovement();
         for (IView views: views) {
             views.render();
         }
