@@ -20,8 +20,8 @@ public class WorldBoundaries {
     }
 
     public void createWalls(){
-        blocks.add(new Block(630, 40, 450, 10));
-        blocks.add(new Block(0,40,450,10));
+        blocks.add(new Block(630, 40, 1000, 10));
+        blocks.add(new Block(0,40,1000,10));
     }
 
 }
