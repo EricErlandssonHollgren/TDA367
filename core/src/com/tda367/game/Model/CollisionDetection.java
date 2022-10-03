@@ -27,28 +27,44 @@ public class CollisionDetection {
      * The method checks the collision between the player and the walls in the game. Enables the player to
      * either move right or left depending on which wall it collides with.
      */
-    public void CheckCollisionPlayerAndBoundaries(){
+    public void CheckCollisionPlayerNextStep(){
         boolean ableToMoveRight = true;
         boolean ableToMoveLeft = true;
 
         for (Block block: wb.blocks) {
-            if(player.getX() + player.getWidth() + player.getVelocity() > block.getX()
-                    && player.getX() + player.getWidth() + player.getVelocity() < block.getWidth() + block.getX()
-                    && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY()){
+            if(CheckCollisionPlayerwithLeftBlock(block)){
+            ableToMoveLeft = false;
+            }
+            if(CheckCollisionPlayerwithRightBlock(block)){
                 ableToMoveRight = false;
 
             }
-
-           if(player.getX() - player.getVelocity() > block.getX()
-                   && player.getX() + player.getWidth() - player.getVelocity() < block.getWidth() + block.getX()
-                   && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY()){
-               ableToMoveLeft =false;
-
-           }
         }
         player.setAbleToMoveRight(ableToMoveRight);
         player.setAbleToMoveLeft(ableToMoveLeft);
 
+    }
+
+    /**
+     * The method checks if the player is colliding with the left block
+     * @param block to check collision with
+     * @return if there will be a collision after the player's movement
+     */
+    public boolean CheckCollisionPlayerwithLeftBlock(Block block) {
+        return player.getX() - player.getVelocity() > block.getX()
+                && player.getX() + player.getWidth() - player.getVelocity() < block.getWidth() + block.getX()
+                && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY();
+    }
+
+    /**
+     * The method checks if the player is colliding with the right block
+     * @param block to check collision with
+     * @return if there will be a collision after the player's movement
+     */
+    public boolean CheckCollisionPlayerwithRightBlock(Block block) {
+        return player.getX() + player.getWidth() + player.getVelocity() > block.getX()
+                && player.getX() + player.getWidth() + player.getVelocity() < block.getWidth() + block.getX()
+                && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY();
     }
 
     /**
