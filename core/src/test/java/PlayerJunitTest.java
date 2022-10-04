@@ -1,10 +1,7 @@
 package test.java;
 
 import Model.Player;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PlayerJunitTest {
 

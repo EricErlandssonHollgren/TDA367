@@ -58,7 +58,7 @@ public class ViewHolder {
     public void render(){
         keyListener.UpdatePlayerMovement();
         cd.CheckCollisionPlayerAndEnemy();
-        cd.CheckCollisionPlayerAndBoundaries();
+        cd.CheckCollisionPlayerNextStep();
         for (IView views: views) {
             views.render();
         }
