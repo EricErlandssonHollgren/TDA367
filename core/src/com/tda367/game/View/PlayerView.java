@@ -20,7 +20,6 @@ public class PlayerView implements IView, IPlayerSubscriber{
         playerSprite = new Sprite();
         batch = new SpriteBatch();
         texture = new Texture("adventurer-stand-01.png");
-
     }
 
     /**

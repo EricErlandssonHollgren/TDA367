@@ -18,7 +18,7 @@ public class KeyListener{
     public void upgradeTower() {
         if (Gdx.input.isKeyPressed(Input.Keys.U)) {
             for (IObservers o : observers) {
-                o.keyPressed(Input.Keys.U);
+                //o.keyPressed(Input.Keys.U);
             }
         }
     }
@@ -26,7 +26,7 @@ public class KeyListener{
     public void buildTurret() {
         if (Gdx.input.isKeyPressed(Input.Keys.B)) {
             for (IObservers o : observers) {
-                o.keyPressed(Input.Keys.B);
+                //o.keyPressed(Input.Keys.B);
             }
         }
     }
