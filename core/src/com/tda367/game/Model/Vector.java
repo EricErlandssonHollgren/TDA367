@@ -8,9 +8,9 @@ public class Vector {
         this.y = y;
     }
 
-    public float x;
+    private float x;
 
-    public float y;
+    private float y;
 
     public double getX() {
         return x;
@@ -21,8 +21,8 @@ public class Vector {
     }
 
 
-    public void setLocation(double x, double y) {
-        this.x = (float) x;
-        this.y = (float) y;
+    public void setLocation(float x, float y) {
+        this.x = x;
+        this.y = y;
     }
 }

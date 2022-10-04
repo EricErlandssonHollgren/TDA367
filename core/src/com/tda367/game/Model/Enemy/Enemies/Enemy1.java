@@ -10,7 +10,7 @@ import Model.Vector;
 public class Enemy1 implements IEnemy {
 
     private static final int worth = 5;
-    private static final int HP = 5;
+    private static int HP = 5;
     private Vector position = new Vector(1560,0);
 
     public Enemy1(float x, float y) {
@@ -34,7 +34,7 @@ public class Enemy1 implements IEnemy {
      */
     @Override
     public void move() {
-        double speed = 0.5;
-        position.setLocation(position.getX()-speed, position.getY());
+        float speed = (float) 0.5;
+        position.setLocation(position.x-speed, position.y);
     }
 }
