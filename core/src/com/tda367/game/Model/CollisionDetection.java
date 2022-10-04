@@ -4,6 +4,9 @@ import Interfaces.IEntity;
 import Model.Enemy.Enemy;
 import com.badlogic.gdx.math.Interpolation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CollisionDetection {
     private EntityHolder posHandler;
     private Player player;
@@ -71,13 +74,16 @@ public class CollisionDetection {
      * The method checks the collision between the player and the enemy in the game. If the player is
      * colliding with an enemy it should be getting damage.
      */
-    public void CheckCollisionPlayerAndEnemy(){
+    public Map<IEntity,Boolean> CheckCollisionPlayerAndEnemy(){
+        Map<IEntity, Boolean> collision = new HashMap<>();
         for (IEntity entity: posHandler.entities) {
             if(entity instanceof Enemy){
                 if((player.getX() + player.getWidth() >= entity.getX()) && (player.getX() <= entity.getX()+50)){
-                    System.out.println(((Enemy) entity).getDamage());
+                    collision.put(entity,true);
                 }
+                collision.put(entity,false);
             }
         }
+        return collision;
     }
 }

@@ -141,7 +141,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     /*
     (Probably temporary, as it doesn't follow MVC).
      */
-    @Override
+
     public void keyPressed(int key) {
         if(key == Input.Keys.U){
             upgrade();
@@ -151,4 +151,8 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         }
     }
 
+    @Override
+    public void keyPressed(MovementDirection key) {
+
+    }
 }
