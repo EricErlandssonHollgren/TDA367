@@ -10,8 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class TowerView implements IView {
 
-    Tower tower;
-    Sprite towerSprite;
+    private Tower tower;
+    private Sprite towerSprite;
     private Batch batch;
     private Texture texture;
 
