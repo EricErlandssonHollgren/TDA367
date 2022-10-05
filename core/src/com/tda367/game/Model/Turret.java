@@ -40,17 +40,26 @@ public class Turret implements IShoot, IUpgradeable {
     /*
     Increments Turret level.
      */
-    public void incrementLevel(){this.level = getLevel() + 1;}
+    public void incrementLevel(){
+        int newLevel = this.level = getLevel() + 1;
+        setLevel(newLevel);
+    }
 
     /*
     Increments Turret damage.
      */
-    public void incrementDamage(){this.damage = getDamage() + 20;}
+    public void incrementDamage(){
+        double newDamage = this.damage = getDamage() + ((getLevel()-1) * 20);
+        setDamage(newDamage);
+    }
 
     /*
     Decrements Turret shooting speed, making the Turret shoot faster.
      */
-    public void decrementShootingSpeed(){this.shootingSpeed = getShootingSpeed() - getShootingSpeed() * 0.2;}
+    public void decrementShootingSpeed(){
+        double newShootingSpeed = this.shootingSpeed = getShootingSpeed() - ((getLevel() -1) * (getShootingSpeed() * 0.2));
+        setShootingSpeed(newShootingSpeed);
+    }
 
     /*
     Gets the current Turret level.
