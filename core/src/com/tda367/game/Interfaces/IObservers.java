@@ -4,5 +4,5 @@ import Model.MovementDirection;
 
 public interface IObservers {
 
-    void keyPressed(MovementDirection key);
+    void actionHandle(MovementDirection key);
 }
