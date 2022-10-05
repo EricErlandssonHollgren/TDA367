@@ -3,13 +3,12 @@ package Controller;
 import Interfaces.IObservers;
 import Model.MovementDirection;
 import com.badlogic.gdx.*;
-import Model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class KeyListener{
+public class PlayerKeyListener {
     List<IObservers> observers = new ArrayList<>();
 
     public void addSubscribers(IObservers observer){
@@ -19,7 +18,7 @@ public class KeyListener{
     public void upgradeTower() {
         if (Gdx.input.isKeyPressed(Input.Keys.U)) {
             for (IObservers o : observers) {
-                o.keyPressed(Input.Keys.U);
+                //o.keyPressed(Input.Keys.U);
             }
         }
     }
@@ -27,7 +26,7 @@ public class KeyListener{
     public void buildTurret() {
         if (Gdx.input.isKeyPressed(Input.Keys.B)) {
             for (IObservers o : observers) {
-                o.keyPressed(Input.Keys.B);
+                //o.keyPressed(Input.Keys.B);
             }
         }
     }

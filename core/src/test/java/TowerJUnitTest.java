@@ -14,7 +14,7 @@ public class TowerJUnitTest {
     public void testTowerHasSpecifiedLocation() {
         Tower tower1 = new Tower();
         assertEquals(tower1.getPositionX(), 0);
-        assertEquals(tower1.getPositionY(), 0);
+        assertEquals(tower1.getPositionY(), 100);
     }
 
     @Test

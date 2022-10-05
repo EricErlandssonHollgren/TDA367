@@ -15,8 +15,8 @@ public class RoundHandlerTest {
     }
     @Test
     public void TestRound(){
-        RoundHandler r = RoundHandler.GetInstance();
         GameTimer t = GameTimer.GetInstance();
+        RoundHandler r = RoundHandler.GetInstance(t);
         double mult = r.getMultiplier();
         t.UpdateTime(5);
         assertTrue(mult < r.getMultiplier());
