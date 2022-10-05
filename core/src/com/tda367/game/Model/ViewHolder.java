@@ -1,6 +1,6 @@
 package Model;
 
-import Controller.PlayerKeyListener;
+import Controller.*;
 import Interfaces.IView;
 import Model.Enemy.EnemyFactory;
 import View.EnemyView;
@@ -14,6 +14,7 @@ public class ViewHolder {
     //
     private List<IView> views;
     private PlayerKeyListener playerKeyListener;
+    private UpgradeKeyListener upgradeKeyListener;
     private float gravity;
     public ViewHolder(float gravity){
         //Instantiate world and views list
@@ -27,9 +28,8 @@ public class ViewHolder {
         Tower tower = new Tower();
         TowerView towerView = new TowerView(tower);
 
-        playerKeyListener = new PlayerKeyListener();
-        playerKeyListener.addSubscribers(player);
-        playerKeyListener.addSubscribers(tower);
+        upgradeKeyListener = new UpgradeKeyListener();
+        upgradeKeyListener.addSubscribers(tower);
 
         playerKeyListener = new PlayerKeyListener();
         playerKeyListener.addSubscribers(player);
