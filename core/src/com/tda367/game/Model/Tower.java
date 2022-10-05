@@ -14,8 +14,8 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
 
     private int level;
     private double health;
-    private final double positionX;
-    private final double positionY;
+    private final float positionX;
+    private final float positionY;
     private int maxCapacity;
     private final ArrayList turrets;
 
@@ -27,7 +27,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         this.level = 1;
         this.health = 500;
         positionX = 0;
-        positionY = 0;
+        positionY = 100;
         this.maxCapacity = 1;
         this.turrets = new ArrayList<Turret>();
     }
@@ -104,12 +104,12 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     /*
     Gets the tower position x
      */
-    public double getPositionX(){return positionX;}
+    public float getPositionX(){return positionX;}
 
     /*
     Gets the tower position y
      */
-    public double getPositionY(){return positionY;}
+    public float getPositionY(){return positionY;}
 
     /*
     Gets the ArrayList of turrets that tower has.
@@ -141,7 +141,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     /*
     (Probably temporary, as it doesn't follow MVC).
      */
-    @Override
+
     public void keyPressed(int key) {
         if(key == Input.Keys.U){
             upgrade();
@@ -151,4 +151,8 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         }
     }
 
+    @Override
+    public void keyPressed(MovementDirection key) {
+
+    }
 }

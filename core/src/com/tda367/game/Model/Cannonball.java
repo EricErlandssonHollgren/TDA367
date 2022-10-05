@@ -3,10 +3,11 @@ package Model;
 import Interfaces.IProjectile;
 
 public class Cannonball implements IProjectile {
-    private float x,y,vx,vy,gravity, damage;
+    private float x,y,vx,vy,gravity, damage, radius;
 
-    public Cannonball(float x, float y, float vx, float vy, float gravity, float damage){
+    public Cannonball(float x, float y, float vx, float vy, float gravity, float damage, float radius){
         this.gravity = gravity;
+        this.radius = radius;
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -26,6 +27,11 @@ public class Cannonball implements IProjectile {
     public float getY(){
         return this.y;
     }
+    @Override
+    public float getRadius() {
+        return this.radius;
+    }
+
     @Override
     public void move(){
         vy += gravity;

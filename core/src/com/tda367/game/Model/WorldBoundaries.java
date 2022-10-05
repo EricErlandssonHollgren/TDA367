@@ -6,6 +6,9 @@ public class WorldBoundaries {
 
     List<Block> blocks = new ArrayList<>();
 
+    /**
+     * A constructor which adds the walls and grounds.
+     */
     public WorldBoundaries(){
         createGround();
         createWalls();
@@ -15,13 +18,20 @@ public class WorldBoundaries {
         return blocks;
     }
 
+    /**
+     * Creating the ground by adding a block with preferred values.
+     */
     public void createGround(){
         blocks.add(new Block(0,0, 100, 780));
     }
 
+
+    /**
+     * Creating walls by adding a block with preferred values.
+     */
     public void createWalls(){
-        blocks.add(new Block(630, 40, 450, 10));
-        blocks.add(new Block(0,40,450,10));
+        blocks.add(new Block(630, 40, 1000, 10));
+        blocks.add(new Block(0,40,1000,10));
     }
 
 }
