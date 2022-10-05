@@ -1,8 +1,7 @@
 package Interfaces;
-
-import Model.MovementDirection;
+import Model.ActionEnum;
 
 public interface IObservers {
 
-    void actionHandle();
+    void actionHandle(ActionEnum action);
 }

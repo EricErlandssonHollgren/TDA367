@@ -130,11 +130,11 @@ public class Player implements IObservers, IEntity {
      * @param key uses the moveLeft() or moveRight() method
      */
     @Override
-    public void keyPressed(MovementDirection key) {
-        if(key == MovementDirection.LEFT){
+    public void actionHandle(ActionEnum key) {
+        if(key == ActionEnum.LEFT){
             moveLeft();
         }
-        if(key == MovementDirection.RIGHT){
+        if(key == ActionEnum.RIGHT){
             moveRight();
         }
     }
