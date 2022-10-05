@@ -13,7 +13,7 @@ public class Enemy1 extends Enemy {
     private static final String projectile = "bomb";
     private static final String spritePath = "koopaTroopa.png";
     private static final float positionX = 200;
-    private static final float positionY = 200;
+    private static final float positionY = 0;
 
     public Enemy1() {
         super(worth, HP, projectile, spritePath, positionX, positionY);
