@@ -12,19 +12,17 @@ import java.util.Map;
 
 public class CollisionDetection {
     private EntityHolder posHandler;
-    private Player player;
     private WorldBoundaries wb;
     private static CollisionDetection instance;
 
-    private CollisionDetection(Player player){
-        this.player = player;
+    private CollisionDetection(){
         this.posHandler = EntityHolder.getInstance();
         this.wb = new WorldBoundaries();
     }
 
-    public static CollisionDetection getInstance(Player player) {
+    public static CollisionDetection getInstance() {
         if(instance == null){
-            instance = new CollisionDetection(player);
+            instance = new CollisionDetection();
         }
         return instance;
     }
@@ -34,12 +32,12 @@ public class CollisionDetection {
      * The method checks the collision between the player and the walls in the game. Enables the player to
      * either move right or left depending on which wall it collides with.
      */
-    public void CheckCollisionPlayerNextStep(){
+    public void CheckCollisionPlayerNextStep(Player player){
         boolean ableToMoveRight = true;
         boolean ableToMoveLeft = true;
 
-        ableToMoveRight = !CheckCollisionPlayerwithRightBlock(wb.getBlocks().get(1));
-        ableToMoveLeft = !CheckCollisionPlayerwithLeftBlock(wb.getBlocks().get(2));
+        ableToMoveRight = !CheckCollisionPlayerwithRightBlock(wb.getBlocks().get(1),player);
+        ableToMoveLeft = !CheckCollisionPlayerwithLeftBlock(wb.getBlocks().get(2),player);
 
         player.setAbleToMoveRight(ableToMoveRight);
         player.setAbleToMoveLeft(ableToMoveLeft);
@@ -51,7 +49,7 @@ public class CollisionDetection {
      * @param block to check collision with
      * @return if there will be a collision after the player's movement
      */
-    public boolean CheckCollisionPlayerwithLeftBlock(Block block) {
+    public boolean CheckCollisionPlayerwithLeftBlock(Block block, Player player) {
         return player.getX() <= block.getX()+ block.getWidth()
                 && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY();
     }
@@ -61,7 +59,7 @@ public class CollisionDetection {
      * @param block to check collision with
      * @return if there will be a collision after the player's movement
      */
-    public boolean CheckCollisionPlayerwithRightBlock(Block block) {
+    public boolean CheckCollisionPlayerwithRightBlock(Block block, Player player) {
         return player.getX() + player.getWidth() > block.getX()
                 && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY();
     }
@@ -70,7 +68,7 @@ public class CollisionDetection {
      * The method checks the collision between the player and the enemy in the game. If the player is
      * colliding with an enemy it will return a referenece to that enemy along with the value true
      */
-    public Map<IEntity, Boolean> CheckCollisionPlayerAndEnemy(){
+    public Map<IEntity, Boolean> CheckCollisionPlayerAndEnemy(Player player){
         Map<IEntity, Boolean> collisions = new HashMap<>();
         for (IEntity entity: posHandler.entities) {
             if(entity instanceof Enemy){

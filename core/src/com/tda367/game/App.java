@@ -39,7 +39,7 @@ public class App extends ApplicationAdapter {
 		roundHandler = RoundHandler.GetInstance(timer);
 
 		entityHolder = EntityHolder.getInstance();
-		collisionDetection = CollisionDetection.getInstance(player);
+		collisionDetection = CollisionDetection.getInstance();
 
 		views = new ViewHolder(-0.5f,player,tower,worldBoundaries);
 
@@ -52,9 +52,9 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
-		collisionDetection.CheckCollisionPlayerAndEnemy();
-		collisionDetection.CheckCollisionPlayerAndEnemy();
-		collisionDetection.CheckCollisionPlayerNextStep();
+		collisionDetection.CheckCollisionPlayerAndEnemy(player);
+		collisionDetection.CheckCollisionPlayerAndEnemy(player);
+		collisionDetection.CheckCollisionPlayerNextStep(player);
 		playerKeyListener.UpdatePlayerMovement();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
