@@ -85,6 +85,7 @@ public class CollisionDetection {
                 if((player.getX() + player.getWidth() >= entity.getX()) && (player.getX() <= entity.getX()+50)){
                     collisions.put(entity,true);
                 }
+                collisions.put(entity,false);
             }
         }
         return collisions;
@@ -104,6 +105,7 @@ public class CollisionDetection {
                             System.out.println("Collided with " + entity);
                         }
                     }
+                    collided.put(entity,false);
                 }
             }
         }
