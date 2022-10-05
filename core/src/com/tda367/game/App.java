@@ -1,6 +1,8 @@
 package com.tda367.game;
 
+import Model.CollisionDetection;
 import Model.GameTimer;
+import Model.EntityHolder;
 import Model.ViewHolder;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -16,6 +18,8 @@ public class App extends ApplicationAdapter {
 	World world;
 	GameTimer timer;
 	ViewHolder views;
+	CollisionDetection cd;
+	EntityHolder ph;
 	@Override
 	public void create () {
 		world = new World(new Vector2(0,-0.5f),true);
@@ -31,6 +35,7 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
+		//cd.CheckCollisionPlayerAndBoundaries();
 		ScreenUtils.clear(0, 0, 0, 0);
 		batch.begin();
 		views.render();

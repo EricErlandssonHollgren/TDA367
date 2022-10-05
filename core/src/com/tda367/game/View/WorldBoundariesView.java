@@ -22,7 +22,7 @@ public class WorldBoundariesView implements IView {
             int rectX = block.getX();
             int rectY = block.getY();
             debugRenderer.setColor(new Color(Color.BROWN));
-            debugRenderer.rect(rectX,rectY, block.getWidth(), block.getHeight());
+           debugRenderer.rect(rectX,rectY, block.getWidth(), block.getHeight());
         }
         debugRenderer.end();
     }
