@@ -12,7 +12,7 @@ import View.ProjectileView;
  */
 public class ViewFactory {
     public static IView createEnemyView(IEnemy e) {
-        return new EnemyView(e);
+        return new EnemyView(e, "koopaTroopa.png");
     }
     public static IView createProjectileView(IProjectile p){
         return new ProjectileView(p, "Cannonball.png");

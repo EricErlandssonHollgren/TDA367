@@ -8,14 +8,15 @@ import java.util.*;
 public class Waves {
     /**
      * Adds enemies to a queue to be rendered
-     * @param count: The number of enemies to be added to the queue
+     * //@param count: The number of enemies to be added to the queue
      * @return the queue
      */
-    public Queue<IEnemy> addEnemies(int count) {
-        Queue<IEnemy> queue = new LinkedList<>();
-        for (int i = 0; i <= count; i++) {
-            queue.add(EnemyFactory.createEnemy1(new Vector(1560,0)));
-        }
+    Queue<IEnemy> queue = new LinkedList<>();
+
+    public Queue<IEnemy> addEnemies() {
+       for (int i = 0; i <= 10; i++) {
+           queue.add(EnemyFactory.createEnemy1());
+       }
         return queue;
     }
 
@@ -23,8 +24,8 @@ public class Waves {
      * Returns (and afterwards removes) the first enemy in the queue if it is not null.
      */
     public IEnemy getEnemyFromQueue() {
-        Queue<IEnemy> enemies = addEnemies(10);
-        IEnemy currentEnemy = enemies.poll();
+        //Queue<IEnemy> enemies = addEnemies();
+        IEnemy currentEnemy = addEnemies().poll();
         return Objects.requireNonNull(currentEnemy);
     }
 

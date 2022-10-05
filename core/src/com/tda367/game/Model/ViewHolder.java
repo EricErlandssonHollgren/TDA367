@@ -1,9 +1,8 @@
 package Model;
 
 import Controller.KeyListener;
+import Interfaces.IEnemy;
 import Interfaces.IView;
-import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
 import View.EnemyView;
 import View.PlayerView;
@@ -20,13 +19,15 @@ public class ViewHolder {
     private List<IView> views;
     private KeyListener keyListener;
     private float gravity;
+
     public ViewHolder(float gravity){
         //Instantiate world and views list
         this.gravity = gravity;
         views = new ArrayList<>();
 
         //Create views and objects
-        IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
+        IView enemyView = new EnemyView(EnemyFactory.createEnemy1(), "koopaTroopa.png");
+        //IView enemyViewTest = ViewFactory.createEnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
         Player player = new Player(9, 100);
         Tower tower = new Tower();

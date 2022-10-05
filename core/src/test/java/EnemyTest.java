@@ -10,16 +10,15 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class EnemyTest {
-    Vector position = new Vector(800,0);
-    IEnemy enemy = new Enemy1(position.x, position.y);
+    IEnemy enemy = new Enemy1();
 
     /**
      * Checks if the enemy is being rendered at the right position on the screen.
      */
     @Test
     public void testPosition() {
-        assertEquals(enemy.getX(), new Vector(800,0).x);
-        assertEquals(enemy.getY(), new Vector(0,0).y);
+        assertEquals(enemy.getX(), new Vector(1560,0).getX());
+        assertEquals(enemy.getY(), new Vector(0,0).getY());
     }
 
     /**

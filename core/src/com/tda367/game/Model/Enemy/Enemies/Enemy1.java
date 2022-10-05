@@ -9,23 +9,22 @@ import Model.Vector;
  */
 public class Enemy1 implements IEnemy {
 
-    private static final int worth = 5;
-    private static int HP = 5;
-    private Vector position = new Vector(1560,0);
+    private final int worth = 5;
+    private int HP = 5;
+    private Vector position;
 
-    public Enemy1(float x, float y) {
-        this.position.x = x;
-        this.position.y = y;
+    public Enemy1() {
+        this.position = new Vector(1560,0);
     }
 
     @Override
     public float getX() {
-        return position.x;
+        return position.getX();
     }
 
     @Override
     public float getY() {
-        return position.y;
+        return position.getY();
     }
 
     /**
@@ -34,7 +33,7 @@ public class Enemy1 implements IEnemy {
      */
     @Override
     public void move() {
-        float speed = (float) 0.5;
-        position.setLocation(position.x-speed, position.y);
+        double speed = 0.5;
+        position.setLocation(position.getX()-speed, position.getY());
     }
 }

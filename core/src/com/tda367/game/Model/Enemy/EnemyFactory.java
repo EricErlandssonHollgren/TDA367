@@ -3,6 +3,7 @@ package Model.Enemy;
 
 import Interfaces.IEnemy;
 import Model.Enemy.Enemies.Enemy1;
+import Model.Facade.DrawFacade;
 import Model.Vector;
 
 /**
@@ -12,8 +13,8 @@ import Model.Vector;
 public class EnemyFactory {
 
 
-    public static IEnemy createEnemy1(Vector position) {
-        return new Enemy1(position.x, position.y);
+    public static IEnemy createEnemy1() {
+        return new Enemy1();
     }
 
 }

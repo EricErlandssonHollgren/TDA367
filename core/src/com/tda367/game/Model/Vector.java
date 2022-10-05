@@ -12,17 +12,17 @@ public class Vector {
 
     private float y;
 
-    public double getX() {
+    public float getX() {
         return x;
     }
 
-    public double getY() {
+    public float getY() {
         return y;
     }
 
 
-    public void setLocation(float x, float y) {
-        this.x = x;
-        this.y = y;
+    public void setLocation(double x, double y) {
+        this.x = (float) x;
+        this.y = (float) y;
     }
 }
