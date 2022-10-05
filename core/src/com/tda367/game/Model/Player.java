@@ -24,6 +24,8 @@ public class Player implements IObservers, IEntity {
     public Player(float x, float y){
          this.x = x;
          this.y = y;
+         this.width = 50;
+         this.height = 37;
     }
 
 

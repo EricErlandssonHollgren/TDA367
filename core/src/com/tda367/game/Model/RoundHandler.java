@@ -4,13 +4,13 @@ public class RoundHandler {
     private static RoundHandler instance;
     private GameTimer timer;
 
-    private RoundHandler(){
-        timer = GameTimer.GetInstance();
+    private RoundHandler(GameTimer timer){
+        this.timer = timer;
     }
 
-    public static RoundHandler GetInstance(){
+    public static RoundHandler GetInstance(GameTimer timer){
         if(instance == null){
-            instance = new RoundHandler();
+            instance = new RoundHandler(timer);
         }
         return instance;
     }

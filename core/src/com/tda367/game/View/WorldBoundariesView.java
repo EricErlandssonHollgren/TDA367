@@ -13,7 +13,7 @@ public class WorldBoundariesView implements IView {
 
     public WorldBoundariesView(WorldBoundaries worldBoundaries){
         this.worldBoundaries = worldBoundaries;
-
+        drawFacade = new DrawFacade();
     }
     @Override
     public void render() {

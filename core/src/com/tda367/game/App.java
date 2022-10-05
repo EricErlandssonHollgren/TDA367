@@ -1,51 +1,68 @@
 package com.tda367.game;
 
-import Model.CollisionDetection;
-import Model.GameTimer;
-import Model.EntityHolder;
-import Model.ViewHolder;
+import Controller.PlayerKeyListener;
+import Model.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class App extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	World world;
-	GameTimer timer;
-	ViewHolder views;
-	CollisionDetection cd;
-	EntityHolder ph;
+	private SpriteBatch batch;
+	private GameTimer timer;
+	private ViewHolder views;
+	private Player player;
+	private RoundHandler roundHandler;
+	private MainHandler goldHandler;
+	private MainHandler pointsHandler;
+	private Tower tower;
+	private WorldBoundaries worldBoundaries;
+	private CollisionDetection collisionDetection;
+	private EntityHolder entityHolder;
+	private PlayerKeyListener playerKeyListener;
+	/**
+	 * Initialises the model in the startup configuration, is called when the application starts
+	 */
 	@Override
 	public void create () {
-		world = new World(new Vector2(0,-0.5f),true);
-		views = new ViewHolder(world.getGravity().y);
-		batch = new SpriteBatch();
+		//Handlers
+		player = new Player(120,100);
+		tower = new Tower();
+		worldBoundaries = new WorldBoundaries();
 
 		timer = GameTimer.GetInstance();
+		//setup chain of responsibility?
+		goldHandler = new Goldhandler();
+		pointsHandler = new PointHandler();
+		goldHandler.setSuccessor(pointsHandler);
 
-		img = new Texture("badlogic.jpg");
-		//TODO
+		roundHandler = RoundHandler.GetInstance(timer);
+
+		entityHolder = EntityHolder.getInstance();
+		collisionDetection = CollisionDetection.getInstance(player);
+
+		views = new ViewHolder(-0.5f,player,tower,worldBoundaries);
+
+		//Controllers
+		playerKeyListener = new PlayerKeyListener();
+		playerKeyListener.addSubscribers(player);
+
 	}
   
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
-		//cd.CheckCollisionPlayerAndBoundaries();
+		collisionDetection.CheckCollisionPlayerAndEnemy();
+		collisionDetection.CheckCollisionPlayerAndEnemy();
+		collisionDetection.CheckCollisionPlayerNextStep();
+		playerKeyListener.UpdatePlayerMovement();
 		ScreenUtils.clear(0, 0, 0, 0);
-		batch.begin();
 		views.render();
-		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 		views.dispose();
 
 	}

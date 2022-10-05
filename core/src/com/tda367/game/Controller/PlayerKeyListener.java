@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class KeyListener{
+public class PlayerKeyListener {
     List<IObservers> observers = new ArrayList<>();
 
     public void addSubscribers(IObservers observer){

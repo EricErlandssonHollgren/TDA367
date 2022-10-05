@@ -38,15 +38,9 @@ public class CollisionDetection {
         boolean ableToMoveRight = true;
         boolean ableToMoveLeft = true;
 
-        for (Block block: wb.blocks) {
-            if(CheckCollisionPlayerwithLeftBlock(block)){
-            ableToMoveLeft = false;
-            }
-            if(CheckCollisionPlayerwithRightBlock(block)){
-                ableToMoveRight = false;
+        ableToMoveRight = !CheckCollisionPlayerwithRightBlock(wb.getBlocks().get(1));
+        ableToMoveLeft = !CheckCollisionPlayerwithLeftBlock(wb.getBlocks().get(2));
 
-            }
-        }
         player.setAbleToMoveRight(ableToMoveRight);
         player.setAbleToMoveLeft(ableToMoveLeft);
 
@@ -58,8 +52,7 @@ public class CollisionDetection {
      * @return if there will be a collision after the player's movement
      */
     public boolean CheckCollisionPlayerwithLeftBlock(Block block) {
-        return player.getX() - player.getVelocity() > block.getX()
-                && player.getX() + player.getWidth() - player.getVelocity() < block.getWidth() + block.getX()
+        return player.getX() <= block.getX()+ block.getWidth()
                 && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY();
     }
 
@@ -69,8 +62,8 @@ public class CollisionDetection {
      * @return if there will be a collision after the player's movement
      */
     public boolean CheckCollisionPlayerwithRightBlock(Block block) {
-        return player.getX() + player.getWidth() + player.getVelocity() > block.getX()
-                && player.getX() + player.getWidth() + player.getVelocity() < block.getWidth() + block.getX()
+        return player.getX() + player.getWidth() > block.getX()
+                && player.getX() + player.getWidth() < block.getWidth() + block.getX()
                 && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY();
     }
 
