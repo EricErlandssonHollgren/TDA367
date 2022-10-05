@@ -54,11 +54,11 @@ public class CollisionDetectionTest {
     @Test
     public void playerWillCollideWithEnemy(){
         Player player = new Player(200, 0);
-        CollisionDetection cd = CollisionDetection.getInstance(player);
+        CollisionDetection cd = CollisionDetection.getInstance();
         Enemy enemy = EnemyFactory.createEnemy1();
 
         EntityHolder.getInstance().addEntity(enemy);
-        Map<IEntity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy();
+        Map<IEntity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
 
         assertTrue(collision.get(enemy));
     }
@@ -66,13 +66,13 @@ public class CollisionDetectionTest {
     @Test
     public void playerWillNotCollideWithEnemy(){
         Player player = new Player(500,500);
-        CollisionDetection cd = CollisionDetection.getInstance(player);
+        CollisionDetection cd = CollisionDetection.getInstance();
 
         Enemy enemy = EnemyFactory.createEnemy1();
 
         EntityHolder.getInstance().addEntity(enemy);
 
-        Map<IEntity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy();
+        Map<IEntity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
         assertFalse(collision.get(enemy));
     }
 }
