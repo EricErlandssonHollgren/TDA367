@@ -63,7 +63,6 @@ public class CollisionDetection {
      */
     public boolean CheckCollisionPlayerwithRightBlock(Block block) {
         return player.getX() + player.getWidth() > block.getX()
-                && player.getX() + player.getWidth() < block.getWidth() + block.getX()
                 && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY();
     }
 

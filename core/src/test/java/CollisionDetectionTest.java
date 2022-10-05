@@ -11,7 +11,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerCollideswithLeftBlock(){
-        Player player = new Player(9, 100);
+        Player player = new Player(5, 100);
         CollisionDetection cd =  CollisionDetection.getInstance(player);
         Block block = new Block(0,40,1000,10);
 
@@ -22,7 +22,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerCollideswithRightBlock(){
-        Player player = new Player(630, 100);
+        Player player = new Player(620, 100);
         CollisionDetection cd =  CollisionDetection.getInstance(player);
         Block block = new Block(630,40,1000,10);
 
@@ -41,7 +41,7 @@ public class CollisionDetectionTest {
     }
     @Test
     public void playerWillNotCollidewithRightBlock(){
-        Player player = new Player(623, 100);
+        Player player = new Player(500, 100);
         CollisionDetection cd =  CollisionDetection.getInstance(player);
         Block block = new Block(630,40,1000,10);
 

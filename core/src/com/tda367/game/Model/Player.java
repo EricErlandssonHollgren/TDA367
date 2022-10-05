@@ -15,13 +15,15 @@ public class Player implements IObservers, IEntity {
     private int width;
     private int height;
 
-    private boolean isAbleToMoveRight = false;
-    private boolean isAbleToMoveLeft = false;
+    private boolean isAbleToMoveRight;
+    private boolean isAbleToMoveLeft;
 
     private float velocity = 7;
 
 
     public Player(float x, float y){
+        isAbleToMoveLeft = true;
+        isAbleToMoveRight = true;
          this.x = x;
          this.y = y;
          this.width = 50;
