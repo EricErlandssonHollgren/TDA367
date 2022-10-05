@@ -1,6 +1,7 @@
 package View;
 
 import Interfaces.IView;
+import Model.Facade.DrawFacade;
 import Model.Tower;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -10,34 +11,26 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class TowerView implements IView {
 
-    Tower tower;
-    Sprite towerSprite;
-    private Batch batch;
-    private Texture texture;
-
+    private Tower tower;
+    private DrawFacade drawFacade;
     /*
         A constructor for creating a view for the model of a Tower.
     */
 
     public TowerView(Tower tower){
         this.tower = tower;
-        this.towerSprite = new Sprite();
-        this.batch = new SpriteBatch();
-        this.texture = new Texture("basicTowerSprite.png");
+        drawFacade = new DrawFacade("basicTowerSprite.png");
     }
 
 
     @Override
     public void render() {
-        batch.begin();
-        batch.draw(getTowerTexture(), towerSprite.getX(), towerSprite.getY());
-        batch.end();
+        drawFacade.drawObject(tower.getPositionX(),tower.getPositionY(),115,200);
     }
 
     @Override
     public void dispose() {
-        batch.dispose();
-        texture.dispose();
+        drawFacade.dispose();
     }
 
     private Texture getTowerTexture(){
@@ -58,7 +51,7 @@ public class TowerView implements IView {
                 return new Texture("Tower1_1Turret_Sprite.png");
             }
             else {
-                return this.texture;
+                return new Texture("basicTowerSprite.png");
             }
         }
     }

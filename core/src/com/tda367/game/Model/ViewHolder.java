@@ -1,12 +1,8 @@
 package Model;
 
-import Controller.KeyListener;
+import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
-import View.EnemyView;
-import View.PlayerView;
-import View.WorldBoundariesView;
+import View.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,36 +10,30 @@ import java.util.List;
 public class ViewHolder {
     //
     private List<IView> views;
-    private KeyListener keyListener;
+    //private PlayerKeyListener keyListener;
     private float gravity;
 
-    public ViewHolder(float gravity){
+    /**
+     * Initialises the startup views
+     * @param gravity
+     */
+    public ViewHolder(float gravity, Player player, Tower tower, WorldBoundaries worldBoundaries){
         //Instantiate world and views list
         this.gravity = gravity;
         views = new ArrayList<>();
 
         //Create views and objects
-        IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
+        IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
+        IView playerView = new PlayerView();
+        IView towerView = new TowerView(tower);
+        IView background = new BackgroundView();
 
-        Enemy enemy = EnemyFactory.createEnemy1();
-        IView worldBoundariesView = new WorldBoundariesView();
-        PlayerView playerView = new PlayerView();
-        Player player = new Player(9, 100);
-        Tower tower = new Tower();
-
-        keyListener = new KeyListener();
-        keyListener.addSubscribers(player);
-        keyListener.addSubscribers(tower);
-        //cd = CollisionDetection.getInstance(player);
-
-        keyListener = new KeyListener();
-        keyListener.addSubscribers(player);
-        player.positionSubscriber(playerView);
-        EntityHolder.getInstance().addEntity(enemy);
+        player.positionSubscriber((IPlayerSubscriber) playerView);
         //Add views to list and they will be rendered. Views must implement IView
+        addView(background);
         addView(worldBoundariesView);
-        addView(enemyView);
         addView(playerView);
+        addView(towerView);
     }
     public void addView(IView view){
         views.add(view);
@@ -52,9 +42,6 @@ public class ViewHolder {
         views.remove(view);
     }
     public void render(){
-        keyListener.UpdatePlayerMovement();
-       // cd.CheckCollisionPlayerAndEnemy();
-        //cd.CheckCollisionPlayerNextStep();
         for (IView views: views) {
             views.render();
         }

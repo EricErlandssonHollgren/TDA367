@@ -2,34 +2,34 @@ package View;
 
 import Interfaces.IView;
 import Model.Block;
+import Model.Facade.DrawFacade;
 import Model.WorldBoundaries;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class WorldBoundariesView implements IView {
     private WorldBoundaries worldBoundaries;
-    private ShapeRenderer debugRenderer = new ShapeRenderer();
+    private DrawFacade drawFacade;
 
-    public WorldBoundariesView(){
-        this.worldBoundaries = new WorldBoundaries();
-
+    public WorldBoundariesView(WorldBoundaries worldBoundaries){
+        this.worldBoundaries = worldBoundaries;
+        drawFacade = new DrawFacade();
     }
     @Override
     public void render() {
-        debugRenderer.begin(ShapeType.Filled);
+        drawFacade.getShaperenderer().begin(ShapeType.Filled);
         for(Block block : worldBoundaries.getBlocks()){
             int rectX = block.getX();
             int rectY = block.getY();
-            debugRenderer.setColor(new Color(Color.BROWN));
-           debugRenderer.rect(rectX,rectY, block.getWidth(), block.getHeight());
+            drawFacade.getShaperenderer().setColor(new Color(Color.BROWN));
+           drawFacade.getShaperenderer().rect(rectX,rectY, block.getWidth(), block.getHeight());
         }
-        debugRenderer.end();
+        drawFacade.getShaperenderer().end();
     }
 
     @Override
     public void dispose() {
 
-        debugRenderer.dispose();
+        drawFacade.getShaperenderer().dispose();
     }
 }
