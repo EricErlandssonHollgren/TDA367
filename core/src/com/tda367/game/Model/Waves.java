@@ -1,21 +1,23 @@
 package Model;
 
-import Interfaces.IEnemy;
+import Interfaces.IEntity;
 import Model.Enemy.EnemyFactory;
 
 import java.util.*;
 
 public class Waves {
+
     /**
      * Adds enemies to a queue to be rendered
      * //@param count: The number of enemies to be added to the queue
      * @return the queue
      */
-    Queue<IEnemy> queue = new LinkedList<>();
+    Queue<IEntity> queue = new LinkedList<>();
 
-    public Queue<IEnemy> addEnemies() {
+    public Queue<IEntity> addEnemies() {
        for (int i = 0; i <= 10; i++) {
-           queue.add(EnemyFactory.createEnemy1());
+           queue.add(EnemyFactory.createEnemy1(300+i*10, 100));
+
        }
         return queue;
     }
@@ -23,9 +25,9 @@ public class Waves {
     /**
      * Returns (and afterwards removes) the first enemy in the queue if it is not null.
      */
-    public IEnemy getEnemyFromQueue() {
+    public IEntity getEnemyFromQueue() {
         //Queue<IEnemy> enemies = addEnemies();
-        IEnemy currentEnemy = addEnemies().poll();
+        IEntity currentEnemy = addEnemies().poll();
         return Objects.requireNonNull(currentEnemy);
     }
 

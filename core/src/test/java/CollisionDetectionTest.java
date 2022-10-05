@@ -55,7 +55,7 @@ public class CollisionDetectionTest {
     public void playerWillCollideWithEnemy(){
         Player player = new Player(200, 0);
         CollisionDetection cd = CollisionDetection.getInstance();
-        Enemy enemy = EnemyFactory.createEnemy1();
+        IEntity enemy = EnemyFactory.createEnemy1(350, 100);
 
         EntityHolder.getInstance().addEntity(enemy);
         Map<IEntity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
@@ -68,7 +68,7 @@ public class CollisionDetectionTest {
         Player player = new Player(500,500);
         CollisionDetection cd = CollisionDetection.getInstance();
 
-        Enemy enemy = EnemyFactory.createEnemy1();
+        IEntity enemy = EnemyFactory.createEnemy1(350, 100);
 
         EntityHolder.getInstance().addEntity(enemy);
 

@@ -1,10 +1,8 @@
 package Model.Enemy;
 
 
-import Interfaces.IEnemy;
+import Interfaces.IEntity;
 import Model.Enemy.Enemies.Enemy1;
-import Model.Facade.DrawFacade;
-import Model.Vector;
 
 /**
  * A class for handling the task of creating different enemies. Is useful when different types of
@@ -13,8 +11,8 @@ import Model.Vector;
 public class EnemyFactory {
 
 
-    public static IEnemy createEnemy1() {
-        return new Enemy1();
+    public static Enemy createEnemy1(float x, float y) {
+        return new Enemy1(x,y);
     }
 
 }

@@ -1,12 +1,12 @@
 package View;
 
-import Interfaces.IEnemy;
-import Interfaces.IView;
+import Interfaces.*;
+import Model.Enemy.Enemies.Enemy1;
 import Model.Facade.DrawFacade;
 import Model.GameTimer;
 import Model.Waves;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,27 +14,22 @@ import java.util.List;
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
-public class EnemyView implements IView {
-
-    private IEnemy enemy;
-
-    private List<IEnemy> enemiesOnScreen;
-
-
+public class EnemyView implements IView{
+    private List<IEntity> enemiesOnScreen;
     private Waves wave;
     private Texture img;
-
     private DrawFacade drawFacade;
+    private Sprite enemySprite;
 
     /**
      * A constructor for creating an Enemy.
      */
-    public EnemyView(IEnemy enemy, String texturePath) {
-        this.enemy = enemy;
-        this.img = new Texture("koopaTroopa.png");
-        this.wave = new Waves();
-        this.enemiesOnScreen = new ArrayList<>();
-        this.drawFacade = new DrawFacade(texturePath);
+    public EnemyView() {
+        wave = new Waves();
+        enemiesOnScreen = new ArrayList<>();
+        drawFacade = new DrawFacade("koopaTroopa.png");
+        enemySprite = new Sprite();
+
     }
 
     /**
@@ -45,15 +40,14 @@ public class EnemyView implements IView {
         if (Math.ceil(GameTimer.GetInstance().GetTime()) % 5 == 0) {
             enemiesOnScreen.add(wave.getEnemyFromQueue());
         }
-       for (IEnemy enemy: enemiesOnScreen) {
-            float imgWidth = (float) Math.ceil(img.getHeight()*0.15);
-            float imgHeight = (float) Math.ceil(img.getWidth()*0.25);
-            enemy.move();
-            drawFacade.drawObject(enemy.getX(), enemy.getY(), imgWidth, imgHeight);
-       }
+        for (IEntity e:enemiesOnScreen) {
+            drawFacade.drawObject(e.getX(), e.getY(), 64,64);
+        }
+
     }
     @Override
     public void dispose() {
         drawFacade.dispose();
     }
+
 }

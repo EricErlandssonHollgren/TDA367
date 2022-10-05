@@ -1,6 +1,10 @@
 package Model.Enemy;
 
 import Interfaces.IEntity;
+import Interfaces.IEntitySubscriber;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * All methods and parameters that an Enemy might need.
@@ -8,18 +12,12 @@ import Interfaces.IEntity;
 
 
 public abstract class Enemy implements IEntity {
-
     private int worth;
     private int HP;
 
     private float positionX;
 
     private float positionY;
-
-    private String projectile;
-
-    private String spritePath;
-
     private int damage = 10;
 
     /**
@@ -28,15 +26,12 @@ public abstract class Enemy implements IEntity {
      * @param HP = every enemy has a number of "health points" that will decrease as it is being attacked.
 
      */
-    public Enemy(int worth, int HP, String projectile, String spritePath, float positionX, float positionY) {
+    public Enemy(int worth, int HP, float positionX, float positionY) {
         this.worth = worth;
         this.HP = HP;
-        this.projectile = projectile;
-        this.spritePath = spritePath;
         this.positionX = positionX;
         this.positionY = positionY;
     }
-
     public int getWorth() {
         return worth;
     }
@@ -44,11 +39,6 @@ public abstract class Enemy implements IEntity {
     public int getHP() {
         return HP;
     }
-
-    public String getSpritePath() {
-        return spritePath;
-    }
-
     public float getX() {
         return positionX;
     }
@@ -56,4 +46,9 @@ public abstract class Enemy implements IEntity {
         return positionY;
     }
     public int getDamage(){return damage;}
+    public void moveEnemy() {
+        double speed = 0.5;
+        positionX -= speed;
+
+    }
 }

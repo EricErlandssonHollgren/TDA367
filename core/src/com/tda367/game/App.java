@@ -1,7 +1,12 @@
 package com.tda367.game;
 
 import Controller.PlayerKeyListener;
+import Interfaces.IEnemy;
+import Interfaces.IEntity;
 import Model.*;
+import Model.Enemy.Enemies.Enemy1;
+import Model.Enemy.Enemy;
+import Model.Enemy.EnemyFactory;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -29,7 +34,6 @@ public class App extends ApplicationAdapter {
 		player = new Player(120,100);
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
-
 		timer = GameTimer.GetInstance();
 		//setup chain of responsibility?
 		goldHandler = new Goldhandler();
@@ -56,7 +60,6 @@ public class App extends ApplicationAdapter {
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
 		playerKeyListener.UpdatePlayerMovement();
-		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}
 	

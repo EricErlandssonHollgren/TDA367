@@ -1,7 +1,7 @@
 package Model;
 import Interfaces.IEntity;
 import Interfaces.IObservers;
-import Interfaces.IPlayerSubscriber;
+import Interfaces.IEntitySubscriber;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class Player implements IObservers, IEntity {
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
-    List<IPlayerSubscriber> subscriberList = new ArrayList<>();
+    List<IEntitySubscriber> subscriberList = new ArrayList<>();
     private float x;
     private float y;
     private int width;
@@ -35,7 +35,7 @@ public class Player implements IObservers, IEntity {
      * A subscriber to handle the playerPosition. It should be updating its position
      * @param subscriber for the subscriberList
      */
-    public void positionSubscriber(IPlayerSubscriber subscriber){
+    public void positionSubscriber(IEntitySubscriber subscriber){
         subscriberList.add(subscriber);
         subscriber.updatePosition(x,y);
     }
@@ -48,7 +48,7 @@ public class Player implements IObservers, IEntity {
     public void moveLeft(){
         if(isAbleToMoveLeft) {
             x -= velocity;
-            for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
+            for (IEntitySubscriber playerPositionSubscriber : subscriberList) {
                 playerPositionSubscriber.updatePosition(x, y);
             }
         }
@@ -62,7 +62,7 @@ public class Player implements IObservers, IEntity {
     public void moveRight(){
         if(isAbleToMoveRight){
             x += velocity;
-            for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
+            for (IEntitySubscriber playerPositionSubscriber : subscriberList) {
                 playerPositionSubscriber.updatePosition(x,y);
             }
         }

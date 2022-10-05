@@ -1,14 +1,12 @@
 package View;
+import Interfaces.IEntitySubscriber;
 import Interfaces.IView;
 import Model.Facade.DrawFacade;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import Interfaces.IPlayerSubscriber;
 
 
-public class PlayerView implements IView, IPlayerSubscriber{
+public class PlayerView implements IView, IEntitySubscriber {
     private static Sprite playerSprite;
-    private static Texture texture;
     private DrawFacade drawFacade;
     /**
      * A constructor for the playerView. When creating a new playerView it should contain

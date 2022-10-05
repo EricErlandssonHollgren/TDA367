@@ -1,7 +1,8 @@
 package Model;
 
-import Interfaces.IPlayerSubscriber;
-import Interfaces.IView;
+import Interfaces.*;
+import Model.Enemy.Enemies.Enemy1;
+import Model.Enemy.Enemy;
 import View.*;
 
 import java.util.ArrayList;
@@ -25,13 +26,15 @@ public class ViewHolder {
         //Create views and objects
         IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
         IView playerView = new PlayerView();
+        IView enemyView = new EnemyView();
         IView towerView = new TowerView(tower);
         IView background = new BackgroundView();
 
-        player.positionSubscriber((IPlayerSubscriber) playerView);
+        player.positionSubscriber((IEntitySubscriber) playerView);
         //Add views to list and they will be rendered. Views must implement IView
         addView(background);
         addView(worldBoundariesView);
+        addView(enemyView);
         addView(playerView);
         addView(towerView);
     }
