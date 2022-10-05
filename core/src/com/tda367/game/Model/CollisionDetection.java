@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class CollisionDetection {
     private EntityHolder posHandler;
+    private Player player;
     private WorldBoundaries wb;
     private static CollisionDetection instance;
 

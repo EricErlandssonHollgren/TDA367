@@ -1,8 +1,10 @@
-import Model.Block;
-import Model.CollisionDetection;
-import Model.Player;
-import Model.WorldBoundaries;
+import Interfaces.IEntity;
+import Model.*;
+import Model.Enemy.Enemy;
+import Model.Enemy.EnemyFactory;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -47,5 +49,30 @@ public class CollisionDetectionTest {
 
         assertFalse(cd.CheckCollisionPlayerwithRightBlock(block,player));
 
+    }
+
+    @Test
+    public void playerWillCollideWithEnemy(){
+        Player player = new Player(200, 0);
+        CollisionDetection cd = CollisionDetection.getInstance(player);
+        Enemy enemy = EnemyFactory.createEnemy1();
+
+        EntityHolder.getInstance().addEntity(enemy);
+        Map<IEntity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy();
+
+        assertTrue(collision.get(enemy));
+    }
+
+    @Test
+    public void playerWillNotCollideWithEnemy(){
+        Player player = new Player(500,500);
+        CollisionDetection cd = CollisionDetection.getInstance(player);
+
+        Enemy enemy = EnemyFactory.createEnemy1();
+
+        EntityHolder.getInstance().addEntity(enemy);
+
+        Map<IEntity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy();
+        assertFalse(collision.get(enemy));
     }
 }

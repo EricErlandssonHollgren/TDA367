@@ -14,7 +14,7 @@ public class PlayerKeyListener {
     public void addSubscribers(IObservers observer){
         observers.add(observer);
     }
-
+/*
     public void upgradeTower() {
         if (Gdx.input.isKeyPressed(Input.Keys.U)) {
             for (IObservers o : observers) {
@@ -30,6 +30,8 @@ public class PlayerKeyListener {
             }
         }
     }
+
+ */
     
 
     /**
