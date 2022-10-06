@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -46,13 +48,11 @@ public class ButtonView implements IView {
         this.batch = new SpriteBatch();
         controller = new TowerKeyListener();
 
-        upgradeButton.addListener(new EventListener() {
+        upgradeButton.addListener(new ClickListener(){
             @Override
-            public boolean handle(Event event) {
-
-                System.out.println("Pressed!");
+            public void clicked (InputEvent event, float x, float y){
                 controller.upgradeTower();
-                return true;
+                System.out.println("Pressed!");
             }
         });
     }
@@ -60,6 +60,7 @@ public class ButtonView implements IView {
     @Override
     public void render() {
         stage.act(Gdx.graphics.getDeltaTime());
+        Gdx.input.setInputProcessor(stage);
         stage.draw();
     }
 
