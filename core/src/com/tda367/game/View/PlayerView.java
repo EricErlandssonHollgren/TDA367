@@ -8,7 +8,7 @@ import Model.Player;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class PlayerView implements IView, PlayerPositionSubscriber {
-    Sprite playerSprite;
+    public Sprite playerSprite;
     private Batch batch;
     private Texture texture;
 
@@ -20,6 +20,7 @@ public class PlayerView implements IView, PlayerPositionSubscriber {
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
+
     public PlayerView(){
         playerSprite = new Sprite();
         batch = new SpriteBatch();

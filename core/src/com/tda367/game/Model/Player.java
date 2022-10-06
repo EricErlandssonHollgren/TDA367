@@ -19,10 +19,15 @@ public class Player extends Entity implements IObservers {
      * When creating a player it should have two variables which defines its position.
      *  @param positionX represents the player's position on the x-axis
      *  @param positionY represents the player's position on the y-axis
+     *  @param entityWidth represents the player's
+     *  @param entityHieght represents the player's position on the y-axis
      */
-    public Player(float positionX, float positionY, int health ){
-        super(positionX, positionY, health);
+
+    public Player(float positionX, float positionY, float entityWidth, float entityHieght){
+        super(positionX, positionY, entityWidth, entityHieght);
     }
+
+
 
 
     /**
@@ -65,16 +70,9 @@ public class Player extends Entity implements IObservers {
     public void keyPressed(int key) {
         if(key == Input.Keys.LEFT){
             moveLeft();
-            state = STATE.RUNNINGLEFT;
         }
         else if(key == Input.Keys.RIGHT){
             moveRight();
-            state = STATE.RUNNINGRIGHT;
         }
-        else if (key == 0) {
-            System.out.println("state");
-            state = STATE.IDLE;
-        }
-
     }
 }

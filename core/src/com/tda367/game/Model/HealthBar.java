@@ -5,16 +5,18 @@ public class HealthBar  {
 
     private float positionX;
     private float positionY;
-    private float entityHeight = 20;
-    private float entityWidth = 20;
+    private float entityHeight;
+    private float entityWidth;
     private float maxHealth;
     private float health;
 
-    public HealthBar(float x, float y, float health) {
-        positionX = x + entityWidth/2;
-        positionY = y + entityHeight;
+    public HealthBar(float x, float y, float health, float entityWidth, float entityHeight) {
+        this.entityHeight = entityHeight;
+        this.entityWidth = entityWidth;
         this.maxHealth = health;
         this.health = 80;
+        updatePosition(x,y);
+
     }
 
     public void updatePosition(float x, float y){
