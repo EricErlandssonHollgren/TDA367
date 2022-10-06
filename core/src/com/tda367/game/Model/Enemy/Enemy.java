@@ -11,7 +11,7 @@ import Interfaces.IObservers;
  */
 
 
-public class Enemy implements IObservers, IEntity {
+public class Enemy {
     private int worth;
     private int HP;
     private float positionX;
@@ -32,10 +32,6 @@ public class Enemy implements IObservers, IEntity {
         this.positionY = positionY;
     }
 
-    public void positionSubscriber(IEntitySubscriber subscriber){
-        subscriberList.add(subscriber);
-        subscriber.updatePosition(positionX,positionY);
-    }
     public int getWorth() {
         return worth;
     }
@@ -50,19 +46,6 @@ public class Enemy implements IObservers, IEntity {
         return positionY;
     }
     public int getDamage(){return damage;}
-    public void moveEnemy() {
-        double speed = 0.5;
-        positionX -= speed;
-        for(IEntitysubscriber enemyPositionsubscriber : subscriberList){
-            enemyPositionsubcriber.updatePosition(positionX, positionY);
-        }
 
-    }
-    @Override
-    public void actionHandle(ActionEnum key){
-        if(key == ActionEnum.ENEMYMOVE){
-            moveEnemy();
-        }
-    }
 
 }

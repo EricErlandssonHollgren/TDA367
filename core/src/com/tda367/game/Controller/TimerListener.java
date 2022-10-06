@@ -12,15 +12,4 @@ public class TimerListener {
         observers.add(observer);
     }
 
-    public void UpdateEnemyMovement(){
-        timer.GetInstance().GetTime();
-        if(Math.ceil(timer) % 10 == 0){
-
-        }
-
-        //TODO: Depending on what the time is
-        for(IObservers o: observers){
-            o.actionHandle(ActionEnum.ENEMYMOVE);
-        }
-    }
 }

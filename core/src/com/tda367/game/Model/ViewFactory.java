@@ -1,6 +1,6 @@
 package Model;
 
-import Interfaces.IEnemy;
+
 import Interfaces.IEntity;
 import Interfaces.IView;
 import View.EnemyView;

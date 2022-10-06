@@ -12,8 +12,6 @@ public class Player extends Entity implements IObservers {
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
     List<IEntitySubscriber> subscriberList = new ArrayList<>();
-    private float x;
-    private float y;
     private int width;
     private int height;
     private int damage = 30;
@@ -24,11 +22,10 @@ public class Player extends Entity implements IObservers {
     private float velocity = 7;
 
 
-    public Player(float x, float y){
+    public Player(float positionX, float positionY,int entityWidth, int entityHeight){
+        super(positionX, positionY,50, 37);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
-        this.x = x;
-        this.y = y;
         this.width = 50;
         this.height = 37;
     }
@@ -39,7 +36,7 @@ public class Player extends Entity implements IObservers {
      */
     public void positionSubscriber(IEntitySubscriber subscriber){
         subscriberList.add(subscriber);
-        subscriber.updatePosition(x,y);
+        subscriber.updatePosition(positionX,positionY);
     }
 
 
@@ -49,9 +46,9 @@ public class Player extends Entity implements IObservers {
      */
     public void moveLeft(){
         if(isAbleToMoveLeft) {
-            x -= velocity;
+            positionX -= velocity;
             for (IEntitySubscriber playerPositionSubscriber : subscriberList) {
-                playerPositionSubscriber.updatePosition(x, y);
+                playerPositionSubscriber.updatePosition(positionX, positionY);
             }
         }
     }
@@ -62,9 +59,9 @@ public class Player extends Entity implements IObservers {
      */
     public void moveRight(){
         if(isAbleToMoveRight){
-            x += velocity;
+            positionX += velocity;
             for (IEntitySubscriber playerPositionSubscriber : subscriberList) {
-                playerPositionSubscriber.updatePosition(x,y);
+                playerPositionSubscriber.updatePosition(positionX,positionY);
             }
         }
     }
@@ -92,7 +89,7 @@ public class Player extends Entity implements IObservers {
      * @return y-coordinate of the object
      */
     public float getY(){
-        return y;
+        return positionY;
     }
 
     /**
@@ -100,7 +97,7 @@ public class Player extends Entity implements IObservers {
      * @return x-coordinate of the object
      */
     public float getX(){
-        return x;
+        return positionX;
     }
 
     /**

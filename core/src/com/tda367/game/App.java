@@ -15,6 +15,7 @@ public class App extends ApplicationAdapter {
 	private GameTimer timer;
 	private ViewHolder views;
 	private Player player;
+	private HealthBar healthBar;
 	private RoundHandler roundHandler;
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
@@ -32,7 +33,8 @@ public class App extends ApplicationAdapter {
 		//Handlers
 
 
-		player = new Player(120,100);
+		healthBar = new HealthBar(120, 120, 10, 50, 50);
+		player = new Player(120,100, 50, 37);
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
@@ -46,7 +48,7 @@ public class App extends ApplicationAdapter {
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
 
-		views = new ViewHolder(-0.5f,player,tower,worldBoundaries);
+		views = new ViewHolder(-0.5f,player,tower,worldBoundaries, healthBar);
 
 		//Controllers
 		playerKeyListener = new PlayerKeyListener();

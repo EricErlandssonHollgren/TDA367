@@ -17,7 +17,7 @@ public class ViewHolder {
      * Initialises the startup views
      * @param gravity
      */
-    public ViewHolder(float gravity, Player player, Tower tower, WorldBoundaries worldBoundaries){
+    public ViewHolder(float gravity, Player player, Tower tower, WorldBoundaries worldBoundaries, HealthBar healthBar){
         //Instantiate world and views list
         this.gravity = gravity;
         views = new ArrayList<>();
@@ -29,15 +29,15 @@ public class ViewHolder {
         IView towerView = new TowerView(tower);
         IView background = new BackgroundView();
         IView buttonView = new ButtonView();
+        IView healthbarView = new HealthBarView(healthBar);
 
         player.positionSubscriber((IEntitySubscriber) playerView);
         //Add views to list and they will be rendered. Views must implement IView
         addView(background);
         addView(worldBoundariesView);
-        addView(enemyView);
+        //addView(enemyView);
         addView(playerView);
-        addView(projectileView);
-        addView(healhBarView);
+        addView(healthbarView);
         addView(towerView);
         addView(buttonView);
     }
