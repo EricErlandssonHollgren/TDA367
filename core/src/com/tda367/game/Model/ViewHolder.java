@@ -3,6 +3,7 @@ package Model;
 import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
 import Model.Enemy.Enemy;
+import Model.Enemy.EnemyFactory;
 import View.*;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class ViewHolder {
      * Initialises the startup views
      * @param gravity
      */
-    public ViewHolder(float gravity, Player player, Enemy enemy, Tower tower, WorldBoundaries worldBoundaries){
+    public ViewHolder(float gravity, Player player, Tower tower, Enemy enemy, WorldBoundaries worldBoundaries){
         //Instantiate world and views list
         this.gravity = gravity;
         views = new ArrayList<>();

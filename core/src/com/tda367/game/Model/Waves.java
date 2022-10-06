@@ -9,7 +9,7 @@ public class Waves {
 
     Queue<Enemy> queue = new LinkedList<>();
     List<Enemy> currentEnemiesRendered = new ArrayList<>();
-    boolean wasRecentlySpawned = false;
+    private boolean wasRecentlySpawned = false;
 
     /**
      * Adds 10 enemies to a queue to later be used for rendering.

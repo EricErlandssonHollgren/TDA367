@@ -4,6 +4,7 @@ import Interfaces.*;
 import Model.Enemy.Enemy;
 import Model.Facade.DrawFacade;
 import Model.Waves;
+import com.badlogic.gdx.math.Interpolation;
 
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
