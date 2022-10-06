@@ -1,4 +1,3 @@
-import Interfaces.IEntity;
 import Model.*;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;

@@ -10,9 +10,9 @@ public class PlayerView implements IView, IEntitySubscriber {
     private Batch batch;
     private static Sprite playerSprite;
     private DrawFacade drawFacade;
-    float elapsedTime;
+    private float elapsedTime;
     private Texture texture;
-    TextureRegion[] animationFrames;
+    private TextureRegion[] animationFrames;
     Animation animation;
 
     /**
@@ -23,8 +23,6 @@ public class PlayerView implements IView, IEntitySubscriber {
     public PlayerView(){
         playerSprite = new Sprite();
         batch = new SpriteBatch();
-        texture = new Texture("adventurer-stand-01.png");
-
         animationFrames = new TextureRegion[6];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-run-00.png"));
         animationFrames[1] = new TextureRegion(new Texture("adventurer-run-01.png"));
@@ -57,7 +55,6 @@ public class PlayerView implements IView, IEntitySubscriber {
         //drawFacade.drawObject(playerSprite.getX(), playerSprite.getY(), 64, 64);
 
         elapsedTime += Gdx.graphics.getDeltaTime();
-
         batch.begin();
         batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true), playerSprite.getX(), playerSprite.getY());
         batch.end();

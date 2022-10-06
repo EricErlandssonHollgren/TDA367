@@ -1,6 +1,6 @@
 package Model.Enemy;
 
-import Interfaces.IEntity;
+import Model.Entity;
 import Model.Waves;
 
 /**
@@ -8,29 +8,22 @@ import Model.Waves;
  */
 
 
-public abstract class Enemy implements IEntity {
+public abstract class Enemy extends Entity {
 
     private final int worth;
     private int HP;
-
-    private float positionX;
-
-    private float positionY;
     private Waves wave;
     private final int damage;
-
-
 
     /**
      * @param worth  = is what the enemy is "worth". int will be transferred to the player when the enemy has been killed
      * @param HP     = every enemy has a number of "health points" that will decrease as it is being attacked.
      * @param damage = is how much damage the enemy will do to the player when it attacks.
      */
-    public Enemy(int worth, int HP, float positionX, float positionY, int damage) {
+    public Enemy(float positionX, float positionY, int entityWidth, int entityHeight, int worth, int HP, int damage) {
+        super(positionX, positionY, entityWidth, entityHeight);
         this.worth = worth;
         this.HP = HP;
-        this.positionX = positionX;
-        this.positionY = positionY;
         this.wave = new Waves();
         this.damage = damage;
     }
@@ -43,12 +36,9 @@ public abstract class Enemy implements IEntity {
         return HP;
     }
 
-    @Override
     public float getX() {
         return positionX;
     }
-
-    @Override
     public float getY() {
         return positionY;
     }

@@ -2,13 +2,13 @@ package Model.Facade;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class DrawFacade {
     private SpriteBatch batch;
     private Texture img;
-
     private ShapeRenderer shaperenderer;
 
     public DrawFacade(String texturePath){

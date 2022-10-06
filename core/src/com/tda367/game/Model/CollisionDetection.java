@@ -1,18 +1,13 @@
 package Model;
 
-import Interfaces.IEntity;
 import Interfaces.IProjectile;
 import Model.Enemy.Enemy;
-import com.badlogic.gdx.math.Interpolation;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CollisionDetection {
     private EntityHolder posHandler;
-    private Player player;
     private WorldBoundaries wb;
     private static CollisionDetection instance;
 
@@ -69,11 +64,11 @@ public class CollisionDetection {
      * The method checks the collision between the player and the enemy in the game. If the player is
      * colliding with an enemy it will return a referenece to that enemy along with the value true
      */
-    public Map<IEntity, Boolean> CheckCollisionPlayerAndEnemy(Player player){
-        Map<IEntity, Boolean> collisions = new HashMap<>();
-        for (IEntity entity: posHandler.entities) {
+    public Map<Entity, Boolean> CheckCollisionPlayerAndEnemy(Player player){
+        Map<Entity, Boolean> collisions = new HashMap<>();
+        for (Entity entity: posHandler.entities) {
             if(entity instanceof Enemy){
-                if((player.getX() + player.getWidth() >= entity.getX()) && (player.getX() <= entity.getX()+50)){
+                if((player.getX() + player.getWidth() >= entity.getPosX()) && (player.getX() <= entity.getPosY()+50)){
                     collisions.put(entity,true);
                 }
                 collisions.put(entity,false);
@@ -85,13 +80,13 @@ public class CollisionDetection {
      * The method checks collision between projectiles and enemies in the game. If an enemy is hit
      * it will return the enemy that is hit along with the value true
      */
-    public Map<IEntity, Boolean> checkCollisionProjectileAndEnemy(){
-        Map<IEntity, Boolean> collided = new HashMap<>();
+    public Map<Entity, Boolean> checkCollisionProjectileAndEnemy(){
+        Map<Entity, Boolean> collided = new HashMap<>();
         for (IProjectile projectile: posHandler.projectiles) {
-            for(IEntity entity : posHandler.entities) {
+            for(Entity entity : posHandler.entities) {
                 if(entity instanceof Enemy){
-                    if((projectile.getX() + projectile.getRadius()*2 >= entity.getX()) && (projectile.getX() <= entity.getX()+50)){
-                        if((projectile.getY() + 2*projectile.getRadius() >= entity.getY()) && (projectile.getY() <= entity.getY()+50)){
+                    if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+50)){
+                        if((projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+50)){
                             collided.put(entity,true);
                             System.out.println("Collided with " + entity);
                         }

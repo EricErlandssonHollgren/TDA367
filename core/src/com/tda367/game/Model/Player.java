@@ -1,5 +1,4 @@
 package Model;
-import Interfaces.IEntity;
 import Interfaces.IObservers;
 import Interfaces.IEntitySubscriber;
 import java.util.ArrayList;

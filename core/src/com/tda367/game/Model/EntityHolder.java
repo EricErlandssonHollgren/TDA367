@@ -1,13 +1,12 @@
 package Model;
 
-import Interfaces.IEntity;
 import Interfaces.IProjectile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EntityHolder {
-    List<IEntity> entities;
+    List<Entity> entities;
     List<IProjectile> projectiles;
     private static EntityHolder instance;
     private EntityHolder(){
@@ -20,7 +19,7 @@ public class EntityHolder {
         }
         return instance;
     }
-    public void addEntity(IEntity entity){
+    public void addEntity(Entity entity){
         //In factories add entities to this list
         entities.add(entity);
     }

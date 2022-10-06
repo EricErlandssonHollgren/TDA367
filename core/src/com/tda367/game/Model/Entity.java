@@ -48,4 +48,8 @@ public abstract class Entity{
         return positionY;
     }
 
+    public void takeDamage(int damage){
+        health -= damage;
+    }
+
 }
