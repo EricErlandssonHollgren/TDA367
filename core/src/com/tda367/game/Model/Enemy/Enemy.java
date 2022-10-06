@@ -1,6 +1,7 @@
 package Model.Enemy;
 
 import Interfaces.IEntity;
+import Model.Waves;
 
 /**
  * All methods and parameters that an Enemy might need.
@@ -9,32 +10,29 @@ import Interfaces.IEntity;
 
 public abstract class Enemy implements IEntity {
 
-    private int worth;
+    private final int worth;
     private int HP;
 
     private float positionX;
 
     private float positionY;
+    private Waves wave;
+    private final int damage;
 
-    private String projectile;
 
-    private String spritePath;
-
-    private int damage = 10;
 
     /**
-     *
-     * @param worth = is what the enemy is "worth". int will be transferred to the player when the enemy has been killed
-     * @param HP = every enemy has a number of "health points" that will decrease as it is being attacked.
-
+     * @param worth  = is what the enemy is "worth". int will be transferred to the player when the enemy has been killed
+     * @param HP     = every enemy has a number of "health points" that will decrease as it is being attacked.
+     * @param damage = is how much damage the enemy will do to the player when it attacks.
      */
-    public Enemy(int worth, int HP, String projectile, String spritePath, float positionX, float positionY) {
+    public Enemy(int worth, int HP, float positionX, float positionY, int damage) {
         this.worth = worth;
         this.HP = HP;
-        this.projectile = projectile;
-        this.spritePath = spritePath;
         this.positionX = positionX;
         this.positionY = positionY;
+        this.wave = new Waves();
+        this.damage = damage;
     }
 
     public int getWorth() {
@@ -45,15 +43,25 @@ public abstract class Enemy implements IEntity {
         return HP;
     }
 
-    public String getSpritePath() {
-        return spritePath;
-    }
-
+    @Override
     public float getX() {
         return positionX;
     }
+
+    @Override
     public float getY() {
         return positionY;
     }
-    public int getDamage(){return damage;}
+
+    /**
+     * moves the enemy in x-direction only with a change of 0.2px.
+     */
+    public void moveEnemy() {
+        double speed = 0.2;
+        positionX -= speed;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
 }
