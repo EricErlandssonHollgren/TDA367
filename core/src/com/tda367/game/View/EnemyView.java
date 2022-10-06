@@ -35,7 +35,6 @@ public class EnemyView implements IView {
             float imgHeight = (float) Math.ceil(drawFacade.getTexture().getHeight()*0.10);
             enemy.moveEnemy();
             drawFacade.drawObject(enemy.getX(), enemy.getY(), imgWidth, imgHeight);
-            System.out.println(enemy.getX()+ enemy.getY());
         }
     }
     @Override
