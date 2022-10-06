@@ -29,7 +29,7 @@ public class AnimationController {
         animationFrames[5] = new TextureRegion(new Texture("adventurer-run-05.png"));
 
         Texture t = new Texture("adventurer-run-00.png");
-        
+
     }
 
 }
