@@ -1,15 +1,8 @@
 package Model;
 
-import Controller.KeyListener;
-import Interfaces.IEnemy;
+import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
-import Model.Enemy.EnemyFactory;
-import View.EnemyView;
-import View.PlayerView;
-import View.ProjectileView;
-import View.TowerView;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
+import View.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,33 +10,30 @@ import java.util.List;
 public class ViewHolder {
     //
     private List<IView> views;
-    private KeyListener keyListener;
+    //private PlayerKeyListener keyListener;
     private float gravity;
 
-    public ViewHolder(float gravity){
+    /**
+     * Initialises the startup views
+     * @param gravity
+     */
+    public ViewHolder(float gravity, Player player, Tower tower, WorldBoundaries worldBoundaries){
         //Instantiate world and views list
         this.gravity = gravity;
         views = new ArrayList<>();
 
         //Create views and objects
-        IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
-        //IView enemyViewTest = ViewFactory.createEnemyView(EnemyFactory.createEnemy1());
-        PlayerView playerView = new PlayerView();
-        Player player = new Player(9, 100);
-        Tower tower = new Tower();
-        TowerView towerView = new TowerView(tower);
+        IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
+        IView playerView = new PlayerView();
+        IView towerView = new TowerView(tower);
+        IView background = new BackgroundView();
 
-        keyListener = new KeyListener();
-        keyListener.addSubscribers(player);
-        //keyListener.addSubscribers(tower);
-
-        keyListener = new KeyListener();
-        keyListener.addSubscribers(player);
-        player.positionSubscriber(playerView);
-
+        player.positionSubscriber((IPlayerSubscriber) playerView);
         //Add views to list and they will be rendered. Views must implement IView
-        addView(enemyView);
+        addView(background);
+        addView(worldBoundariesView);
         addView(playerView);
+        addView(towerView);
     }
     public void addView(IView view){
         views.add(view);
@@ -52,7 +42,6 @@ public class ViewHolder {
         views.remove(view);
     }
     public void render(){
-        keyListener.UpdatePlayerMovement();
         for (IView views: views) {
             views.render();
         }

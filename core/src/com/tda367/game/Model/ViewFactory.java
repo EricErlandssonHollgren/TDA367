@@ -15,6 +15,6 @@ public class ViewFactory {
         return new EnemyView(e);
     }
     public static IView createProjectileView(IProjectile p){
-        return new ProjectileView(p, "Cannonball.png");
+        return new ProjectileView("Cannonball.png");
     }
 }

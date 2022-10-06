@@ -1,39 +1,25 @@
 package Model.Enemy.Enemies;
 
-import Interfaces.IEnemy;
-import Model.Vector;
+import Model.Enemy.Enemy;
 
 /**
  * First instance of an enemy to be rendered on the screen.
  * Values are currently placeholders, will change later.
  */
-public class Enemy1 implements IEnemy {
+public class Enemy1 extends Enemy {
 
-    private final int worth = 5;
-    private int HP = 5;
-    private Vector position;
+    private static final int worth = 5;
+    private static final int HP = 5;
+    private static final String projectile = "bomb";
+    private static final String spritePath = "koopaTroopa.png";
+    private static final float positionX = 200;
+    private static final float positionY = 0;
 
     public Enemy1() {
-        this.position = new Vector(1560,0);
+        super(worth, HP, projectile, spritePath, positionX, positionY);
     }
 
-    @Override
-    public float getX() {
-        return position.getX();
-    }
-
-    @Override
-    public float getY() {
-        return position.getY();
-    }
-
-    /**
-     * Changes the position of the enemy to create movement.
-     * speed: How fast the enemy is moving, higher number equals higher speed
-     */
-    @Override
-    public void move() {
-        double speed = 0.5;
-        position.setLocation(position.getX()-speed, position.getY());
+    public String getSpritePath() {
+        return spritePath;
     }
 }
