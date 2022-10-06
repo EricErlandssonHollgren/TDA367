@@ -3,14 +3,15 @@ package Model;
 import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
 import View.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ViewHolder {
-    //
+
     private List<IView> views;
-    //private PlayerKeyListener keyListener;
     private float gravity;
 
     /**
@@ -23,6 +24,7 @@ public class ViewHolder {
         views = new ArrayList<>();
 
     }
+    // add method to connect controller and view
     public void addView(IView view){
         views.add(view);
     }

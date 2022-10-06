@@ -54,8 +54,6 @@ public class ButtonView implements IView {
 
     @Override
     public void render() {
-        stage.act(Gdx.graphics.getDeltaTime());
-        Gdx.input.setInputProcessor(stage);
         stage.draw();
     }
 

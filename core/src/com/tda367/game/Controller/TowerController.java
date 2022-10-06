@@ -13,6 +13,7 @@ public class TowerController {
     private List<IObservers> observers;
     private List<Button> towerButtons;
     private Button upgrade;
+
     public TowerController(){
         observers = new ArrayList<>();
         towerButtons = new ArrayList<>();
