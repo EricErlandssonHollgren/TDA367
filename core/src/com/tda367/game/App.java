@@ -15,7 +15,7 @@ public class App extends ApplicationAdapter {
 	private GameTimer timer;
 	private ViewHolder views;
 	private Player player;
-	private Enemy enemy;
+	private EnemyFactory enemyFactory;
 	private RoundHandler roundHandler;
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
@@ -33,19 +33,17 @@ public class App extends ApplicationAdapter {
 		player = new Player(120,100);
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
-		enemy = new Enemy(10,10,780,100);
 		timer = GameTimer.GetInstance();
 		//setup chain of responsibility?
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();
 		goldHandler.setSuccessor(pointsHandler);
-
 		roundHandler = RoundHandler.GetInstance(timer);
 
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
 
-		views = new ViewHolder(-0.5f,player,enemy, tower,worldBoundaries);
+		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries);
 
 		//Controllers
 		playerKeyListener = new PlayerKeyListener();
