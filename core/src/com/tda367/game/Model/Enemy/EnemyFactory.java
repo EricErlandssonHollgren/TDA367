@@ -1,7 +1,7 @@
 package Model.Enemy;
 
 
-import Interfaces.IEntity;
+import Model.Enemy.Enemies.Enemy1;
 
 /**
  * A class for handling the task of creating different enemies. Is useful when different types of
@@ -9,8 +9,9 @@ import Interfaces.IEntity;
  */
 public class EnemyFactory {
 
-    public static Enemy createEnemy(int worth, int HP, float x, float y) {
-        return new Enemy(worth, HP, x,y);
+
+    public static Enemy createEnemy1() {
+        return new Enemy1();
     }
 
 }

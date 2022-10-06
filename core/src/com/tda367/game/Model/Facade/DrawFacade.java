@@ -17,6 +17,10 @@ public class DrawFacade {
         shaperenderer = new ShapeRenderer();
     }
 
+    public Texture getTexture() {
+        return img;
+    }
+
     public DrawFacade(){
         batch = new SpriteBatch();
         shaperenderer = new ShapeRenderer();

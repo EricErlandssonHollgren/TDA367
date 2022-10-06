@@ -1,48 +1,40 @@
 package View;
 
 import Interfaces.*;
+import Model.Enemy.Enemy;
 import Model.Facade.DrawFacade;
-import Model.GameTimer;
 import Model.Waves;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
-public class EnemyView implements IView{
-    private List<IEntity> enemiesOnScreen;
+public class EnemyView implements IView {
+
     private Waves wave;
-    private Texture img;
     private DrawFacade drawFacade;
-    private Sprite enemySprite;
+
 
     /**
      * A constructor for creating an Enemy.
      */
     public EnemyView() {
-        wave = new Waves();
-        enemiesOnScreen = new ArrayList<>();
-        drawFacade = new DrawFacade("koopaTroopa.png");
-        enemySprite = new Sprite();
-
+        this.wave = new Waves();
+        this.drawFacade = new DrawFacade("koopaTroopa.png");
     }
 
+
     /**
-     * A method for rendering, and moving, an enemy across the screen every 40 seconds.
+     * Is responsible for rendering an enemy with the help of facade pattern.
+     * Scaling of the texture is also being done in this method.
      */
     @Override
     public void render() {
-        if (Math.ceil(GameTimer.GetInstance().GetTime()) % 5 == 0) {
-            enemiesOnScreen.add(wave.getEnemyFromQueue());
+        for (Enemy enemy: wave.getEnemiesToRender()) {
+            float imgWidth = (float) Math.ceil(drawFacade.getTexture().getWidth()*0.15);
+            float imgHeight = (float) Math.ceil(drawFacade.getTexture().getHeight()*0.10);
+            enemy.moveEnemy();
+            drawFacade.drawObject(enemy.getX(), enemy.getY(), imgWidth, imgHeight);
         }
-        for (IEntity e:enemiesOnScreen) {
-            drawFacade.drawObject(e.getX(), e.getY(), 64,64);
-        }
-
     }
     @Override
     public void dispose() {

@@ -1,35 +1,38 @@
 package Model.Enemy;
-import Interfaces.IEntity;
-import Interfaces.IEntitySubscriber;
 
-import java.util.ArrayList;
-import java.util.List;
-import Interfaces.IObservers;
+import Interfaces.IEntity;
+import Model.Waves;
 
 /**
  * All methods and parameters that an Enemy might need.
  */
 
 
-public class Enemy {
-    private int worth;
+public abstract class Enemy implements IEntity {
+
+    private final int worth;
     private int HP;
+
     private float positionX;
+
     private float positionY;
-    private int damage = 10;
-    List <IEntitySubscriber> subscribersList = new ArrayList<>();
+    private Waves wave;
+    private final int damage;
+
+
 
     /**
-     *
-     * @param worth = is what the enemy is "worth". int will be transferred to the player when the enemy has been killed
-     * @param HP = every enemy has a number of "health points" that will decrease as it is being attacked.
-
+     * @param worth  = is what the enemy is "worth". int will be transferred to the player when the enemy has been killed
+     * @param HP     = every enemy has a number of "health points" that will decrease as it is being attacked.
+     * @param damage = is how much damage the enemy will do to the player when it attacks.
      */
-    public Enemy(int worth, int HP, float positionX, float positionY) {
+    public Enemy(int worth, int HP, float positionX, float positionY, int damage) {
         this.worth = worth;
         this.HP = HP;
         this.positionX = positionX;
         this.positionY = positionY;
+        this.wave = new Waves();
+        this.damage = damage;
     }
 
     public int getWorth() {
@@ -39,13 +42,26 @@ public class Enemy {
     public int getHP() {
         return HP;
     }
+
+    @Override
     public float getX() {
         return positionX;
     }
+
+    @Override
     public float getY() {
         return positionY;
     }
-    public int getDamage(){return damage;}
 
+    /**
+     * moves the enemy in x-direction only with a change of 0.2px.
+     */
+    public void moveEnemy() {
+        double speed = 0.2;
+        positionX -= speed;
+    }
 
+    public int getDamage() {
+        return damage;
+    }
 }
