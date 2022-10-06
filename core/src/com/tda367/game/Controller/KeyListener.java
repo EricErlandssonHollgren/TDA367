@@ -25,12 +25,10 @@ public class KeyListener{
                 o.keyPressed(Input.Keys.LEFT);
             }
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
             for (IObservers o: observers) {
                 o.keyPressed(Input.Keys.RIGHT);
             }
         }
     }
-
-
 }

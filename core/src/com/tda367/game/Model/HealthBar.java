@@ -1,44 +1,41 @@
 package Model;
 
 
-import com.badlogic.gdx.graphics.Texture;
-
-public class HealthBar {
-// stoppa in texurn här inne så det kan kalkuleras
+public class HealthBar  {
 
     private float positionX;
     private float positionY;
-    private float entityHeight;
-    private float entityWidth;
-    private static final float aboveY = 10;
+    private float entityHeight = 20;
+    private float entityWidth = 20;
     private float maxHealth;
     private float health;
-    private Texture healthBarHolderImg;
-    private Texture healthBarImg;
 
-
-    public HealthBar(float x, float y, float health, float entityHeight, float entityWidth) {
-        healthBarHolderImg = new Texture("grayhealthbar.png");
-        healthBarImg = new Texture("healthBar/redhealthbar.png");
+    public HealthBar(float x, float y, float health) {
         positionX = x + entityWidth/2;
         positionY = y + entityHeight;
-        this.health = health;
-        this.entityHeight = entityHeight;
-        this.entityWidth = entityWidth;
+        this.maxHealth = health;
+        this.health = 80;
     }
 
     public void updatePosition(float x, float y){
-        positionX = x+(entityWidth/2);
+        positionX = x + (entityWidth/2);
         positionY = y + entityHeight;
+    }
+
+    public void updateEntitySize(float entityWidth, float entityHeight) {
+        this.entityWidth = entityWidth;
+        this.entityHeight = entityHeight;
     }
 
     public void updateHealth(int currentHeahlth) {
         health = currentHeahlth;
     }
 
-    public double getHealthWidth(){
-        return (healthBarImg.getWidth()*(0.8));
+    public float getHealthWidth(){
+        return (health/maxHealth);
     }
+
+    public float getHealth() { return health; }
 
     public float getPositionX() {
         return positionX;
@@ -47,8 +44,5 @@ public class HealthBar {
     public float getPositionY() {
         return positionY;
     }
-
-
-
 
 }

@@ -1,11 +1,9 @@
 package View;
 
 import Interfaces.IView;
-import Model.Enemy.Enemy;
 import Model.HealthBar;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class HealthBarView implements IView {
 
@@ -24,10 +22,12 @@ public class HealthBarView implements IView {
     @Override
     public void render() {
         batch.begin();
-        batch.draw(healthBarHolderImg, healthBar.getPositionX(), healthBar.getPositionY());
-        batch.draw(healthBarImg, healthBar.getPositionX(), healthBar.getPositionY(), (float) healthBar.getHealthWidth(), healthBarImg.getHeight());
+        batch.draw(healthBarHolderImg, healthBar.getPositionX(), healthBar.getPositionY(), healthBarHolderImg.getWidth(), healthBarHolderImg.getHeight());
+        batch.draw(healthBarImg, healthBar.getPositionX(), healthBar.getPositionY(), healthBarImg.getWidth() * healthBar.getHealthWidth(), healthBarImg.getHeight());
         batch.end();
     }
+
+
 
     @Override
     public void dispose() {

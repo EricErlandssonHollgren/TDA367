@@ -6,10 +6,10 @@ import com.badlogic.gdx.Input;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.badlogic.gdx.graphics.Texture;
 
 
 public class Player extends Entity implements IObservers {
+
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
@@ -57,21 +57,24 @@ public class Player extends Entity implements IObservers {
         }
     }
 
-    public void crouche() {
-
-    }
-
-    protected void setEntityImg(){
-        entityImg = new Texture("adventurer-idle-01.png");
+    public STATE getState() {
+        return state;
     }
 
     @Override
     public void keyPressed(int key) {
         if(key == Input.Keys.LEFT){
             moveLeft();
+            state = STATE.RUNNINGLEFT;
         }
-        if(key == Input.Keys.RIGHT){
+        else if(key == Input.Keys.RIGHT){
             moveRight();
+            state = STATE.RUNNINGRIGHT;
         }
+        else if (key == 0) {
+            System.out.println("state");
+            state = STATE.IDLE;
+        }
+
     }
 }
