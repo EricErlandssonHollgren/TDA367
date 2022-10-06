@@ -1,23 +1,18 @@
 package View;
 
-import Controller.TowerKeyListener;
+import Controller.TowerController;
 import Interfaces.IView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import java.awt.event.MouseEvent;
 
 public class ButtonView implements IView {
 
@@ -27,7 +22,7 @@ public class ButtonView implements IView {
     private TextureRegion txRegion;
     private TextureRegionDrawable txrDrawable;
 
-    private TowerKeyListener controller;
+    private TowerController controller;
     private Stage stage;
     private Skin skin;
 
@@ -46,7 +41,7 @@ public class ButtonView implements IView {
         Gdx.input.setInputProcessor(stage);
 
         this.batch = new SpriteBatch();
-        controller = new TowerKeyListener();
+        controller = new TowerController();
 
         upgradeButton.addListener(new ClickListener(){
             @Override

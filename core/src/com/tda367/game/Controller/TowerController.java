@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TowerKeyListener {
-    List<IObservers> observers;
-    List<Button> towerButtons;
-    Button upgrade;
-    public TowerKeyListener(){
+public class TowerController {
+    private List<IObservers> observers;
+    private List<Button> towerButtons;
+    private Button upgrade;
+    public TowerController(){
         observers = new ArrayList<>();
         towerButtons = new ArrayList<>();
         upgrade = new Button();

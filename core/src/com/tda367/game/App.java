@@ -1,6 +1,7 @@
 package com.tda367.game;
 
 import Controller.PlayerKeyListener;
+import Controller.TowerController;
 import Model.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -20,6 +21,7 @@ public class App extends ApplicationAdapter {
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
 	private PlayerKeyListener playerKeyListener;
+	private TowerController towerController;
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -46,7 +48,8 @@ public class App extends ApplicationAdapter {
 		//Controllers
 		playerKeyListener = new PlayerKeyListener();
 		playerKeyListener.addSubscribers(player);
-
+		towerController = new TowerController();
+		towerController.addSubscribers(tower);
 	}
   
 	@Override

@@ -142,6 +142,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     @Override
     public void actionHandle(ActionEnum action) {
         if(action == ActionEnum.UPGRADE){
+            System.out.println("Upgrade");
             upgrade();
         }
         if(action == ActionEnum.BUILD){
