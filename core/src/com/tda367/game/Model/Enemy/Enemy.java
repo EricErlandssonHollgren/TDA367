@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 
-public abstract class Enemy implements IEntity {
+public class Enemy implements IEntity {
     private int worth;
     private int HP;
 

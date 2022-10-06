@@ -10,9 +10,8 @@ import Model.Enemy.Enemies.Enemy1;
  */
 public class EnemyFactory {
 
-
-    public static Enemy createEnemy1(float x, float y) {
-        return new Enemy1(x,y);
+    public static Enemy createEnemy(int worth, int HP, float x, float y) {
+        return new Enemy(worth, HP, x,y);
     }
 
 }

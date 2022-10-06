@@ -16,7 +16,7 @@ public class Waves {
 
     public Queue<IEntity> addEnemies() {
        for (int i = 0; i <= 10; i++) {
-           queue.add(EnemyFactory.createEnemy1(300+i*10, 100));
+           queue.add(EnemyFactory.createEnemy(5, 10, 300+i*10, 100));
 
        }
         return queue;
