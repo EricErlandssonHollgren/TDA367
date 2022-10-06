@@ -70,6 +70,7 @@ public class CollisionDetection {
             if(entity instanceof Enemy){
                 if((player.getX() + player.getWidth() >= entity.getPosX()) && (player.getX() <= entity.getPosY()+50)){
                     collisions.put(entity,true);
+
                 }
                 collisions.put(entity,false);
             }
@@ -88,7 +89,7 @@ public class CollisionDetection {
                     if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+50)){
                         if((projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+50)){
                             collided.put(entity,true);
-                            System.out.println("Collided with " + entity);
+
                         }
                     }
                     collided.put(entity,false);
