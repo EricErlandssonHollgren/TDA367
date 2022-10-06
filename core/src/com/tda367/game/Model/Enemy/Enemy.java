@@ -1,10 +1,10 @@
 package Model.Enemy;
-
 import Interfaces.IEntity;
 import Interfaces.IEntitySubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
+import Interfaces.IObservers;
 
 /**
  * All methods and parameters that an Enemy might need.
@@ -57,6 +57,12 @@ public class Enemy implements IObservers, IEntity {
             enemyPositionsubcriber.updatePosition(positionX, positionY);
         }
 
+    }
+    @Override
+    public void actionHandle(ActionEnum key){
+        if(key == ActionEnum.ENEMYMOVE){
+            moveEnemy();
+        }
     }
 
 }
