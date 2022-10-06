@@ -1,27 +1,16 @@
 package View;
 
 import Interfaces.*;
-import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
 import Model.Facade.DrawFacade;
-import Model.GameTimer;
 import Model.Waves;
-import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
-public class EnemyView implements IView, IEnemySubscriber {
+public class EnemyView implements IView {
 
     private Waves wave;
-    private Texture img;
-
     private DrawFacade drawFacade;
 
 
@@ -34,11 +23,15 @@ public class EnemyView implements IView, IEnemySubscriber {
     }
 
 
+    /**
+     * Is responsible for rendering an enemy with the help of facade pattern.
+     * Scaling of the texture is also being done in this method.
+     */
     @Override
     public void render() {
         for (Enemy enemy: wave.getEnemiesToRender()) {
-            float imgWidth = (float) Math.ceil(drawFacade.getTexture().getWidth()*0.25);
-            float imgHeight = (float) Math.ceil(drawFacade.getTexture().getHeight()*0.15);
+            float imgWidth = (float) Math.ceil(drawFacade.getTexture().getWidth()*0.15);
+            float imgHeight = (float) Math.ceil(drawFacade.getTexture().getHeight()*0.10);
             enemy.moveEnemy();
             drawFacade.drawObject(enemy.getX(), enemy.getY(), imgWidth, imgHeight);
         }
@@ -48,8 +41,4 @@ public class EnemyView implements IView, IEnemySubscriber {
         drawFacade.dispose();
     }
 
-    @Override
-    public void updatePosition(float x, float y) {
-
-    }
 }

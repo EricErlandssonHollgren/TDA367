@@ -1,6 +1,5 @@
 package Model;
 
-import Interfaces.IEnemy;
 import Interfaces.IView;
 import View.EnemyView;
 import Interfaces.IProjectile;

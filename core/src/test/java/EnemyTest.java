@@ -1,13 +1,8 @@
-import Interfaces.IEnemy;
-import Interfaces.IEntity;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
 import Model.Vector;
 import Model.Waves;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,25 +46,19 @@ public class EnemyTest {
     public void testMovementY() {
         float oldPositionY = enemy.getY();
         enemy.moveEnemy();
-        for (int i = 1; i <= 1560; i++) {
+        for (int i = 1; i <= 780; i++) {
             if (oldPositionY == enemy.getX()) {
                 assertTrue(true);
             }
         }
     }
 
+    /**
+     * Checks so that the number of enemies added to a wave is correct.
+     */
     @Test
-    public void testNumberOfEnemies() {
+    public void testNumberOfEnemiesInQueue() {
         assertEquals(wave.addEnemies().size(), 10);
-    }
-
-    @Test
-    public void testAcquireEnemies() {
-        List<Enemy> tempList = new ArrayList<>();
-        for (int i = 0; i < wave.addEnemies().size(); i++){
-            tempList.add(wave.getEnemyFromQueue());
-        }
-        assertEquals(wave.addEnemies().size(), tempList.size());
     }
 
 }

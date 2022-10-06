@@ -1,12 +1,10 @@
 package Model;
 
-import Interfaces.IEnemySubscriber;
 import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
 import Model.Enemy.Enemy;
 import View.*;
 
-import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +29,6 @@ public class ViewHolder {
         IView playerView = new PlayerView();
         IView towerView = new TowerView(tower);
         IView background = new BackgroundView();
-        enemy.positionSubscriber((IEnemySubscriber) enemyView);
         player.positionSubscriber((IPlayerSubscriber) playerView);
         //Add views to list and they will be rendered. Views must implement IView
         addView(background);
