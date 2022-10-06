@@ -26,7 +26,7 @@ public class ButtonView implements IView {
     private Stage stage;
     private Skin skin;
 
-    public ButtonView() {
+    public ButtonView(TowerController towerController) {
         this.texture = new Texture("badlogic.jpg");
         this.txRegion = new TextureRegion(texture);
         this.txrDrawable = new TextureRegionDrawable(txRegion);
@@ -41,7 +41,7 @@ public class ButtonView implements IView {
         Gdx.input.setInputProcessor(stage);
 
         this.batch = new SpriteBatch();
-        controller = new TowerController();
+        controller = towerController;
 
         upgradeButton.addListener(new ClickListener(){
             @Override

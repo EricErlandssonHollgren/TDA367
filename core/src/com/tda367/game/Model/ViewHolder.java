@@ -17,25 +17,11 @@ public class ViewHolder {
      * Initialises the startup views
      * @param gravity
      */
-    public ViewHolder(float gravity, Player player, Tower tower, WorldBoundaries worldBoundaries){
+    public ViewHolder(float gravity){
         //Instantiate world and views list
         this.gravity = gravity;
         views = new ArrayList<>();
 
-        //Create views and objects
-        IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
-        IView playerView = new PlayerView();
-        IView towerView = new TowerView(tower);
-        IView background = new BackgroundView();
-        IView buttonView = new ButtonView();
-
-        player.positionSubscriber((IPlayerSubscriber) playerView);
-        //Add views to list and they will be rendered. Views must implement IView
-        addView(background);
-        addView(worldBoundariesView);
-        addView(playerView);
-        addView(towerView);
-        addView(buttonView);
     }
     public void addView(IView view){
         views.add(view);

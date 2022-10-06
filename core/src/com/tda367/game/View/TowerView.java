@@ -3,28 +3,28 @@ package View;
 import Interfaces.IView;
 import Model.Facade.DrawFacade;
 import Model.Tower;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class TowerView implements IView {
 
     private Tower tower;
     private DrawFacade drawFacade;
+    private String texturePath;
+
     /*
         A constructor for creating a view for the model of a Tower.
     */
-
     public TowerView(Tower tower){
         this.tower = tower;
-        drawFacade = new DrawFacade("basicTowerSprite.png");
+        this.texturePath = "basicTowerSprite.png";
+        drawFacade = new DrawFacade(texturePath);
     }
 
 
     @Override
     public void render() {
+        updateTexturePath();
+        this.drawFacade = new DrawFacade(texturePath);
         drawFacade.drawObject(tower.getPositionX(),tower.getPositionY(),115,200);
     }
 
@@ -33,25 +33,34 @@ public class TowerView implements IView {
         drawFacade.dispose();
     }
 
-    private Texture getTowerTexture(){
+    private void setTexturePath(String newTexturePath){
+        this.texturePath = newTexturePath;
+    }
+
+    private void updateTexturePath(){
         if (this.tower.getLevel() > 1){
             if (this.tower.getTurrets().size() == 1){
-                return new Texture("Tower2_1Turret_Sprite.png");
+                String newTexturePath = "\"Tower2_1Turret_Sprite.png\"";
+                setTexturePath( newTexturePath);
             }
             else if (this.tower.getTurrets().size() > 1) {
-                return new Texture("Tower2_2Turret_Sprite.png");
+                String newTexturePath = "Tower2_2Turret_Sprite.png";
+                setTexturePath( newTexturePath);
             }
             else {
-                return new Texture("Tower2Sprite.png");
+                String newTexturePath = "Tower2Sprite.png";
+                setTexturePath( newTexturePath);
             }
         }
 
         else{
             if (this.tower.getTurrets().size() > 0){
-                return new Texture("Tower1_1Turret_Sprite.png");
+                String newTexturePath = "Tower1_1Turret_Sprite.png";
+                setTexturePath( newTexturePath);
             }
             else {
-                return new Texture("basicTowerSprite.png");
+                String newTexturePath = "basicTowerSprite.png";
+                setTexturePath( newTexturePath);
             }
         }
     }
