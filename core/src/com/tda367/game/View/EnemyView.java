@@ -1,7 +1,6 @@
 package View;
 
 import Interfaces.*;
-import Model.Enemy.Enemies.Enemy1;
 import Model.Facade.DrawFacade;
 import Model.GameTimer;
 import Model.Waves;

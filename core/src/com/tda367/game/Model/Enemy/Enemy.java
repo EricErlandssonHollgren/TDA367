@@ -11,14 +11,13 @@ import java.util.List;
  */
 
 
-public class Enemy implements IEntity {
+public class Enemy implements IObservers, IEntity {
     private int worth;
     private int HP;
-
     private float positionX;
-
     private float positionY;
     private int damage = 10;
+    List <IEntitySubscriber> subscribersList = new ArrayList<>();
 
     /**
      *
@@ -31,6 +30,11 @@ public class Enemy implements IEntity {
         this.HP = HP;
         this.positionX = positionX;
         this.positionY = positionY;
+    }
+
+    public void positionSubscriber(IEntitySubscriber subscriber){
+        subscriberList.add(subscriber);
+        subscriber.updatePosition(positionX,positionY);
     }
     public int getWorth() {
         return worth;
@@ -49,6 +53,10 @@ public class Enemy implements IEntity {
     public void moveEnemy() {
         double speed = 0.5;
         positionX -= speed;
+        for(IEntitysubscriber enemyPositionsubscriber : subscriberList){
+            enemyPositionsubcriber.updatePosition(positionX, positionY);
+        }
 
     }
+
 }

@@ -3,7 +3,6 @@ package com.tda367.game;
 import Controller.PlayerKeyListener;
 import Controller.TowerController;
 import Model.*;
-import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -31,6 +30,8 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		//Handlers
+
+
 		player = new Player(120,100);
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();

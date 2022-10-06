@@ -1,7 +1,6 @@
 package Model;
 
 import Interfaces.*;
-import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
 import View.*;
 

@@ -14,6 +14,7 @@ public class Player implements IObservers, IEntity {
     private float y;
     private int width;
     private int height;
+    private int damage = 30;
 
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
@@ -123,6 +124,10 @@ public class Player implements IObservers, IEntity {
 
     public int getWidth(){
         return width;
+    }
+
+    public int getDamage(){
+        return damage;
     }
 
     /**
