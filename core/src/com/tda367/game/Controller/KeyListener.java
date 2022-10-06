@@ -15,7 +15,7 @@ public class KeyListener{
     public void addSubscribers(IObservers observer){
         observers.add(observer);
     }
-
+/*
     public void upgradeTower() {
         if (Gdx.input.isKeyPressed(Input.Keys.U)) {
             for (IObservers o : observers) {
@@ -24,6 +24,7 @@ public class KeyListener{
         }
     }
 
+
     public void buildTurret() {
         if (Gdx.input.isKeyPressed(Input.Keys.B)) {
             for (IObservers o : observers) {
@@ -31,7 +32,7 @@ public class KeyListener{
             }
         }
     }
-    
+    */
 
     /**
      * UpdatePlayerPosition listens to inputs depending on which key is pressed.

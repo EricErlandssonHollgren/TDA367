@@ -1,7 +1,11 @@
 import Interfaces.IEnemy;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Vector;
+import Model.Waves;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EnemyTest {
     IEnemy enemy = new Enemy1();
 
+    Waves wave = new Waves();
     /**
      * Checks if the enemy is being rendered at the right position on the screen.
      */
@@ -49,6 +54,20 @@ public class EnemyTest {
                 assertTrue(true);
             }
         }
+    }
+
+    @Test
+    public void testNumberOfEnemies() {
+        assertEquals(wave.addEnemies().size(), 10);
+    }
+
+    @Test
+    public void testAcquireEnemies() {
+        List<IEnemy> tempList = new ArrayList<>();
+        for (int i = 0; i < wave.addEnemies().size(); i++){
+            tempList.add(wave.getEnemyFromQueue());
+        }
+        assertEquals(wave.addEnemies().size(), tempList.size());
     }
 
 }

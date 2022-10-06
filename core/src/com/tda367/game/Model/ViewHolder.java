@@ -26,7 +26,7 @@ public class ViewHolder {
         views = new ArrayList<>();
 
         //Create views and objects
-        IView enemyView = new EnemyView(EnemyFactory.createEnemy1(), "koopaTroopa.png");
+        IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
         //IView enemyViewTest = ViewFactory.createEnemyView(EnemyFactory.createEnemy1());
         PlayerView playerView = new PlayerView();
         Player player = new Player(9, 100);
@@ -35,7 +35,7 @@ public class ViewHolder {
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
-        keyListener.addSubscribers(tower);
+        //keyListener.addSubscribers(tower);
 
         keyListener = new KeyListener();
         keyListener.addSubscribers(player);
