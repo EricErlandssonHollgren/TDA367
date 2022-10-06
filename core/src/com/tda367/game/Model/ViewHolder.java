@@ -1,9 +1,12 @@
 package Model;
 
+import Interfaces.IEnemySubscriber;
 import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
+import Model.Enemy.Enemy;
 import View.*;
 
+import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,23 +20,25 @@ public class ViewHolder {
      * Initialises the startup views
      * @param gravity
      */
-    public ViewHolder(float gravity, Player player, Tower tower, WorldBoundaries worldBoundaries){
+    public ViewHolder(float gravity, Player player, Enemy enemy, Tower tower, WorldBoundaries worldBoundaries){
         //Instantiate world and views list
         this.gravity = gravity;
         views = new ArrayList<>();
 
         //Create views and objects
         IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
+        IView enemyView = ViewFactory.createEnemyView();
         IView playerView = new PlayerView();
         IView towerView = new TowerView(tower);
         IView background = new BackgroundView();
-
+        enemy.positionSubscriber((IEnemySubscriber) enemyView);
         player.positionSubscriber((IPlayerSubscriber) playerView);
         //Add views to list and they will be rendered. Views must implement IView
         addView(background);
         addView(worldBoundariesView);
         addView(playerView);
         addView(towerView);
+        addView(enemyView);
     }
     public void addView(IView view){
         views.add(view);

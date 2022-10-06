@@ -2,6 +2,9 @@ package com.tda367.game;
 
 import Controller.PlayerKeyListener;
 import Model.*;
+import Model.Enemy.Enemies.Enemy1;
+import Model.Enemy.Enemy;
+import Model.Enemy.EnemyFactory;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,6 +15,7 @@ public class App extends ApplicationAdapter {
 	private GameTimer timer;
 	private ViewHolder views;
 	private Player player;
+	private Enemy enemy;
 	private RoundHandler roundHandler;
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
@@ -29,7 +33,7 @@ public class App extends ApplicationAdapter {
 		player = new Player(120,100);
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
-
+		enemy = new Enemy(10,10,780,100);
 		timer = GameTimer.GetInstance();
 		//setup chain of responsibility?
 		goldHandler = new Goldhandler();
@@ -41,7 +45,7 @@ public class App extends ApplicationAdapter {
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
 
-		views = new ViewHolder(-0.5f,player,tower,worldBoundaries);
+		views = new ViewHolder(-0.5f,player,enemy, tower,worldBoundaries);
 
 		//Controllers
 		playerKeyListener = new PlayerKeyListener();

@@ -13,7 +13,7 @@ import Model.Vector;
 public class EnemyFactory {
 
 
-    public static IEnemy createEnemy1() {
+    public static Enemy createEnemy1() {
         return new Enemy1();
     }
 

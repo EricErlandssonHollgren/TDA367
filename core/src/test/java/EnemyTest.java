@@ -1,5 +1,7 @@
 import Interfaces.IEnemy;
+import Interfaces.IEntity;
 import Model.Enemy.Enemies.Enemy1;
+import Model.Enemy.Enemy;
 import Model.Vector;
 import Model.Waves;
 import org.junit.jupiter.api.Test;
@@ -14,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class EnemyTest {
-    IEnemy enemy = new Enemy1();
+    Enemy enemy = new Enemy1();
 
     Waves wave = new Waves();
     /**
@@ -33,7 +35,7 @@ public class EnemyTest {
     @Test
     public void testMovementX() {
         float oldPositionX = enemy.getX();
-        enemy.move();
+        enemy.moveEnemy();
         for (int i = 1; i <= 1560; i++) {
             if (oldPositionX >= enemy.getX()) {
                 assertTrue(true);
@@ -48,7 +50,7 @@ public class EnemyTest {
     @Test
     public void testMovementY() {
         float oldPositionY = enemy.getY();
-        enemy.move();
+        enemy.moveEnemy();
         for (int i = 1; i <= 1560; i++) {
             if (oldPositionY == enemy.getX()) {
                 assertTrue(true);
@@ -63,7 +65,7 @@ public class EnemyTest {
 
     @Test
     public void testAcquireEnemies() {
-        List<IEnemy> tempList = new ArrayList<>();
+        List<Enemy> tempList = new ArrayList<>();
         for (int i = 0; i < wave.addEnemies().size(); i++){
             tempList.add(wave.getEnemyFromQueue());
         }
