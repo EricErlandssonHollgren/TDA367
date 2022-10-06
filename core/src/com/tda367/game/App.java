@@ -1,8 +1,7 @@
 package com.tda367.game;
 
 import Controller.PlayerKeyListener;
-import Interfaces.IEnemy;
-import Interfaces.IEntity;
+import Controller.TowerController;
 import Model.*;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
@@ -25,6 +24,7 @@ public class App extends ApplicationAdapter {
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
 	private PlayerKeyListener playerKeyListener;
+	private TowerController towerController;
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -50,7 +50,8 @@ public class App extends ApplicationAdapter {
 		//Controllers
 		playerKeyListener = new PlayerKeyListener();
 		playerKeyListener.addSubscribers(player);
-
+		towerController = new TowerController();
+		towerController.addSubscribers(tower);
 	}
   
 	@Override

@@ -1,7 +1,7 @@
 package Controller;
 
 import Interfaces.IObservers;
-import Model.MovementDirection;
+import Model.ActionEnum;
 import com.badlogic.gdx.*;
 
 import java.util.ArrayList;
@@ -14,24 +14,6 @@ public class PlayerKeyListener {
     public void addSubscribers(IObservers observer){
         observers.add(observer);
     }
-/*
-    public void upgradeTower() {
-        if (Gdx.input.isKeyPressed(Input.Keys.U)) {
-            for (IObservers o : observers) {
-                //o.keyPressed(Input.Keys.U);
-            }
-        }
-    }
-
-    public void buildTurret() {
-        if (Gdx.input.isKeyPressed(Input.Keys.B)) {
-            for (IObservers o : observers) {
-                //o.keyPressed(Input.Keys.B);
-            }
-        }
-    }
-
- */
     
 
     /**
@@ -42,12 +24,12 @@ public class PlayerKeyListener {
     public void UpdatePlayerMovement(){
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
             for (IObservers o: observers) {
-                o.keyPressed(MovementDirection.LEFT);
+                o.actionHandle(ActionEnum.LEFT);
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
             for (IObservers o: observers) {
-                o.keyPressed(MovementDirection.RIGHT);
+                o.actionHandle(ActionEnum.RIGHT);
             }
         }
     }

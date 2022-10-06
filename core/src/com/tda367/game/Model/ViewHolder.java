@@ -29,6 +29,7 @@ public class ViewHolder {
         IView enemyView = new EnemyView();
         IView towerView = new TowerView(tower);
         IView background = new BackgroundView();
+        IView buttonView = new ButtonView();
 
         player.positionSubscriber((IEntitySubscriber) playerView);
         //Add views to list and they will be rendered. Views must implement IView
@@ -37,6 +38,7 @@ public class ViewHolder {
         addView(enemyView);
         addView(playerView);
         addView(towerView);
+        addView(buttonView);
     }
     public void addView(IView view){
         views.add(view);

@@ -138,21 +138,32 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         return turrets.size() == getMaxCapacity();
     }
 
-    /*
-    (Probably temporary, as it doesn't follow MVC).
-     */
-
-    public void keyPressed(int key) {
-        if(key == Input.Keys.U){
-            upgrade();
-        }
-        if(key == Input.Keys.B){
-            buildTurret(new Turret());
-        }
-    }
 
     @Override
-    public void keyPressed(MovementDirection key) {
+    public void actionHandle(ActionEnum action) {
+        if(action == ActionEnum.UPGRADE){
+            System.out.println("Upgrade");
+            upgrade();
+        }
+        if(action == ActionEnum.BUILD){
+            buildTurret(new Turret());
+        }
+
+        if(action == ActionEnum.SELL){
+            /*sellTurret();
+
+             */
+        }
+        if(action == ActionEnum.UPGRADETURRET1){
+            /*upgradeTurret(1);
+
+             */
+        }
+        if(action == ActionEnum.UPGRADETURRET2){
+            /*upgradeTurret(2);
+
+             */
+        }
 
     }
 }
