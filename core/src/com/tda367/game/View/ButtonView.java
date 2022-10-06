@@ -1,31 +1,71 @@
 package View;
 
+import Controller.TowerKeyListener;
 import Interfaces.IView;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class ButtonView<button> implements IView {
+import java.awt.event.MouseEvent;
 
-    private Button button;
+public class ButtonView implements IView {
+
+    private ImageButton upgradeButton;
     private SpriteBatch batch;
-    private Texture texturePath;
+    private Texture texture;
+    private TextureRegion txRegion;
+    private TextureRegionDrawable txrDrawable;
 
-    public ButtonView(Button button) {
-        this.button = button;
+    private TowerKeyListener controller;
+    private Stage stage;
+    private Skin skin;
+
+    public ButtonView() {
+        this.texture = new Texture("badlogic.jpg");
+        this.txRegion = new TextureRegion(texture);
+        this.txrDrawable = new TextureRegionDrawable(txRegion);
+        this.upgradeButton = new ImageButton(txrDrawable);
+
+        upgradeButton.setPosition(300,300);
+        upgradeButton.setSize(60,60);
+
+        this.stage = new Stage(new ScreenViewport());
+        stage.addActor(upgradeButton);
+
+        Gdx.input.setInputProcessor(stage);
+
         this.batch = new SpriteBatch();
-        this.texturePath = new Texture("badlogic.jpg");
+        controller = new TowerKeyListener();
+
+        upgradeButton.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+
+                System.out.println("Pressed!");
+                controller.upgradeTower();
+                return true;
+            }
+        });
     }
 
     @Override
     public void render() {
-        batch.begin();
-        batch.draw(img, 300, 0, (float) Math.ceil(img.getHeight()*0.2), (float) Math.ceil(img.getWidth()*0.25));
-        batch.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
 
     @Override
     public void dispose() {
-
+        batch.dispose();
+        stage.dispose();
     }
 }

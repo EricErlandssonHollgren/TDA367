@@ -24,10 +24,10 @@ public class Player implements IObservers, IEntity {
     public Player(float x, float y){
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
-         this.x = x;
-         this.y = y;
-         this.width = 50;
-         this.height = 37;
+        this.x = x;
+        this.y = y;
+        this.width = 50;
+        this.height = 37;
     }
 
 

@@ -4,23 +4,29 @@ import Interfaces.IObservers;
 import Model.ActionEnum;
 import com.badlogic.gdx.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class TowerKeyListener {
-    List<IObservers> observers = new ArrayList<>();
+    List<IObservers> observers;
+    List<Button> towerButtons;
+    Button upgrade;
+    public TowerKeyListener(){
+        observers = new ArrayList<>();
+        towerButtons = new ArrayList<>();
+        upgrade = new Button();
+    }
 
     public void addSubscribers(IObservers observer){
         observers.add(observer);
     }
 
     public void upgradeTower() {
-        if (Gdx.input.isKeyPressed(Input.Keys.U)) {
             for (IObservers o : observers) {
                 o.actionHandle(ActionEnum.UPGRADE);
             }
-        }
     }
 
     public void buildTurret() {
