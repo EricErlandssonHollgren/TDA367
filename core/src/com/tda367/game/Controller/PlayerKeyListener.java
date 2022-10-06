@@ -27,12 +27,10 @@ public class PlayerKeyListener {
                 o.actionHandle(ActionEnum.LEFT);
             }
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
             for (IObservers o: observers) {
                 o.actionHandle(ActionEnum.RIGHT);
             }
         }
     }
-
-
 }

@@ -5,7 +5,9 @@ import Interfaces.IEntitySubscriber;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements IObservers, IEntity {
+
+public class Player extends Entity implements IObservers {
+
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
@@ -31,7 +33,6 @@ public class Player implements IObservers, IEntity {
         this.height = 37;
     }
 
-
     /**
      * A subscriber to handle the playerPosition. It should be updating its position
      * @param subscriber for the subscriberList
@@ -54,7 +55,6 @@ public class Player implements IObservers, IEntity {
             }
         }
     }
-
 
     /**
      * The moveRight() method is allowing the character to move to the right side,

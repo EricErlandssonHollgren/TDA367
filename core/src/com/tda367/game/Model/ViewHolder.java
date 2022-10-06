@@ -36,6 +36,8 @@ public class ViewHolder {
         addView(worldBoundariesView);
         addView(enemyView);
         addView(playerView);
+        addView(projectileView);
+        addView(healhBarView);
         addView(towerView);
         addView(buttonView);
     }
