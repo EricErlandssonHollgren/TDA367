@@ -4,14 +4,8 @@ import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
-import Controller.KeyListener;
 import View.*;
-import View.EnemyView;
-import View.HealthBarView;
-import View.PlayerView;
-import View.ProjectileView;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +26,6 @@ public class ViewHolder {
         views = new ArrayList<>();
 
         //Create views and objects
-        IView enemyView = new EnemyView(EnemyFactory.createEnemy1());
-        PlayerView playerView = new PlayerView();
-        Player player = new Player(40f, 50f, playerView.playerSprite.getWidth(), playerView.playerSprite.getHeight());
-        IView healhBarView = new HealthBarView(player.healthBar);
 
         IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
         IView enemyView = ViewFactory.createEnemyView();
@@ -47,10 +37,10 @@ public class ViewHolder {
         addView(background);
         addView(worldBoundariesView);
         addView(playerView);
-        addView(healhBarView);
         addView(towerView);
         addView(enemyView);
     }
+
     public void addView(IView view){
         views.add(view);
     }

@@ -1,7 +1,7 @@
 package Model;
 import Interfaces.IEntity;
 import Interfaces.IObservers;
-import Interfaces.PlayerPositionSubscriber;
+import Interfaces.IPlayerSubscriber;
 import com.badlogic.gdx.Input;
 
 import Interfaces.IPlayerSubscriber;
@@ -14,10 +14,7 @@ public class Player extends Entity implements IObservers, IEntity {
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
-    List<PlayerPositionSubscriber> subscriberList = new ArrayList<>();
     List<IPlayerSubscriber> subscriberList = new ArrayList<>();
-    private float x;
-    private float y;
     private int width;
     private int height;
     private float velocity = 7;
@@ -38,10 +35,11 @@ public class Player extends Entity implements IObservers, IEntity {
         super(positionX, positionY, entityWidth, entityHieght);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
-         this.x = positionX;
-         this.y = positionY;
+         this.positionX = positionX;
+         this.positionY = positionY;
          this.width = 50;
          this.height = 37;
+
     }
 
 
@@ -51,7 +49,8 @@ public class Player extends Entity implements IObservers, IEntity {
      */
     public void positionSubscriber(IPlayerSubscriber subscriber){
         subscriberList.add(subscriber);
-        subscriber.updatePosition(x,y);
+        subscriber.updatePosition(positionX,positionY);
+        updateHealthBar();
     }
 
 
@@ -61,9 +60,9 @@ public class Player extends Entity implements IObservers, IEntity {
      */
     public void moveLeft(){
         if(isAbleToMoveLeft) {
-            x -= velocity;
+            positionX -= velocity;
             for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-                playerPositionSubscriber.updatePosition(x, y);
+                playerPositionSubscriber.updatePosition(positionX, positionY);
                 updateHealthBar();
             }
         }
@@ -76,9 +75,9 @@ public class Player extends Entity implements IObservers, IEntity {
      */
     public void moveRight(){
         if(isAbleToMoveRight){
-            x += velocity;
+            positionX += velocity;
             for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-                playerPositionSubscriber.updatePosition(x,y);
+                playerPositionSubscriber.updatePosition(positionX,positionY);
                 updateHealthBar();
             }
         }
@@ -101,32 +100,36 @@ public class Player extends Entity implements IObservers, IEntity {
         isAbleToMoveLeft = ableToMoveLeft;
     }
 
-    /**
-     * Gets the y-coordinate of the object of float
-     *
-     * @return y-coordinate of the object
-     */
-    public float getY(){
-        return y;
-    }
 
     public STATE getState() {
         return state;
+    }
+
     /**
      * Gets the x-coordinate of the object of float
      * @return x-coordinate of the object
      */
     public float getX(){
-        return x;
+        return positionX;
+    }
+
+    /**
+     * Gets the y-coordinate of the object of float
+     * @return y-coordinate of the object
+     */
+    public float getY(){
+        return positionY;
     }
 
     /**
      * Gets the velocity of the player
      * @return the velocity of the player
      */
+
     public float getVelocity() {
         return velocity;
     }
+
     /**
      * Gets the height of the object of int
      * @return the height of a player
@@ -134,6 +137,7 @@ public class Player extends Entity implements IObservers, IEntity {
     public int getHeight(){
         return height;
     }
+
     /**
      * Gets the width of the object of int
      * @return the width of a player
@@ -156,7 +160,4 @@ public class Player extends Entity implements IObservers, IEntity {
             moveRight();
         }
     }
-
-
-
 }

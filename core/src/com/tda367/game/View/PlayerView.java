@@ -7,7 +7,7 @@ import Interfaces.IPlayerSubscriber;
 
 
 public class PlayerView implements IView, IPlayerSubscriber{
-    private static Sprite playerSprite;
+    public Sprite playerSprite;
     private static Texture texture;
     private DrawFacade drawFacade;
     /**
@@ -16,6 +16,7 @@ public class PlayerView implements IView, IPlayerSubscriber{
      */
 
     public PlayerView(){
+        texture = new Texture("adventurer-stand-01.png");
         drawFacade = new DrawFacade("adventurer-stand-01.png");
         playerSprite = new Sprite();
     }

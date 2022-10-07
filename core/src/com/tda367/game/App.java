@@ -5,6 +5,8 @@ import Model.*;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
+import View.HealthBarView;
+import View.PlayerView;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,16 +29,11 @@ public class App extends ApplicationAdapter {
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
-	SpriteBatch batch;
-	Texture img;
-	World world;
-	GameTimer timer;
-	ViewHolder views;
+
 
 	@Override
 	public void create () {
 		//Handlers
-		player = new Player(120,100);
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
@@ -49,7 +46,15 @@ public class App extends ApplicationAdapter {
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
 
+		PlayerView pV = new PlayerView();
+		player = new Player(120,100, pV.playerSprite.getWidth(), pV.playerSprite.getHeight());
+
+
 		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries);
+
+		views.addView(new HealthBarView(player.healthBar));
+		views.addView(pV);
+
 
 		//Controllers
 		playerKeyListener = new PlayerKeyListener();

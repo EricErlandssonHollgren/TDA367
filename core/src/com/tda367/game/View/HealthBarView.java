@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class HealthBarView implements IView {
-
     private HealthBar healthBar;
     private SpriteBatch batch;
     private Texture healthBarHolderImg;
@@ -26,9 +25,6 @@ public class HealthBarView implements IView {
         batch.draw(healthBarImg, healthBar.getPositionX(), healthBar.getPositionY(), healthBarImg.getWidth() * healthBar.getHealthWidth(), healthBarImg.getHeight());
         batch.end();
     }
-
-
-
     @Override
     public void dispose() {
         batch.dispose();
