@@ -9,7 +9,7 @@ public class PlayerJunitTest {
 
     @Test
     public void playerMoveLeftShouldBeLessThanCurrentPositionIfMoveLeft(){
-        Player player = new Player(40f, 50f, 100);
+        Player player = new Player(40f, 50f, 10f, 10f);
 
         float posX = player.getPosX();
         player.moveLeft();
@@ -20,7 +20,7 @@ public class PlayerJunitTest {
 
     @Test
     public void playerMoveRightShouldBeMoreThanCurrentPositionIfMoveRight(){
-        Player player = new Player(40f, 50f, 100);
+        Player player = new Player(40f, 50f, 10f, 10f);
 
         float posX = player.getPosX();
         player.moveRight();

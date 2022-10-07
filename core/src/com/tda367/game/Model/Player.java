@@ -28,8 +28,6 @@ public class Player extends Entity implements IObservers {
     }
 
 
-
-
     /**
      * A subscriber to handle the playerPosition. It should be updating its position
      * @param subscriber for the subscriberList
