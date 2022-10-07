@@ -1,6 +1,8 @@
 package Interfaces;
 
+import Model.MovementDirection;
+
 public interface IObservers {
 
-    void keyPressed(int key);
+    void keyPressed(MovementDirection key);
 }

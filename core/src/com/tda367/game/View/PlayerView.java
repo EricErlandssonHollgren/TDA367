@@ -1,72 +1,48 @@
 package View;
 import Interfaces.IView;
-import com.badlogic.gdx.Gdx;
+import Model.Facade.DrawFacade;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
-import Interfaces.PlayerPositionSubscriber;
-import Model.Player;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import Interfaces.IPlayerSubscriber;
 
-public class PlayerView implements IView, PlayerPositionSubscriber {
-    public Sprite playerSprite;
-    private Batch batch;
-    private Texture texture;
 
-    float elapsedTime;
-    TextureRegion[] animationFrames;
-    Animation animation;
-
+public class PlayerView implements IView, IPlayerSubscriber{
+    private static Sprite playerSprite;
+    private static Texture texture;
+    private DrawFacade drawFacade;
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
 
     public PlayerView(){
+        drawFacade = new DrawFacade("adventurer-stand-01.png");
         playerSprite = new Sprite();
-        batch = new SpriteBatch();
-        texture = new Texture("adventurer-stand-01.png");
-
-        animationFrames = new TextureRegion[6];
-        animationFrames[0] = new TextureRegion(new Texture("adventurer-run-00.png"));
-        animationFrames[1] = new TextureRegion(new Texture("adventurer-run-01.png"));
-        animationFrames[2] = new TextureRegion(new Texture("adventurer-run-02.png"));
-        animationFrames[3] = new TextureRegion(new Texture("adventurer-run-03.png"));
-        animationFrames[4] = new TextureRegion(new Texture("adventurer-run-04.png"));
-        animationFrames[5] = new TextureRegion(new Texture("adventurer-run-05.png"));
-
-
-
-        animation = new Animation(1f/3f, animationFrames);
     }
 
     /**
-     * The updatePosition should set the sprite of a player's x and y coordinates.
-     * @param x is the coordinate on the x-axis
-     * @param y is the coordinate on the y-axis
+     * Updates the position of a player's sprite
+     * @param x is the player sprite's x-coordinate
+     * @param y is the player sprite's y-coordinate
      */
     @Override
     public void updatePosition(float x, float y) {
-        playerSprite.setPosition(x,y);
+        playerSprite.setPosition(x, y);
     }
 
 
-
+    /**
+     * Render for the player sprite which paints the player sprite's texture
+     */
     @Override
     public void render() {
-        elapsedTime += Gdx.graphics.getDeltaTime();
-        ScreenUtils.clear(0, 0, 0, 0);
-        batch.begin();
+        drawFacade.drawObject(playerSprite.getX(), playerSprite.getY(), 64, 64);
 
-        batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true), playerSprite.getX(), playerSprite.getY());
-
-        batch.end();
     }
 
     @Override
     public void dispose() {
-        batch.dispose();
-        texture.dispose();
+        drawFacade.dispose();
     }
-
 
 }

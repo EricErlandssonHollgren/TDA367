@@ -1,32 +1,32 @@
 package com.tda367.game;
 
-import Controller.KeyListener;
-import Interfaces.IView;
+import Controller.PlayerKeyListener;
+import Model.*;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
-import Model.Player;
-import View.PlayerView;
-import Interfaces.IView;
-import Model.GameTimer;
-import Model.Projectile;
-import Model.ViewHolder;
-import View.ProjectileView;
-import Interfaces.IView;
+import Model.Enemy.EnemyFactory;
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
-import View.EnemyView;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class App extends ApplicationAdapter {
+	private SpriteBatch batch;
+	private GameTimer timer;
+	private ViewHolder views;
+	private Player player;
+	private EnemyFactory enemyFactory;
+	private RoundHandler roundHandler;
+	private MainHandler goldHandler;
+	private MainHandler pointsHandler;
+	private Tower tower;
+	private WorldBoundaries worldBoundaries;
+	private CollisionDetection collisionDetection;
+	private EntityHolder entityHolder;
+	private PlayerKeyListener playerKeyListener;
+	/**
+	 * Initialises the model in the startup configuration, is called when the application starts
+	 */
 	SpriteBatch batch;
 	Texture img;
 	World world;
@@ -35,28 +35,43 @@ public class App extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		world = new World(new Vector2(0,-0.5f),true);
-		views = new ViewHolder(world);
-		batch = new SpriteBatch();
-
+		//Handlers
+		player = new Player(120,100);
+		tower = new Tower();
+		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
-		img = new Texture("badlogic.jpg");
-		//TODO
+		//setup chain of responsibility?
+		goldHandler = new Goldhandler();
+		pointsHandler = new PointHandler();
+		goldHandler.setSuccessor(pointsHandler);
+		roundHandler = RoundHandler.GetInstance(timer);
+
+		entityHolder = EntityHolder.getInstance();
+		collisionDetection = CollisionDetection.getInstance();
+
+		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries);
+
+		//Controllers
+		playerKeyListener = new PlayerKeyListener();
+		playerKeyListener.addSubscribers(player);
+
 	}
 
 	@Override
 	public void render () {
+		timer.UpdateTime(Gdx.graphics.getDeltaTime());
+		collisionDetection.CheckCollisionPlayerAndEnemy(player);
+		collisionDetection.CheckCollisionPlayerAndEnemy(player);
+		collisionDetection.CheckCollisionPlayerNextStep(player);
+		playerKeyListener.UpdatePlayerMovement();
 		ScreenUtils.clear(0, 0, 0, 0);
-		batch.begin();
 		views.render();
-		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
-
 		batch.dispose();
-		img.dispose();
 		views.dispose();
+
 	}
 }

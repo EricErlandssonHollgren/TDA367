@@ -1,40 +1,45 @@
 package View;
 
-import Interfaces.IView;
+import Interfaces.*;
 import Model.Enemy.Enemy;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
-import Model.Enemy.EnemyFactory;
+import Model.Facade.DrawFacade;
+import Model.Waves;
+import com.badlogic.gdx.math.Interpolation;
 
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
 public class EnemyView implements IView {
 
-    private Enemy enemy;
-    private SpriteBatch batch;
-    private Texture img;
+    private Waves wave;
+    private DrawFacade drawFacade;
+
 
     /**
      * A constructor for creating an Enemy.
      */
-    public EnemyView(Enemy enemy) {
-        this.enemy = enemy;
-        batch = new SpriteBatch();
-        img = new Texture(this.enemy.getSpritePath());
+    public EnemyView() {
+        this.wave = new Waves();
+        this.drawFacade = new DrawFacade("koopaTroopa.png");
     }
+
+
+    /**
+     * Is responsible for rendering an enemy with the help of facade pattern.
+     * Scaling of the texture is also being done in this method.
+     */
     @Override
     public void render() {
-        batch.begin();
-        batch.draw(img, 300, 0, (float) Math.ceil(img.getHeight()*0.2), (float) Math.ceil(img.getWidth()*0.25));
-        batch.end();
+        for (Enemy enemy: wave.getEnemiesToRender()) {
+            float imgWidth = (float) Math.ceil(drawFacade.getTexture().getWidth()*0.15);
+            float imgHeight = (float) Math.ceil(drawFacade.getTexture().getHeight()*0.10);
+            enemy.moveEnemy();
+            drawFacade.drawObject(enemy.getX(), enemy.getY(), imgWidth, imgHeight);
+        }
     }
     @Override
     public void dispose() {
-        batch.dispose();
-        img.dispose();
+        drawFacade.dispose();
     }
+
 }
