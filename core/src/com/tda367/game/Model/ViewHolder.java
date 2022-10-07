@@ -33,7 +33,6 @@ public class ViewHolder {
         IView towerView = new TowerView(tower);
         IView healthBarView = new HealthBarView(healthBar);
         IView background = new BackgroundView();
-        player.positionSubscriber((IPlayerSubscriber) playerView);
         player.positionSubscriber((IEntitySubscriber) playerView);
         //Add views to list and they will be rendered. Views must implement IView
         addView(background);

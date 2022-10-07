@@ -1,20 +1,18 @@
 package Model;
 import Interfaces.IObservers;
 import Interfaces.IEntitySubscriber;
-import Interfaces.IPlayerSubscriber;
 import com.badlogic.gdx.Input;
 
-import Interfaces.IPlayerSubscriber;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Player extends Entity implements IObservers, IEntity {
+public class Player extends Entity implements IObservers {
 
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
-    List<IPlayerSubscriber> subscriberList = new ArrayList<>();
+    List<IEntitySubscriber> subscriberList = new ArrayList<>();
     private int width;
     private int height;
     private int damage = 30;
@@ -60,8 +58,8 @@ public class Player extends Entity implements IObservers, IEntity {
     public void moveLeft(){
         if(isAbleToMoveLeft) {
             positionX -= velocity;
-            for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-                playerPositionSubscriber.updatePosition(positionX, positionY);
+            for (IEntitySubscriber subscriber : subscriberList) {
+                subscriber.updatePosition(positionX, positionY);
                 updateHealthBar();
             }
         }
