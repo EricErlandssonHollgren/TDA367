@@ -26,14 +26,14 @@ public class ButtonView implements IView {
     private Stage stage;
     private Skin skin;
 
-    public ButtonView(TowerController towerController) {
+    public ButtonView(TowerController towerController, float posX, float posY, float sizeW,float sizeH) {
         this.texture = new Texture("badlogic.jpg");
         this.txRegion = new TextureRegion(texture);
         this.txrDrawable = new TextureRegionDrawable(txRegion);
         this.upgradeButton = new ImageButton(txrDrawable);
 
-        upgradeButton.setPosition(300,300);
-        upgradeButton.setSize(60,60);
+        upgradeButton.setPosition(posX,posY);
+        upgradeButton.setSize(sizeW,sizeH);
 
         this.stage = new Stage(new ScreenViewport());
         stage.addActor(upgradeButton);
