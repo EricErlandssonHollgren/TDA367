@@ -10,7 +10,7 @@ public class Player extends Entity implements IObservers {
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
-    List<IEntitySubscriber> subscriberList = new ArrayList<>();
+    private List<IEntitySubscriber> subscriberList = new ArrayList<>();
     private int width;
     private int height;
     private int damage = 30;
