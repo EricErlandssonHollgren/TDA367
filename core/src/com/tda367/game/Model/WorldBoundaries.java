@@ -4,7 +4,7 @@ import java.util.List;
 
 public class WorldBoundaries {
 
-    List<Block> blocks = new ArrayList<>();
+    private List<Block> blocks = new ArrayList<>();
 
     /**
      * A constructor which adds the walls and grounds.

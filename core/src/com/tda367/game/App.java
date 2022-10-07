@@ -2,8 +2,6 @@ package com.tda367.game;
 
 import Controller.PlayerKeyListener;
 import Model.*;
-import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
 import View.HealthBarView;
 import View.PlayerView;
@@ -17,11 +15,11 @@ public class App extends ApplicationAdapter {
 	private GameTimer timer;
 	private ViewHolder views;
 	private Player player;
-	private EnemyFactory enemyFactory;
 	private RoundHandler roundHandler;
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
 	private Tower tower;
+	private HealthBar healthBar;
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
@@ -29,11 +27,13 @@ public class App extends ApplicationAdapter {
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
-
-
 	@Override
 	public void create () {
 		//Handlers
+
+
+		healthBar = new HealthBar(120, 120, 10, 50, 50);
+		player = new Player(120,100, 50, 37);
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
@@ -41,6 +41,7 @@ public class App extends ApplicationAdapter {
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();
 		goldHandler.setSuccessor(pointsHandler);
+
 		roundHandler = RoundHandler.GetInstance(timer);
 
 		entityHolder = EntityHolder.getInstance();
@@ -50,7 +51,7 @@ public class App extends ApplicationAdapter {
 		player = new Player(120,100, pV.playerSprite.getWidth(), pV.playerSprite.getHeight());
 
 
-		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries);
+		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries, healthBar);
 
 		views.addView(new HealthBarView(player.healthBar));
 		views.addView(pV);
@@ -61,7 +62,7 @@ public class App extends ApplicationAdapter {
 		playerKeyListener.addSubscribers(player);
 
 	}
-
+  
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());

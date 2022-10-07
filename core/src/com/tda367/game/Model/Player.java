@@ -1,6 +1,6 @@
 package Model;
-import Interfaces.IEntity;
 import Interfaces.IObservers;
+import Interfaces.IEntitySubscriber;
 import Interfaces.IPlayerSubscriber;
 import com.badlogic.gdx.Input;
 
@@ -17,6 +17,8 @@ public class Player extends Entity implements IObservers, IEntity {
     List<IPlayerSubscriber> subscriberList = new ArrayList<>();
     private int width;
     private int height;
+    private int damage = 30;
+
     private float velocity = 7;
 
 
@@ -37,9 +39,6 @@ public class Player extends Entity implements IObservers, IEntity {
         isAbleToMoveRight = true;
          this.positionX = positionX;
          this.positionY = positionY;
-         this.width = 50;
-         this.height = 37;
-
     }
 
 
@@ -47,7 +46,7 @@ public class Player extends Entity implements IObservers, IEntity {
      * A subscriber to handle the playerPosition. It should be updating its position
      * @param subscriber for the subscriberList
      */
-    public void positionSubscriber(IPlayerSubscriber subscriber){
+    public void positionSubscriber(IEntitySubscriber subscriber){
         subscriberList.add(subscriber);
         subscriber.updatePosition(positionX,positionY);
         updateHealthBar();
@@ -76,7 +75,7 @@ public class Player extends Entity implements IObservers, IEntity {
     public void moveRight(){
         if(isAbleToMoveRight){
             positionX += velocity;
-            for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
+            for (IEntitySubscriber playerPositionSubscriber : subscriberList) {
                 playerPositionSubscriber.updatePosition(positionX,positionY);
                 updateHealthBar();
             }
@@ -105,13 +104,7 @@ public class Player extends Entity implements IObservers, IEntity {
         return state;
     }
 
-    /**
-     * Gets the x-coordinate of the object of float
-     * @return x-coordinate of the object
-     */
-    public float getX(){
-        return positionX;
-    }
+
 
     /**
      * Gets the y-coordinate of the object of float
@@ -122,14 +115,20 @@ public class Player extends Entity implements IObservers, IEntity {
     }
 
     /**
+     * Gets the x-coordinate of the object of float
+     * @return x-coordinate of the object
+     */
+    public float getX(){
+            return positionX;
+    }
+
+    /**
      * Gets the velocity of the player
      * @return the velocity of the player
      */
-
     public float getVelocity() {
         return velocity;
     }
-
     /**
      * Gets the height of the object of int
      * @return the height of a player
@@ -137,7 +136,6 @@ public class Player extends Entity implements IObservers, IEntity {
     public int getHeight(){
         return height;
     }
-
     /**
      * Gets the width of the object of int
      * @return the width of a player
@@ -147,17 +145,24 @@ public class Player extends Entity implements IObservers, IEntity {
         return width;
     }
 
+    public int getDamage(){
+        return damage;
+    }
+
     /**
      * The method allows the player to move left or right depending on the key that is pressed.
      * @param key uses the moveLeft() or moveRight() method
      */
     @Override
-    public void keyPressed(MovementDirection key) {
-        if(key == MovementDirection.LEFT){
+    public void actionHandle(ActionEnum key) {
+        if(key == ActionEnum.LEFT){
             moveLeft();
         }
-        if(key == MovementDirection.RIGHT){
+        if(key == ActionEnum.RIGHT){
             moveRight();
         }
     }
+
+
+
 }

@@ -12,7 +12,7 @@ public abstract class Entity{
     protected STATE state;
     protected int health = 100;
 
-    public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
+    public Entity(float positionX, float positionY, int entityWidth, int entityHeight) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.state = STATE.IDLE;
@@ -46,6 +46,10 @@ public abstract class Entity{
      */
     public float getPosX(){
         return positionY;
+    }
+
+    public void takeDamage(int damage){
+        health -= damage;
     }
 
 }
