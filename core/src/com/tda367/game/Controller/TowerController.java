@@ -31,16 +31,26 @@ public class TowerController {
     }
 
     public void buildTurret() {
-        if (Gdx.input.isKeyPressed(Input.Keys.B)) {
             for (IObservers o : observers) {
                 o.actionHandle(ActionEnum.BUILD);
             }
-        }
+
     }
     public void sellTurret() {
-        if (Gdx.input.isKeyPressed(Input.Keys.B)) {
             for (IObservers o : observers) {
                 o.actionHandle(ActionEnum.SELL);
+            }
+
+    }
+    public void upgradeTurret(int i) {
+        if (i == 1) {
+            for (IObservers o : observers) {
+                o.actionHandle(ActionEnum.UPGRADETURRET1);
+            }
+        }
+        else if (i ==2){
+            for (IObservers o : observers) {
+                o.actionHandle(ActionEnum.UPGRADETURRET2);
             }
         }
     }
