@@ -32,8 +32,9 @@ public class App extends ApplicationAdapter {
 		//Handlers
 
 
-		healthBar = new HealthBar(120, 120, 10, 50, 50);
+
 		player = new Player(120,100, 50, 37);
+		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
@@ -43,18 +44,9 @@ public class App extends ApplicationAdapter {
 		goldHandler.setSuccessor(pointsHandler);
 
 		roundHandler = RoundHandler.GetInstance(timer);
-
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
-
-		PlayerView pV = new PlayerView();
-		player = new Player(120,100, pV.playerSprite.getWidth(), pV.playerSprite.getHeight());
-
-
 		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries, healthBar);
-
-		views.addView(new HealthBarView(player.healthBar));
-		views.addView(pV);
 
 
 		//Controllers
