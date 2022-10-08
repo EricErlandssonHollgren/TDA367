@@ -1,5 +1,6 @@
 package Model.Enemy;
 
+import Model.CollisionDetection;
 import Model.Entity;
 import Model.Waves;
 
@@ -13,19 +14,16 @@ public abstract class Enemy extends Entity {
     private final int worth;
     private int HP;
     private Waves wave;
-    private final int damage;
 
     /**
      * @param worth  = is what the enemy is "worth". int will be transferred to the player when the enemy has been killed
      * @param HP     = every enemy has a number of "health points" that will decrease as it is being attacked.
-     * @param damage = is how much damage the enemy will do to the player when it attacks.
      */
-    public Enemy(float positionX, float positionY, int entityWidth, int entityHeight, int worth, int HP, int damage) {
+    public Enemy(float positionX, float positionY, int entityWidth, int entityHeight, int worth, int HP) {
         super(positionX, positionY, entityWidth, entityHeight);
         this.worth = worth;
         this.HP = HP;
         this.wave = new Waves();
-        this.damage = damage;
     }
 
     public int getWorth() {
@@ -51,7 +49,9 @@ public abstract class Enemy extends Entity {
         positionX -= speed;
     }
 
-    public int getDamage() {
-        return damage;
+    public void takeDamage(int damage) {
+        health -= damage;
     }
+
+
 }

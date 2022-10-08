@@ -9,6 +9,7 @@ import java.util.Map;
 public class CollisionDetection {
     private EntityHolder posHandler;
     private WorldBoundaries wb;
+    private Tower tower;
     private static CollisionDetection instance;
 
     private CollisionDetection(){
@@ -66,10 +67,13 @@ public class CollisionDetection {
      */
     public Map<Entity, Boolean> CheckCollisionPlayerAndEnemy(Player player){
         Map<Entity, Boolean> collisions = new HashMap<>();
+        boolean isDoingDamage = true;
         for (Entity entity: posHandler.entities) {
             if(entity instanceof Enemy){
                 if((player.getX() + player.getWidth() >= entity.getPosX()) && (player.getX() <= entity.getPosY()+50)){
                     collisions.put(entity,true);
+                    player.setDoingDamage(isDoingDamage);
+                    System.out.println(player.setDoingDamage(isDoingDamage));
 
                 }
                 collisions.put(entity,false);

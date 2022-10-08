@@ -8,7 +8,6 @@ public abstract class Entity{
     protected float positionX;
     protected float positionY;
     public HealthBar healthBar;
-    protected Texture entityImg;
     protected STATE state;
     protected int health = 100;
 

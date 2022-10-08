@@ -32,5 +32,10 @@ public class PlayerKeyListener {
                 o.actionHandle(ActionEnum.RIGHT);
             }
         }
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+            for (IObservers o : observers){
+                o.actionHandle(ActionEnum.DAMAGE);
+            }
+        }
     }
 }

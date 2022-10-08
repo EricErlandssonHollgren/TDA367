@@ -1,7 +1,6 @@
 package Model;
 import Interfaces.IObservers;
 import Interfaces.IEntitySubscriber;
-import com.badlogic.gdx.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +14,9 @@ public class Player extends Entity implements IObservers {
     List<IEntitySubscriber> subscriberList = new ArrayList<>();
     private int width;
     private int height;
-    private int damage = 30;
-
+    private int damage;
     private float velocity = 7;
-
-
+    private boolean isDoingDamage;
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
 
@@ -35,6 +32,7 @@ public class Player extends Entity implements IObservers {
         super(positionX, positionY, entityWidth, entityHieght);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
+        isDoingDamage  = true;
          this.positionX = positionX;
          this.positionY = positionY;
     }
@@ -73,8 +71,8 @@ public class Player extends Entity implements IObservers {
     public void moveRight(){
         if(isAbleToMoveRight){
             positionX += velocity;
-            for (IEntitySubscriber playerPositionSubscriber : subscriberList) {
-                playerPositionSubscriber.updatePosition(positionX,positionY);
+            for (IEntitySubscriber subscriber : subscriberList) {
+                subscriber.updatePosition(positionX,positionY);
                 updateHealthBar();
             }
         }
@@ -101,8 +99,6 @@ public class Player extends Entity implements IObservers {
     public STATE getState() {
         return state;
     }
-
-
 
     /**
      * Gets the y-coordinate of the object of float
@@ -143,9 +139,23 @@ public class Player extends Entity implements IObservers {
         return width;
     }
 
-    public int getDamage(){
-        return damage;
+    public void takeDamage(int damage){
+        health -= damage;
     }
+
+    public void doDamage(){
+        damage = 30;
+        for(IEntitySubscriber subscriber : subscriberList ){
+            subscriber.updatePosition(positionX, positionY);
+        }
+    }
+
+    public boolean setDoingDamage(boolean doingDamage) {
+        isDoingDamage = doingDamage;
+        return doingDamage;
+    }
+
+
 
     /**
      * The method allows the player to move left or right depending on the key that is pressed.
@@ -158,6 +168,9 @@ public class Player extends Entity implements IObservers {
         }
         if(key == ActionEnum.RIGHT){
             moveRight();
+        }
+        if(key == ActionEnum.DAMAGE){
+            doDamage();
         }
     }
 
