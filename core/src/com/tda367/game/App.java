@@ -2,9 +2,9 @@ package com.tda367.game;
 
 import Controller.PlayerKeyListener;
 import Model.*;
-import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
+import View.HealthBarView;
+import View.PlayerView;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,11 +15,11 @@ public class App extends ApplicationAdapter {
 	private GameTimer timer;
 	private ViewHolder views;
 	private Player player;
-	private EnemyFactory enemyFactory;
 	private RoundHandler roundHandler;
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
 	private Tower tower;
+	private HealthBar healthBar;
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
@@ -30,7 +30,10 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		//Handlers
-		player = new Player(120,100);
+
+
+		healthBar = new HealthBar(120, 120, 10, 50, 50);
+		player = new Player(120,100, 50, 37);
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
@@ -38,12 +41,21 @@ public class App extends ApplicationAdapter {
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();
 		goldHandler.setSuccessor(pointsHandler);
+
 		roundHandler = RoundHandler.GetInstance(timer);
 
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
 
-		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries);
+		PlayerView pV = new PlayerView();
+		player = new Player(120,100, pV.playerSprite.getWidth(), pV.playerSprite.getHeight());
+
+
+		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries, healthBar);
+
+		views.addView(new HealthBarView(player.healthBar));
+		views.addView(pV);
+
 
 		//Controllers
 		playerKeyListener = new PlayerKeyListener();

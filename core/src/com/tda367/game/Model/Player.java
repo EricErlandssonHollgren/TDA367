@@ -1,33 +1,42 @@
 package Model;
-import Interfaces.IEntity;
 import Interfaces.IObservers;
-import Interfaces.IPlayerSubscriber;
+import Interfaces.IEntitySubscriber;
+import com.badlogic.gdx.Input;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements IObservers, IEntity {
+
+public class Player extends Entity implements IObservers {
+
     /**
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
-    List<IPlayerSubscriber> subscriberList = new ArrayList<>();
-    private float x;
-    private float y;
+    List<IEntitySubscriber> subscriberList = new ArrayList<>();
     private int width;
     private int height;
-
-    private boolean isAbleToMoveRight;
-    private boolean isAbleToMoveLeft;
+    private int damage = 30;
 
     private float velocity = 7;
 
 
-    public Player(float x, float y){
+    private boolean isAbleToMoveRight;
+    private boolean isAbleToMoveLeft;
+
+    /**
+     * When creating a player it should have two variables which defines its position.
+     *  @param positionX represents the player's position on the x-axis
+     *  @param positionY represents the player's position on the y-axis
+     *  @param entityWidth represents the player's
+     *  @param entityHieght represents the player's position on the y-axis
+     */
+
+    public Player(float positionX, float positionY, float entityWidth, float entityHieght){
+        super(positionX, positionY, entityWidth, entityHieght);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
-         this.x = x;
-         this.y = y;
-         this.width = 50;
-         this.height = 37;
+         this.positionX = positionX;
+         this.positionY = positionY;
     }
 
 
@@ -35,9 +44,10 @@ public class Player implements IObservers, IEntity {
      * A subscriber to handle the playerPosition. It should be updating its position
      * @param subscriber for the subscriberList
      */
-    public void positionSubscriber(IPlayerSubscriber subscriber){
+    public void positionSubscriber(IEntitySubscriber subscriber){
         subscriberList.add(subscriber);
-        subscriber.updatePosition(x,y);
+        subscriber.updatePosition(positionX,positionY);
+        updateHealthBar();
     }
 
 
@@ -47,9 +57,10 @@ public class Player implements IObservers, IEntity {
      */
     public void moveLeft(){
         if(isAbleToMoveLeft) {
-            x -= velocity;
-            for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-                playerPositionSubscriber.updatePosition(x, y);
+            positionX -= velocity;
+            for (IEntitySubscriber subscriber : subscriberList) {
+                subscriber.updatePosition(positionX, positionY);
+                updateHealthBar();
             }
         }
     }
@@ -61,9 +72,10 @@ public class Player implements IObservers, IEntity {
      */
     public void moveRight(){
         if(isAbleToMoveRight){
-            x += velocity;
-            for (IPlayerSubscriber playerPositionSubscriber : subscriberList) {
-                playerPositionSubscriber.updatePosition(x,y);
+            positionX += velocity;
+            for (IEntitySubscriber playerPositionSubscriber : subscriberList) {
+                playerPositionSubscriber.updatePosition(positionX,positionY);
+                updateHealthBar();
             }
         }
     }
@@ -85,13 +97,19 @@ public class Player implements IObservers, IEntity {
         isAbleToMoveLeft = ableToMoveLeft;
     }
 
+
+    public STATE getState() {
+        return state;
+    }
+
+
+
     /**
      * Gets the y-coordinate of the object of float
-     *
      * @return y-coordinate of the object
      */
     public float getY(){
-        return y;
+        return positionY;
     }
 
     /**
@@ -99,7 +117,7 @@ public class Player implements IObservers, IEntity {
      * @return x-coordinate of the object
      */
     public float getX(){
-        return x;
+            return positionX;
     }
 
     /**
@@ -125,16 +143,20 @@ public class Player implements IObservers, IEntity {
         return width;
     }
 
+    public int getDamage(){
+        return damage;
+    }
+
     /**
      * The method allows the player to move left or right depending on the key that is pressed.
      * @param key uses the moveLeft() or moveRight() method
      */
     @Override
-    public void keyPressed(MovementDirection key) {
-        if(key == MovementDirection.LEFT){
+    public void actionHandle(ActionEnum key) {
+        if(key == ActionEnum.LEFT){
             moveLeft();
         }
-        if(key == MovementDirection.RIGHT){
+        if(key == ActionEnum.RIGHT){
             moveRight();
         }
     }
