@@ -18,7 +18,7 @@ public class ViewHolder {
      * Initialises the startup views
      * @param gravity
      */
-    public ViewHolder(float gravity, Player player, Tower tower, Enemy enemy, WorldBoundaries worldBoundaries, HealthBar healthBar){
+    public ViewHolder(float gravity, Player player, Tower tower, WorldBoundaries worldBoundaries, HealthBar healthBar){
         //Instantiate world and views list
         this.gravity = gravity;
         views = new ArrayList<>();

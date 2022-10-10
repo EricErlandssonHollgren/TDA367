@@ -10,6 +10,7 @@ public abstract class Entity{
     public HealthBar healthBar;
     protected STATE state;
     protected int health = 100;
+    protected int damage;
 
     public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
         this.positionX = positionX;
@@ -36,7 +37,7 @@ public abstract class Entity{
      */
 
     public float getPosY(){
-        return positionX;
+        return positionY;
     }
 
     /**
@@ -44,11 +45,15 @@ public abstract class Entity{
      * @return x-coordinate of the object
      */
     public float getPosX(){
-        return positionY;
+        return positionX;
     }
 
     public void takeDamage(int damage){
         health -= damage;
+    }
+
+    public void doDamage(){
+        damage = 30;
     }
 
 }

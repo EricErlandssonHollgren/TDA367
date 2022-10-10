@@ -14,9 +14,9 @@ public class Player extends Entity implements IObservers {
     List<IEntitySubscriber> subscriberList = new ArrayList<>();
     private int width;
     private int height;
-    private int damage;
+    private int damage = 15;
     private float velocity = 7;
-    private boolean isDoingDamage;
+    private boolean isAttacking;
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
 
@@ -25,16 +25,14 @@ public class Player extends Entity implements IObservers {
      *  @param positionX represents the player's position on the x-axis
      *  @param positionY represents the player's position on the y-axis
      *  @param entityWidth represents the player's
-     *  @param entityHieght represents the player's position on the y-axis
+     *  @param entityHeight represents the player's position on the y-axis
      */
 
-    public Player(float positionX, float positionY, float entityWidth, float entityHieght){
-        super(positionX, positionY, entityWidth, entityHieght);
+    public Player(float positionX, float positionY, float entityWidth, float entityHeight){
+        super(positionX, positionY, entityWidth, entityHeight);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
-        isDoingDamage  = true;
-         this.positionX = positionX;
-         this.positionY = positionY;
+        isAttacking  = true;
     }
 
 
@@ -101,22 +99,6 @@ public class Player extends Entity implements IObservers {
     }
 
     /**
-     * Gets the y-coordinate of the object of float
-     * @return y-coordinate of the object
-     */
-    public float getY(){
-        return positionY;
-    }
-
-    /**
-     * Gets the x-coordinate of the object of float
-     * @return x-coordinate of the object
-     */
-    public float getX(){
-            return positionX;
-    }
-
-    /**
      * Gets the velocity of the player
      * @return the velocity of the player
      */
@@ -143,16 +125,11 @@ public class Player extends Entity implements IObservers {
         health -= damage;
     }
 
-    public void doDamage(){
-        damage = 30;
-        for(IEntitySubscriber subscriber : subscriberList ){
-            subscriber.updatePosition(positionX, positionY);
+    public void collisionAttack(Entity enemy){
+        if(isAttacking){
+            System.out.println("Damage :)");
+            enemy.takeDamage(damage);
         }
-    }
-
-    public boolean setDoingDamage(boolean doingDamage) {
-        isDoingDamage = doingDamage;
-        return doingDamage;
     }
 
 
@@ -170,7 +147,7 @@ public class Player extends Entity implements IObservers {
             moveRight();
         }
         if(key == ActionEnum.DAMAGE){
-            doDamage();
+            isAttacking = true;
         }
     }
 

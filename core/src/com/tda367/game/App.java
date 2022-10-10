@@ -43,7 +43,7 @@ public class App extends ApplicationAdapter {
 		roundHandler = RoundHandler.GetInstance(timer);
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
-		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries, healthBar);
+		views = new ViewHolder(-0.5f,player, tower,worldBoundaries, healthBar);
 
 
 		//Controllers
