@@ -1,10 +1,13 @@
 package com.tda367.game;
 
 import Controller.PlayerKeyListener;
+import Controller.ProjectileController;
+import Interfaces.IView;
 import Model.*;
 import Model.Enemy.EnemyFactory;
 import View.HealthBarView;
 import View.PlayerView;
+import View.ProjectileView;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,15 +27,13 @@ public class App extends ApplicationAdapter {
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
 	private PlayerKeyListener playerKeyListener;
+	private ProjectileController projectileController;
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
 	@Override
 	public void create () {
 		//Handlers
-
-
-
 		player = new Player(120,100, 50, 37);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		tower = new Tower();
@@ -48,11 +49,13 @@ public class App extends ApplicationAdapter {
 		collisionDetection = CollisionDetection.getInstance();
 		views = new ViewHolder(-0.5f,player, tower,EnemyFactory.createEnemy1(),worldBoundaries, healthBar);
 
-
 		//Controllers
 		playerKeyListener = new PlayerKeyListener();
 		playerKeyListener.addSubscribers(player);
+		projectileController = new ProjectileController(entityHolder, collisionDetection, timer);
 
+		IView projectileView = new ProjectileView("Cannonball.png", projectileController);
+		views.addView(projectileView);
 	}
   
 	@Override
@@ -62,6 +65,7 @@ public class App extends ApplicationAdapter {
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
 		playerKeyListener.UpdatePlayerMovement();
+		projectileController.updateProjectiles(collisionDetection.checkCollisionProjectileAndEnemy(), collisionDetection.checkCollisionProjectileGround());
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}

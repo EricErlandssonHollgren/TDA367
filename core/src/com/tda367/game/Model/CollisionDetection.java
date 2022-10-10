@@ -1,9 +1,12 @@
 package Model;
 
+import Interfaces.ICollisionListener;
 import Interfaces.IProjectile;
 import Model.Enemy.Enemy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CollisionDetection {
@@ -11,7 +14,10 @@ public class CollisionDetection {
     private WorldBoundaries wb;
     private static CollisionDetection instance;
 
+    private List<ICollisionListener> listeners;
+
     private CollisionDetection(){
+        listeners = new ArrayList<>();
         this.posHandler = EntityHolder.getInstance();
         this.wb = new WorldBoundaries();
     }
@@ -79,24 +85,33 @@ public class CollisionDetection {
     }
     /**
      * The method checks collision between projectiles and enemies in the game. If an enemy is hit
-     * it will return the enemy that is hit along with the value true
+     * it will return the enemy that is hit along with the projectile that hit
      */
-    public Map<Entity, Boolean> checkCollisionProjectileAndEnemy(){
-        Map<Entity, Boolean> collided = new HashMap<>();
-        for (IProjectile projectile: posHandler.projectiles) {
+    public Map<Entity, IProjectile> checkCollisionProjectileAndEnemy(){
+        Map<Entity, IProjectile> collided = new HashMap<>();
+        for (IProjectile projectile: posHandler.getProjectiles()) {
             for(Entity entity : posHandler.entities) {
                 if(entity instanceof Enemy){
-                    if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+50)){
-                        if((projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+50)){
-                            collided.put(entity,true);
-
+                    System.out.println(entity.positionX);
+                    if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+entity.getEntityWidth())){
+                        if((projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+entity.getEntityHeight())){
+                            collided.put(entity,projectile);
+                            System.out.println("hit!");
                         }
                     }
-                    collided.put(entity,false);
                 }
             }
         }
         return collided;
     }
 
+    public List<IProjectile> checkCollisionProjectileGround(){
+        List<IProjectile> collisions = new ArrayList<>();
+        for (IProjectile p : posHandler.getProjectiles()){
+            if(p.getY() <= wb.getBlocks().get(0).getY()+wb.getBlocks().get(0).getHeight()){
+                collisions.add(p);
+            }
+        }
+        return collisions;
+    }
 }

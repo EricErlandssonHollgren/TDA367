@@ -11,12 +11,29 @@ public abstract class Entity{
     protected Texture entityImg;
     protected STATE state;
     protected int health = 100;
+    private float entityWidth, entityHeight;
 
     public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.state = STATE.IDLE;
         this.healthBar = new HealthBar(positionX,positionY, 100f, entityWidth, entityHeight);
+    }
+
+    /**
+     * Getter for width
+     * @return float for width
+     */
+    public float getEntityWidth(){
+        return this.entityWidth;
+    }
+
+    /**
+     * Getter for height
+     * @return float for height
+     */
+    public float getEntityHeight(){
+        return this.entityHeight;
     }
 
     public void updateHealthBar() {
