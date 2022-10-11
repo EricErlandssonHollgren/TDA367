@@ -92,12 +92,9 @@ public class CollisionDetection {
         for (IProjectile projectile: posHandler.getProjectiles()) {
             for(Entity entity : posHandler.entities) {
                 if(entity instanceof Enemy){
-                    //System.out.println(posHandler.entities.size());
                     if(isColliding(entity,projectile)){
                         collided.put(entity,projectile);
-                        System.out.println("hit!");
                     }
-
                 }
             }
         }
@@ -105,8 +102,6 @@ public class CollisionDetection {
     }
 
     private boolean isColliding(Entity entity, IProjectile projectile){
-        System.out.println(projectile.getX()+projectile.getRadius()*2+" "+entity.positionX);
-        System.out.println(projectile.getX() + projectile.getRadius()*2 >= entity.getPosX());
         if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+entity.getEntityWidth())){
             return (projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+entity.getEntityHeight());
         }
