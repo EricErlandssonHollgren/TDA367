@@ -6,7 +6,6 @@ import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
 import Model.*;
 import View.*;
-import View.Buttons.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -59,10 +58,7 @@ public class App extends ApplicationAdapter {
 		IView playerView = new PlayerView();
 		IView towerView = new TowerView(tower);
 		IView background = new BackgroundView();
-		IView upgradeTowerButton = new UpgradeTowerButton(towerController, 100,400,50, 40);
-		IView buildTurretButton = new BuildTurretButton(towerController, 300,400,50, 40);
-		IView upgradeTurretButton1 = new UpgradeTurretButton(towerController,1, 250,200,30, 30);
-		IView upgradeTurretButton2 = new UpgradeTurretButton(towerController,2, 250,300,30, 30);
+		IView buttonView = new ButtonView(towerController);
 
 		player.positionSubscriber((IPlayerSubscriber) playerView);
 
@@ -72,10 +68,7 @@ public class App extends ApplicationAdapter {
 		views.addView(worldBoundariesView);
 		views.addView(playerView);
 		views.addView(towerView);
-		views.addView(upgradeTowerButton);
-		views.addView(buildTurretButton);
-		views.addView(upgradeTurretButton1);
-		views.addView(upgradeTurretButton2);
+		views.addView(buttonView);
 	}
   
 	@Override

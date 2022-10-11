@@ -2,10 +2,13 @@ package View;
 
 import Controller.TowerController;
 import Interfaces.IView;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -14,39 +17,67 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import java.util.List;
 
 public class ButtonView implements IView {
-
     private TowerController controller;
-    List<ImageButton> buttons;
+    private ImageButton upgradeButtonTower;
+    private ImageButton upgradeButtonTurret;
+    private ImageButton buildButtonTurret;
 
-    private Texture texture;
-    private TextureRegion txRegion;
-    private TextureRegionDrawable txrDrawable;
-
-    private ClickListener clickListener;
     private Stage stage;
 
-    public ButtonView(TowerController towerController, float posX, float posY, float sizeW,float sizeH) {
-
-        this.texture = new Texture("badlogic.jpg");
-        this.txRegion = new TextureRegion(texture);
-        this.txrDrawable = new TextureRegionDrawable(txRegion);
-        this.buttonImage = new ImageButton(txrDrawable);
-
+    public ButtonView(TowerController towerController) {
         this.controller = towerController;
-        buttonImage.setPosition(posX,posY);
-        buttonImage.setSize(sizeW,sizeH);
+        initButtons();
+        addListeners();
 
-        this.clickListener = new ClickListener(){
-            @Override
-            public void clicked (InputEvent event, float x, float y){
-                controller.buildTurret();
-                System.out.println("Pressed!");
-            }
-        };
         this.stage = new Stage(new ScreenViewport());
+        stage.addActor(upgradeButtonTower);
+        stage.addActor(upgradeButtonTurret);
+        stage.addActor(buildButtonTurret);
         Gdx.input.setInputProcessor(stage);
+    }
 
-        this.batch = new SpriteBatch();
+    private TextureRegionDrawable getTxrDrawable(Texture tx){
+        TextureRegion txR = new TextureRegion(tx);
+        return new TextureRegionDrawable(txR);
+    }
+
+    private void initButtons(){
+        Texture textureUpgradeTower = new Texture("badlogic.jpg");
+        this.upgradeButtonTower = new ImageButton(getTxrDrawable(textureUpgradeTower));
+        this.upgradeButtonTower.setSize(15,40);
+        this.upgradeButtonTower.setPosition(100,400);
+
+        Texture textureUpgradeTurret = new Texture("badlogic.jpg");
+        this.upgradeButtonTurret = new ImageButton(getTxrDrawable(textureUpgradeTurret));
+        this.upgradeButtonTurret.setVisible(false);
+        this.upgradeButtonTurret.setSize(10,40);
+        this.upgradeButtonTurret.setPosition(300,480);
+
+        Texture textureBuildTurret = new Texture("badlogic.jpg");
+        this.buildButtonTurret = new ImageButton(getTxrDrawable(textureBuildTurret));
+        this.upgradeButtonTower.setSize(10,10);
+        this.upgradeButtonTower.setPosition(100,600);
+    }
+
+    private void addListeners(){
+        this.upgradeButtonTower.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                System.out.println("uTower");
+            }
+        });
+        this.upgradeButtonTurret.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                System.out.println("uTurret");
+            }
+        });
+        this.buildButtonTurret.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                System.out.println("bTurret");
+            }
+        });
     }
 
     @Override
@@ -56,9 +87,6 @@ public class ButtonView implements IView {
 
     @Override
     public void dispose() {
-        batch.dispose();
         stage.dispose();
     }
-
-
 }
