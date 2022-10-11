@@ -7,8 +7,8 @@ import java.util.*;
 
 public class Waves {
 
-    Queue<Enemy> queue = new LinkedList<>();
-    List<Enemy> currentEnemiesRendered = new ArrayList<>();
+    private Queue<Enemy> queue = new LinkedList<>();
+    private List<Enemy> currentEnemiesRendered = new ArrayList<>();
     private boolean wasRecentlySpawned = false;
 
     /**

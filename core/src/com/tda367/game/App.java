@@ -2,9 +2,8 @@ package com.tda367.game;
 
 import Controller.PlayerKeyListener;
 import Model.*;
+import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
-import View.HealthBarView;
-import View.PlayerView;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,6 +14,7 @@ public class App extends ApplicationAdapter {
 	private GameTimer timer;
 	private ViewHolder views;
 	private Player player;
+	private Enemy enemy;
 	private RoundHandler roundHandler;
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
@@ -34,6 +34,7 @@ public class App extends ApplicationAdapter {
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
+		enemy = EnemyFactory.createEnemy1();
 		timer = GameTimer.GetInstance();
 		//setup chain of responsibility?
 		goldHandler = new Goldhandler();

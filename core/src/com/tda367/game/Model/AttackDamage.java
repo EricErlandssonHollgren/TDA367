@@ -1,15 +1,12 @@
 package Model;
 
 import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
-
-import java.util.Map;
 
 public class AttackDamage {
 
     //Will probably rename this class
     private Player player;
-    private FireBall fireBall;
+    private FireFlame fireBall;
     private Tower tower;
     private Enemy1 enemy;
     private EntityHolder entityHolder;
