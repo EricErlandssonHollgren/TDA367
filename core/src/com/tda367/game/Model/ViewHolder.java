@@ -12,15 +12,12 @@ import java.util.List;
 public class ViewHolder {
 
     private List<IView> views;
-    private float gravity;
 
     /**
      * Initialises the startup views
-     * @param gravity
      */
-    public ViewHolder(float gravity){
+    public ViewHolder(){
         //Instantiate world and views list
-        this.gravity = gravity;
         views = new ArrayList<>();
 
     }

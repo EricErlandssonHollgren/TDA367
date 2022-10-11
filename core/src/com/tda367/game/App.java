@@ -63,7 +63,7 @@ public class App extends ApplicationAdapter {
 		player.positionSubscriber((IPlayerSubscriber) playerView);
 
 		//Add views to list and they will be rendered. Views must implement IView
-		views = new ViewHolder(-0.5f);
+		views = new ViewHolder();
 		views.addView(background);
 		views.addView(worldBoundariesView);
 		views.addView(playerView);
@@ -86,6 +86,5 @@ public class App extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		views.dispose();
-
 	}
 }

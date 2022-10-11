@@ -44,7 +44,7 @@ public class ButtonView implements IView {
     private void initButtons(){
         Texture textureUpgradeTower = new Texture("badlogic.jpg");
         this.upgradeButtonTower = new ImageButton(getTxrDrawable(textureUpgradeTower));
-        this.upgradeButtonTower.setSize(20,40);
+        this.upgradeButtonTower.setSize(100,100);
         this.upgradeButtonTower.setPosition(100,400);
 
         Texture textureUpgradeTurret = new Texture("badlogic.jpg");
@@ -63,18 +63,21 @@ public class ButtonView implements IView {
         this.upgradeButtonTower.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                controller.upgradeTower();
                 System.out.println("uTower");
             }
         });
         this.upgradeButtonTurret.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                //controller.upgradeTurret();
                 System.out.println("uTurret");
             }
         });
         this.buildButtonTurret.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                controller.buildTurret();
                 System.out.println("bTurret");
             }
         });

@@ -40,7 +40,7 @@ public class TowerView implements IView {
     private void updateTexturePath(){
         if (this.tower.getLevel() > 1){
             if (this.tower.getTurrets().size() == 1){
-                String newTexturePath = "\"Tower2_1Turret_Sprite.png\"";
+                String newTexturePath = "Tower2_1Turret_Sprite.png";
                 setTexturePath( newTexturePath);
             }
             else if (this.tower.getTurrets().size() > 1) {
