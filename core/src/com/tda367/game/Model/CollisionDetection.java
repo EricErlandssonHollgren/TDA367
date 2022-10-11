@@ -12,7 +12,6 @@ public class CollisionDetection {
     private EntityHolder posHandler;
     private WorldBoundaries wb;
     private Tower tower;
-    private List<IObservers> observers = new ArrayList<>();
     private static CollisionDetection instance;
 
     private CollisionDetection(){
@@ -26,11 +25,6 @@ public class CollisionDetection {
         }
         return instance;
     }
-
-    public void addSubscribers(IObservers observer){
-        observers.add(observer);
-    }
-
 
     /**
      * The method checks the collision between the player and the walls in the game. Enables the player to
@@ -70,16 +64,16 @@ public class CollisionDetection {
 
     /**
      * The method checks the collision between the player and the enemy in the game. If the player is
-     * colliding with an enemy it will return a referenece to that enemy along with the value true
+     * colliding with an enemy it will return a reference to that enemy along with the value true
      */
     public Map<Entity, Boolean> CheckCollisionPlayerAndEnemy(Player player){
         Map<Entity, Boolean> collisions = new HashMap<>();
-        boolean ableToDoDamage = true;
         for (Entity entity: posHandler.entities) {
             if(entity instanceof Enemy){
-                if((player.getPosX() + player.getWidth() > ((Enemy) entity).getX())){
+                if((player.getPosX() + player.getWidth() > entity.getPosX()) &&
+                        player.getPosX() <= entity.getWidth() + entity.getPosX()){
                     collisions.put(entity,true);
-                    player.collisionAttack(entity);
+                    player.playerAttack(entity);
                     //TODO: Uppdatera attacken efter klockan. Förmodligen inte här
                 }
                 collisions.put(entity,false);

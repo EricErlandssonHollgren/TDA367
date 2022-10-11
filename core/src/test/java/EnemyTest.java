@@ -20,8 +20,8 @@ public class EnemyTest {
      */
     @Test
     public void testPosition() {
-        assertEquals(enemy.getX(), 630);
-        assertEquals(enemy.getY(), 100);
+        assertEquals(enemy.getPosX(), 630);
+        assertEquals(enemy.getPosY(), 100);
     }
 
     /**
@@ -30,10 +30,10 @@ public class EnemyTest {
      */
     @Test
     public void testMovementX() {
-        float oldPositionX = enemy.getX();
+        float oldPositionX = enemy.getPosX();
         enemy.moveEnemy();
         for (int i = 1; i <= 1560; i++) {
-            if (oldPositionX >= enemy.getX()) {
+            if (oldPositionX >= enemy.getPosX()) {
                 assertTrue(true);
             }
             oldPositionX = oldPositionX - (float) 0.5;
@@ -45,10 +45,10 @@ public class EnemyTest {
      */
     @Test
     public void testMovementY() {
-        float oldPositionY = enemy.getY();
+        float oldPositionY = enemy.getPosY();
         enemy.moveEnemy();
         for (int i = 1; i <= 780; i++) {
-            if (oldPositionY == enemy.getX()) {
+            if (oldPositionY == enemy.getPosX()) {
                 assertTrue(true);
             }
         }

@@ -25,6 +25,10 @@ public class EntityHolder {
         entities.add(entity);
     }
 
+    public void removeEntity(Entity entity){
+        entities.remove(entity);
+    }
+
     public void addProjectile(IProjectile projectile){
         projectiles.add(projectile);
     }

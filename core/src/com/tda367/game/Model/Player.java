@@ -12,13 +12,12 @@ public class Player extends Entity implements IObservers {
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
     List<IEntitySubscriber> subscriberList = new ArrayList<>();
-    private int width;
-    private int height;
-    private int damage = 15;
-    private float velocity = 7;
+    private static int damage = 25;
+    private static float velocity = 7;
     private boolean isAttacking;
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
+    private long latestAttackTime;
 
     /**
      * When creating a player it should have two variables which defines its position.
@@ -98,40 +97,21 @@ public class Player extends Entity implements IObservers {
         return state;
     }
 
-    /**
-     * Gets the velocity of the player
-     * @return the velocity of the player
-     */
-    public float getVelocity() {
-        return velocity;
-    }
-    /**
-     * Gets the height of the object of int
-     * @return the height of a player
-     */
-    public int getHeight(){
-        return height;
-    }
-    /**
-     * Gets the width of the object of int
-     * @return the width of a player
-     */
-
-    public int getWidth(){
-        return width;
-    }
-
     public void takeDamage(int damage){
         health -= damage;
     }
 
-    public void collisionAttack(Entity enemy){
+    public void playerAttack(Entity enemy){
+        long currentAttackTime = System.currentTimeMillis();
+        long minIntervalbetweenAttack = 1000;
         if(isAttacking){
-            System.out.println("Damage :)");
-            enemy.takeDamage(damage);
+            if (currentAttackTime > latestAttackTime + minIntervalbetweenAttack) {
+                System.out.println("Damage :)");
+                enemy.takeDamage(damage);
+                latestAttackTime = currentAttackTime;
+            }
         }
     }
-
 
 
     /**
@@ -146,11 +126,7 @@ public class Player extends Entity implements IObservers {
         if(key == ActionEnum.RIGHT){
             moveRight();
         }
-        if(key == ActionEnum.DAMAGE){
-            isAttacking = true;
-        }
+        isAttacking = key == ActionEnum.DAMAGE;
     }
-
-
 
 }

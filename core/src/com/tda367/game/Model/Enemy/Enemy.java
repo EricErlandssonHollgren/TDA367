@@ -1,5 +1,7 @@
 package Model.Enemy;
 import Model.Entity;
+import Model.PointHandler;
+
 
 
 /**
@@ -10,26 +12,14 @@ import Model.Entity;
 public abstract class Enemy extends Entity {
 
     private final int worth;
-
     /**
-     * @param worth  = is what the enemy is "worth". int will be transferred to the player when the enemy has been killed
+     * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
-    public Enemy(float positionX, float positionY, int entityWidth, int entityHeight, int worth) {
-        super(positionX, positionY, entityWidth, entityHeight);
+    public Enemy(float positionX, float positionY, int worth) {
+        super(positionX, positionY, 100, 100);
         this.worth = worth;
     }
 
-    public int getWorth() {
-        return worth;
-    }
-
-
-    public float getX() {
-        return positionX;
-    }
-    public float getY() {
-        return positionY;
-    }
 
     /**
      * moves the enemy in x-direction only with a change of 0.2px.
@@ -41,8 +31,16 @@ public abstract class Enemy extends Entity {
 
     public void takeDamage(int damage) {
         health -= damage;
-        //TODO: Uppdatera i healthbaren.
+        if(health <= 0){
+            enemyDead(this, worth);
+            System.out.println("I am dead");
+        }
     }
 
+    private void enemyDead(Entity enemy, int amount){
+        //EntityHolder.getInstance().removeEntity(enemy);
+        //TODO: Is currently writing and reading from the list so we might have to change the structure a bit.
+        PointHandler.addPoints(amount);
+    }
 
 }

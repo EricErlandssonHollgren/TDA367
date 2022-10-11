@@ -8,6 +8,6 @@ import Model.Enemy.Enemy;
  */
 public class Enemy1 extends Enemy {
     public Enemy1() {
-        super(630, 100, 100, 100, 5);
+        super(630, 100, 10);
     }
 }
