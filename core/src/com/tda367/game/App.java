@@ -58,7 +58,7 @@ public class App extends ApplicationAdapter {
 		IView playerView = new PlayerView();
 		IView towerView = new TowerView(tower);
 		IView background = new BackgroundView();
-		IView buttonView = new ButtonView(towerController);
+		IView buttonView = new ButtonView(towerController, tower);
 
 		player.positionSubscriber((IPlayerSubscriber) playerView);
 
