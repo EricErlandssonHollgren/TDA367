@@ -54,7 +54,7 @@ public abstract class Entity{
      */
 
     public float getPosY(){
-        return positionX;
+        return positionY;
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class Entity{
      * @return x-coordinate of the object
      */
     public float getPosX(){
-        return positionY;
+        return positionX;
     }
 
     public void takeDamage(int damage){
