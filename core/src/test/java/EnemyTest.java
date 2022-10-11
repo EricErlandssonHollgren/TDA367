@@ -1,7 +1,7 @@
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
-import Model.Vector;
 import Model.Waves;
+import Model.WorldBoundaries;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,11 +16,12 @@ public class EnemyTest {
     Waves wave = new Waves();
     /**
      * Checks if the enemy is being rendered at the right position on the screen.
+     * The actual values are taken from WorldBoundaries and in which position the walls and ground are created
      */
     @Test
     public void testPosition() {
-        assertEquals(enemy.getX(), new Vector(1560,0).getX());
-        assertEquals(enemy.getY(), new Vector(0,0).getY());
+        assertEquals(enemy.getX(), 630);
+        assertEquals(enemy.getY(), 100);
     }
 
     /**
