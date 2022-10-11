@@ -44,7 +44,7 @@ public class ButtonView implements IView {
     private void initButtons(){
         Texture textureUpgradeTower = new Texture("badlogic.jpg");
         this.upgradeButtonTower = new ImageButton(getTxrDrawable(textureUpgradeTower));
-        this.upgradeButtonTower.setSize(15,40);
+        this.upgradeButtonTower.setSize(20,40);
         this.upgradeButtonTower.setPosition(100,400);
 
         Texture textureUpgradeTurret = new Texture("badlogic.jpg");
@@ -55,8 +55,8 @@ public class ButtonView implements IView {
 
         Texture textureBuildTurret = new Texture("badlogic.jpg");
         this.buildButtonTurret = new ImageButton(getTxrDrawable(textureBuildTurret));
-        this.upgradeButtonTower.setSize(10,10);
-        this.upgradeButtonTower.setPosition(100,600);
+        this.buildButtonTurret.setSize(20,40);
+        this.buildButtonTurret.setPosition(200,400);
     }
 
     private void addListeners(){
