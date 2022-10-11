@@ -39,6 +39,11 @@ public abstract class Enemy extends Entity {
         positionX -= speed;
     }
 
+    public float getUpdatedPosition() {
+        moveEnemy();
+        return positionX;
+    }
+
     public void takeDamage(int damage) {
         health -= damage;
         //TODO: Uppdatera i healthbaren.

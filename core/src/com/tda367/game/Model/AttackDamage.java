@@ -6,7 +6,7 @@ public class AttackDamage {
 
     //Will probably rename this class
     private Player player;
-    private FireFlame fireBall;
+    private FireFlame fireFlame;
     private Tower tower;
     private Enemy1 enemy;
     private EntityHolder entityHolder;
