@@ -2,23 +2,22 @@ package View;
 
 import Controller.TowerController;
 import Interfaces.IView;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+import java.util.List;
+
 public class ButtonView implements IView {
 
     private TowerController controller;
+    List<ImageButton> buttons;
 
-    private ImageButton buttonImage;
-    private SpriteBatch batch;
     private Texture texture;
     private TextureRegion txRegion;
     private TextureRegionDrawable txrDrawable;
@@ -60,4 +59,6 @@ public class ButtonView implements IView {
         batch.dispose();
         stage.dispose();
     }
+
+
 }
