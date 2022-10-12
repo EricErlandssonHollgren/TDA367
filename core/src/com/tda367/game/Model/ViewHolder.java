@@ -29,7 +29,7 @@ public class ViewHolder {
 
         IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
         IView enemyView = ViewFactory.createEnemyView();
-        IView playerView = new PlayerView();
+        IView playerView = new PlayerView(player);
         IView towerView = new TowerView(tower);
         IView healthBarView = new HealthBarView(player.healthBar);
         IView background = new BackgroundView();

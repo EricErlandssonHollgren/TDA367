@@ -16,9 +16,7 @@ public class Player extends Entity implements IObservers {
     private int width;
     private int height;
     private int damage = 30;
-
     private float velocity = 7;
-
 
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
@@ -28,11 +26,11 @@ public class Player extends Entity implements IObservers {
      *  @param positionX represents the player's position on the x-axis
      *  @param positionY represents the player's position on the y-axis
      *  @param entityWidth represents the player's
-     *  @param entityHieght represents the player's position on the y-axis
+     *  @param entityHeight represents the player's position on the y-axis
      */
 
-    public Player(float positionX, float positionY, float entityWidth, float entityHieght){
-        super(positionX, positionY, entityWidth, entityHieght);
+    public Player(float positionX, float positionY, float entityWidth, float entityHeight){
+        super(positionX, positionY, entityWidth, entityHeight);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
          this.positionX = positionX;
@@ -155,12 +153,14 @@ public class Player extends Entity implements IObservers {
     public void actionHandle(ActionEnum key) {
         if(key == ActionEnum.LEFT){
             moveLeft();
+            state = STATE.RUNNINGLEFT;
         }
         if(key == ActionEnum.RIGHT){
             moveRight();
+            state = STATE.RUNNINGRIGHT;
+        }
+        if (key == ActionEnum.NOTPRESSED) {
+            state = STATE.IDLE;
         }
     }
-
-
-
 }
