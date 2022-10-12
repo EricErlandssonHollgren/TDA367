@@ -5,17 +5,18 @@ import Model.Tower;
 import Interfaces.IView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import java.util.List;
+ /**
+  * @author Jonatan Jageklint <jonatan.jage@gmail.com>
+  * @author Eric Erlandsson Hollgren <eric.e.hollgren@gmail.com>
+ */
 
 public class ButtonView implements IView {
     private TowerController controller;
@@ -27,6 +28,10 @@ public class ButtonView implements IView {
 
     private Stage stage;
 
+     /**
+      * A constructor for ButtonView.
+      * This creates buttons that when clicked, upgrades Tower with Turrets and upgrades them.'
+      */
     public ButtonView(TowerController towerController, Tower tower) {
         this.controller = towerController;
         this.tower = tower;
@@ -41,11 +46,18 @@ public class ButtonView implements IView {
         Gdx.input.setInputProcessor(stage);
     }
 
+
+    /*
+    Method for setting up texture.
+     */
     private TextureRegionDrawable getTxrDrawable(Texture tx){
         TextureRegion txR = new TextureRegion(tx);
         return new TextureRegionDrawable(txR);
     }
 
+    /*
+    Sets up the buttons textures, sizes and positions.
+     */
     private void initButtons(){
         Texture textureUpgradeTower = new Texture("badlogic.jpg");
         this.upgradeButtonTower = new ImageButton(getTxrDrawable(textureUpgradeTower));
@@ -70,6 +82,9 @@ public class ButtonView implements IView {
         this.buildButtonTurret.setPosition(150,40);
     }
 
+    /*
+    Adds listeners to the buttons that informs controller of specific inputs by the user.
+     */
     private void addListeners(){
         this.upgradeButtonTower.addListener(new ClickListener(){
             @Override
@@ -82,13 +97,13 @@ public class ButtonView implements IView {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 controller.upgradeTurret(1);
-                System.out.println("uTurret");}
+                System.out.println("uTurret1");}
         });
         this.upgradeButtonTurret2.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y){
                     controller.upgradeTurret(2);
-                    System.out.println("uTurret");
+                    System.out.println("uTurret2");
                 }
         });
         this.buildButtonTurret.addListener(new ClickListener(){
@@ -100,6 +115,9 @@ public class ButtonView implements IView {
         });
     }
 
+    /*
+    Makes button for upgrading specific turrets visible after viewing model to see that corresponding turrets exist.
+     */
     private void updateButtonVisibility(){
         if(tower.getTurrets().size() == 1){
             this.upgradeButtonTurret.setVisible(true);

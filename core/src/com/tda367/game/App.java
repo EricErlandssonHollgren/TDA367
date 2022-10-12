@@ -33,7 +33,6 @@ public class App extends ApplicationAdapter {
 		//Model
 		//Handlers
 		player = new Player(120,100);
-		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
 
 		timer = GameTimer.GetInstance();
@@ -43,6 +42,10 @@ public class App extends ApplicationAdapter {
 		goldHandler.setSuccessor(pointsHandler);
 
 		roundHandler = RoundHandler.GetInstance(timer);
+
+
+		//Instantiates Tower, (needs to be done after instantiating Goldhandler).
+		tower = new Tower((Goldhandler) goldHandler);
 
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
