@@ -20,6 +20,13 @@ public abstract class Enemy extends Entity {
         this.worth = worth;
     }
 
+    public float getX() {
+        return positionX;
+    }
+
+    public float getY() {
+        return positionY;
+    }
 
     /**
      * moves the enemy in x-direction only with a change of 0.2px.

@@ -22,10 +22,13 @@ public class FireView implements IView {
     }
     @Override
     public void render() {
-        //drawFacade.drawObject(wave.getEnemyFromQueue().getX(), wave.getEnemyFromQueue().getY(), 50, 50);
-        //fireFlame.updatePosition(wave.getEnemyFromQueue().getUpdatedPosition(), wave.getEnemyFromQueue().getY());
-        drawFacade.drawObject(enemy.getX(), enemy.getY()+30, 50,50);
-        fireFlame.updatePosition(enemy.getUpdatedPosition(), enemy.getPosY());
+        float positionFromEnemy = 60;
+        float imgWidth = 70;
+        float imgHeight = 70;
+        for (Enemy enemy: wave.getEnemiesToRender()) {
+            drawFacade.drawObject(enemy.getX()-positionFromEnemy, enemy.getY(), imgWidth,imgHeight);
+            fireFlame.updatePosition(enemy.getUpdatedPosition(), enemy.getPosY());
+        }
     }
 
     @Override
