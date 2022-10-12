@@ -4,7 +4,6 @@ import Interfaces.*;
 import Model.Enemy.Enemy;
 import Model.Facade.DrawFacade;
 import Model.Waves;
-import com.badlogic.gdx.math.Interpolation;
 
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
@@ -34,7 +33,7 @@ public class EnemyView implements IView {
             float imgWidth = (float) Math.ceil(drawFacade.getTexture().getWidth()*0.15);
             float imgHeight = (float) Math.ceil(drawFacade.getTexture().getHeight()*0.10);
             enemy.moveEnemy();
-            drawFacade.drawObject(enemy.getX(), enemy.getY(), imgWidth, imgHeight);
+            drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), imgWidth, imgHeight);
         }
     }
     @Override

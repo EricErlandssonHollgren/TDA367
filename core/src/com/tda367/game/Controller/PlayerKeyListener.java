@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class PlayerKeyListener {
-    List<IObservers> observers = new ArrayList<>();
+    private List<IObservers> observers = new ArrayList<>();
 
     public void addSubscribers(IObservers observer){
         observers.add(observer);

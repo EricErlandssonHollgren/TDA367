@@ -11,13 +11,33 @@ public abstract class Entity{
     protected STATE state;
     protected int health = 100;
     protected int damage;
+    private float width, height;
 
     public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.state = STATE.IDLE;
+        this.width = entityWidth;
+        this.height = entityHeight;
         this.healthBar = new HealthBar(positionX,positionY, 100f, entityWidth, entityHeight);
     }
+
+    /**
+     * Getter for width
+     * @return float for width
+     */
+    public float getWidth(){
+        return width;
+    }
+
+    /**
+     * Getter for height
+     * @return float for height
+     */
+    public float getHeight(){
+        return height;
+    }
+
 
     public void updateHealthBar() {
         healthBar.updatePosition(positionX,positionY);
@@ -50,10 +70,6 @@ public abstract class Entity{
 
     public void takeDamage(int damage){
         health -= damage;
-    }
-
-    public void doDamage(){
-        damage = 30;
     }
 
 }
