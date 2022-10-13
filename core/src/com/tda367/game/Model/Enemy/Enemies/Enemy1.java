@@ -1,5 +1,6 @@
 package Model.Enemy.Enemies;
 
+import Interfaces.IObject;
 import Model.AttackFactory;
 import Model.Enemy.Enemy;
 

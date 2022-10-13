@@ -1,5 +1,6 @@
 package Model.Enemy;
 import Interfaces.IEnemyAttack;
+import Interfaces.IObject;
 import Model.Entity;
 import Model.EntityHolder;
 import Model.PointHandler;
@@ -14,11 +15,11 @@ import Model.PointHandler;
 public abstract class Enemy extends Entity {
 
     private final int worth;
-    private final IEnemyAttack enemyAttack;
+    private final IObject enemyAttack;
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
-    public Enemy(float positionX, float positionY, int worth, IEnemyAttack enemyAttack) {
+    public Enemy(float positionX, float positionY, int worth, IObject enemyAttack) {
         super(positionX, positionY, 100, 100);
         this.worth = worth;
         this.enemyAttack = enemyAttack;

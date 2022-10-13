@@ -1,7 +1,7 @@
 package Model.Enemy;
 
 
-import Model.AttackFactory;
+import Interfaces.IObject;
 import Model.Enemy.Enemies.Enemy1;
 import Model.EntityHolder;
 
