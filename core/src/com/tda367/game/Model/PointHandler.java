@@ -1,7 +1,7 @@
 package Model;
 
 public class PointHandler extends MainHandler {
-    private static int points = 0;
+    private static int points = 200;
 
     // Checks if the request is meant for this handler.
     // If it´s the correct handler it will add the Points.
@@ -25,6 +25,5 @@ public class PointHandler extends MainHandler {
     // Returns the
     public static int getPoints() {
         return points;
-        // add time passed
     }
 }
