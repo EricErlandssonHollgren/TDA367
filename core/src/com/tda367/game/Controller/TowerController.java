@@ -41,20 +41,6 @@ public class TowerController {
             for (IObservers o : observers) {
                 o.actionHandle(ActionEnum.SELL);
             }
-
-    }
-
-    //Tells tower to upgrade a specific turret.
-    public void upgradeTurret(int i) {
-        if (i == 1) {
-            for (IObservers o : observers) {
-                o.actionHandle(ActionEnum.UPGRADETURRET1);
-            }
-        }
-        else if (i ==2){
-            for (IObservers o : observers) {
-                o.actionHandle(ActionEnum.UPGRADETURRET2);
-            }
         }
     }
 }
