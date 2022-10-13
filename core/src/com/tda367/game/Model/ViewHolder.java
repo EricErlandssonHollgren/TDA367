@@ -1,6 +1,7 @@
-package View;
+package Model;
 
 import Interfaces.IView;
+import View.*;
 
 import java.util.ArrayList;
 import java.util.List;
