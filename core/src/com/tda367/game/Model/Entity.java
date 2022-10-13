@@ -5,13 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 
 public abstract class Entity{
 
-    protected float positionX;
-    protected float positionY;
+    public float positionX;
+    public float positionY;
     public HealthBar healthBar;
-    protected STATE state;
-    protected int health = 100;
+    public STATE state;
+    public int health = 100;
     protected int damage;
-    private float width, height;
+    public float width, height;
 
     public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
         this.positionX = positionX;

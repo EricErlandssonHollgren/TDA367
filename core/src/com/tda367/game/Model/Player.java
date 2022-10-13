@@ -97,10 +97,24 @@ public class Player extends Entity implements IObservers {
         return state;
     }
 
+    /**
+     * The method decrement player's health depending on the input of damage.
+     * @param damage is the input for dealing damage
+     */
     public void takeDamage(int damage){
         health -= damage;
+        if(health <= 0){
+            playerDead();
+        }
+    }
+    private void playerDead(){
+        
     }
 
+    /**
+     *
+     * @param enemy
+     */
     public void playerAttack(Entity enemy){
         long currentAttackTime = System.currentTimeMillis();
         long minIntervalbetweenAttack = 1000;

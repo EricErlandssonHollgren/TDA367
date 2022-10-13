@@ -27,18 +27,6 @@ public class PlayerView implements IView, IEntitySubscriber {
         texture = new Texture("adventurer-stand-01.png");
         drawFacade = new DrawFacade("adventurer-stand-01.png");
         playerSprite = new Sprite();
-        batch = new SpriteBatch();
-        animationFrames = new TextureRegion[6];
-        animationFrames[0] = new TextureRegion(new Texture("adventurer-run-00.png"));
-        animationFrames[1] = new TextureRegion(new Texture("adventurer-run-01.png"));
-        animationFrames[2] = new TextureRegion(new Texture("adventurer-run-02.png"));
-        animationFrames[3] = new TextureRegion(new Texture("adventurer-run-03.png"));
-        animationFrames[4] = new TextureRegion(new Texture("adventurer-run-04.png"));
-        animationFrames[5] = new TextureRegion(new Texture("adventurer-run-05.png"));
-
-
-
-        animation = new Animation(1f/3f, animationFrames);
     }
 
     /**
