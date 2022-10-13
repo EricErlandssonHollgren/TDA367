@@ -1,4 +1,8 @@
 package Model.Enemy;
+<<<<<<< HEAD
+import Interfaces.IEntitySubscriber;
+=======
+>>>>>>> origin/3.2/playerAttackandReceiveDamage
 import Interfaces.IObject;
 import Model.Entity;
 import Model.EntityHolder;
