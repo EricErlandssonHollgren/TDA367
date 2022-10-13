@@ -1,6 +1,5 @@
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
-import Model.Vector;
 import Model.Waves;
 import org.junit.jupiter.api.Test;
 
