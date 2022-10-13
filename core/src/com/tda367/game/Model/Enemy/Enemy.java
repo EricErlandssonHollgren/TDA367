@@ -1,6 +1,7 @@
 package Model.Enemy;
 import Interfaces.IEnemyAttack;
 import Model.Entity;
+import Model.EntityHolder;
 import Model.PointHandler;
 
 
@@ -45,8 +46,7 @@ public abstract class Enemy extends Entity {
     }
 
     private void enemyDead(Entity enemy, int amount){
-        //EntityHolder.getInstance().removeEntity(enemy);
-        //TODO: Is currently writing and reading from the list so we might have to change the structure a bit.
+        EntityHolder.getInstance().removeEntity(enemy);
         PointHandler.addPoints(amount);
     }
 

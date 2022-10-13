@@ -1,6 +1,6 @@
 package com.tda367.game;
 
-import Controller.PlayerKeyListener;
+import Controller.PlayerListener;
 import Interfaces.IEntitySubscriber;
 import Interfaces.IView;
 import Model.*;
@@ -28,7 +28,7 @@ public class App extends ApplicationAdapter {
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
-	private PlayerKeyListener playerKeyListener;
+	private PlayerListener playerListener;
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -51,8 +51,8 @@ public class App extends ApplicationAdapter {
 		collisionDetection = CollisionDetection.getInstance();
 
 		//Controllers
-		playerKeyListener = new PlayerKeyListener();
-		playerKeyListener.addSubscribers(player);
+		playerListener = new PlayerListener();
+		playerListener.addSubscribers(player);
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
@@ -82,7 +82,7 @@ public class App extends ApplicationAdapter {
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
-		playerKeyListener.UpdatePlayerMovement();
+		playerListener.UpdatePlayerMovement();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}

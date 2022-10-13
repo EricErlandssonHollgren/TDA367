@@ -68,16 +68,19 @@ public class CollisionDetection {
      */
     public Map<Entity, Boolean> CheckCollisionPlayerAndEnemy(Player player){
         Map<Entity, Boolean> collisions = new HashMap<>();
+        List<Entity> attackedEnemies = new ArrayList<>();
         for (Entity entity: posHandler.entities) {
             if(entity instanceof Enemy){
                 if((player.getPosX() + player.getWidth() > entity.getPosX()) &&
                         player.getPosX() <= entity.getWidth() + entity.getPosX()){
                     collisions.put(entity,true);
-                    player.playerAttack(entity);
-                    //TODO: Uppdatera attacken efter klockan. Förmodligen inte här
+                    attackedEnemies.add(entity);
                 }
                 collisions.put(entity,false);
             }
+        }
+        for (Entity e: attackedEnemies) {
+            player.playerAttack(e);
         }
         return collisions;
     }
