@@ -8,7 +8,7 @@ import Model.Waves;
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
-public class EnemyView implements IView {
+public class EnemyView implements IView, IEntitySubscriber{
 
     private Waves wave;
     private DrawFacade drawFacade;
@@ -38,7 +38,16 @@ public class EnemyView implements IView {
     }
     @Override
     public void dispose() {
-        drawFacade.dispose();
+
     }
 
+    @Override
+    public void updatePosition(float x, float y) {
+
+    }
+
+    @Override
+    public void updateState() {
+        drawFacade.dispose();
+    }
 }

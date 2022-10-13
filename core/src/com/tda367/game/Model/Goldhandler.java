@@ -1,7 +1,7 @@
 package Model;
 
 public class Goldhandler extends MainHandler {
-    private int gold = 0;
+    private static int gold = 100;
 
     // Checks if the request is meant for this handler.
     // If it´s the correct handler it will add the gold.
@@ -18,8 +18,8 @@ public class Goldhandler extends MainHandler {
     }
 
     // Adds gold to the total
-    private void addGold(int amount){
-        this.gold+=amount;
+    public static void addGold(int amount){
+        gold+=amount;
     }
 
     // Returns gold
