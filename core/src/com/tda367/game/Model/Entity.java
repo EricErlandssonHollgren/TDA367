@@ -1,5 +1,8 @@
 package Model;
-public abstract class Entity{
+
+import Interfaces.IObject;
+
+public abstract class Entity {
     public float positionX;
     public float positionY;
     public HealthBar healthBar;
@@ -7,6 +10,7 @@ public abstract class Entity{
     public int health = 100;
     protected int damage;
     public float width, height;
+
 
     public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
         this.positionX = positionX;

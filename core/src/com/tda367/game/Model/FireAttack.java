@@ -1,9 +1,8 @@
 package Model;
 
-import Interfaces.IEnemyAttack;
 import Interfaces.IObject;
 
-public class FireAttack implements IEnemyAttack, IObject {
+public class FireAttack implements IObject {
 
     private float x;
     private float y;
@@ -21,7 +20,6 @@ public class FireAttack implements IEnemyAttack, IObject {
         this.damage = 5;
     }
 
-    @Override
     public float getDamage() {
         return this.damage;
     }
