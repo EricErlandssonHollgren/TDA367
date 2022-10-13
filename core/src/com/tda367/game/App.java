@@ -60,6 +60,7 @@ public class App extends ApplicationAdapter {
 		IView playerView = new PlayerView();
 		IView towerView = new TowerView(tower);
 		IView healthBarView = new HealthBarView(player.healthBar);
+		IView attackView = new AttackView();
 		IView background = new BackgroundView();
 		player.positionSubscriber((IEntitySubscriber) playerView);
 
@@ -69,6 +70,7 @@ public class App extends ApplicationAdapter {
 		views.addView(worldBoundariesView);
 		views.addView(playerView);
 		views.addView(towerView);
+		views.addView(attackView);
 		views.addView(enemyView);
 		views.addView(healthBarView);
 

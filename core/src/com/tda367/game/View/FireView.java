@@ -19,7 +19,7 @@ public class FireView implements IView {
     @Override
     public void render() {
         float imgPositionFromEnemy = 60;
-        drawFacade.drawObject(enemy.getX()-imgPositionFromEnemy, enemy.getY(), fireAttack.getImgWidth(), fireAttack.getImgHeight());
+        drawFacade.drawObject(enemy.getPosX()-imgPositionFromEnemy, enemy.getPosY(), fireAttack.getImgWidth(), fireAttack.getImgHeight());
         fireAttack.updatePosition(enemy.getUpdatedPosition(), enemy.getPosY());
     }
 
