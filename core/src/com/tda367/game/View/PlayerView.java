@@ -50,6 +50,7 @@ public class PlayerView implements IView, IEntitySubscriber {
      */
     @Override
     public void render() {
+
         if (player.getState() == STATE.IDLE)
             idleAnimation();
         else if (player.getState() == STATE.RUNNINGLEFT)
@@ -107,6 +108,13 @@ public class PlayerView implements IView, IEntitySubscriber {
         animationFrames[3] = new TextureRegion(new Texture("adventurer-attack1-03.png"));
         animationFrames[4] = new TextureRegion(new Texture("adventurer-attack1-04.png"));
         animation = new Animation(1f/2f, animationFrames);
+    }
+
+    void hurAnimation() {
+        animationFrames = new TextureRegion[3];
+        animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-00.png"));
+        animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-01.png"));
+        animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-02.png"));
     }
 
     void dieAnimation() {

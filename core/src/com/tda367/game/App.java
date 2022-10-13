@@ -33,7 +33,7 @@ public class App extends ApplicationAdapter {
 
 
 
-		player = new Player(120,100, 50, 37);
+		player = new Player(120,100, 50, 55);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
