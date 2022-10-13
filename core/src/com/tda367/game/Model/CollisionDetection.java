@@ -89,7 +89,7 @@ public class CollisionDetection {
      * @param player
      * @return List of entities
      */
-    public List<Entity> enemyInHitbox(Player player){
+    public List<Entity> CheckCollisionEnemyAndHitBox(Player player){
         List<Entity> collisions = new ArrayList<>();
         float[] attackEdges = player.attackHitbox.getEdges();
         for (Entity entity: posHandler.entities) {
