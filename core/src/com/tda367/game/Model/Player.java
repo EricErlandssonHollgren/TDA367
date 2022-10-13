@@ -92,11 +92,6 @@ public class Player extends Entity implements IObservers {
         isAbleToMoveLeft = ableToMoveLeft;
     }
 
-
-    public STATE getState() {
-        return state;
-    }
-
     /**
      * The method decrement player's health depending on the input of damage.
      * @param damage is the input for dealing damage
@@ -108,13 +103,12 @@ public class Player extends Entity implements IObservers {
         }
     }
     private void playerDead(){
-        
+        for (IEntitySubscriber subscriber : subscriberList) {
+            subscriber.updateState();
+        }
     }
 
-    /**
-     *
-     * @param enemy
-     */
+
     public void playerAttack(Entity enemy){
         long currentAttackTime = System.currentTimeMillis();
         long minIntervalbetweenAttack = 1000;
@@ -127,20 +121,23 @@ public class Player extends Entity implements IObservers {
         }
     }
 
-
     /**
      * The method allows the player to move left or right depending on the key that is pressed.
-     * @param key uses the moveLeft() or moveRight() method
+     * @param action uses the moveLeft() or moveRight() method
      */
     @Override
-    public void actionHandle(ActionEnum key) {
-        if(key == ActionEnum.LEFT){
+    public void actionHandle(ActionEnum action) {
+        if(action == ActionEnum.LEFT){
             moveLeft();
         }
-        if(key == ActionEnum.RIGHT){
+        if(action == ActionEnum.RIGHT){
             moveRight();
         }
-        isAttacking = key == ActionEnum.DAMAGE;
+        if(action == ActionEnum.DEAD){
+            playerDead();
+        }
+        isAttacking = action == ActionEnum.DAMAGE;
+
     }
 
 }

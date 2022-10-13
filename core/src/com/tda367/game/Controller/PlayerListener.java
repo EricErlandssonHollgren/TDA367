@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PlayerKeyListener {
+public class PlayerListener {
     private List<IObservers> observers = new ArrayList<>();
 
     public void addSubscribers(IObservers observer){
@@ -37,5 +37,12 @@ public class PlayerKeyListener {
                 o.actionHandle(ActionEnum.DAMAGE);
             }
         }
+    }
+
+    public void UpdatePlayerState(){
+        for(IObservers o : observers){
+            o.actionHandle(ActionEnum.DEAD);
+        }
+
     }
 }

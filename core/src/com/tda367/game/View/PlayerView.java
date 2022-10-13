@@ -15,7 +15,7 @@ public class PlayerView implements IView, IEntitySubscriber {
     private float elapsedTime;
     private Texture texture;
     private TextureRegion[] animationFrames;
-    Animation animation;
+    private Animation animation;
 
     public Sprite playerSprite;
     /**
@@ -37,6 +37,11 @@ public class PlayerView implements IView, IEntitySubscriber {
     @Override
     public void updatePosition(float x, float y) {
         playerSprite.setPosition(x, y);
+    }
+
+    @Override
+    public void updateState(){
+        //TODO: Uppdatera playerSprite här ?
     }
 
     /**
