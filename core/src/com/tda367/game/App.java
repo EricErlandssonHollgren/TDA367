@@ -4,13 +4,15 @@ import Controller.PlayerKeyListener;
 import Model.*;
 import Model.Enemy.EnemyFactory;
 import View.HealthBarView;
+import View.MainMenuView;
 import View.PlayerView;
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class App extends ApplicationAdapter {
+public class App extends Game {
 	private SpriteBatch batch;
 	private GameTimer timer;
 	private ViewHolder views;
@@ -24,14 +26,17 @@ public class App extends ApplicationAdapter {
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
 	private PlayerKeyListener playerKeyListener;
+	private MainMenuView mainMenuView;
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
 	@Override
 	public void create () {
+
+		setScreen(new MainMenuView(this));
+
 		//Handlers
-
-
+		/*
 
 		player = new Player(120,100, 50, 37);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
@@ -53,10 +58,13 @@ public class App extends ApplicationAdapter {
 		playerKeyListener = new PlayerKeyListener();
 		playerKeyListener.addSubscribers(player);
 
+		 */
+
 	}
   
 	@Override
 	public void render () {
+		/*
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
@@ -64,6 +72,8 @@ public class App extends ApplicationAdapter {
 		playerKeyListener.UpdatePlayerMovement();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
+
+		 */
 	}
 	
 	@Override

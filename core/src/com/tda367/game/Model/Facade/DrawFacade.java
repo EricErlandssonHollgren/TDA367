@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 public class DrawFacade {
     private SpriteBatch batch;
     private Texture img;
+    private String str;
     private ShapeRenderer shaperenderer;
 
     public DrawFacade(String texturePath){
