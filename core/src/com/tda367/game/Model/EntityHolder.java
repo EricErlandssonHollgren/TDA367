@@ -1,5 +1,6 @@
 package Model;
 
+import Interfaces.IEnemyAttack;
 import Interfaces.IProjectile;
 
 import java.util.ArrayList;
@@ -9,10 +10,13 @@ public class EntityHolder {
     List<Entity> entities;
     List<IProjectile> projectiles;
 
+    List<IEnemyAttack> attacks;
+
     private static EntityHolder instance;
     private EntityHolder(){
         entities = new ArrayList<>();
         projectiles = new ArrayList<>();
+        attacks = new ArrayList<>();
     }
     public static EntityHolder getInstance(){
         if(instance == null){
@@ -32,4 +36,5 @@ public class EntityHolder {
     public void addProjectile(IProjectile projectile){
         projectiles.add(projectile);
     }
+
 }

@@ -1,6 +1,7 @@
 package Model.Enemy;
 
 
+import Model.AttackFactory;
 import Model.Enemy.Enemies.Enemy1;
 import Model.EntityHolder;
 
@@ -10,7 +11,7 @@ import Model.EntityHolder;
  */
 public class EnemyFactory {
 
-    public static Enemy createEnemy1() {
+    public static Enemy1 createEnemy1() {
         Enemy1 enemy1 = new Enemy1();
         EntityHolder.getInstance().addEntity(enemy1);
         return enemy1;

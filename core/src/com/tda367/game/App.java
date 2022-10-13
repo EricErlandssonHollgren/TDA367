@@ -21,7 +21,7 @@ public class App extends ApplicationAdapter {
 	private Tower tower;
 	private HealthBar healthBar;
 
-	private FireFlame fireFlame;
+	private FireAttack fireAttack;
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
@@ -38,7 +38,7 @@ public class App extends ApplicationAdapter {
 		worldBoundaries = new WorldBoundaries();
 		enemy = EnemyFactory.createEnemy1();
 		timer = GameTimer.GetInstance();
-		fireFlame = new FireFlame(enemy.getX(), enemy.getY(), 10, 10, 10);
+		fireAttack = new FireAttack(enemy.getX(), enemy.getY());
 		//setup chain of responsibility?
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();
@@ -47,7 +47,7 @@ public class App extends ApplicationAdapter {
 		roundHandler = RoundHandler.GetInstance(timer);
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
-		views = new ViewHolder(-0.5f,player, tower,worldBoundaries, healthBar, fireFlame);
+		views = new ViewHolder(-0.5f,player, tower,worldBoundaries, healthBar, fireAttack);
 
 
 		//Controllers

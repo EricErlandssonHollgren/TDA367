@@ -1,5 +1,6 @@
 package Model.Enemy.Enemies;
 
+import Model.AttackFactory;
 import Model.Enemy.Enemy;
 
 /**
@@ -8,6 +9,6 @@ import Model.Enemy.Enemy;
  */
 public class Enemy1 extends Enemy {
     public Enemy1() {
-        super(630, 100, 10);
+        super(630, 100, 10, AttackFactory.createFireFlame(630,100));
     }
 }
