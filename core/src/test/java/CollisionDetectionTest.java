@@ -1,4 +1,3 @@
-import Interfaces.IEntity;
 import Model.*;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
@@ -13,7 +12,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerCollideswithLeftBlock(){
-        Player player = new Player(5, 100);
+        Player player = new Player(5, 100, 50,37);
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(0,40,1000,10);
 
@@ -24,7 +23,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerCollideswithRightBlock(){
-        Player player = new Player(620, 100);
+        Player player = new Player(620, 100, 50 ,37);
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(630,40,1000,10);
 
@@ -34,7 +33,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerWillNotCollidewithLeftBlock(){
-        Player player = new Player(17, 100);
+        Player player = new Player(17, 100, 50 ,37);
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(0,40,1000,10);
 
@@ -43,7 +42,7 @@ public class CollisionDetectionTest {
     }
     @Test
     public void playerWillNotCollidewithRightBlock(){
-        Player player = new Player(500, 100);
+        Player player = new Player(500, 100, 50 ,37);
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(630,40,1000,10);
 
@@ -53,26 +52,26 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerWillCollideWithEnemy(){
-        Player player = new Player(200, 0);
+        Player player = new Player(200, 0, 50 ,37);
         CollisionDetection cd = CollisionDetection.getInstance();
         Enemy enemy = EnemyFactory.createEnemy1();
 
         EntityHolder.getInstance().addEntity(enemy);
-        Map<IEntity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
+        Map<Entity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
 
         assertTrue(collision.get(enemy));
     }
 
     @Test
     public void playerWillNotCollideWithEnemy(){
-        Player player = new Player(500,500);
+        Player player = new Player(500,500, 50 ,37);
         CollisionDetection cd = CollisionDetection.getInstance();
 
-        Enemy enemy = EnemyFactory.createEnemy1();
+        Entity enemy = EnemyFactory.createEnemy1();
 
         EntityHolder.getInstance().addEntity(enemy);
 
-        Map<IEntity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
+        Map<Entity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
         assertFalse(collision.get(enemy));
     }
 }

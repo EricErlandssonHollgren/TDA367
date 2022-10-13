@@ -18,11 +18,11 @@ public class testEnemy {
         //assertEquals(enemy.getPositionY(), 0);
     }
  */
-
+/*
     @Test
     public void testRendering() {
         Enemy enemy = new Enemy1();
         assertTrue(enemy.getSpritePath() == "koopaTroopa.png");
     }
-
+*/
 }

@@ -4,7 +4,10 @@ import Controller.PlayerKeyListener;
 import Controller.TowerController;
 import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
+import Interfaces.IEntitySubscriber;
+import Interfaces.IView;
 import Model.*;
+import Model.Enemy.EnemyFactory;
 import View.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -20,6 +23,7 @@ public class App extends ApplicationAdapter {
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
 	private Tower tower;
+	private HealthBar healthBar;
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
@@ -31,16 +35,15 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		//Model
-		//Handlers
-		player = new Player(120,100);
+		player = new Player(120,100, 50, 37);
+		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		worldBoundaries = new WorldBoundaries();
-
 		timer = GameTimer.GetInstance();
-		//setup chain of responsibility?
+
+		//Handlers
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();
 		goldHandler.setSuccessor(pointsHandler);
-
 		roundHandler = RoundHandler.GetInstance(timer);
 
 
@@ -58,12 +61,13 @@ public class App extends ApplicationAdapter {
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
+		IView enemyView = ViewFactory.createEnemyView();
 		IView playerView = new PlayerView();
 		IView towerView = new TowerView(tower);
-		IView background = new BackgroundView();
 		IView buttonView = new ButtonView(towerController, tower);
-
-		player.positionSubscriber((IPlayerSubscriber) playerView);
+		IView healthBarView = new HealthBarView(player.healthBar);
+		IView background = new BackgroundView();
+		player.positionSubscriber((IEntitySubscriber) playerView);
 
 		//Add views to list and they will be rendered. Views must implement IView
 		views = new ViewHolder();
@@ -72,6 +76,9 @@ public class App extends ApplicationAdapter {
 		views.addView(playerView);
 		views.addView(towerView);
 		views.addView(buttonView);
+		views.addView(enemyView);
+		views.addView(healthBarView);
+
 	}
   
 	@Override
@@ -89,5 +96,6 @@ public class App extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		views.dispose();
+
 	}
 }

@@ -1,10 +1,7 @@
 package Model;
 
-import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
 import View.*;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +11,14 @@ public class ViewHolder {
     private List<IView> views;
 
     /**
-     * Initialises the startup views
+     * Initiates a holder for the views and calls the views to render
      */
     public ViewHolder(){
         //Instantiate world and views list
         views = new ArrayList<>();
 
     }
-    // add method to connect controller and view
+    // Adds a View to ViewHolders views
     public void addView(IView view){
         views.add(view);
     }
