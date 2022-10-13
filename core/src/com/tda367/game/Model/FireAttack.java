@@ -1,8 +1,9 @@
 package Model;
 
 import Interfaces.IEnemyAttack;
+import Interfaces.IObject;
 
-public class FireAttack implements IEnemyAttack {
+public class FireAttack implements IEnemyAttack, IObject {
 
     private float x;
     private float y;
@@ -33,13 +34,16 @@ public class FireAttack implements IEnemyAttack {
         return this.y;
     }
 
-    public float getImgWidth(){
+    @Override
+    public float getHeight() {
+        return imgHeight;
+    }
+
+    @Override
+    public float getWidth() {
         return imgWidth;
     }
 
-    public float getImgHeight(){
-        return imgHeight;
-    }
     public void updatePosition(float x, float y) {
         this.x = x;
         this.y = y;
