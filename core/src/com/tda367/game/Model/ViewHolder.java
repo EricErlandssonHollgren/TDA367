@@ -10,37 +10,14 @@ import java.util.List;
 public class ViewHolder {
     //
     private List<IView> views;
-    //private PlayerKeyListener keyListener;
-    private float gravity;
 
     /**
-     * Initialises the startup views
-     * @param gravity
+     * Initiates a holder for the views and calls the views to render
      */
-    public ViewHolder(float gravity, Player player, Tower tower, WorldBoundaries worldBoundaries, HealthBar healthBar, FireAttack fireAttack){
+    public ViewHolder(){
         //Instantiate world and views list
-        this.gravity = gravity;
         views = new ArrayList<>();
 
-        //Create views and objects
-        IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
-        IView enemyView = ViewFactory.createEnemyView();
-        IView playerView = new PlayerView();
-        IView towerView = new TowerView(tower);
-        IView statsView = new StatsView();
-        IView healthBarView = new HealthBarView(player.healthBar);
-        IView fireView = new AttackView();
-        IView background = new BackgroundView();
-        player.positionSubscriber((IEntitySubscriber) playerView);
-        //Add views to list and they will be rendered. Views must implement IView
-        addView(background);
-        addView(statsView);
-        addView(worldBoundariesView);
-        addView(playerView);
-        addView(towerView);
-        addView(enemyView);
-        addView(healthBarView);
-        addView(fireView);
     }
     public void addView(IView view){
         views.add(view);

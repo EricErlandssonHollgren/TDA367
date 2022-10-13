@@ -1,9 +1,12 @@
 package com.tda367.game;
 
 import Controller.PlayerKeyListener;
+import Interfaces.IEntitySubscriber;
+import Interfaces.IView;
 import Model.*;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
+import View.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,28 +34,43 @@ public class App extends ApplicationAdapter {
 	 */
 	@Override
 	public void create () {
-		//Handlers
+		//Model
 		player = new Player(120,100, 50, 37);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
 		enemy = EnemyFactory.createEnemy1();
 		timer = GameTimer.GetInstance();
-		fireAttack = new FireAttack(enemy.getX(), enemy.getY());
-		//setup chain of responsibility?
+
+		//Handlers
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();
 		goldHandler.setSuccessor(pointsHandler);
-
 		roundHandler = RoundHandler.GetInstance(timer);
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
-		views = new ViewHolder(-0.5f,player, tower,worldBoundaries, healthBar, fireAttack);
-
 
 		//Controllers
 		playerKeyListener = new PlayerKeyListener();
 		playerKeyListener.addSubscribers(player);
+
+		//Create views and objects
+		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
+		IView enemyView = ViewFactory.createEnemyView();
+		IView playerView = new PlayerView();
+		IView towerView = new TowerView(tower);
+		IView healthBarView = new HealthBarView(player.healthBar);
+		IView background = new BackgroundView();
+		player.positionSubscriber((IEntitySubscriber) playerView);
+
+		//Add views to list and they will be rendered. Views must implement IView
+		views = new ViewHolder();
+		views.addView(background);
+		views.addView(worldBoundariesView);
+		views.addView(playerView);
+		views.addView(towerView);
+		views.addView(enemyView);
+		views.addView(healthBarView);
 
 	}
   
