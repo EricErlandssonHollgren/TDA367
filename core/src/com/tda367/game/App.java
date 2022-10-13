@@ -31,7 +31,10 @@ public class App extends ApplicationAdapter {
 	 */
 	@Override
 	public void create () {
-		//Model
+		//Handlers
+
+
+
 		player = new Player(120,100, 50, 37);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		worldBoundaries = new WorldBoundaries();
@@ -41,6 +44,7 @@ public class App extends ApplicationAdapter {
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();
 		goldHandler.setSuccessor(pointsHandler);
+
 		roundHandler = RoundHandler.GetInstance(timer);
 
 

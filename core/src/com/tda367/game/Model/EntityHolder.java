@@ -3,11 +3,13 @@ package Model;
 import Interfaces.IProjectile;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class EntityHolder {
     List<Entity> entities;
-    List<IProjectile> projectiles;
+    private List<IProjectile> projectiles;
 
     private static EntityHolder instance;
     private EntityHolder(){
@@ -21,11 +23,15 @@ public class EntityHolder {
         return instance;
     }
     public void addEntity(Entity entity){
-        //In factories add entities to this list
         entities.add(entity);
     }
-
+    public List<IProjectile> getProjectiles(){
+        return this.projectiles;
+    }
     public void addProjectile(IProjectile projectile){
         projectiles.add(projectile);
+    }
+    public void removeProjectile(IProjectile projectile){
+        projectiles.remove(projectile);
     }
 }
