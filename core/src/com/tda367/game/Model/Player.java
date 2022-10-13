@@ -18,6 +18,7 @@ public class Player extends Entity implements IObservers {
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
     private long latestAttackTime;
+    public AttackHitbox attackHitbox;
 
     /**
      * When creating a player it should have two variables which defines its position.
@@ -32,6 +33,7 @@ public class Player extends Entity implements IObservers {
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
         isAttacking  = true;
+        attackHitbox = new AttackHitbox(positionX+width,positionY);
     }
 
 
@@ -53,6 +55,7 @@ public class Player extends Entity implements IObservers {
     public void moveLeft(){
         if(isAbleToMoveLeft) {
             positionX -= velocity;
+            attackHitbox.setX(positionX);
             for (IEntitySubscriber subscriber : subscriberList) {
                 subscriber.updatePosition(positionX, positionY);
                 updateHealthBar();
@@ -68,6 +71,7 @@ public class Player extends Entity implements IObservers {
     public void moveRight(){
         if(isAbleToMoveRight){
             positionX += velocity;
+            attackHitbox.setX(positionX);
             for (IEntitySubscriber subscriber : subscriberList) {
                 subscriber.updatePosition(positionX,positionY);
                 updateHealthBar();
