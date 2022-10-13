@@ -2,12 +2,9 @@ package com.tda367.game;
 
 import Controller.PlayerKeyListener;
 import Controller.TowerController;
-import Interfaces.IPlayerSubscriber;
 import Interfaces.IView;
 import Interfaces.IEntitySubscriber;
-import Interfaces.IView;
 import Model.*;
-import Model.Enemy.EnemyFactory;
 import View.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
