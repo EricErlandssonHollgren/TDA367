@@ -85,6 +85,28 @@ public class CollisionDetection {
     }
 
     /**
+     * Checks if a player should deal damage to an enemy
+     * @param player
+     * @return List of entities
+     */
+    public List<Entity> enemyInHitbox(Player player){
+        List<Entity> collisions = new ArrayList<>();
+        float[] attackEdges = player.attackHitbox.getEdges();
+        for (Entity entity: posHandler.entities) {
+            if(entity instanceof Enemy){
+                if((attackEdges[1] > entity.getPosX()) &&
+                        attackEdges[0] <= entity.getWidth() + entity.getPosX()){
+                    collisions.add(entity);
+                }
+            }
+        }
+        for (Entity e: collisions) {
+            player.playerAttack(e);
+        }
+        return collisions;
+    }
+
+    /**
      * The method checks collision between projectiles and enemies in the game. If an enemy is hit
      * it will return the enemy that is hit along with the value true
      */

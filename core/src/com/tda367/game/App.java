@@ -39,7 +39,6 @@ public class App extends ApplicationAdapter {
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
-		enemy = EnemyFactory.createEnemy1();
 		timer = GameTimer.GetInstance();
 
 		//Handlers
@@ -82,8 +81,9 @@ public class App extends ApplicationAdapter {
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
-		collisionDetection.CheckCollisionPlayerAndEnemy(player);
+		//collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
+		collisionDetection.enemyInHitbox(player);
 		playerListener.UpdatePlayerMovement();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();

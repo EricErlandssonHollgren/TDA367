@@ -1,5 +1,6 @@
 package Model;
 
+
 import Interfaces.IObject;
 
 public class AttackFactory {
