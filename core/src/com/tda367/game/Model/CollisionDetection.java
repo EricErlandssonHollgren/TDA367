@@ -1,6 +1,5 @@
 package Model;
 
-import Interfaces.IObservers;
 import Interfaces.IProjectile;
 import Model.Enemy.Enemy;
 import java.util.ArrayList;

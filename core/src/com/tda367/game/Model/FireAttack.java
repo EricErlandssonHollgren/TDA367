@@ -45,4 +45,6 @@ public class FireAttack implements IEnemyAttack {
         this.y = y;
     }
 
+
+
 }

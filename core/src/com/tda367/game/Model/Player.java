@@ -133,7 +133,7 @@ public class Player extends Entity implements IObservers {
         if(action == ActionEnum.RIGHT){
             moveRight();
         }
-        if(action == ActionEnum.DEAD){
+        if(action == ActionEnum.DYING){
             playerDead();
         }
         isAttacking = action == ActionEnum.DAMAGE;

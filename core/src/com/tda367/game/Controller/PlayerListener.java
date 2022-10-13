@@ -41,7 +41,7 @@ public class PlayerListener {
 
     public void UpdatePlayerState(){
         for(IObservers o : observers){
-            o.actionHandle(ActionEnum.DEAD);
+            o.actionHandle(ActionEnum.DYING);
         }
 
     }

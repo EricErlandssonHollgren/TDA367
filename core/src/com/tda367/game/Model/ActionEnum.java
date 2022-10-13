@@ -10,7 +10,9 @@ public enum ActionEnum {
     UPGRADETURRET2,
     BUILD,
     SELL,
-    DEAD,
-    STATE
-
+    ATTACKING,
+    RUNNINGLEFT,
+    RUNNINGRIGHT,
+    IDLE,
+    DYING
 }

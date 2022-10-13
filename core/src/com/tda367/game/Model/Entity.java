@@ -1,14 +1,9 @@
 package Model;
-
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
-
 public abstract class Entity{
-
     public float positionX;
     public float positionY;
     public HealthBar healthBar;
-    public STATE state;
+    public ActionEnum state;
     public int health = 100;
     protected int damage;
     public float width, height;
@@ -16,7 +11,7 @@ public abstract class Entity{
     public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
         this.positionX = positionX;
         this.positionY = positionY;
-        this.state = STATE.IDLE;
+        this.state = ActionEnum.IDLE;
         this.width = entityWidth;
         this.height = entityHeight;
         this.healthBar = new HealthBar(positionX,positionY, 100f, entityWidth, entityHeight);
@@ -43,7 +38,7 @@ public abstract class Entity{
         healthBar.updatePosition(positionX,positionY);
     }
 
-    public STATE getState() {
+    public ActionEnum getState() {
         return state;
     }
 

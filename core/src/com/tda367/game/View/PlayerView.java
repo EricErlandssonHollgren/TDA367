@@ -2,11 +2,8 @@ package View;
 import Interfaces.IEntitySubscriber;
 import Interfaces.IView;
 import Model.Facade.DrawFacade;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
-import Model.Facade.DrawFacade;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class PlayerView implements IView, IEntitySubscriber {
