@@ -84,7 +84,7 @@ public class CollisionDetectionTest {
         EntityHolder eh = EntityHolder.getInstance();
         eh.addEntity(enemy);
 
-        IProjectile projectile = ProjectileFactory.createCannonball(630,150,0,0,16);
+        IProjectile projectile = ProjectileFactory.createCannonball(630,100,0,0,16);
         Map<Entity,IProjectile> collision = cd.checkCollisionProjectileAndEnemy();
         assertTrue(collision.containsKey(enemy));
         assertTrue(collision.containsValue(projectile));
