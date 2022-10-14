@@ -33,7 +33,7 @@ public class EnemyView implements IView, IEntitySubscriber{
             float imgWidth = (float) Math.ceil(drawFacade.getTexture().getWidth()*0.15);
             float imgHeight = (float) Math.ceil(drawFacade.getTexture().getHeight()*0.10);
             enemy.moveEnemy();
-            drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), imgWidth, imgHeight);
+            drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
         }
     }
     @Override

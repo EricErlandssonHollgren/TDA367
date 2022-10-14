@@ -32,7 +32,7 @@ public class Player extends Entity implements IObservers {
         super(positionX, positionY, entityWidth, entityHeight);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
-        isAttacking  = false;
+        isAttacking  = true;
         attackHitbox = new AttackHitbox(positionX+width,positionY);
     }
 
@@ -135,16 +135,19 @@ public class Player extends Entity implements IObservers {
     public void actionHandle(ActionEnum action) {
         if(action == ActionEnum.LEFT){
             moveLeft();
+            isAttacking = false;
         }
-        if(action == ActionEnum.RIGHT){
+        if(action == ActionEnum.RIGHT) {
             moveRight();
+            isAttacking = false;
         }
 
-        if(action == ActionEnum.DYING){
+        if(action == ActionEnum.DAMAGE) {
+            isAttacking = true;
+        } else if (action == ActionEnum.DYING) {
             playerDead();
+            isAttacking = false;
         }
-        isAttacking = action == ActionEnum.DAMAGE;
-
 
     }
 

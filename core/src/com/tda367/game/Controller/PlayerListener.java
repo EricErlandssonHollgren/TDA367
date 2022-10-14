@@ -35,14 +35,12 @@ public class PlayerListener {
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
             for (IObservers o : observers){
                 o.actionHandle(ActionEnum.DAMAGE);
+
             }
         }
     }
 
     public void UpdatePlayerState(){
-        for(IObservers o : observers){
-            o.actionHandle(ActionEnum.DYING);
-        }
 
     }
 }

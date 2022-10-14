@@ -34,7 +34,6 @@ public class App extends ApplicationAdapter {
 	private TowerController towerController;
 	private PlayerListener playerListener;
 	private ProjectileController projectileController;
-	private TowerController towerController;
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -100,17 +99,12 @@ public class App extends ApplicationAdapter {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
 
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
-		//collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
 
 		List<IProjectile> projectileGround = collisionDetection.checkCollisionProjectileGround();
 		Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();
-		//System.out.println(projectileEnemy.values().size());
-		playerKeyListener.UpdatePlayerMovement();
-		projectileController.updateProjectiles(projectileEnemy,projectileGround);
-
-		collisionDetection.enemyInHitbox(player);
 		playerListener.UpdatePlayerMovement();
+		projectileController.updateProjectiles(projectileEnemy,projectileGround);
 		playerListener.UpdatePlayerState();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();

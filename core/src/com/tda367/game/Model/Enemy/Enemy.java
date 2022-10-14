@@ -1,6 +1,7 @@
 package Model.Enemy;
 import Interfaces.IEntitySubscriber;
 import Interfaces.IObject;
+import Interfaces.IProjectile;
 import Model.Entity;
 import Model.EntityHolder;
 import Model.Goldhandler;

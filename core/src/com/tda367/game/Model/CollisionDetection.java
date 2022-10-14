@@ -72,7 +72,7 @@ public class CollisionDetection {
     public Map<Entity, Boolean> CheckCollisionPlayerAndEnemy(Player player){
         Map<Entity, Boolean> collisions = new HashMap<>();
         List<Entity> attackedEnemies = new ArrayList<>();
-        for (Entity entity: posHandler.entities) {
+        for (Entity entity: posHandler.entities) {;
             if(entity instanceof Enemy){
                 if((player.getPosX() + player.getWidth() > entity.getPosX()) &&
                         player.getPosX() <= entity.getWidth() + entity.getPosX()){
@@ -129,8 +129,8 @@ public class CollisionDetection {
     }
 
     private boolean isColliding(Entity entity, IProjectile projectile){
-        if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+ entity.getEntityHeight())){
-            return (projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+ entity.getEntityWidth());
+        if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+ entity.getHeight())){
+            return (projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+ entity.getWidth());
         }
         return false;
     }
