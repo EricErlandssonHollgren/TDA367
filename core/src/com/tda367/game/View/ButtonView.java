@@ -96,13 +96,13 @@ public class ButtonView implements IView {
         this.upgradeButtonTurret.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                controller.upgradeTurret(1);
+                controller.upgradeTower();
                 System.out.println("uTurret1");}
         });
         this.upgradeButtonTurret2.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y){
-                    controller.upgradeTurret(2);
+                    controller.upgradeTower();
                     System.out.println("uTurret2");
                 }
         });

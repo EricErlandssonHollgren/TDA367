@@ -5,7 +5,6 @@ import Controller.TowerController;
 import Controller.PlayerListener;
 import Interfaces.IEntitySubscriber;
 import Model.*;
-import Model.Enemy.Enemy;
 import View.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -17,7 +16,6 @@ public class App extends ApplicationAdapter {
 	private GameTimer timer;
 	private ViewHolder views;
 	private Player player;
-	private Enemy enemy;
 	private RoundHandler roundHandler;
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
@@ -37,13 +35,10 @@ public class App extends ApplicationAdapter {
 	public void create () {
 		//Handlers
 
-
-
 		player = new Player(120,100, 50, 37);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
-		enemy = EnemyFactory.createEnemy1();
 
 		//Handlers
 		goldHandler = new Goldhandler();
@@ -72,7 +67,6 @@ public class App extends ApplicationAdapter {
 		IView towerView = new TowerView(tower);
 		IView buttonView = new ButtonView(towerController, tower);
 		IView healthBarView = new HealthBarView(player.healthBar);
-		IView fireView = new FireView(enemy.enemyAttack);
 		IView statsView = new StatsView();
 		IView background = new BackgroundView();
 		player.positionSubscriber((IEntitySubscriber) playerView);
@@ -93,7 +87,6 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
-		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		//collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
 		collisionDetection.CheckCollisionEnemyAndHitBox(player);
@@ -105,7 +98,6 @@ public class App extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
 		views.dispose();
 
 	}

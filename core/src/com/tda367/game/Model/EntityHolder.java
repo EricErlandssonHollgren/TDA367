@@ -25,13 +25,13 @@ public class EntityHolder {
     public void addEntity(Entity entity){
         entities.add(entity);
     }
+    public void removeEntity(Entity entity){
+        entities.remove(entity);
+    }
     public List<IProjectile> getProjectiles(){
         return this.projectiles;
     }
 
-    public void removeEntity(Entity entity){
-        entities.remove(entity);
-    }
 
     public void addProjectile(IProjectile projectile){
         projectiles.add(projectile);

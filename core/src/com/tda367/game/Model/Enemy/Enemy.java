@@ -16,7 +16,6 @@ import java.util.List;
 
 
 public abstract class Enemy extends Entity {
-
     private final int worth;
     public final IProjectile enemyAttack;
     private List<IEntitySubscriber> subscriberList = new ArrayList<>();
@@ -42,10 +41,6 @@ public abstract class Enemy extends Entity {
         positionX -= speed;
     }
 
-    public float getUpdatedPosition() {
-        moveEnemy();
-        return positionX;
-    }
 
     public void takeDamage(int damage) {
         health -= damage;
@@ -56,9 +51,10 @@ public abstract class Enemy extends Entity {
     }
 
     private void enemyDead(Entity enemy, int amount){
-        for (IEntitySubscriber e: subscriberList) {
+       /* for (IEntitySubscriber e: subscriberList) {
             e.updateState();
         }
+        */
         EntityHolder.getInstance().removeEntity(enemy);
         PointHandler.addPoints(amount);
         Goldhandler.addGold(amount);

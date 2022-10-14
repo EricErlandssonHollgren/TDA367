@@ -129,8 +129,8 @@ public class CollisionDetection {
     }
 
     private boolean isColliding(Entity entity, IProjectile projectile){
-        if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+entity.getEntityWidth())){
-            return (projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+entity.getEntityHeight());
+        if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+entity.getWidth())){
+            return (projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+entity.getHeight());
         }
         return false;
     }
