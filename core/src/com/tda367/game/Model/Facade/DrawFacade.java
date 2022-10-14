@@ -2,7 +2,6 @@ package Model.Facade;
 
 import Model.GameTimer;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -10,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class DrawFacade {
     private SpriteBatch batch;
+    private Sprite sprite;
     private Texture img;
     private String texturePath;
     private ShapeRenderer shaperenderer;
@@ -50,7 +50,7 @@ public class DrawFacade {
         batch.draw(texturePath, x,y);
         batch.end();
     }
-    
+
      */
 
 
@@ -61,5 +61,9 @@ public class DrawFacade {
     public void dispose(){
         batch.dispose();
         img.dispose();
+    }
+
+    public void destroy(){
+
     }
 }

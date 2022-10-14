@@ -1,7 +1,14 @@
 package Model.Enemy;
-
+import Interfaces.IEntitySubscriber;
+import Interfaces.IObject;
 import Model.Entity;
-import Model.Waves;
+import Model.EntityHolder;
+import Model.Goldhandler;
+import Model.PointHandler;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * All methods and parameters that an Enemy might need.
@@ -11,36 +18,20 @@ import Model.Waves;
 public abstract class Enemy extends Entity {
 
     private final int worth;
-    private int HP;
-    private Waves wave;
-    private final int damage;
-
+    private final IObject enemyAttack;
+    private List<IEntitySubscriber> subscriberList = new ArrayList<>();
     /**
-     * @param worth  = is what the enemy is "worth". int will be transferred to the player when the enemy has been killed
-     * @param HP     = every enemy has a number of "health points" that will decrease as it is being attacked.
-     * @param damage = is how much damage the enemy will do to the player when it attacks.
+     * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
-    public Enemy(float positionX, float positionY, int entityWidth, int entityHeight, int worth, int HP, int damage) {
-        super(positionX, positionY, entityWidth, entityHeight);
+    public Enemy(float positionX, float positionY, int worth, IObject enemyAttack) {
+        super(positionX, positionY, 100, 100);
         this.worth = worth;
-        this.HP = HP;
-        this.wave = new Waves();
-        this.damage = damage;
+        this.enemyAttack = enemyAttack;
     }
 
-    public int getWorth() {
-        return worth;
-    }
-
-    public int getHP() {
-        return HP;
-    }
-
-    public float getX() {
-        return positionX;
-    }
-    public float getY() {
-        return positionY;
+    public void enemySubscriber(IEntitySubscriber subscriber){
+        subscriberList.add(subscriber);
+        subscriber.updatePosition(positionX,positionY);
     }
 
     /**
@@ -51,7 +42,26 @@ public abstract class Enemy extends Entity {
         positionX -= speed;
     }
 
-    public int getDamage() {
-        return damage;
+    public float getUpdatedPosition() {
+        moveEnemy();
+        return positionX;
     }
+
+    public void takeDamage(int damage) {
+        health -= damage;
+        if(health <= 0){
+            enemyDead(this, worth);
+            System.out.println("I am dead");
+        }
+    }
+
+    private void enemyDead(Entity enemy, int amount){
+        for (IEntitySubscriber e: subscriberList) {
+            e.updateState();
+        }
+        EntityHolder.getInstance().removeEntity(enemy);
+        PointHandler.addPoints(amount);
+        Goldhandler.addGold(amount);
+    }
+
 }

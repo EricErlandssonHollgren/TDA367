@@ -1,9 +1,7 @@
 package Model;
 
-import Interfaces.ICollisionListener;
 import Interfaces.IProjectile;
 import Model.Enemy.Enemy;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,12 +10,10 @@ import java.util.Map;
 public class CollisionDetection {
     private EntityHolder posHandler;
     private WorldBoundaries wb;
+    private Tower tower;
     private static CollisionDetection instance;
 
-    private List<ICollisionListener> listeners;
-
     private CollisionDetection(){
-        listeners = new ArrayList<>();
         this.posHandler = EntityHolder.getInstance();
         this.wb = new WorldBoundaries();
     }
@@ -28,7 +24,6 @@ public class CollisionDetection {
         }
         return instance;
     }
-
 
     /**
      * The method checks the collision between the player and the walls in the game. Enables the player to
@@ -52,8 +47,8 @@ public class CollisionDetection {
      * @return if there will be a collision after the player's movement
      */
     public boolean CheckCollisionPlayerwithLeftBlock(Block block, Player player) {
-        return player.getX() <= block.getX()+ block.getWidth()
-                && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY();
+        return player.getPosX() <= block.getX()+ block.getWidth()
+                && player.getPosY() < block.getHeight() + block.getY() && block.getY() < player.getPosY();
     }
 
     /**
@@ -62,39 +57,71 @@ public class CollisionDetection {
      * @return if there will be a collision after the player's movement
      */
     public boolean CheckCollisionPlayerwithRightBlock(Block block, Player player) {
-        return player.getX() + player.getWidth() > block.getX()
-                && player.getY() < block.getHeight() + block.getY() && block.getY() < player.getY();
+        return player.getPosX() + player.getWidth() > block.getX()
+                && player.getPosY() < block.getHeight() + block.getY() && block.getY() < player.getPosY();
     }
 
     /**
      * The method checks the collision between the player and the enemy in the game. If the player is
-     * colliding with an enemy it will return a referenece to that enemy along with the value true
+     * colliding with an enemy it will return a reference to that enemy along with the value true
      */
     public Map<Entity, Boolean> CheckCollisionPlayerAndEnemy(Player player){
         Map<Entity, Boolean> collisions = new HashMap<>();
+        List<Entity> attackedEnemies = new ArrayList<>();
         for (Entity entity: posHandler.entities) {
             if(entity instanceof Enemy){
-                if((player.getX() + player.getWidth() >= entity.getPosX()) && (player.getX() <= entity.getPosY()+50)){
+                if((player.getPosX() + player.getWidth() > entity.getPosX()) &&
+                        player.getPosX() <= entity.getWidth() + entity.getPosX()){
                     collisions.put(entity,true);
-
+                    attackedEnemies.add(entity);
                 }
                 collisions.put(entity,false);
             }
         }
+        for (Entity e: attackedEnemies) {
+            player.playerAttack(e);
+        }
         return collisions;
     }
+
+    /**
+     * Checks if a player should deal damage to an enemy
+     * @param player
+     * @return List of entities
+     */
+    public List<Entity> enemyInHitbox(Player player){
+        List<Entity> collisions = new ArrayList<>();
+        float[] attackEdges = player.attackHitbox.getEdges();
+        for (Entity entity: posHandler.entities) {
+            if(entity instanceof Enemy){
+                if((attackEdges[1] > entity.getPosX()) &&
+                        attackEdges[0] <= entity.getWidth() + entity.getPosX()){
+                    collisions.add(entity);
+                }
+            }
+        }
+        for (Entity e: collisions) {
+            player.playerAttack(e);
+        }
+        return collisions;
+    }
+
     /**
      * The method checks collision between projectiles and enemies in the game. If an enemy is hit
-     * it will return the enemy that is hit along with the projectile that hit
+     * it will return the enemy that is hit along with the value true
      */
     public Map<Entity,IProjectile> checkCollisionProjectileAndEnemy(){
         Map<Entity, IProjectile> collided = new HashMap<>();
         for (IProjectile projectile: posHandler.getProjectiles()) {
             for(Entity entity : posHandler.entities) {
                 if(entity instanceof Enemy){
-                    if(isColliding(entity,projectile)){
-                        collided.put(entity,projectile);
+                    if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+50)){
+                        if((projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+50)){
+                            collided.put(entity,true);
+
+                        }
                     }
+                    collided.put(entity,false);
                 }
             }
         }

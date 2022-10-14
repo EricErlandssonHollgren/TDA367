@@ -16,8 +16,7 @@ public class PlayerView implements IView, IEntitySubscriber {
     private float elapsedTime;
     private Texture texture;
     private TextureRegion[] animationFrames;
-    Animation animation;
-    Player player;
+    private Animation animation;
 
     public Sprite playerSprite;
     /**
@@ -25,14 +24,11 @@ public class PlayerView implements IView, IEntitySubscriber {
      * the sprite for the player.
      */
 
-    public PlayerView(Player player){
+    public PlayerView(){
         texture = new Texture("adventurer-stand-01.png");
         drawFacade = new DrawFacade("adventurer-stand-01.png");
         animationFacade = new AnimationFacade("adventurer-stand-01.png");
         playerSprite = new Sprite();
-        batch = new SpriteBatch();
-        idleAnimation();
-        this.player = player;
     }
 
     /**
@@ -45,20 +41,17 @@ public class PlayerView implements IView, IEntitySubscriber {
         playerSprite.setPosition(x, y);
     }
 
+    @Override
+    public void updateState(){
+        //TODO: Uppdatera playerSprite här ?
+    }
+
     /**
      * Render for the player sprite which paints the player sprite's texture
      */
     @Override
     public void render() {
-
-        if (player.getState() == STATE.IDLE)
-            idleAnimation();
-        else if (player.getState() == STATE.RUNNINGLEFT)
-            runningLeftAnimation();
-        else if (player.getState() == STATE.RUNNINGRIGHT)
-            runningRightAnimation();
-
-        animationFacade.drawAnimation(animation, playerSprite.getX(), playerSprite.getY(), 64,64);
+        drawFacade.drawObject(playerSprite.getX(), playerSprite.getY(), 64, 64);
     }
 
     @Override

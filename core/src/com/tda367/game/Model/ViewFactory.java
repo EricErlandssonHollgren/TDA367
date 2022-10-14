@@ -2,6 +2,8 @@ package Model;
 
 import Interfaces.IView;
 import View.EnemyView;
+import Interfaces.IProjectile;
+import View.ProjectileView;
 
 
 /**
@@ -10,5 +12,8 @@ import View.EnemyView;
 public class ViewFactory {
     public static IView createEnemyView() {
         return new EnemyView();
+    }
+    public static IView createProjectileView(IProjectile p){
+        return new ProjectileView("Cannonball.png");
     }
 }

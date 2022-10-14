@@ -13,6 +13,9 @@ public class Player extends Entity implements IObservers {
      * The PlayerPositionSubscriber is an ArrayList which contains subscribers
      */
     List<IEntitySubscriber> subscriberList = new ArrayList<>();
+    private static int damage = 25;
+    private static float velocity = 7;
+    private boolean isAttacking;
     private int width;
     private int height;
     private int damage = 30;
@@ -20,6 +23,8 @@ public class Player extends Entity implements IObservers {
 
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
+    private long latestAttackTime;
+    public AttackHitbox attackHitbox;
 
     /**
      * When creating a player it should have two variables which defines its position.
@@ -33,8 +38,8 @@ public class Player extends Entity implements IObservers {
         super(positionX, positionY, entityWidth, entityHeight);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
-         this.positionX = positionX;
-         this.positionY = positionY;
+        isAttacking  = true;
+        attackHitbox = new AttackHitbox(positionX+width,positionY);
     }
 
 
@@ -56,6 +61,7 @@ public class Player extends Entity implements IObservers {
     public void moveLeft(){
         if(isAbleToMoveLeft) {
             positionX -= velocity;
+            attackHitbox.setX(positionX);
             for (IEntitySubscriber subscriber : subscriberList) {
                 subscriber.updatePosition(positionX, positionY);
                 updateHealthBar();
@@ -71,8 +77,9 @@ public class Player extends Entity implements IObservers {
     public void moveRight(){
         if(isAbleToMoveRight){
             positionX += velocity;
-            for (IEntitySubscriber playerPositionSubscriber : subscriberList) {
-                playerPositionSubscriber.updatePosition(positionX,positionY);
+            attackHitbox.setX(positionX);
+            for (IEntitySubscriber subscriber : subscriberList) {
+                subscriber.updatePosition(positionX,positionY);
                 updateHealthBar();
             }
         }
@@ -95,70 +102,56 @@ public class Player extends Entity implements IObservers {
         isAbleToMoveLeft = ableToMoveLeft;
     }
 
-
-    public STATE getState() {
-        return state;
-    }
-
-
-
     /**
-     * Gets the y-coordinate of the object of float
-     * @return y-coordinate of the object
+     * The method decrement player's health depending on the input of damage.
+     * @param damage is the input for dealing damage
      */
-    public float getY(){
-        return positionY;
+    public void takeDamage(int damage){
+        health -= damage;
+        if(health <= 0){
+            playerDead();
+        }
+    }
+    private void playerDead(){
+        for (IEntitySubscriber subscriber : subscriberList) {
+            subscriber.updateState();
+        }
     }
 
-    /**
-     * Gets the x-coordinate of the object of float
-     * @return x-coordinate of the object
-     */
-    public float getX(){
-            return positionX;
-    }
 
-    /**
-     * Gets the velocity of the player
-     * @return the velocity of the player
-     */
-    public float getVelocity() {
-        return velocity;
-    }
-    /**
-     * Gets the height of the object of int
-     * @return the height of a player
-     */
-    public int getHeight(){
-        return height;
-    }
-    /**
-     * Gets the width of the object of int
-     * @return the width of a player
-     */
-
-    public int getWidth(){
-        return width;
-    }
-
-    public int getDamage(){
-        return damage;
+    public void playerAttack(Entity enemy){
+        long currentAttackTime = System.currentTimeMillis();
+        long minIntervalbetweenAttack = 1000;
+        if(isAttacking){
+            if (currentAttackTime > latestAttackTime + minIntervalbetweenAttack) {
+                System.out.println("Damage :)");
+                enemy.takeDamage(damage);
+                latestAttackTime = currentAttackTime;
+            }
+        }
     }
 
     /**
      * The method allows the player to move left or right depending on the key that is pressed.
-     * @param key uses the moveLeft() or moveRight() method
+     * @param action uses the moveLeft() or moveRight() method
      */
     @Override
-    public void actionHandle(ActionEnum key) {
-        if(key == ActionEnum.LEFT){
+    public void actionHandle(ActionEnum action) {
+        if(action == ActionEnum.LEFT){
             moveLeft();
             state = STATE.RUNNINGLEFT;
         }
-        if(key == ActionEnum.RIGHT){
+        if(action == ActionEnum.RIGHT){
             moveRight();
             state = STATE.RUNNINGRIGHT;
         }
+        if(action == ActionEnum.DYING){
+            playerDead();
+        }
+        isAttacking = action == ActionEnum.DAMAGE;
+
+    }
+
         if (key == ActionEnum.NOTPRESSED) {
             state = STATE.IDLE;
         }

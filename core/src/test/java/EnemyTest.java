@@ -1,6 +1,8 @@
+import Model.AttackFactory;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
 import Model.Waves;
+import Model.WorldBoundaries;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,11 +17,12 @@ public class EnemyTest {
     Waves wave = new Waves();
     /**
      * Checks if the enemy is being rendered at the right position on the screen.
+     * The actual values are taken from WorldBoundaries and in which position the walls and ground are created
      */
     @Test
     public void testPosition() {
-        assertEquals(enemy.getX(), new Vector(1560,0).getX());
-        assertEquals(enemy.getY(), new Vector(0,0).getY());
+        assertEquals(enemy.getPosX(), 630);
+        assertEquals(enemy.getPosY(), 100);
     }
 
     /**
@@ -28,10 +31,10 @@ public class EnemyTest {
      */
     @Test
     public void testMovementX() {
-        float oldPositionX = enemy.getX();
+        float oldPositionX = enemy.getPosX();
         enemy.moveEnemy();
         for (int i = 1; i <= 1560; i++) {
-            if (oldPositionX >= enemy.getX()) {
+            if (oldPositionX >= enemy.getPosX()) {
                 assertTrue(true);
             }
             oldPositionX = oldPositionX - (float) 0.5;
@@ -43,10 +46,10 @@ public class EnemyTest {
      */
     @Test
     public void testMovementY() {
-        float oldPositionY = enemy.getY();
+        float oldPositionY = enemy.getPosY();
         enemy.moveEnemy();
         for (int i = 1; i <= 780; i++) {
-            if (oldPositionY == enemy.getX()) {
+            if (oldPositionY == enemy.getPosX()) {
                 assertTrue(true);
             }
         }

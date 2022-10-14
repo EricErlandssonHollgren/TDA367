@@ -2,7 +2,6 @@ package Model;
 import Interfaces.IBuild;
 import Interfaces.IObservers;
 import Interfaces.IUpgradeable;
-import com.badlogic.gdx.Input;
 
 import java.util.ArrayList;
 /*
@@ -18,49 +17,26 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     private final float positionY;
     private int maxCapacity;
     private final ArrayList turrets;
-    private Goldhandler gold;
 
 
     /*
     This creates a player base, which requires arguments for its health, location and maximum turrets capacity
      */
-    public Tower(Goldhandler gold){
+    public Tower(){
         this.level = 1;
         this.health = 500;
         positionX = 0;
         positionY = 100;
         this.maxCapacity = 1;
         this.turrets = new ArrayList<Turret>();
-        this.gold = gold;
     }
 
     /*
         Builds a turret on the base if the base has available space for a turret
      */
     public void buildTurret(Turret turret){
-        if (this.isFull()){
-            System.out.println("Not enough space");
-        }
-        else if (gold.getGold() >= 1000){
+        if (!this.isFull()){
             turrets.add(turret);
-            gold.handleRequest(new Request(HandlerItemDefiners.LOSEGOLD, 1000));
-        }
-        else{
-            System.out.println("Not enough gold");
-        }
-    }
-
-    /*
-    Upgrades a selected turret.
-     */
-    public void upgradeTurret(int index){
-        if(gold.getGold() >=1000){
-            getTurrets().get(index).upgrade();
-            gold.handleRequest(new Request(HandlerItemDefiners.LOSEGOLD, 1000));
-            System.out.println("Turret Upgraded");
-        }
-        else{
-            System.out.println("Not enough gold");
         }
     }
 
@@ -70,7 +46,6 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     public void sellTurret(Turret turret){
         if (this.turrets.contains(turret)){
             this.turrets.remove(turret);
-            gold.handleRequest(new Request(HandlerItemDefiners.ADDGOLD, 500));
         }
         else{
             throw new IllegalStateException("You don't have any turrets to be sold");
@@ -82,15 +57,11 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     Upgrades the level of the tower to have more health and more turret-capacity.
      */
     public void upgrade(){
-        if (gold.getGold() >= 3000) {
-            this.incrementLevel();
-            this.incrementHealth();
-            this.incrementMaxCapacity();
-            gold.handleRequest(new Request(HandlerItemDefiners.LOSEGOLD, 3000));
-        }
-        else{
-            System.out.println("Not enough gold");
-        }
+        this.incrementLevel();
+        this.incrementHealth();
+        this.incrementMaxCapacity();
+
+
 
     }
 
@@ -169,9 +140,6 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     }
 
 
-    /*
-    Handles different tasks given by controller to update the state of Tower.
-     */
     @Override
     public void actionHandle(ActionEnum action) {
         if(action == ActionEnum.UPGRADE){
@@ -188,12 +156,14 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
              */
         }
         if(action == ActionEnum.UPGRADETURRET1){
-            upgradeTurret(0);
+            /*upgradeTurret(1);
+
+             */
         }
-
         if(action == ActionEnum.UPGRADETURRET2){
-            upgradeTurret(1);
+            /*upgradeTurret(2);
 
+             */
         }
 
     }

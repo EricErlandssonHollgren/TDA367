@@ -7,8 +7,8 @@ import java.util.*;
 
 public class Waves {
 
-    Queue<Enemy> queue = new LinkedList<>();
-    List<Enemy> currentEnemiesRendered = new ArrayList<>();
+    private Queue<Enemy> queue = new LinkedList<>();
+    private List<Enemy> currentEnemiesRendered = new ArrayList<>();
     private boolean wasRecentlySpawned = false;
 
     /**
@@ -27,7 +27,7 @@ public class Waves {
      * Takes the first enemy in the queue and returns it, as well as removes it from the queue.
      * @return the enemy that is first in line.
      */
-    public Enemy getEnemyFromQueue() {
+    private Enemy getEnemyFromQueue() {
         Enemy currentEnemy = addEnemies().poll();
         return Objects.requireNonNull(currentEnemy);
     }
