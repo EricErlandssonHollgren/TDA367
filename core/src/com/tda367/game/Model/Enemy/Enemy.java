@@ -1,8 +1,5 @@
 package Model.Enemy;
-import Interfaces.IEnemyAttack;
-import Interfaces.IEntitySubscriber;
-import Interfaces.IObject;
-import Interfaces.IProjectile;
+import Interfaces.*;
 import Model.Entity;
 import Model.EntityHolder;
 import Model.Goldhandler;
@@ -21,6 +18,7 @@ public abstract class Enemy extends Entity {
     private final int worth;
     public final IEnemyAttack enemyAttack;
     private List<IEntitySubscriber> subscriberList = new ArrayList<>();
+    private boolean isDead;
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
@@ -28,6 +26,7 @@ public abstract class Enemy extends Entity {
         super(positionX, positionY, 70, 70);
         this.worth = worth;
         this.enemyAttack = enemyAttack;
+        this.isDead = false;
     }
 
     public void enemySubscriber(IEntitySubscriber subscriber){
@@ -48,15 +47,17 @@ public abstract class Enemy extends Entity {
         health -= damage;
         if(health <= 0){
             enemyDead(this, worth);
+            isDead = true;
             System.out.println("I am dead");
         }
     }
 
     private void enemyDead(Entity enemy, int amount){
-       /* for (IEntitySubscriber e: subscriberList) {
+      for (IEntitySubscriber e: subscriberList) {
             e.updateState();
+            isDead = true;
         }
-        */
+
         EntityHolder.getInstance().removeEntity(enemy);
         PointHandler.addPoints(amount);
         Goldhandler.addGold(amount);

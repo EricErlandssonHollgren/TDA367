@@ -1,6 +1,7 @@
 package Model;
 
 import Interfaces.IProjectile;
+import Model.Enemy.Enemy;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -10,6 +11,7 @@ import java.util.Queue;
 public class EntityHolder {
     List<Entity> entities;
     private List<IProjectile> projectiles;
+    private List<Entity> enemies;
 
     private static EntityHolder instance;
     private EntityHolder(){
@@ -38,5 +40,9 @@ public class EntityHolder {
     }
     public void removeProjectile(IProjectile projectile){
         projectiles.remove(projectile);
+    }
+
+    public List<Entity> getEnemies() {
+        return this.enemies;
     }
 }
