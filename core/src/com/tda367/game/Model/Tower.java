@@ -43,6 +43,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         }
         else if (gold.getGold() >= 1000){
             turrets.add(turret);
+            gold.handleRequest(new Request(HandlerItemDefiners.LOSEGOLD, 1000));
         }
         else{
             System.out.println("Not enough gold");
@@ -55,6 +56,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     public void upgradeTurret(int index){
         if(gold.getGold() >=1000){
             getTurrets().get(index).upgrade();
+            gold.handleRequest(new Request(HandlerItemDefiners.LOSEGOLD, 1000));
             System.out.println("Turret Upgraded");
         }
         else{
@@ -68,6 +70,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     public void sellTurret(Turret turret){
         if (this.turrets.contains(turret)){
             this.turrets.remove(turret);
+            gold.handleRequest(new Request(HandlerItemDefiners.ADDGOLD, 500));
         }
         else{
             throw new IllegalStateException("You don't have any turrets to be sold");
@@ -83,6 +86,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
             this.incrementLevel();
             this.incrementHealth();
             this.incrementMaxCapacity();
+            gold.handleRequest(new Request(HandlerItemDefiners.LOSEGOLD, 3000));
         }
         else{
             System.out.println("Not enough gold");

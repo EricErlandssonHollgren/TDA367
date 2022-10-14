@@ -8,8 +8,11 @@ public class Goldhandler extends MainHandler {
     // If isn't it will give it to the next handler.
     public void handleRequest(Request request){
 
-        if (request.getDescription() == HandlerItemDefiners.GOLD) {
+        if (request.getDescription() == HandlerItemDefiners.ADDGOLD) {
             addGold(request.getValue());
+        }
+        if (request.getDescription() == HandlerItemDefiners.LOSEGOLD) {
+            loseGold(request.getValue());
         }
         else if (m_successor != null)
         {
@@ -20,6 +23,11 @@ public class Goldhandler extends MainHandler {
     // Adds gold to the total
     private void addGold(int amount){
         this.gold+=amount;
+    }
+
+    // Adds gold to the total
+    private void loseGold(int amount){
+        this.gold-=amount;
     }
 
     // Returns gold
