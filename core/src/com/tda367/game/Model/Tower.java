@@ -61,7 +61,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         this.incrementHealth();
         this.incrementMaxCapacity();
 
-        */
+
 
     }
 
