@@ -11,6 +11,8 @@ import java.util.List;
 
 public class TowerController {
     private List<IObservers> observers;
+    private List<Button> towerButtons;
+    private Button upgrade;
 
     //A constructor for the controller that holds a list of observers that calls them to handle different actions.
     public TowerController() {
