@@ -17,26 +17,47 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     private final float positionY;
     private int maxCapacity;
     private final ArrayList turrets;
+    private Goldhandler gold;
 
 
     /*
     This creates a player base, which requires arguments for its health, location and maximum turrets capacity
      */
-    public Tower(){
+    public Tower(Goldhandler gold){
         this.level = 1;
         this.health = 500;
         positionX = 0;
         positionY = 100;
         this.maxCapacity = 1;
         this.turrets = new ArrayList<Turret>();
+        this.gold = gold;
     }
 
     /*
         Builds a turret on the base if the base has available space for a turret
      */
     public void buildTurret(Turret turret){
-        if (!this.isFull()){
+        if (this.isFull()){
+            System.out.println("Not enough space");
+        }
+        else if (gold.getGold() >= 1000){
             turrets.add(turret);
+        }
+        else{
+            System.out.println("Not enough gold");
+        }
+    }
+
+    /*
+    Upgrades a selected turret.
+     */
+    public void upgradeTurret(int index){
+        if(gold.getGold() >=1000){
+            getTurrets().get(index).upgrade();
+            System.out.println("Turret Upgraded");
+        }
+        else{
+            System.out.println("Not enough gold");
         }
     }
 
@@ -57,9 +78,14 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     Upgrades the level of the tower to have more health and more turret-capacity.
      */
     public void upgrade(){
-        this.incrementLevel();
-        this.incrementHealth();
-        this.incrementMaxCapacity();
+        if (gold.getGold() >= 3000) {
+            this.incrementLevel();
+            this.incrementHealth();
+            this.incrementMaxCapacity();
+        }
+        else{
+            System.out.println("Not enough gold");
+        }
 
     }
 
@@ -138,6 +164,9 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     }
 
 
+    /*
+    Handles different tasks given by controller to update the state of Tower.
+     */
     @Override
     public void actionHandle(ActionEnum action) {
         if(action == ActionEnum.UPGRADE){
@@ -154,14 +183,12 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
              */
         }
         if(action == ActionEnum.UPGRADETURRET1){
-            /*upgradeTurret(1);
-
-             */
+            upgradeTurret(0);
         }
-        if(action == ActionEnum.UPGRADETURRET2){
-            /*upgradeTurret(2);
 
-             */
+        if(action == ActionEnum.UPGRADETURRET2){
+            upgradeTurret(1);
+
         }
 
     }

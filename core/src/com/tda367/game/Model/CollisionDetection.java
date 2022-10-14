@@ -1,5 +1,6 @@
 package Model;
 
+import Interfaces.ICollisionListener;
 import Interfaces.IProjectile;
 import Model.Enemy.Enemy;
 import java.util.ArrayList;
@@ -13,7 +14,10 @@ public class CollisionDetection {
     private Tower tower;
     private static CollisionDetection instance;
 
+    private List<ICollisionListener> listeners;
+
     private CollisionDetection(){
+        listeners = new ArrayList<>();
         this.posHandler = EntityHolder.getInstance();
         this.wb = new WorldBoundaries();
     }
@@ -108,24 +112,36 @@ public class CollisionDetection {
 
     /**
      * The method checks collision between projectiles and enemies in the game. If an enemy is hit
-     * it will return the enemy that is hit along with the value true
+     * it will return the enemy that is hit along with the projectile that hit
      */
-    public Map<Entity, Boolean> checkCollisionProjectileAndEnemy(){
-        Map<Entity, Boolean> collided = new HashMap<>();
-        for (IProjectile projectile: posHandler.projectiles) {
+    public Map<Entity, IProjectile> checkCollisionProjectileAndEnemy(){
+        Map<Entity, IProjectile> collided = new HashMap<>();
+        for (IProjectile projectile: posHandler.getProjectiles()) {
             for(Entity entity : posHandler.entities) {
                 if(entity instanceof Enemy){
-                    if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+50)){
-                        if((projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+50)){
-                            collided.put(entity,true);
-
-                        }
+                    if(isColliding(entity,projectile)){
+                        collided.put(entity,projectile);
                     }
-                    collided.put(entity,false);
                 }
             }
         }
         return collided;
     }
 
+    private boolean isColliding(Entity entity, IProjectile projectile){
+        if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+entity.getEntityWidth())){
+            return (projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+entity.getEntityHeight());
+        }
+        return false;
+    }
+
+    public List<IProjectile> checkCollisionProjectileGround(){
+        List<IProjectile> collisions = new ArrayList<>();
+        for (IProjectile p : posHandler.getProjectiles()){
+            if(p.getY() <= wb.getBlocks().get(0).getY()+wb.getBlocks().get(0).getHeight()){
+                collisions.add(p);
+            }
+        }
+        return collisions;
+    }
 }
