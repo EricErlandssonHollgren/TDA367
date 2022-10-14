@@ -42,6 +42,7 @@ public class Waves {
         if (timer % 30 == 0 && !wasRecentlySpawned) {
             Enemy newEnemy = getEnemyFromQueue();
             currentEnemiesRendered.add(newEnemy);
+            EntityHolder.getInstance().addEntity(newEnemy);
             wasRecentlySpawned = true;
         }
         if (timer % 30 == 9){

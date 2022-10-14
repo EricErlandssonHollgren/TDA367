@@ -49,5 +49,6 @@ public class EnemyView implements IView, IEntitySubscriber{
     @Override
     public void updateState() {
         drawFacade.dispose();
+
     }
 }
