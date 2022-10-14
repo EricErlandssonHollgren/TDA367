@@ -1,10 +1,11 @@
 package com.tda367.game;
 
+import Controller.EnemyController;
 import Controller.ProjectileController;
 import Controller.TowerController;
 import Interfaces.IProjectile;
 import Interfaces.IView;
-import Controller.PlayerListener;
+import Controller.PlayerController;
 import Interfaces.IEntitySubscriber;
 import Model.*;
 import View.*;
@@ -32,8 +33,9 @@ public class App extends ApplicationAdapter {
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
 	private TowerController towerController;
-	private PlayerListener playerListener;
+	private PlayerController playerController;
 	private ProjectileController projectileController;
+	private EnemyController enemyController;
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -63,11 +65,12 @@ public class App extends ApplicationAdapter {
 		//Controllers
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
-		playerListener = new PlayerListener();
-		playerListener.addSubscribers(player);
+		playerController = new PlayerController();
+		playerController.addSubscribers(player);
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		projectileController = new ProjectileController(entityHolder,collisionDetection,timer);
+		enemyController = new EnemyController(entityHolder, collisionDetection, timer);
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
@@ -103,9 +106,11 @@ public class App extends ApplicationAdapter {
 
 		List<IProjectile> projectileGround = collisionDetection.checkCollisionProjectileGround();
 		Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();
-		playerListener.UpdatePlayerMovement();
+		Map<Entity,Boolean> enemyUpdate = collisionDetection.CheckCollisionPlayerAndEnemy(player);
+		playerController.UpdatePlayerMovement();
 		projectileController.updateProjectiles(projectileEnemy,projectileGround);
-		playerListener.UpdatePlayerState();
+		playerController.UpdatePlayerState();
+		enemyController.updateEnemy(enemyUpdate);
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}

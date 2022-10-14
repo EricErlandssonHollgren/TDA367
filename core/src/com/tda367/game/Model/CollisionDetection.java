@@ -70,22 +70,26 @@ public class CollisionDetection {
      * colliding with an enemy it will return a reference to that enemy along with the value true
      */
     public Map<Entity, Boolean> CheckCollisionPlayerAndEnemy(Player player){
-        Map<Entity, Boolean> collisions = new HashMap<>();
+        Map<Entity, Boolean> collided = new HashMap<>();
         List<Entity> attackedEnemies = new ArrayList<>();
         for (Entity entity: posHandler.entities) {;
             if(entity instanceof Enemy){
-                if((player.getPosX() + player.getWidth() > entity.getPosX()) &&
-                        player.getPosX() <= entity.getWidth() + entity.getPosX()){
-                    collisions.put(entity,true);
+                if(EnemyAndPlayerColliding(entity, player)){
+                    collided.put(entity,true);
                     attackedEnemies.add(entity);
                 }
-                collisions.put(entity,false);
+                collided.put(entity,false);
             }
         }
         for (Entity e: attackedEnemies) {
             player.playerAttack(e);
         }
-        return collisions;
+        return collided;
+    }
+
+    private boolean EnemyAndPlayerColliding(Entity entity, Player player){
+        return (player.getPosX() + player.getWidth() > entity.getPosX()) &&
+                player.getPosX() <= entity.getWidth() + entity.getPosX();
     }
 
     /**
