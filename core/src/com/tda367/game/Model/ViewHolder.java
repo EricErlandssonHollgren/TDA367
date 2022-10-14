@@ -1,5 +1,6 @@
 package Model;
 
+import Interfaces.IEntitySubscriber;
 import Interfaces.IView;
 import View.*;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewHolder {
-
+    //
     private List<IView> views;
 
     /**
@@ -18,7 +19,6 @@ public class ViewHolder {
         views = new ArrayList<>();
 
     }
-    // Adds a View to ViewHolders views
     public void addView(IView view){
         views.add(view);
     }

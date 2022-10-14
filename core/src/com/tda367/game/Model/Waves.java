@@ -40,9 +40,8 @@ public class Waves {
     public List<Enemy> getEnemiesToRender() {
         double timer = Math.ceil(GameTimer.GetInstance().GetTime() );
         if (timer % 30 == 0 && !wasRecentlySpawned) {
-            Enemy newEnemy = EnemyFactory.createEnemy1();
+            Enemy newEnemy = getEnemyFromQueue();
             currentEnemiesRendered.add(newEnemy);
-            EntityHolder.getInstance().addEntity(newEnemy);
             wasRecentlySpawned = true;
         }
         if (timer % 30 == 9){

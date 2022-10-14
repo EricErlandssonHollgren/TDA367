@@ -1,10 +1,11 @@
 package Model;
 
-import Interfaces.IProjectile;
+
+import Interfaces.IObject;
 
 public class AttackFactory {
 
-    public static IProjectile createFireFlame(){
-        return new FireAttack(630,100);
+    public static IObject createFireFlame(float x, float y){
+        return new FireAttack(x,y);
     }
 }
