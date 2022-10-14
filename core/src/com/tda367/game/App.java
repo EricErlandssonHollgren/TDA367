@@ -6,10 +6,7 @@ import Interfaces.IProjectile;
 import Interfaces.IView;
 import Controller.PlayerListener;
 import Interfaces.IEntitySubscriber;
-import Interfaces.IView;
 import Model.*;
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
 import View.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -24,7 +21,6 @@ public class App extends ApplicationAdapter {
 	private GameTimer timer;
 	private ViewHolder views;
 	private Player player;
-	private Enemy enemy;
 	private RoundHandler roundHandler;
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
@@ -35,6 +31,7 @@ public class App extends ApplicationAdapter {
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
+	private TowerController towerController;
 	private PlayerListener playerListener;
 	private ProjectileController projectileController;
 	private TowerController towerController;
@@ -43,10 +40,10 @@ public class App extends ApplicationAdapter {
 	 */
 	@Override
 	public void create () {
-		//Model
+		//Handlers
+
 		player = new Player(120,100, 50, 37);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
-		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
 
@@ -54,11 +51,19 @@ public class App extends ApplicationAdapter {
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();
 		goldHandler.setSuccessor(pointsHandler);
+
 		roundHandler = RoundHandler.GetInstance(timer);
+
+
+		//Instantiates Tower, (needs to be done after instantiating Goldhandler).
+		tower = new Tower((Goldhandler) goldHandler);
+
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
 
 		//Controllers
+		towerController = new TowerController();
+		towerController.addSubscribers(tower);
 		playerListener = new PlayerListener();
 		playerListener.addSubscribers(player);
 		towerController = new TowerController();
@@ -70,8 +75,8 @@ public class App extends ApplicationAdapter {
 		IView enemyView = ViewFactory.createEnemyView();
 		IView playerView = new PlayerView();
 		IView towerView = new TowerView(tower);
+		IView buttonView = new ButtonView(towerController, tower);
 		IView healthBarView = new HealthBarView(player.healthBar);
-		IView attackView = new AttackView();
 		IView statsView = new StatsView();
 		IView background = new BackgroundView();
 		IView projectileView = new ProjectileView(projectileController);
@@ -83,7 +88,7 @@ public class App extends ApplicationAdapter {
 		views.addView(worldBoundariesView);
 		views.addView(playerView);
 		views.addView(towerView);
-		views.addView(attackView);
+		views.addView(buttonView);
 		views.addView(enemyView);
 		views.addView(statsView);
 		views.addView(healthBarView);
@@ -106,13 +111,13 @@ public class App extends ApplicationAdapter {
 
 		collisionDetection.enemyInHitbox(player);
 		playerListener.UpdatePlayerMovement();
+		playerListener.UpdatePlayerState();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
 		views.dispose();
 
 	}

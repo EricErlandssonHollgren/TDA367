@@ -1,7 +1,5 @@
 package Model.Enemy;
 
-
-import Interfaces.IObject;
 import Model.Enemy.Enemies.Enemy1;
 import Model.EntityHolder;
 

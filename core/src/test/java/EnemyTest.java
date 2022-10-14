@@ -1,6 +1,7 @@
 import Model.AttackFactory;
 import Model.Enemy.Enemies.Enemy1;
 import Model.Enemy.Enemy;
+import Model.FireAttack;
 import Model.Waves;
 import Model.WorldBoundaries;
 import org.junit.jupiter.api.Test;

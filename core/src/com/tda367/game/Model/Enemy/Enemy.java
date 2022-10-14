@@ -16,14 +16,13 @@ import java.util.List;
 
 
 public abstract class Enemy extends Entity {
-
     private final int worth;
-    private final IObject enemyAttack;
+    public final IProjectile enemyAttack;
     private List<IEntitySubscriber> subscriberList = new ArrayList<>();
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
-    public Enemy(float positionX, float positionY, int worth, IObject enemyAttack) {
+    public Enemy(float positionX, float positionY, int worth, IProjectile enemyAttack) {
         super(positionX, positionY, 100, 100);
         this.worth = worth;
         this.enemyAttack = enemyAttack;
@@ -42,10 +41,6 @@ public abstract class Enemy extends Entity {
         positionX -= speed;
     }
 
-    public float getUpdatedPosition() {
-        moveEnemy();
-        return positionX;
-    }
 
     public void takeDamage(int damage) {
         health -= damage;
@@ -56,9 +51,10 @@ public abstract class Enemy extends Entity {
     }
 
     private void enemyDead(Entity enemy, int amount){
-        for (IEntitySubscriber e: subscriberList) {
+       /* for (IEntitySubscriber e: subscriberList) {
             e.updateState();
         }
+        */
         EntityHolder.getInstance().removeEntity(enemy);
         PointHandler.addPoints(amount);
         Goldhandler.addGold(amount);
