@@ -40,6 +40,7 @@ public class App extends ApplicationAdapter {
 		tower = new Tower();
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
+		enemy = EnemyFactory.createEnemy1();
 
 		//Handlers
 		goldHandler = new Goldhandler();
@@ -59,7 +60,7 @@ public class App extends ApplicationAdapter {
 		IView playerView = new PlayerView();
 		IView towerView = new TowerView(tower);
 		IView healthBarView = new HealthBarView(player.healthBar);
-		IView attackView = new AttackView();
+		IView fireView = new FireView(enemy.enemyAttack);
 		IView statsView = new StatsView();
 		IView background = new BackgroundView();
 		player.positionSubscriber((IEntitySubscriber) playerView);
@@ -70,7 +71,7 @@ public class App extends ApplicationAdapter {
 		views.addView(worldBoundariesView);
 		views.addView(playerView);
 		views.addView(towerView);
-		views.addView(attackView);
+		views.addView(fireView);
 		views.addView(enemyView);
 		views.addView(statsView);
 		views.addView(healthBarView);
