@@ -1,4 +1,4 @@
-package Model;
+package View;
 
 import Interfaces.IEntitySubscriber;
 import Interfaces.IView;

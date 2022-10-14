@@ -11,35 +11,48 @@ import java.util.List;
 
 public class TowerController {
     private List<IObservers> observers;
-    private List<Button> towerButtons;
-    private Button upgrade;
-    public TowerController(){
+
+    //A constructor for the controller that holds a list of observers that calls them to handle different actions.
+    public TowerController() {
         observers = new ArrayList<>();
         towerButtons = new ArrayList<>();
         upgrade = new Button();
     }
 
-    public void addSubscribers(IObservers observer){
+    //Adds an observer to this controller.
+    public void addSubscribers(IObservers observer) {
         observers.add(observer);
     }
 
     public void upgradeTower() {
-            for (IObservers o : observers) {
-                o.actionHandle(ActionEnum.UPGRADE);
-            }
+        for (IObservers o : observers) {
+            o.actionHandle(ActionEnum.UPGRADE);
+        }
     }
 
     public void buildTurret() {
-        if (Gdx.input.isKeyPressed(Input.Keys.B)) {
-            for (IObservers o : observers) {
-                o.actionHandle(ActionEnum.BUILD);
-            }
+        for (IObservers o : observers) {
+            o.actionHandle(ActionEnum.BUILD);
         }
+
     }
+
     public void sellTurret() {
-        if (Gdx.input.isKeyPressed(Input.Keys.B)) {
+        for (IObservers o : observers) {
+            o.actionHandle(ActionEnum.SELL);
+        }
+
+    }
+
+    //Tells tower to upgrade a specific turret.
+    public void upgradeTurret(int i) {
+        if (i == 1) {
             for (IObservers o : observers) {
-                o.actionHandle(ActionEnum.SELL);
+                o.actionHandle(ActionEnum.UPGRADETURRET1);
+            }
+        } else if (i == 2) {
+            for (IObservers o : observers) {
+                o.actionHandle(ActionEnum.UPGRADETURRET2);
             }
         }
     }
