@@ -34,7 +34,7 @@ public class EnemyTest {
     public void testMovementX() {
         float oldPositionX = enemy.getPosX();
         enemy.moveEnemy();
-        for (int i = 1; i <= 1560; i++) {
+        for (int i = 1; i <= 630; i++) {
             if (oldPositionX >= enemy.getPosX()) {
                 assertTrue(true);
             }

@@ -38,14 +38,14 @@ public class Waves {
      * wasRecentlySpawned: A check for making sure only one enemy is being spawned every 30 seconds.
      */
     public List<Enemy> getEnemiesToRender() {
-        double timer = Math.ceil(GameTimer.GetInstance().GetTime() );
-        if (timer % 30 == 0 && !wasRecentlySpawned) {
-            Enemy newEnemy = EnemyFactory.createEnemy1();
+        double timer = Math.ceil(GameTimer.GetInstance().GetTime());
+        if (timer % 10 == 0 && !wasRecentlySpawned) {
+            Enemy newEnemy = addEnemies().poll();
             currentEnemiesRendered.add(newEnemy);
             EntityHolder.getInstance().addEntity(newEnemy);
             wasRecentlySpawned = true;
         }
-        if (timer % 30 == 9){
+        if (timer % 10 == 9){
             wasRecentlySpawned = false;
         }
         return currentEnemiesRendered;
