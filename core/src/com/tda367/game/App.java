@@ -83,8 +83,9 @@ public class App extends ApplicationAdapter {
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		//collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
-		collisionDetection.enemyInHitbox(player);
+		collisionDetection.CheckCollisionEnemyAndHitBox(player);
 		playerListener.UpdatePlayerMovement();
+		playerListener.UpdatePlayerState();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}
