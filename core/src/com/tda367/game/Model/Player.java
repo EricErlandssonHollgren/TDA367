@@ -18,8 +18,6 @@ public class Player extends Entity implements IObservers {
     private boolean isAttacking;
     private int width;
     private int height;
-    private int damage = 30;
-    private float velocity = 7;
 
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
@@ -139,21 +137,15 @@ public class Player extends Entity implements IObservers {
     public void actionHandle(ActionEnum action) {
         if(action == ActionEnum.LEFT){
             moveLeft();
-            state = STATE.RUNNINGLEFT;
         }
         if(action == ActionEnum.RIGHT){
             moveRight();
-            state = STATE.RUNNINGRIGHT;
         }
         if(action == ActionEnum.DYING){
             playerDead();
         }
         isAttacking = action == ActionEnum.DAMAGE;
-
     }
 
-        if (key == ActionEnum.NOTPRESSED) {
-            state = STATE.IDLE;
-        }
-    }
+
 }

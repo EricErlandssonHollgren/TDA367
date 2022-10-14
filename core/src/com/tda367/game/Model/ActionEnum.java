@@ -14,5 +14,7 @@ public enum ActionEnum {
     RUNNINGRIGHT,
     IDLE,
     DYING,
-    ENEMYMOVE
+    ENEMYMOVE,
+    NOTPRESSED,
+    DAMAGE
 }

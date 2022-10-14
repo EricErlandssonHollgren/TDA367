@@ -4,7 +4,6 @@ import Interfaces.IView;
 import Model.Facade.AnimationFacade;
 import Model.Facade.DrawFacade;
 import Model.Player;
-import Model.STATE;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
