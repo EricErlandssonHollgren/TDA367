@@ -1,14 +1,15 @@
 package View;
 
+import Interfaces.IEnemyAttack;
 import Interfaces.IProjectile;
 import Interfaces.IView;
 import Model.Facade.DrawFacade;
 
 public class FireView implements IView {
-    private IProjectile fireAttack;
+    private IEnemyAttack fireAttack;
     private DrawFacade drawFacade;
 
-    public FireView(IProjectile fireAttack) {
+    public FireView(IEnemyAttack fireAttack) {
         this.fireAttack = fireAttack;
         this.drawFacade = new DrawFacade("flame.png");
     }
@@ -16,7 +17,7 @@ public class FireView implements IView {
     public void render() {
         float imgPositionFromEnemy = 50;
         fireAttack.move();
-        drawFacade.drawObject(fireAttack.getX()-imgPositionFromEnemy, fireAttack.getY(), fireAttack.getRadius(), fireAttack.getRadius());
+        drawFacade.drawObject(fireAttack.getX()-imgPositionFromEnemy, fireAttack.getY(), fireAttack.getImgWidth(), fireAttack.getImgHeight());
         //System.out.println(fireAttack.getX());
     }
 

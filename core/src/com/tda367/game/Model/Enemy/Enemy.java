@@ -1,4 +1,5 @@
 package Model.Enemy;
+import Interfaces.IEnemyAttack;
 import Interfaces.IEntitySubscriber;
 import Interfaces.IObject;
 import Interfaces.IProjectile;
@@ -18,13 +19,13 @@ import java.util.List;
 
 public abstract class Enemy extends Entity {
     private final int worth;
-    public final IProjectile enemyAttack;
+    public final IEnemyAttack enemyAttack;
     private List<IEntitySubscriber> subscriberList = new ArrayList<>();
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
-    public Enemy(float positionX, float positionY, int worth, IProjectile enemyAttack) {
-        super(positionX, positionY, 100, 100);
+    public Enemy(float positionX, float positionY, int worth, IEnemyAttack enemyAttack) {
+        super(positionX, positionY, 70, 70);
         this.worth = worth;
         this.enemyAttack = enemyAttack;
     }
@@ -38,7 +39,7 @@ public abstract class Enemy extends Entity {
      * moves the enemy in x-direction only with a change of 0.2px.
      */
     public void moveEnemy() {
-        double speed = 0.2;
+        double speed = 0.5;
         positionX -= speed;
     }
 

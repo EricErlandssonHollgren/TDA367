@@ -1,14 +1,16 @@
 package Model;
 
+import Interfaces.IEnemyAttack;
 import Interfaces.IProjectile;
 
-public class FireAttack implements IProjectile {
+public class FireAttack implements IEnemyAttack {
 
     private float x;
     private float y;
     private long latestAttackTime;
 
     private final float imgWidth;
+    private final float imgHeight;
 
     private final int damage;
 
@@ -16,6 +18,7 @@ public class FireAttack implements IProjectile {
         this.x = x;
         this.y = y;
         this.imgWidth = 100;
+        this.imgHeight = 100;
         this.damage = 5;
     }
 
@@ -33,8 +36,13 @@ public class FireAttack implements IProjectile {
     }
 
     @Override
-    public float getRadius() {
-        return imgWidth/2;
+    public float getImgWidth() {
+        return imgWidth;
+    }
+
+    @Override
+    public float getImgHeight() {
+        return imgHeight;
     }
 
     @Override
