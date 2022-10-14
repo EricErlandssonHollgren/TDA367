@@ -15,7 +15,7 @@ public class UiJunitTest {
     @Test
     public void addOneHundredGolds(){
         Goldhandler h1 = new Goldhandler();
-        h1.handleRequest(new Request(HandlerItemDefiners.GOLD, 100));
+        h1.handleRequest(new Request(HandlerItemDefiners.ADDGOLD, 100));
         assertSame(100, h1.getGold(), "should be the same");
     }
 
