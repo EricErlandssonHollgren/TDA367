@@ -1,4 +1,5 @@
 package Model.Enemy;
+import Interfaces.IEntitySubscriber;
 import Interfaces.IObject;
 import Model.Entity;
 import Model.EntityHolder;
