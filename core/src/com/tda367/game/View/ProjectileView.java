@@ -14,8 +14,8 @@ public class ProjectileView implements IView{
 
     private DrawFacade drawFacade;
     private ProjectileController controller;
-    public ProjectileView(String texturePath, ProjectileController controller) {
-        drawFacade = new DrawFacade(texturePath);
+    public ProjectileView(ProjectileController controller) {
+        drawFacade = new DrawFacade("Cannonball.png");
         this.controller = controller;
     }
     @Override

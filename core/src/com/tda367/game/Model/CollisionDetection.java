@@ -87,7 +87,7 @@ public class CollisionDetection {
      * The method checks collision between projectiles and enemies in the game. If an enemy is hit
      * it will return the enemy that is hit along with the projectile that hit
      */
-    public Map<Entity, IProjectile> checkCollisionProjectileAndEnemy(){
+    public Map<Entity,IProjectile> checkCollisionProjectileAndEnemy(){
         Map<Entity, IProjectile> collided = new HashMap<>();
         for (IProjectile projectile: posHandler.getProjectiles()) {
             for(Entity entity : posHandler.entities) {
@@ -102,8 +102,8 @@ public class CollisionDetection {
     }
 
     private boolean isColliding(Entity entity, IProjectile projectile){
-        if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+entity.getEntityWidth())){
-            return (projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+entity.getEntityHeight());
+        if((projectile.getX() + projectile.getRadius()*2 >= entity.getPosX()) && (projectile.getX() <= entity.getPosX()+ entity.getEntityHeight())){
+            return (projectile.getY() + 2*projectile.getRadius() >= entity.getPosY()) && (projectile.getY() <= entity.getPosY()+ entity.getEntityWidth());
         }
         return false;
     }
