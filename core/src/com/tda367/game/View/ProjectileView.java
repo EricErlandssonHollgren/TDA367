@@ -10,10 +10,10 @@ import java.util.List;
 public class ProjectileView implements IView{
     private List<IProjectile> projectiles;
     private DrawFacade drawFacade;
-
-    public ProjectileView(String texturePath) {
-        drawFacade = new DrawFacade(texturePath);
-        projectiles = new ArrayList<>();
+    private ProjectileController controller;
+    public ProjectileView(ProjectileController controller) {
+        drawFacade = new DrawFacade("Cannonball.png");
+        this.controller = controller;
     }
     @Override
     public void render() {

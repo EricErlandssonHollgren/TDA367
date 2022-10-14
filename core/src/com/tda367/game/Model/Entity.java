@@ -15,9 +15,9 @@ public abstract class Entity {
     public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
         this.positionX = positionX;
         this.positionY = positionY;
-        this.state = ActionEnum.IDLE;
-        this.width = entityWidth;
-        this.height = entityHeight;
+        this.entityHeight = entityHeight;
+        this.entityWidth = entityWidth;
+        this.state = STATE.IDLE;
         this.healthBar = new HealthBar(positionX,positionY, 100f, entityWidth, entityHeight);
     }
 
