@@ -1,23 +1,26 @@
 package View;
 
-import Interfaces.IProjectile;
 import Interfaces.IView;
+import Model.Enemy.Enemy;
+import Model.Enemy.EnemyFactory;
 import Model.Facade.DrawFacade;
+import Model.FireAttack;
 
 public class FireView implements IView {
-    private IProjectile fireAttack;
-    private DrawFacade drawFacade;
+    Enemy enemy;
+    FireAttack fireAttack;
+    DrawFacade drawFacade;
 
-    public FireView(IProjectile fireAttack) {
-        this.fireAttack = fireAttack;
+    public FireView() {
+        this.fireAttack = new FireAttack(630,100);
+        this.enemy = EnemyFactory.createEnemy1();
         this.drawFacade = new DrawFacade("flame.png");
     }
     @Override
     public void render() {
-        float imgPositionFromEnemy = 50;
-        fireAttack.move();
-        drawFacade.drawObject(fireAttack.getX()-imgPositionFromEnemy, fireAttack.getY(), fireAttack.getRadius(), fireAttack.getRadius());
-        //System.out.println(fireAttack.getX());
+        float imgPositionFromEnemy = 60;
+        drawFacade.drawObject(enemy.getPosX()-imgPositionFromEnemy, enemy.getPosY(), fireAttack.getWidth(), fireAttack.getHeight());
+        fireAttack.updatePosition(enemy.getUpdatedPosition(), enemy.getPosY());
     }
 
     @Override

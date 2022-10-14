@@ -32,7 +32,7 @@ public class Player extends Entity implements IObservers {
         super(positionX, positionY, entityWidth, entityHeight);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
-        isAttacking  = false;
+        isAttacking  = true;
         attackHitbox = new AttackHitbox(positionX+width,positionY);
     }
 
@@ -62,6 +62,7 @@ public class Player extends Entity implements IObservers {
             }
         }
     }
+
 
     /**
      * The moveRight() method is allowing the character to move to the right side,
@@ -106,25 +107,22 @@ public class Player extends Entity implements IObservers {
         }
     }
     private void playerDead(){
-       /* for (IEntitySubscriber subscriber : subscriberList) {
+        for (IEntitySubscriber subscriber : subscriberList) {
             subscriber.updateState();
         }
-
-        */
     }
 
 
     public void playerAttack(Entity enemy){
         long currentAttackTime = System.currentTimeMillis();
         long minIntervalbetweenAttack = 1000;
-        if(isAttacking) {
+        if(isAttacking){
             if (currentAttackTime > latestAttackTime + minIntervalbetweenAttack) {
-                enemy.takeDamage(damage);
                 System.out.println("Damage :)");
+                enemy.takeDamage(damage);
                 latestAttackTime = currentAttackTime;
             }
         }
-
     }
 
     /**
@@ -139,12 +137,10 @@ public class Player extends Entity implements IObservers {
         if(action == ActionEnum.RIGHT){
             moveRight();
         }
-
         if(action == ActionEnum.DYING){
             playerDead();
         }
         isAttacking = action == ActionEnum.DAMAGE;
-
 
     }
 

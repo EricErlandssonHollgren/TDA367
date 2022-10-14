@@ -1,8 +1,8 @@
 package Model;
 
-import Interfaces.IProjectile;
+import Interfaces.IObject;
 
-public class FireAttack implements IProjectile {
+public class FireAttack implements IObject {
 
     private float x;
     private float y;
@@ -10,12 +10,14 @@ public class FireAttack implements IProjectile {
 
     private final float imgWidth;
 
+    private final float imgHeight;
     private final int damage;
 
     public FireAttack(float x, float y) {
         this.x = x;
         this.y = y;
-        this.imgWidth = 100;
+        this.imgWidth = 70;
+        this.imgHeight = 70;
         this.damage = 5;
     }
 
@@ -27,28 +29,36 @@ public class FireAttack implements IProjectile {
     public float getX() {
         return this.x;
     }
+
     @Override
     public float getY() {
         return this.y;
     }
 
     @Override
-    public float getRadius() {
-        return imgWidth/2;
+    public float getHeight() {
+        return imgHeight;
     }
 
     @Override
-    public void move() {
-        this.x -= 0.2;
+    public float getWidth() {
+
+        return imgWidth;
     }
 
-    public void fireAttack(Entity player){
-        long currentAttackTime = System.currentTimeMillis();
-        long minIntervalbetweenAttack = 3000;
-        if (currentAttackTime > latestAttackTime + minIntervalbetweenAttack) {
-            player.takeDamage(damage);
-            latestAttackTime = currentAttackTime;
+        public void updatePosition ( float x, float y){
+            this.x = x;
+            this.y = y;
         }
+
+        public void fireAttack(Entity player){
+            long currentAttackTime = System.currentTimeMillis();
+            long minIntervalbetweenAttack = 3000;
+            if (currentAttackTime > latestAttackTime + minIntervalbetweenAttack) {
+                player.takeDamage(damage);
+                latestAttackTime = currentAttackTime;
+            }
+        }
+
     }
 
-}

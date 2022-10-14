@@ -1,4 +1,3 @@
-import Interfaces.IProjectile;
 import Model.*;
 import Model.Enemy.Enemy;
 import Model.Enemy.EnemyFactory;
@@ -74,19 +73,5 @@ public class CollisionDetectionTest {
 
         Map<Entity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
         assertFalse(collision.get(enemy));
-    }
-
-    @Test
-    public void enemyAndProjectileCollides(){
-        CollisionDetection cd = CollisionDetection.getInstance();
-
-        Entity enemy = EnemyFactory.createEnemy1();
-        EntityHolder eh = EntityHolder.getInstance();
-        eh.addEntity(enemy);
-
-        IProjectile projectile = ProjectileFactory.createCannonball(630,100,0,0,16);
-        Map<Entity,IProjectile> collision = cd.checkCollisionProjectileAndEnemy();
-        assertTrue(collision.containsKey(enemy));
-        assertTrue(collision.containsValue(projectile));
     }
 }
