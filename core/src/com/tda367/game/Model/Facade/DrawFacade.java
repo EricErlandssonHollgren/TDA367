@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class DrawFacade {
     private SpriteBatch batch;
@@ -30,6 +31,12 @@ public class DrawFacade {
     public void drawObject(float x, float y, float imgWidth, float imgHeight){
         batch.begin();
         batch.draw(img, x,y,imgWidth,imgHeight);
+        batch.end();
+    }
+
+    public void drawText(float x, float y) {
+        batch.begin();
+        //font.draw(batch,str, x,y);
         batch.end();
     }
 

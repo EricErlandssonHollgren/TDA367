@@ -21,11 +21,15 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.tda367.game.App;
 
-public class MainMenuView extends ScreenAdapter implements IView {
+public class MainMenuView extends ScreenAdapter {
 
     private final App game;
+    SpriteBatch batch;
+    BitmapFont font;
 
     public MainMenuView(App game) {
+        batch = new SpriteBatch();
+        font = new BitmapFont();
         this.game = game;
     }
 
@@ -41,15 +45,16 @@ public class MainMenuView extends ScreenAdapter implements IView {
             }
         });
     }
+
     @Override
-    public void render() {
+    public void render(float delta) {
         Gdx.gl.glClearColor(0, .25f, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.begin();
-        game.font.draw(game.batch, "Title Screen!", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
-        game.font.draw(game.batch, "Click the circle to win.", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .5f);
-        game.font.draw(game.batch, "Press space to play.", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
-        game.batch.end();
+        batch.begin();
+        font.draw(batch, "Game", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .75f);
+        font.draw(batch, "Play", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .5f);
+        font.draw(batch, "Quit", Gdx.graphics.getWidth() * .25f, Gdx.graphics.getHeight() * .25f);
+        batch.end();
     }
 
     @Override
@@ -59,7 +64,8 @@ public class MainMenuView extends ScreenAdapter implements IView {
 
     @Override
     public void dispose() {
-
+        font.dispose();
+        batch.dispose();
     }
 }
 

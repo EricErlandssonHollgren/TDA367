@@ -9,24 +9,13 @@ import View.PlayerView;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class App extends Game {
-	private SpriteBatch batch;
-	private GameTimer timer;
-	private ViewHolder views;
-	private Player player;
-	private RoundHandler roundHandler;
-	private MainHandler goldHandler;
-	private MainHandler pointsHandler;
-	private Tower tower;
-	private HealthBar healthBar;
-	private WorldBoundaries worldBoundaries;
-	private CollisionDetection collisionDetection;
-	private EntityHolder entityHolder;
-	private PlayerKeyListener playerKeyListener;
-	private MainMenuView mainMenuView;
+
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -64,6 +53,7 @@ public class App extends Game {
   
 	@Override
 	public void render () {
+		super.render();
 		/*
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
@@ -78,8 +68,8 @@ public class App extends Game {
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		views.dispose();
+		//batch.dispose();
+		//views.dispose();
 
 	}
 }
