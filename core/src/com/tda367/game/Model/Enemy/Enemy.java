@@ -37,6 +37,12 @@ public abstract class Enemy extends Entity{
     }
 
 
+    /**
+     * Enemy is able to take damage. For each time it is taking damage the health decrements.
+     * If the health is less or equal to zero it should die.
+     * @param damage represents the damage taken from either a player or cannonball.
+     */
+
     public void takeDamage(int damage) {
         health -= damage;
         if(health <= 0){

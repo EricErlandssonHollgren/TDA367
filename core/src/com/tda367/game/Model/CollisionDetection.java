@@ -12,6 +12,7 @@ public class CollisionDetection {
     private EntityHolder posHandler;
     private WorldBoundaries wb;
     private Tower tower;
+    private FireAttack attack;
     private static CollisionDetection instance;
 
     private List<ICollisionListener> listeners;
@@ -37,8 +38,8 @@ public class CollisionDetection {
         boolean ableToMoveRight = true;
         boolean ableToMoveLeft = true;
 
-        ableToMoveRight = !CheckCollisionPlayerwithRightBlock(wb.getBlocks().get(1),player);
-        ableToMoveLeft = !CheckCollisionPlayerwithLeftBlock(wb.getBlocks().get(2),player);
+        ableToMoveRight = !CheckCollisionPlayerWithRightBlock(wb.getBlocks().get(1),player);
+        ableToMoveLeft = !CheckCollisionPlayerWithLeftBlock(wb.getBlocks().get(2),player);
 
         player.setAbleToMoveRight(ableToMoveRight);
         player.setAbleToMoveLeft(ableToMoveLeft);
@@ -50,7 +51,7 @@ public class CollisionDetection {
      * @param block to check collision with
      * @return if there will be a collision after the player's movement
      */
-    public boolean CheckCollisionPlayerwithLeftBlock(Block block, Player player) {
+    public boolean CheckCollisionPlayerWithLeftBlock(Block block, Player player) {
         return player.getPosX() <= block.getX()+ block.getWidth()
                 && player.getPosY() < block.getHeight() + block.getY() && block.getY() < player.getPosY();
     }
@@ -60,7 +61,7 @@ public class CollisionDetection {
      * @param block to check collision with
      * @return if there will be a collision after the player's movement
      */
-    public boolean CheckCollisionPlayerwithRightBlock(Block block, Player player) {
+    public boolean CheckCollisionPlayerWithRightBlock(Block block, Player player) {
         return player.getPosX() + player.getWidth() > block.getX()
                 && player.getPosY() < block.getHeight() + block.getY() && block.getY() < player.getPosY();
     }
@@ -154,5 +155,9 @@ public class CollisionDetection {
             }
         }
         return collisions;
+    }
+
+    public void CheckCollisionTurretAndFireAttack(Tower tower){
+
     }
 }

@@ -17,7 +17,7 @@ public class CollisionDetectionTest {
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(0,40,1000,10);
 
-        assertTrue(cd.CheckCollisionPlayerwithLeftBlock(block,player));
+        assertTrue(cd.CheckCollisionPlayerWithLeftBlock(block,player));
 
     }
 
@@ -28,7 +28,7 @@ public class CollisionDetectionTest {
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(630,40,1000,10);
 
-        assertTrue(cd.CheckCollisionPlayerwithRightBlock(block,player));
+        assertTrue(cd.CheckCollisionPlayerWithRightBlock(block,player));
 
     }
 
@@ -38,7 +38,7 @@ public class CollisionDetectionTest {
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(0,40,1000,10);
 
-        assertFalse(cd.CheckCollisionPlayerwithLeftBlock(block,player));
+        assertFalse(cd.CheckCollisionPlayerWithLeftBlock(block,player));
 
     }
     @Test
@@ -47,7 +47,7 @@ public class CollisionDetectionTest {
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(630,40,1000,10);
 
-        assertFalse(cd.CheckCollisionPlayerwithRightBlock(block,player));
+        assertFalse(cd.CheckCollisionPlayerWithRightBlock(block,player));
 
     }
 
