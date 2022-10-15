@@ -4,6 +4,7 @@ import Interfaces.IEnemyAttack;
 import Interfaces.IProjectile;
 import Interfaces.IView;
 import Model.Enemy.Enemy;
+import Model.Entity;
 import Model.Facade.DrawFacade;
 import Model.Waves;
 
@@ -21,10 +22,11 @@ public class FireView implements IView {
     @Override
     public void render() {
         float imgPositionFromEnemy = 50;
-        for (Enemy enemy: wave.getEnemiesToRender()) {
-            enemy.moveEnemy();
-            drawFacade.drawObject(enemy.getPosX()-imgPositionFromEnemy, enemy.getPosY(), fireAttack.getImgWidth(), fireAttack.getImgHeight());
-
+        for (Entity enemy: wave.getEnemiesToRender()) {
+            if(enemy instanceof Enemy) {
+                ((Enemy) enemy).moveEnemy();
+                drawFacade.drawObject(enemy.getPosX() - imgPositionFromEnemy, enemy.getPosY(), fireAttack.getImgWidth(), fireAttack.getImgHeight());
+            }
         }
     }
 

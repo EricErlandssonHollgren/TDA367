@@ -5,7 +5,6 @@ import Model.EntityHolder;
 import Model.Goldhandler;
 import Model.PointHandler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,10 +13,10 @@ import java.util.List;
  */
 
 
-public abstract class Enemy extends Entity {
+public abstract class Enemy extends Entity{
     private final int worth;
     public final IEnemyAttack enemyAttack;
-    private List<IEntitySubscriber> subscriberList = new ArrayList<>();
+    private EntityHolder entityHolder;
     private boolean isDead;
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
@@ -27,11 +26,6 @@ public abstract class Enemy extends Entity {
         this.worth = worth;
         this.enemyAttack = enemyAttack;
         this.isDead = false;
-    }
-
-    public void enemySubscriber(IEntitySubscriber subscriber){
-        subscriberList.add(subscriber);
-        subscriber.updatePosition(positionX,positionY);
     }
 
     /**
@@ -53,14 +47,11 @@ public abstract class Enemy extends Entity {
     }
 
     private void enemyDead(Entity enemy, int amount){
-      for (IEntitySubscriber e: subscriberList) {
-            e.updateState();
-            isDead = true;
-        }
-
         EntityHolder.getInstance().removeEntity(enemy);
         PointHandler.addPoints(amount);
         Goldhandler.addGold(amount);
     }
+
+
 
 }

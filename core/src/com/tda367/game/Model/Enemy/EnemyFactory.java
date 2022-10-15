@@ -1,6 +1,7 @@
 package Model.Enemy;
 
 import Model.Enemy.Enemies.Enemy1;
+import Model.Entity;
 import Model.EntityHolder;
 
 /**

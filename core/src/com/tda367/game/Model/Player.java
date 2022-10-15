@@ -13,7 +13,7 @@ public class Player extends Entity implements IObservers {
      */
     List<IEntitySubscriber> subscriberList = new ArrayList<>();
     private static int damage = 25;
-    private static float velocity = 7;
+    private static final float velocity = 7;
     private boolean isAttacking;
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;

@@ -2,6 +2,7 @@ package View;
 
 import Interfaces.*;
 import Model.Enemy.Enemy;
+import Model.Entity;
 import Model.Facade.DrawFacade;
 import Model.Waves;
 
@@ -29,9 +30,12 @@ public class EnemyView implements IView, IEntitySubscriber{
      */
     @Override
     public void render() {
-        for (Enemy enemy: wave.getEnemiesToRender()) {
-            enemy.moveEnemy();
-            drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
+        for (Entity enemy: wave.getEnemiesToRender()) {
+            if(enemy instanceof Enemy){
+                ((Enemy) enemy).moveEnemy();
+                drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
+
+            }
         }
     }
     @Override

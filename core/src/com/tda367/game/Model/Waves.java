@@ -32,23 +32,23 @@ public class Waves {
         return Objects.requireNonNull(currentEnemy);
     }
 
+
     /**
      * A method for rendering, and moving, an enemy across the screen every 30 seconds. After 30 seconds a new enemy is
      * to be spawned.
      * wasRecentlySpawned: A check for making sure only one enemy is being spawned every 30 seconds.
      */
-    public List<Enemy> getEnemiesToRender() {
+    public List<Entity> getEnemiesToRender() {
         double timer = Math.ceil(GameTimer.GetInstance().GetTime());
         if (timer % 10 == 0 && !wasRecentlySpawned) {
             Enemy newEnemy = addEnemies().poll();
-            currentEnemiesRendered.add(newEnemy);
             EntityHolder.getInstance().addEntity(newEnemy);
             wasRecentlySpawned = true;
         }
         if (timer % 10 == 9){
             wasRecentlySpawned = false;
         }
-        return currentEnemiesRendered;
+        return EntityHolder.getInstance().entities;
     }
 }
 

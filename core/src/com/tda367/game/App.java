@@ -28,14 +28,13 @@ public class App extends ApplicationAdapter {
 	private Tower tower;
 	private HealthBar healthBar;
 
-	private FireAttack fireAttack;
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
 	private TowerController towerController;
 	private PlayerController playerController;
 	private ProjectileController projectileController;
-	private EnemyController enemyController;
+
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -70,7 +69,6 @@ public class App extends ApplicationAdapter {
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		projectileController = new ProjectileController(entityHolder,collisionDetection,timer);
-		enemyController = new EnemyController(entityHolder, collisionDetection, timer);
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
@@ -106,11 +104,9 @@ public class App extends ApplicationAdapter {
 
 		List<IProjectile> projectileGround = collisionDetection.checkCollisionProjectileGround();
 		Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();
-		Map<Entity,Boolean> enemyUpdate = collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		playerController.UpdatePlayerMovement();
 		projectileController.updateProjectiles(projectileEnemy,projectileGround);
 		playerController.UpdatePlayerState();
-		enemyController.updateEnemy(enemyUpdate);
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}
