@@ -80,19 +80,25 @@ public class Player extends Entity implements IObservers {
 
     /**
      * The setter enables the player to move right
+     *
      * @param ableToMoveRight is a boolean to allow the player move right.
+     * @return ableToMoveRight
      */
-    public void setAbleToMoveRight(boolean ableToMoveRight) {
+    public boolean setAbleToMoveRight(boolean ableToMoveRight) {
         isAbleToMoveRight = ableToMoveRight;
+        return ableToMoveRight;
     }
 
 
     /**
      * The setter enbles the player to move left.
+     *
      * @param ableToMoveLeft is a boolean to allow the player move left.
+     * @return ableToMoveLeft
      */
-    public void setAbleToMoveLeft(boolean ableToMoveLeft) {
+    public boolean setAbleToMoveLeft(boolean ableToMoveLeft) {
         isAbleToMoveLeft = ableToMoveLeft;
+        return ableToMoveLeft;
     }
 
     /**
@@ -113,14 +119,16 @@ public class Player extends Entity implements IObservers {
         */
     }
 
-
+    /**
+     * The playerAttack-method enables the player to deal damage within 1 seconds intervals.
+     * @param enemy is a parameter of the class Entity.
+     */
     public void playerAttack(Entity enemy){
         long currentAttackTime = System.currentTimeMillis();
         long minIntervalbetweenAttack = 1000;
         if(isAttacking) {
             if (currentAttackTime > latestAttackTime + minIntervalbetweenAttack) {
                 enemy.takeDamage(damage);
-                System.out.println("Damage :)");
                 latestAttackTime = currentAttackTime;
             }
         }
@@ -128,8 +136,8 @@ public class Player extends Entity implements IObservers {
     }
 
     /**
-     * The method allows the player to move left or right depending on the key that is pressed.
-     * @param action uses the moveLeft() or moveRight() method
+     * The method checks which method to use whenever an action is called.
+     * @param action uses different methods depending on the action.
      */
     @Override
     public void actionHandle(ActionEnum action) {

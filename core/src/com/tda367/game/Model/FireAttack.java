@@ -21,11 +21,6 @@ public class FireAttack implements IEnemyAttack {
         this.imgHeight = 70;
         this.damage = 5;
     }
-
-    public float getDamage() {
-        return this.damage;
-    }
-
     @Override
     public float getX() {
         return this.x;
