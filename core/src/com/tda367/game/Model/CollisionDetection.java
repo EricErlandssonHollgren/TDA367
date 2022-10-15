@@ -93,11 +93,10 @@ public class CollisionDetection {
     }
 
     /**
-     * Checks if a player should deal damage to an enemy
-     * @param player
-     * @return List of entities
+     * Checks if a player should deal damage to an enemy through its hitbox
+     * @param player checks if an enemy is colliding with player's hitbox
      */
-    public List<Entity> CheckCollisionEnemyAndHitBox(Player player){
+    public void CheckCollisionEnemyAndHitBox(Player player){
         List<Entity> collisions = new ArrayList<>();
         float[] attackEdges = player.attackHitbox.getEdges();
         for (Entity entity: posHandler.entities) {
@@ -111,7 +110,6 @@ public class CollisionDetection {
         for (Entity e: collisions) {
             player.playerAttack(e);
         }
-        return collisions;
     }
 
     /**
@@ -120,13 +118,22 @@ public class CollisionDetection {
      */
     public Map<Entity,IProjectile> checkCollisionProjectileAndEnemy(){
         Map<Entity, IProjectile> collided = new HashMap<>();
+        List<Entity> attackedEnemies = new ArrayList<>();
         for (IProjectile projectile: posHandler.getProjectiles()) {
             for(Entity entity : posHandler.entities) {
                 if(entity instanceof Enemy){
                     if(isColliding(entity,projectile)){
+                        attackedEnemies.add(entity);
                         collided.put(entity,projectile);
+
                     }
+
                 }
+
+
+            }
+            for (Entity e: attackedEnemies) {
+                projectile.projectileAttack(e);
             }
         }
         return collided;

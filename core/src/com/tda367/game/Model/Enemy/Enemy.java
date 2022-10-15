@@ -42,7 +42,6 @@ public abstract class Enemy extends Entity{
         if(health <= 0){
             enemyDead(this, worth);
             isDead = true;
-            System.out.println("I am dead");
         }
     }
 

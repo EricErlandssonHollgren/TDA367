@@ -1,7 +1,9 @@
 package Interfaces;
 
+import Model.Entity;
+
 public interface IProjectile {
-    float getDamage();
+    void projectileAttack(Entity enemy);
     float getX();
     float getY();
     float getRadius();

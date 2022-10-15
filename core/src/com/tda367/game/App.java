@@ -100,6 +100,7 @@ public class App extends ApplicationAdapter {
 
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
+		collisionDetection.CheckCollisionEnemyAndHitBox(player);
 
 		List<IProjectile> projectileGround = collisionDetection.checkCollisionProjectileGround();
 		Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();

@@ -18,7 +18,7 @@ public class Player extends Entity implements IObservers {
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
     private long latestAttackTime;
-    public AttackHitbox attackHitbox;
+    final AttackHitbox attackHitbox;
 
     /**
      * When creating a player it should have two variables which defines its position.
