@@ -20,11 +20,15 @@ public class Waves {
         return queue;
     }
 
-    public Enemy getEnemyFromQueue(){
-        System.out.println(addEnemies().size());
-        Enemy tempEnemy = addEnemies().poll();
-        return Objects.requireNonNull(tempEnemy);
+    /**
+     * Takes the first enemy in the queue and returns it, as well as removes it from the queue.
+     * @return the enemy that is first in line.
+     */
+    private Enemy getEnemyFromQueue() {
+        Enemy currentEnemy = addEnemies().poll();
+        return Objects.requireNonNull(currentEnemy);
     }
+
 
     /**
      * A method for rendering, and moving, an enemy across the screen every 30 seconds. After 30 seconds a new enemy is

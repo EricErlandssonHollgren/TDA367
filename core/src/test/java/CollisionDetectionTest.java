@@ -16,7 +16,7 @@ public class CollisionDetectionTest {
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(0,40,1000,10);
 
-        assertTrue(cd.CheckCollisionPlayerwithLeftBlock(block,player));
+        assertTrue(cd.CheckCollisionPlayerWithLeftBlock(block,player));
 
     }
 
@@ -27,7 +27,7 @@ public class CollisionDetectionTest {
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(630,40,1000,10);
 
-        assertTrue(cd.CheckCollisionPlayerwithRightBlock(block,player));
+        assertTrue(cd.CheckCollisionPlayerWithRightBlock(block,player));
 
     }
 
@@ -37,7 +37,7 @@ public class CollisionDetectionTest {
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(0,40,1000,10);
 
-        assertFalse(cd.CheckCollisionPlayerwithLeftBlock(block,player));
+        assertFalse(cd.CheckCollisionPlayerWithLeftBlock(block,player));
 
     }
     @Test
@@ -46,7 +46,7 @@ public class CollisionDetectionTest {
         CollisionDetection cd =  CollisionDetection.getInstance();
         Block block = new Block(630,40,1000,10);
 
-        assertFalse(cd.CheckCollisionPlayerwithRightBlock(block,player));
+        assertFalse(cd.CheckCollisionPlayerWithRightBlock(block,player));
 
     }
 
@@ -54,7 +54,7 @@ public class CollisionDetectionTest {
     public void playerWillCollideWithEnemy(){
         Player player = new Player(200, 0, 50 ,37);
         CollisionDetection cd = CollisionDetection.getInstance();
-        Enemy enemy = new Enemy(200,0,10, AttackFactory.createFireFlame());
+        Enemy enemy = new Enemy(630,100,10,AttackFactory.createFireFlame();
 
         EntityHolder.getInstance().addEntity(enemy);
         Map<Entity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
@@ -67,7 +67,7 @@ public class CollisionDetectionTest {
         Player player = new Player(500,500, 50 ,37);
         CollisionDetection cd = CollisionDetection.getInstance();
 
-        Entity enemy = new Enemy(630,100,10, AttackFactory.createFireFlame());
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame();
 
         EntityHolder.getInstance().addEntity(enemy);
 
@@ -79,7 +79,7 @@ public class CollisionDetectionTest {
     public void enemyAndProjectileCollides(){
         CollisionDetection cd = CollisionDetection.getInstance();
 
-        Entity enemy = new Enemy(630,100,10, AttackFactory.createFireFlame());
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame();
         EntityHolder eh = EntityHolder.getInstance();
         eh.addEntity(enemy);
 

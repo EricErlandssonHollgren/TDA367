@@ -165,6 +165,12 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         return turrets.size() == getMaxCapacity();
     }
 
+    private void takeDamage(int damage){
+        health -= damage;
+        if(health == 0){
+            //TODO: Gameover.
+        }
+    }
 
     /*
     Handles different tasks given by controller to update the state of Tower.

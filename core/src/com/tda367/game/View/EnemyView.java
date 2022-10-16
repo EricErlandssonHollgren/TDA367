@@ -33,11 +33,12 @@ public class EnemyView implements IView, IEntitySubscriber{
      * Scaling of the texture is also being done in this method.
      */
     @Override
-     public void render() {
+    public void render() {
         for (Entity enemy: wave.getEnemiesToRender()) {
             if(enemy instanceof Enemy){
-                ((Enemy) enemy).move();
+                ((Enemy) enemy).moveEnemy();
                 drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
+
             }
         }
         fireView.render();

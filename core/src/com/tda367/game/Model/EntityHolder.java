@@ -8,7 +8,6 @@ import java.util.List;
 public class EntityHolder {
     List<Entity> entities;
     private List<IProjectile> projectiles;
-    private List<Entity> enemies;
 
     private static EntityHolder instance;
     private EntityHolder(){
@@ -32,7 +31,6 @@ public class EntityHolder {
         return this.projectiles;
     }
 
-
     public void addProjectile(IProjectile projectile){
         projectiles.add(projectile);
     }
@@ -40,7 +38,4 @@ public class EntityHolder {
         projectiles.remove(projectile);
     }
 
-    public List<Entity> getEnemies() {
-        return this.enemies;
-    }
 }

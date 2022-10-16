@@ -2,10 +2,7 @@ package View;
 
 import Interfaces.IEnemyAttack;
 import Interfaces.IView;
-import Model.AttackFactory;
-import Model.Enemy;
 import Model.Facade.DrawFacade;
-import Model.Waves;
 
 public class FireView implements IView {
     private IEnemyAttack fireAttack;

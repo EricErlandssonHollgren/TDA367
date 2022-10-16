@@ -1,6 +1,8 @@
 
 import Model.Player;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PlayerJunitTest {
 
@@ -24,4 +26,34 @@ public class PlayerJunitTest {
 
         assertTrue(player.getPosX() > posX);
     }
+    @Test
+    public void notableToMoveRight(){
+        boolean isAbleToMoveRight = false;
+
+        Player player = new Player(200, 100, 50, 37);
+
+        boolean checkPlayerMoveRight= player.setAbleToMoveRight(isAbleToMoveRight);
+        assertFalse(player.setAbleToMoveRight(checkPlayerMoveRight));
+    }
+
+    @Test
+    public void notableToMoveLeft(){
+        boolean isAbleToMoveLeft = false;
+
+        Player player = new Player(200, 100, 50, 37);
+
+        boolean checkPlayerMoveLeft= player.setAbleToMoveLeft(isAbleToMoveLeft);
+        assertFalse(player.setAbleToMoveRight(checkPlayerMoveLeft));
+
+    }
+
+    @Test
+    public void playingTakingDamage(){
+        Player player = new Player(200, 100, 50, 37);
+
+        player.takeDamage(20);
+        int health = player.getHealth();
+        assertTrue(health < 100);
+    }
+
 }

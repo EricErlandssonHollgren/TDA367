@@ -33,7 +33,10 @@ public class App extends ApplicationAdapter {
 	private TowerController towerController;
 	private PlayerController playerController;
 	private ProjectileController projectileController;
-	private EnemyController enemyController;
+
+	public App() {
+	}
+
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -67,7 +70,6 @@ public class App extends ApplicationAdapter {
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		projectileController = new ProjectileController(entityHolder,collisionDetection,timer);
-		enemyController = new EnemyController(entityHolder, collisionDetection, timer);
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
@@ -100,14 +102,13 @@ public class App extends ApplicationAdapter {
 
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
+		collisionDetection.CheckCollisionEnemyAndHitBox(player);
 
 		List<IProjectile> projectileGround = collisionDetection.checkCollisionProjectileGround();
 		Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();
-		Map<Entity,Boolean> enemyUpdate = collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		playerController.UpdatePlayerMovement();
 		projectileController.updateProjectiles(projectileEnemy,projectileGround);
 		playerController.UpdatePlayerState();
-		enemyController.updateEnemy(enemyUpdate);
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}

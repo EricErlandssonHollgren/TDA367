@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class EnemyTest {
-    Enemy enemy = new Enemy(630,100,10, AttackFactory.createFireFlame());
+    Enemy enemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
 
     Waves wave = new Waves();
     /**
@@ -30,7 +30,7 @@ public class EnemyTest {
     @Test
     public void testMovementX() {
         float oldPositionX = enemy.getPosX();
-        enemy.move();
+        enemy.moveEnemy();
         for (int i = 1; i <= 630; i++) {
             if (oldPositionX >= enemy.getPosX()) {
                 assertTrue(true);
@@ -45,7 +45,7 @@ public class EnemyTest {
     @Test
     public void testMovementY() {
         float oldPositionY = enemy.getPosY();
-        enemy.move();
+        enemy.moveEnemy();
         for (int i = 1; i <= 780; i++) {
             if (oldPositionY == enemy.getPosX()) {
                 assertTrue(true);
