@@ -1,11 +1,6 @@
 package Model.Enemy;
 import Interfaces.*;
-import Model.Entity;
-import Model.EntityHolder;
-import Model.Goldhandler;
-import Model.PointHandler;
-
-import java.util.List;
+import Model.*;
 
 
 /**
@@ -17,7 +12,11 @@ public abstract class Enemy extends Entity{
     private final int worth;
     public final IEnemyAttack enemyAttack;
     private EntityHolder entityHolder;
+    private long latestAttackTime;
     private boolean isDead;
+    private int damage;
+    private boolean isAttacking;
+    private int health;
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
@@ -25,7 +24,10 @@ public abstract class Enemy extends Entity{
         super(positionX, positionY, 70, 70);
         this.worth = worth;
         this.enemyAttack = enemyAttack;
+        this.isAttacking = true;
         this.isDead = false;
+        this.health = 150;
+        this.damage = 20;
     }
 
     /**
@@ -36,6 +38,13 @@ public abstract class Enemy extends Entity{
         positionX -= speed;
     }
 
+    /**
+     * Enemy's getDamage method
+     * @return damage to other objects
+     */
+    public int getDamage(){
+        return damage;
+    }
 
     /**
      * Enemy is able to take damage. For each time it is taking damage the health decrements.
@@ -56,7 +65,5 @@ public abstract class Enemy extends Entity{
         PointHandler.addPoints(amount);
         Goldhandler.addGold(amount);
     }
-
-
 
 }

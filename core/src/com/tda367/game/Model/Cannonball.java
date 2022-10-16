@@ -14,7 +14,7 @@ public class Cannonball implements IProjectile {
         this.y = y;
         this.vx = vx;
         this.vy = vy;
-        this.damage = 20;
+        this.damage = 10;
     }
 
     @Override
