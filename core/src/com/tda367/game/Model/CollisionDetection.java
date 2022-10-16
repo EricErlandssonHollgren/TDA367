@@ -92,6 +92,27 @@ public class CollisionDetection {
         return (player.getPosX() + player.getWidth() > entity.getPosX()) &&
                 player.getPosX() <= entity.getWidth() + entity.getPosX();
     }
+    public void CheckCollisionTowerAndEnemy(Tower tower){
+       List<Entity> collisions = new ArrayList<>();
+       for(Entity entity: posHandler.entities){
+           if(entity instanceof Enemy){
+               if(TowerAndEnemyisColliding(tower, entity)){
+                   collisions.add(entity);
+               }
+           }
+       }
+        for (Entity e: collisions) {
+            tower.takeDamage(((Enemy) e).getDamage());
+            EntityHolder.getInstance().removeEntity(e);
+
+        }
+
+    }
+
+    private boolean TowerAndEnemyisColliding(Tower tower, Entity entity){
+        return tower.getPositionX() + tower.getWidth() > entity.getPosX() &&
+                tower.getPositionX() <= entity.getWidth() + entity.getPosX();
+    }
 
     /**
      * Checks if a player should deal damage to an enemy through its hitbox
@@ -157,7 +178,5 @@ public class CollisionDetection {
         return collisions;
     }
 
-    public void CheckCollisionTurretAndFireAttack(Tower tower){
 
-    }
 }

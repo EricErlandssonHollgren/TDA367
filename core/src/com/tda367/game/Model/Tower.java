@@ -15,6 +15,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     private double health;
     private final float positionX;
     private final float positionY;
+    private final float width;
     private int maxCapacity;
     private final ArrayList turrets;
     private Goldhandler gold;
@@ -28,6 +29,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         this.health = 500;
         positionX = 0;
         positionY = 100;
+        width = 100;
         this.maxCapacity = 1;
         this.turrets = new ArrayList<Turret>();
         this.gold = gold;
@@ -138,6 +140,12 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
      */
     public float getPositionY(){return positionY;}
 
+    /**
+     * Should be getting the tower's width
+     * @return tower's width
+     */
+    public float getWidth(){return width;}
+
     /*
     Gets the ArrayList of turrets that tower has.
     */
@@ -165,8 +173,9 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         return turrets.size() == getMaxCapacity();
     }
 
-    private void takeDamage(int damage){
+    public void takeDamage(int damage){
         health -= damage;
+        System.out.println(health);
         if(health == 0){
             //TODO: Gameover.
         }

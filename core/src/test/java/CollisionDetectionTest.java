@@ -20,7 +20,6 @@ public class CollisionDetectionTest {
 
     }
 
-
     @Test
     public void playerCollideswithRightBlock(){
         Player player = new Player(620, 100, 50 ,37);
