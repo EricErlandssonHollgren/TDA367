@@ -1,25 +1,30 @@
 package View;
 
 import Interfaces.*;
-import Model.Enemy.Enemy;
+import Model.AttackFactory;
+import Model.Enemy;
 import Model.Facade.DrawFacade;
+import Model.FireAttack;
 import Model.Waves;
+
+import java.util.List;
 
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
 public class EnemyView implements IView, IEntitySubscriber{
 
-    private Waves wave;
+    private Enemy enemy;
     private DrawFacade drawFacade;
 
-
+    private FireView fireView;
     /**
      * A constructor for creating an Enemy.
      */
     public EnemyView() {
-        this.wave = new Waves();
         this.drawFacade = new DrawFacade("koopaTroopa.png");
+        this.fireView = new FireView(AttackFactory.createFireFlame());
+        this.enemy = new Enemy(630,100,10, AttackFactory.createFireFlame()) ;
     }
 
 
@@ -29,14 +34,14 @@ public class EnemyView implements IView, IEntitySubscriber{
      */
     @Override
     public void render() {
-        for (Enemy enemy: wave.getEnemiesToRender()) {
-            enemy.moveEnemy();
-            drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
-        }
+        enemy.move();
+        drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
+        fireView.render();
     }
     @Override
     public void dispose() {
-
+        drawFacade.dispose();
+        fireView.dispose();
     }
 
     @Override

@@ -2,7 +2,7 @@ package Model;
 
 import Interfaces.ICollisionListener;
 import Interfaces.IProjectile;
-import Model.Enemy.Enemy;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

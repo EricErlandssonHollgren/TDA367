@@ -1,8 +1,5 @@
 package Model;
 
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
-
 import java.util.*;
 
 public class Waves {
@@ -17,19 +14,16 @@ public class Waves {
      */
     public Queue<Enemy> addEnemies() {
         for (int i = 0; i < 10; i++){
-            Enemy tempEnemy = EnemyFactory.createEnemy1();
+            Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame());
             queue.add(tempEnemy);
         }
         return queue;
     }
 
-    /**
-     * Takes the first enemy in the queue and returns it, as well as removes it from the queue.
-     * @return the enemy that is first in line.
-     */
-    private Enemy getEnemyFromQueue() {
-        Enemy currentEnemy = addEnemies().poll();
-        return Objects.requireNonNull(currentEnemy);
+    public Enemy getEnemyFromQueue(){
+        System.out.println(addEnemies().size());
+        Enemy tempEnemy = addEnemies().poll();
+        return Objects.requireNonNull(tempEnemy);
     }
 
     /**
@@ -40,10 +34,11 @@ public class Waves {
     public List<Enemy> getEnemiesToRender() {
         double timer = Math.ceil(GameTimer.GetInstance().GetTime());
         if (timer % 10 == 0 && !wasRecentlySpawned) {
-            Enemy newEnemy = addEnemies().poll();
+            Enemy newEnemy = getEnemyFromQueue();
+            //System.out.println(addEnemies().size());
             currentEnemiesRendered.add(newEnemy);
-            EntityHolder.getInstance().addEntity(newEnemy);
             wasRecentlySpawned = true;
+            EntityHolder.getInstance().addEntity(newEnemy);
         }
         if (timer % 10 == 9){
             wasRecentlySpawned = false;

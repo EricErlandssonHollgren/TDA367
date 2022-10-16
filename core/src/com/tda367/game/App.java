@@ -27,8 +27,6 @@ public class App extends ApplicationAdapter {
 	private MainHandler pointsHandler;
 	private Tower tower;
 	private HealthBar healthBar;
-
-	private FireAttack fireAttack;
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
@@ -42,7 +40,6 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		//Handlers
-
 		player = new Player(120,100, 50, 37);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		worldBoundaries = new WorldBoundaries();
@@ -74,12 +71,12 @@ public class App extends ApplicationAdapter {
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
-		IView enemyView = ViewFactory.createEnemyView();
+		IView wavesView = new WavesView();
 		IView playerView = new PlayerView();
 		IView towerView = new TowerView(tower);
 		IView buttonView = new ButtonView(towerController, tower);
 		IView healthBarView = new HealthBarView(player.healthBar);
-		IView statsView = new StatsView();
+ 		IView statsView = new StatsView();
 		IView background = new BackgroundView();
 		IView projectileView = new ProjectileView(projectileController);
 		player.positionSubscriber((IEntitySubscriber) playerView);
@@ -91,7 +88,7 @@ public class App extends ApplicationAdapter {
 		views.addView(playerView);
 		views.addView(towerView);
 		views.addView(buttonView);
-		views.addView(enemyView);
+		views.addView(wavesView);
 		views.addView(statsView);
 		views.addView(healthBarView);
 		views.addView(projectileView);

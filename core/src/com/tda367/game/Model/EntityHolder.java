@@ -1,12 +1,9 @@
 package Model;
 
 import Interfaces.IProjectile;
-import Model.Enemy.Enemy;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class EntityHolder {
     List<Entity> entities;
@@ -17,6 +14,7 @@ public class EntityHolder {
     private EntityHolder(){
         entities = new ArrayList<>();
         projectiles = new ArrayList<>();
+        enemies = new ArrayList<>();
     }
     public static EntityHolder getInstance(){
         if(instance == null){

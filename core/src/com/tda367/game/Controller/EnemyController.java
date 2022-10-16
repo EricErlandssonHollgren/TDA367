@@ -2,9 +2,8 @@ package Controller;
 
 import Interfaces.IObservers;
 import Model.*;
-import Model.Enemy.Enemy;
+import Model.Enemy;
 
-import javax.swing.border.SoftBevelBorder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package Model.Enemy;
+package Model;
 import Interfaces.*;
 import Model.Entity;
 import Model.EntityHolder;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 
-public abstract class Enemy extends Entity {
+public class Enemy extends Entity {
     private final int worth;
     public final IEnemyAttack enemyAttack;
     private List<IEntitySubscriber> subscriberList = new ArrayList<>();
@@ -37,7 +37,8 @@ public abstract class Enemy extends Entity {
     /**
      * moves the enemy in x-direction only with a change of 0.2px.
      */
-    public void moveEnemy() {
+
+    public void move() {
         double speed = 0.5;
         positionX -= speed;
     }
