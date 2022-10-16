@@ -12,8 +12,6 @@ import java.util.List;
 public class EnemyView implements IView, IEntitySubscriber{
 
     private DrawFacade drawFacade;
-    private Waves wave;
-
     private FireView fireView;
     /**
      * A constructor for creating an Enemy.
@@ -21,7 +19,6 @@ public class EnemyView implements IView, IEntitySubscriber{
     public EnemyView() {
         this.drawFacade = new DrawFacade("koopaTroopa.png");
         this.fireView = new FireView();
-        this.wave = new Waves();
     }
 
 

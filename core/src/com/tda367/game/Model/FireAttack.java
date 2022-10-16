@@ -30,22 +30,6 @@ public class FireAttack implements IEnemyAttack {
         return this.y;
     }
 
-    @Override
-    public float getImgWidth() {
-        return imgWidth;
-    }
-
-    @Override
-    public float getImgHeight() {
-        return imgHeight;
-    }
-
-    @Override
-    public void move() {
-        double speed = 0.5;
-        this.x -= speed;
-    }
-
     public void fireAttack(Entity player){
         long currentAttackTime = System.currentTimeMillis();
         long minIntervalbetweenAttack = 3000;

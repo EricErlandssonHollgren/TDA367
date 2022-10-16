@@ -8,25 +8,26 @@ import Model.EntityHolder;
 import Model.Facade.DrawFacade;
 import Model.Waves;
 
+import java.util.List;
+
 public class FireView implements IView {
 
-    private Waves wave;
+    private List<Entity> enemies;
     private DrawFacade drawFacade;
 
     public FireView() {
-        this.wave = new Waves();
+        this.enemies = EntityHolder.getInstance().getEntities();
         this.drawFacade = new DrawFacade("flame.png");
     }
+
     @Override
     public void render() {
         float imgPositionFromEnemy = 60;
-        for (Entity enemy: EntityHolder.getInstance().getEntities()) {
-            if(enemy instanceof Enemy){
-                ((Enemy) enemy).moveEnemy();
-                drawFacade.drawObject(enemy.getPosX()-imgPositionFromEnemy, enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
-            }
+        for (Entity enemy: enemies) {
+            drawFacade.drawObject(enemy.getPosX()-imgPositionFromEnemy, enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
         }
     }
+
 
     @Override
     public void dispose() {
