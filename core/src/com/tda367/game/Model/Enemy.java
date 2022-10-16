@@ -9,7 +9,8 @@ import Model.*;
 
 
 public class Enemy extends Entity{
-    private final int worth;
+
+    private int worth;
     public final IEnemyAttack enemyAttack;
     private EntityHolder entityHolder;
     private long latestAttackTime;
@@ -21,7 +22,7 @@ public class Enemy extends Entity{
      */
     public Enemy(float positionX, float positionY, int worth, IEnemyAttack enemyAttack) {
         super(positionX, positionY, 70, 70);
-        this.worth = worth;
+        this.worth = 20;
         this.enemyAttack = enemyAttack;
         this.isAttacking = true;
         this.isDead = false;
@@ -34,6 +35,10 @@ public class Enemy extends Entity{
     public void moveEnemy() {
         double speed = 0.5;
         positionX -= speed;
+    }
+
+    public int getWorth() {
+        return worth;
     }
 
     /**
@@ -53,15 +58,19 @@ public class Enemy extends Entity{
     public void takeDamage(int damage) {
         health -= damage;
         if(health <= 0){
-            enemyDead(this, worth);
+            enemyDead();
             isDead = true;
         }
     }
 
-    private void enemyDead(Entity enemy, int amount){
-        EntityHolder.getInstance().removeEntity(enemy);
-        PointHandler.addPoints(amount);
-        Goldhandler.addGold(amount);
+    /**
+     * When enemy's health is zero the entity holder should remove it from the list
+     * , points is added based on the enemy's worth and so is gold.
+     */
+    public void enemyDead(){
+        EntityHolder.getInstance().removeEntity(this);
+        PointHandler.addPoints(worth);
+        Goldhandler.addGold(worth);
     }
 
 }

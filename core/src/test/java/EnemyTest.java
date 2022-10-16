@@ -1,7 +1,7 @@
-import Model.AttackFactory;
-import Model.Enemy;
-import Model.Waves;
+import Model.*;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,4 +61,34 @@ public class EnemyTest {
         assertEquals(wave.addEnemies().size(), 10);
     }
 
+
+    @Test
+    public void enemyTakeDamage(){
+        int initialHealth = enemy.getHealth();
+        enemy.takeDamage(20);
+        int newHealth = enemy.getHealth();
+
+        assertTrue(initialHealth > newHealth);
+
+    }
+
+    @Test
+    public void EnemyIsDead(){
+       EntityHolder.getInstance().addEntity(enemy);
+       PointHandler.addPoints(20);
+       Goldhandler.addGold(20);
+       int initialsizeOfEnemies = EntityHolder.getInstance().getEntities().size();
+       int initialPoints = PointHandler.getPoints();
+       int initialGold = Goldhandler.getGold();
+
+       enemy.enemyDead();
+       int enemiesAfter = EntityHolder.getInstance().getEntities().size();
+       int pointsIsAdded = PointHandler.getPoints();
+       int goldIsAdded = Goldhandler.getGold();
+
+
+        assertTrue(initialsizeOfEnemies > enemiesAfter);
+        assertTrue(initialPoints < pointsIsAdded);
+        assertTrue(initialGold < goldIsAdded);
+    }
 }

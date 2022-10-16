@@ -51,10 +51,10 @@ public class PlayerJunitTest {
     @Test
     public void playerTakingDamage(){
         Player player = new Player(200, 100, 50, 37);
-
+        int initialHealth = player.getHealth();
         player.takeDamage(20);
-        int health = player.getHealth();
-        assertTrue(health < 100);
+        int newHealth = player.getHealth();
+        assertTrue(initialHealth > newHealth);
     }
 
     @Test
