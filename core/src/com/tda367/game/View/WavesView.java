@@ -3,6 +3,7 @@ package View;
 import Interfaces.IView;
 import Model.AttackFactory;
 import Model.Enemy;
+import Model.Entity;
 import Model.Waves;
 
 import java.util.List;
@@ -17,10 +18,10 @@ public class WavesView implements IView {
         this.enemyView = new EnemyView();
     }
     @Override
-    public void render() {
-        wave.getEnemiesToRender();
-        enemyView.render();
-    }
+        public void render() {
+            enemyView.render();
+        }
+
 
     @Override
     public void dispose() {

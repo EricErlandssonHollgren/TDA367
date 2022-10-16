@@ -1,11 +1,8 @@
 package View;
 
 import Interfaces.*;
-import Model.AttackFactory;
-import Model.Enemy;
+import Model.*;
 import Model.Facade.DrawFacade;
-import Model.FireAttack;
-import Model.Waves;
 
 import java.util.List;
 
@@ -17,6 +14,8 @@ public class EnemyView implements IView, IEntitySubscriber{
     private Enemy enemy;
     private DrawFacade drawFacade;
 
+    private Waves wave;
+
     private FireView fireView;
     /**
      * A constructor for creating an Enemy.
@@ -24,6 +23,7 @@ public class EnemyView implements IView, IEntitySubscriber{
     public EnemyView() {
         this.drawFacade = new DrawFacade("koopaTroopa.png");
         this.fireView = new FireView(AttackFactory.createFireFlame());
+        this.wave = new Waves();
         this.enemy = new Enemy(630,100,10, AttackFactory.createFireFlame()) ;
     }
 
@@ -33,11 +33,16 @@ public class EnemyView implements IView, IEntitySubscriber{
      * Scaling of the texture is also being done in this method.
      */
     @Override
-    public void render() {
-        enemy.move();
-        drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
+     public void render() {
+        for (Entity enemy: wave.getEnemiesToRender()) {
+            if(enemy instanceof Enemy){
+                ((Enemy) enemy).move();
+                drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
+            }
+        }
         fireView.render();
     }
+
     @Override
     public void dispose() {
         drawFacade.dispose();

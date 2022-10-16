@@ -31,19 +31,17 @@ public class Waves {
      * to be spawned.
      * wasRecentlySpawned: A check for making sure only one enemy is being spawned every 30 seconds.
      */
-    public List<Enemy> getEnemiesToRender() {
+    public List<Entity> getEnemiesToRender() {
         double timer = Math.ceil(GameTimer.GetInstance().GetTime());
         if (timer % 10 == 0 && !wasRecentlySpawned) {
-            Enemy newEnemy = getEnemyFromQueue();
-            //System.out.println(addEnemies().size());
-            currentEnemiesRendered.add(newEnemy);
-            wasRecentlySpawned = true;
+            Enemy newEnemy = addEnemies().poll();
             EntityHolder.getInstance().addEntity(newEnemy);
+            wasRecentlySpawned = true;
         }
         if (timer % 10 == 9){
             wasRecentlySpawned = false;
         }
-        return currentEnemiesRendered;
+        return EntityHolder.getInstance().entities;
     }
 }
 
