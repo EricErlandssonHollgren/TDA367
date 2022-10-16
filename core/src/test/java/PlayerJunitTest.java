@@ -1,10 +1,6 @@
 
-import Model.ActionEnum;
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
-import Model.Entity;
-import Model.EntityHolder;
-import Model.Player;
+import Interfaces.IEnemyAttack;
+import Model.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -64,7 +60,7 @@ public class PlayerJunitTest {
     @Test
     public void dealingDamage() throws InterruptedException {
         Player player = new Player(200, 100, 50, 37);
-        Enemy enemy = EnemyFactory.createEnemy1();
+        Enemy enemy = new Enemy(630, 100,10,AttackFactory.createFireFlame());
         EntityHolder.getInstance().addEntity(enemy);
         int initialEnemyHealth = enemy.getHealth();
 
