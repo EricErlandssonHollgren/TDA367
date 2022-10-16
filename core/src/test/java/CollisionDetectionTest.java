@@ -1,7 +1,6 @@
 import Interfaces.IProjectile;
 import Model.*;
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
+import Model.Enemy;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -54,7 +53,7 @@ public class CollisionDetectionTest {
     public void playerWillCollideWithEnemy(){
         Player player = new Player(200, 0, 50 ,37);
         CollisionDetection cd = CollisionDetection.getInstance();
-        Enemy enemy = EnemyFactory.createEnemy1();
+        Enemy enemy = new Enemy(200,0,10,AttackFactory.createFireFlame());
 
         EntityHolder.getInstance().addEntity(enemy);
         Map<Entity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
@@ -67,7 +66,7 @@ public class CollisionDetectionTest {
         Player player = new Player(500,500, 50 ,37);
         CollisionDetection cd = CollisionDetection.getInstance();
 
-        Entity enemy = EnemyFactory.createEnemy1();
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
 
         EntityHolder.getInstance().addEntity(enemy);
 
@@ -79,7 +78,7 @@ public class CollisionDetectionTest {
     public void enemyAndProjectileCollides(){
         CollisionDetection cd = CollisionDetection.getInstance();
 
-        Entity enemy = EnemyFactory.createEnemy1();
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
         EntityHolder eh = EntityHolder.getInstance();
         eh.addEntity(enemy);
 

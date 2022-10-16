@@ -1,9 +1,6 @@
 import Model.AttackFactory;
-import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
-import Model.FireAttack;
+import Model.Enemy;
 import Model.Waves;
-import Model.WorldBoundaries;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class EnemyTest {
-    Enemy enemy = new Enemy1();
+    Enemy enemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
 
     Waves wave = new Waves();
     /**

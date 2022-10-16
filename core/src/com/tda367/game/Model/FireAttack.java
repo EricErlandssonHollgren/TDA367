@@ -42,7 +42,8 @@ public class FireAttack implements IEnemyAttack {
 
     @Override
     public void move() {
-        this.x -= 0.2;
+        double speed = 0.5;
+        this.x -= speed;
     }
 
     public void fireAttack(Entity player){
