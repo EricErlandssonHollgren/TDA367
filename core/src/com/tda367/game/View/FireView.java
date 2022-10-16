@@ -1,9 +1,8 @@
 package View;
 
 import Interfaces.IEnemyAttack;
-import Interfaces.IProjectile;
 import Interfaces.IView;
-import Model.Enemy.Enemy;
+import Model.Enemy;
 import Model.Entity;
 import Model.Facade.DrawFacade;
 import Model.Waves;

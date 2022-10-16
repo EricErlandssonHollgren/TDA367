@@ -1,7 +1,7 @@
 package View;
 
 import Interfaces.*;
-import Model.Enemy.Enemy;
+import Model.Enemy;
 import Model.Entity;
 import Model.Facade.DrawFacade;
 import Model.Waves;

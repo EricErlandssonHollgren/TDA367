@@ -1,13 +1,9 @@
 package Model;
 
 import Interfaces.IProjectile;
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class EntityHolder {
     List<Entity> entities;

@@ -7,8 +7,7 @@ import Interfaces.IView;
 import Controller.PlayerController;
 import Interfaces.IEntitySubscriber;
 import Model.*;
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
+import Model.Enemy;
 import View.*;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -23,14 +22,13 @@ public class App extends ApplicationAdapter {
 	private GameTimer timer;
 	private ViewHolder views;
 	private Player player;
-
-	private Enemy enemy;
 	private RoundHandler roundHandler;
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
 	private Tower tower;
 	private HealthBar healthBar;
 
+	private Enemy enemy;
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
 	private EntityHolder entityHolder;
@@ -47,7 +45,7 @@ public class App extends ApplicationAdapter {
 	@Override
 	public void create () {
 		//Handlers
-		enemy = EnemyFactory.createEnemy1();
+		enemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
 		player = new Player(120,100, 50, 37);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		worldBoundaries = new WorldBoundaries();
@@ -78,7 +76,7 @@ public class App extends ApplicationAdapter {
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
-		IView enemyView = ViewFactory.createEnemyView();
+		IView enemyView = new EnemyView();
 		IView playerView = new PlayerView();
 		IView fireView = new FireView(enemy.enemyAttack);
 		IView towerView = new TowerView(tower);

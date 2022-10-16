@@ -1,8 +1,5 @@
 package Model;
 
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
-
 import java.util.*;
 
 public class Waves {
@@ -17,7 +14,7 @@ public class Waves {
      */
     public Queue<Enemy> addEnemies() {
         for (int i = 0; i < 10; i++){
-            Enemy tempEnemy = EnemyFactory.createEnemy1();
+            Enemy tempEnemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
             queue.add(tempEnemy);
         }
         return queue;

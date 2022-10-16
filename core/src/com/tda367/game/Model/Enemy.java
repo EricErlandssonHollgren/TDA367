@@ -1,4 +1,4 @@
-package Model.Enemy;
+package Model;
 import Interfaces.*;
 import Model.Entity;
 import Model.EntityHolder;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 
-public abstract class Enemy extends Entity{
+public class Enemy extends Entity{
     private final int worth;
     public final IEnemyAttack enemyAttack;
     private EntityHolder entityHolder;
