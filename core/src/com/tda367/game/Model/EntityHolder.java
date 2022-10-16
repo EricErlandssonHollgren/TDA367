@@ -9,6 +9,8 @@ public class EntityHolder {
     List<Entity> entities;
     private List<IProjectile> projectiles;
 
+    private List<Enemy> enemies;
+
     private static EntityHolder instance;
     private EntityHolder(){
         entities = new ArrayList<>();

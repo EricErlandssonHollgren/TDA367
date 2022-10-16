@@ -45,6 +45,7 @@ public class Waves {
         if (timer % 10 == 9){
             wasRecentlySpawned = false;
         }
+        System.out.println(EntityHolder.getInstance().entities.size());
         return EntityHolder.getInstance().entities;
     }
 }
