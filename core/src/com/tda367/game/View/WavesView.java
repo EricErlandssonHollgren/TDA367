@@ -12,16 +12,19 @@ public class WavesView implements IView {
 
     Waves wave;
     EnemyView enemyView;
+    FireView fireview;
 
     public WavesView(){
         this.wave = new Waves();
         this.enemyView = new EnemyView();
+        this.fireview = new FireView();
     }
     @Override
         public void render() {
-            enemyView.render();
-        }
-
+        wave.getEnemiesToRender();
+        enemyView.render();
+        fireview.render();
+    }
 
     @Override
     public void dispose() {

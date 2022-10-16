@@ -9,13 +9,10 @@ public class EntityHolder {
     List<Entity> entities;
     private List<IProjectile> projectiles;
 
-    private List<Enemy> enemies;
-
     private static EntityHolder instance;
     private EntityHolder(){
         entities = new ArrayList<>();
         projectiles = new ArrayList<>();
-        enemies = new ArrayList<>();
     }
     public static EntityHolder getInstance(){
         if(instance == null){
@@ -31,6 +28,10 @@ public class EntityHolder {
     }
     public List<IProjectile> getProjectiles(){
         return this.projectiles;
+    }
+
+    public List<Entity> getEntities(){
+        return this.entities;
     }
 
     public void addProjectile(IProjectile projectile){

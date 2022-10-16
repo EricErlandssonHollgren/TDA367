@@ -11,9 +11,7 @@ import java.util.List;
  */
 public class EnemyView implements IView, IEntitySubscriber{
 
-    private Enemy enemy;
     private DrawFacade drawFacade;
-
     private Waves wave;
 
     private FireView fireView;
@@ -22,9 +20,8 @@ public class EnemyView implements IView, IEntitySubscriber{
      */
     public EnemyView() {
         this.drawFacade = new DrawFacade("koopaTroopa.png");
-        this.fireView = new FireView(AttackFactory.createFireFlame());
+        this.fireView = new FireView();
         this.wave = new Waves();
-        this.enemy = new Enemy(630,100,10, AttackFactory.createFireFlame()) ;
     }
 
 
@@ -34,20 +31,18 @@ public class EnemyView implements IView, IEntitySubscriber{
      */
     @Override
     public void render() {
-        for (Entity enemy: wave.getEnemiesToRender()) {
+        for (Entity enemy: EntityHolder.getInstance().getEntities()) {
             if(enemy instanceof Enemy){
                 ((Enemy) enemy).moveEnemy();
                 drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
 
             }
         }
-        fireView.render();
     }
 
     @Override
     public void dispose() {
         drawFacade.dispose();
-        fireView.dispose();
     }
 
     @Override

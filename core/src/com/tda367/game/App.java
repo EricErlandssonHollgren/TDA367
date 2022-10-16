@@ -72,7 +72,7 @@ public class App extends ApplicationAdapter {
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
-		IView enemyView = new EnemyView();
+		IView wavesView = new WavesView();
 		IView playerView = new PlayerView();
 		IView towerView = new TowerView(tower);
 		IView buttonView = new ButtonView(towerController, tower);
@@ -89,7 +89,7 @@ public class App extends ApplicationAdapter {
 		views.addView(playerView);
 		views.addView(towerView);
 		views.addView(buttonView);
-		views.addView(enemyView);
+		views.addView(wavesView);
 		views.addView(statsView);
 		views.addView(healthBarView);
 		views.addView(projectileView);
