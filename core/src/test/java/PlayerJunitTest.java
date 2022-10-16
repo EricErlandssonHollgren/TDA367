@@ -1,4 +1,9 @@
 
+import Model.ActionEnum;
+import Model.Enemy.Enemy;
+import Model.Enemy.EnemyFactory;
+import Model.Entity;
+import Model.EntityHolder;
 import Model.Player;
 import org.junit.jupiter.api.Test;
 
@@ -48,12 +53,27 @@ public class PlayerJunitTest {
     }
 
     @Test
-    public void playingTakingDamage(){
+    public void playerTakingDamage(){
         Player player = new Player(200, 100, 50, 37);
 
         player.takeDamage(20);
         int health = player.getHealth();
         assertTrue(health < 100);
+    }
+
+    @Test
+    public void dealingDamage() throws InterruptedException {
+        Player player = new Player(200, 100, 50, 37);
+        Enemy enemy = EnemyFactory.createEnemy1();
+        EntityHolder.getInstance().addEntity(enemy);
+        int initialEnemyHealth = enemy.getHealth();
+
+        Thread.sleep(1000);
+        player.actionHandle(ActionEnum.DAMAGE);
+        player.playerAttack(enemy);
+        int newEnemyHealth = enemy.getHealth();
+        assertTrue(initialEnemyHealth > newEnemyHealth);
+
     }
 
 }

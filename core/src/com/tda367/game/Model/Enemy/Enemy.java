@@ -16,7 +16,6 @@ public abstract class Enemy extends Entity{
     private boolean isDead;
     private int damage;
     private boolean isAttacking;
-    private int health;
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
@@ -26,7 +25,6 @@ public abstract class Enemy extends Entity{
         this.enemyAttack = enemyAttack;
         this.isAttacking = true;
         this.isDead = false;
-        this.health = 150;
         this.damage = 20;
     }
 

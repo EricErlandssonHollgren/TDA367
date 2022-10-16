@@ -92,6 +92,12 @@ public class CollisionDetection {
         return (player.getPosX() + player.getWidth() > entity.getPosX()) &&
                 player.getPosX() <= entity.getWidth() + entity.getPosX();
     }
+
+    /**
+     * The method checks the collision between a tower and enemy. If the enemy is colliding with tower,
+     * it will be removed from its list and tower will take damage.
+     * @param tower to check the collision with.
+     */
     public void CheckCollisionTowerAndEnemy(Tower tower){
        List<Entity> collisions = new ArrayList<>();
        for(Entity entity: posHandler.entities){
@@ -108,6 +114,7 @@ public class CollisionDetection {
         }
 
     }
+
 
     private boolean TowerAndEnemyisColliding(Tower tower, Entity entity){
         return tower.getPositionX() + tower.getWidth() > entity.getPosX() &&
@@ -168,6 +175,10 @@ public class CollisionDetection {
         return false;
     }
 
+    /**
+     * Checks the collision between the projectiles and the ground.
+     * @return a list of collisions.
+     */
     public List<IProjectile> checkCollisionProjectileGround(){
         List<IProjectile> collisions = new ArrayList<>();
         for (IProjectile p : posHandler.getProjectiles()){

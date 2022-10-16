@@ -3,13 +3,13 @@ package Model;
 import Interfaces.IObject;
 
 public abstract class Entity {
-    public float positionX;
-    public float positionY;
+    protected float positionX;
+    protected float positionY;
     public HealthBar healthBar;
     public ActionEnum state;
-    public int health = 100;
+    protected int health = 125;
     protected int damage;
-    public float width, height;
+    protected float width, height;
 
 
     public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
