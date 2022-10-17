@@ -12,6 +12,7 @@ public class Waves {
 
     public Waves() {
         this.enemiesInWave = new ArrayList<>();
+        addEnemies();
     }
 
     /**
@@ -52,18 +53,15 @@ public class Waves {
      */
     public List<Entity> getEnemiesToRender() {
         double timer = Math.ceil(GameTimer.GetInstance().GetTime());
-        for (int i = 0 ; i <=10; i++) {
             if (timer % 10 == 0 && !wasRecentlySpawned) {
-                Entity newEnemy = addEnemies2().get(i);
-                //EntityHolder.getInstance().addEntity(newEnemy);
+                Entity newEnemy = addEnemies().poll();
+                EntityHolder.getInstance().addEntity(newEnemy);
                 wasRecentlySpawned = true;
-                EntityHolder.getInstance().removeEntity(newEnemy);
             }
             if (timer % 10 == 9) {
                 wasRecentlySpawned = false;
             }
-        }
-        //System.out.println(EntityHolder.getInstance().entities.size());
+        System.out.println(EntityHolder.getInstance().entities.size());
         return EntityHolder.getInstance().entities;
     }
 }

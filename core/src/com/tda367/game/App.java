@@ -47,6 +47,7 @@ public class App extends ApplicationAdapter {
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
 
+
 		//Handlers
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();

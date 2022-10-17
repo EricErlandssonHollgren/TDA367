@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AttackTest {
 
-    FireAttack fire = new FireAttack(630,100);
+    FireAttack fire = new FireAttack();
 
 
     /**
