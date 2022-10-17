@@ -23,12 +23,13 @@ public class StatsView implements IView {
         font.setColor(Color.RED);
         h1.setSuccessor(h2);
         // Send requests to the chain
-        h1.handleRequest(new Request(HandlerItemDefiners.POINTS, 0));
+        h1.handleRequest(new Request(HandlerItemDefiners.POINTS, 100));
     }
 
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         font.draw(batch, String.valueOf(((Goldhandler)h1).getGold()), 20, 430);
         font.draw(batch, String.valueOf(((PointHandler)h2).getPoints()), 20, 450);
@@ -37,6 +38,7 @@ public class StatsView implements IView {
 
     public void dispose() {
         batch.dispose();
+        img.dispose();
         font.dispose();
     }
 }
