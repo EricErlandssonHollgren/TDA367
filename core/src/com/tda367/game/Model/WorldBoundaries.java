@@ -27,7 +27,7 @@ public class WorldBoundaries {
 
 
     /**
-     * Creating walls by adding a block with preferred values.
+     * Creating walls by adding blocks with preferred values.
      */
     private void createWalls(){
         blocks.add(new Block(630, 40, 1000, 10));

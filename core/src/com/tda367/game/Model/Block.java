@@ -19,6 +19,7 @@ public class Block implements IObject {
      * Gets the x-coordinate of the object of int
      * @return the x-coordinate of a block
      */
+   @Override
     public float getX(){
         return x;
     }
@@ -26,6 +27,7 @@ public class Block implements IObject {
      * Gets the y-coordinate of the object of int
      * @return the y-coordinate of a block
      */
+   @Override
     public float getY(){
         return y;
     }
@@ -33,6 +35,7 @@ public class Block implements IObject {
      * Gets the height of the object of int
      * @return the height of a block
      */
+  @Override
     public float getHeight(){
         return height;
     }
@@ -40,6 +43,7 @@ public class Block implements IObject {
      * Gets the width of the object of int
      * @return the width of a block
      */
+    @Override
     public float getWidth(){
         return width;
     }
