@@ -77,9 +77,8 @@ public class App extends ApplicationAdapter {
 		IView towerView = new TowerView(tower);
 		IView buttonView = new ButtonView(towerController, tower);
 		IView healthBarView = new HealthBarView(player.healthBar);
- 		IView statsView = new StatsView();
-		IView background = new BackgroundView();
 		IView statsView = new StatsView();
+		IView background = new BackgroundView();
 		IView projectileView = new ProjectileView(projectileController);
     
 		player.positionSubscriber((IEntitySubscriber) playerView);
