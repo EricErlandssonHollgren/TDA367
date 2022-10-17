@@ -109,6 +109,7 @@ public class Player extends Entity implements IObservers {
         health -= damage;
         if(health <= 0){
             playerDead();
+            isDead = true;
         }
     }
     private void playerDead(){

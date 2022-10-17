@@ -9,14 +9,13 @@ import java.util.List;
 public class EntityHolder {
     List<Entity> entities;
     private List<IProjectile> projectiles;
-
-    private List<IEnemyAttack> attacks;
+    private List<IEnemyAttack> enemyAttacks;
 
     private static EntityHolder instance;
     private EntityHolder(){
         entities = new ArrayList<>();
         projectiles = new ArrayList<>();
-        attacks = new ArrayList<>();
+        enemyAttacks = new ArrayList<>();
     }
     public static EntityHolder getInstance(){
         if(instance == null){
@@ -34,6 +33,17 @@ public class EntityHolder {
         return this.projectiles;
     }
 
+    public List<IEnemyAttack> getEnemyAttacks(){
+        return this.enemyAttacks;
+    }
+    public void addFireAttack(IEnemyAttack attack){
+        enemyAttacks.add(attack);
+    }
+
+    public void removeFireAttack(IEnemyAttack attack){
+        enemyAttacks.remove(attack);
+    }
+
     public List<Entity> getEntities(){
         return this.entities;
     }
@@ -43,10 +53,6 @@ public class EntityHolder {
     }
     public void removeProjectile(IProjectile projectile){
         projectiles.remove(projectile);
-    }
-
-    public void addAttack(IEnemyAttack attack) {
-        attacks.add(attack);
     }
 
 }

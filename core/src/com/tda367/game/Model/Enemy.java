@@ -12,9 +12,6 @@ public class Enemy extends Entity{
 
     private int worth;
     public final IEnemyAttack enemyAttack;
-    private EntityHolder entityHolder;
-    private long latestAttackTime;
-    private boolean isDead;
     private int damage;
     private boolean isAttacking;
     /**
@@ -25,8 +22,11 @@ public class Enemy extends Entity{
         this.worth = 20;
         this.enemyAttack = enemyAttack;
         this.isAttacking = true;
-        this.isDead = false;
         this.damage = 20;
+    }
+
+    public IEnemyAttack getEnemyAttack() {
+        return enemyAttack;
     }
 
     /**
@@ -34,13 +34,9 @@ public class Enemy extends Entity{
      */
     public void moveEnemy() {
         double speed = 0.5;
+        enemyAttack.move();
         positionX -= speed;
     }
-
-    public int getWorth() {
-        return worth;
-    }
-
     /**
      * Enemy's getDamage method
      * @return damage to other objects

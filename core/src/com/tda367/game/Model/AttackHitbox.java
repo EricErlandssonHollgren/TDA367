@@ -11,7 +11,7 @@ public class AttackHitbox implements IObject {
     public AttackHitbox(float x, float y){
         this.x = x;
         this.y = y;
-        width = 80;
+        width = 120;
         height = 37;
     }
     public float[] getEdges(){

@@ -3,6 +3,8 @@ import Model.*;
 import Model.Enemy;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -86,5 +88,22 @@ public class CollisionDetectionTest {
         Map<Entity,IProjectile> collision = cd.checkCollisionProjectileAndEnemy();
         assertTrue(collision.containsKey(enemy));
         assertTrue(collision.containsValue(projectile));
+    }
+
+
+    @Test
+    public void enemyAndTowerCollides(){
+        CollisionDetection cd = CollisionDetection.getInstance();
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
+        Tower tower = new Tower(new Goldhandler());
+        EntityHolder entityHolder = EntityHolder.getInstance();
+
+        entityHolder.addEntity(enemy);
+        List<Entity> collisions = new ArrayList<>();
+
+        cd.CheckCollisionTowerAndEnemy(tower);
+        collisions.add(enemy);
+
+
     }
 }

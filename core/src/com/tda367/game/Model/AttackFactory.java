@@ -5,6 +5,8 @@ import Interfaces.IEnemyAttack;
 public class AttackFactory {
 
     public static IEnemyAttack createFireFlame(){
-        return new FireAttack(630,100);
+        FireAttack fireAttack = new FireAttack();
+        EntityHolder.getInstance().addFireAttack(fireAttack);
+        return fireAttack;
     }
 }

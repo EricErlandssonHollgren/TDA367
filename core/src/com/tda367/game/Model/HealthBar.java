@@ -21,7 +21,6 @@ public class HealthBar  {
     public void updatePosition(float x, float y){
         positionX = x + (entityWidth/2);
         positionY = y + entityHeight;
-        //System.out.println(x);
     }
 
     public void updateEntitySize(float entityWidth, float entityHeight) {

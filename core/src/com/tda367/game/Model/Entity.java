@@ -10,6 +10,7 @@ public abstract class Entity {
     protected int health = 125;
     protected int damage;
     protected float width, height;
+    protected boolean isDead;
 
 
     public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
@@ -17,6 +18,7 @@ public abstract class Entity {
         this.positionY = positionY;
         this.height = entityHeight;
         this.width = entityWidth;
+        this.isDead = false;
         this.healthBar = new HealthBar(positionX,positionY, 100f, entityWidth, entityHeight);
     }
 
