@@ -12,13 +12,11 @@ import java.util.List;
 public class EnemyView implements IView, IEntitySubscriber{
 
     private DrawFacade drawFacade;
-    private FireView fireView;
     /**
      * A constructor for creating an Enemy.
      */
     public EnemyView() {
         this.drawFacade = new DrawFacade("koopaTroopa.png");
-        this.fireView = new FireView();
     }
 
 
@@ -32,7 +30,6 @@ public class EnemyView implements IView, IEntitySubscriber{
             if(enemy instanceof Enemy){
                 ((Enemy) enemy).moveEnemy();
                 drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
-
             }
         }
     }
