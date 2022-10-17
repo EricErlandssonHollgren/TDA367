@@ -1,7 +1,9 @@
 package com.tda367.game;
 
 import Controller.PlayerKeyListener;
+import Controller.ProjectileController;
 import Controller.TowerController;
+import Interfaces.IProjectile;
 import Interfaces.IView;
 import Interfaces.IEntitySubscriber;
 import Model.*;
@@ -10,6 +12,9 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+
+import java.util.List;
+import java.util.Map;
 
 public class App extends ApplicationAdapter {
 	private SpriteBatch batch;
@@ -26,6 +31,7 @@ public class App extends ApplicationAdapter {
 	private EntityHolder entityHolder;
 	private PlayerKeyListener playerKeyListener;
 	private TowerController towerController;
+	private ProjectileController projectileController;
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -59,6 +65,7 @@ public class App extends ApplicationAdapter {
 		playerKeyListener.addSubscribers(player);
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
+		projectileController = new ProjectileController(entityHolder,collisionDetection,timer);
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
@@ -69,6 +76,8 @@ public class App extends ApplicationAdapter {
 		IView healthBarView = new HealthBarView(player.healthBar);
 		IView background = new BackgroundView();
 		IView statsView = new StatsView();
+		IView projectileView = new ProjectileView(projectileController);
+    
 		player.positionSubscriber((IEntitySubscriber) playerView);
 
 		//Add views to list and they will be rendered. Views must implement IView
@@ -81,16 +90,23 @@ public class App extends ApplicationAdapter {
 		views.addView(buttonView);
 		views.addView(enemyView);
 		views.addView(healthBarView);
-
+		views.addView(projectileView);
 	}
   
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
+
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerAndEnemy(player);
 		collisionDetection.CheckCollisionPlayerNextStep(player);
+
+		List<IProjectile> projectileGround = collisionDetection.checkCollisionProjectileGround();
+		Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();
+		//System.out.println(projectileEnemy.values().size());
 		playerKeyListener.UpdatePlayerMovement();
+		projectileController.updateProjectiles(projectileEnemy,projectileGround);
+
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}
