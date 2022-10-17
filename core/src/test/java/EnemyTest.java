@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class EnemyTest {
     Enemy enemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
-
     Waves wave = new Waves();
     /**
      * Checks if the enemy is being rendered at the right position on the screen.
@@ -91,7 +90,6 @@ public class EnemyTest {
     }
 
 
-    @Test
     public void testPrivateMethodUsingReflection() throws NoSuchMethodException, SecurityException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Method method = Enemy.class.getDeclaredMethod("enemyDead");

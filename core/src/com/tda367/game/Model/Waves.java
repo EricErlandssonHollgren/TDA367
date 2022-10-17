@@ -28,8 +28,8 @@ public class Waves {
     }
 
     public List<Entity> addEnemies2(){
-        Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame());
         for (int i = 0; i < 10; i++){
+            Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame());
             EntityHolder.getInstance().addEntity(tempEnemy);
         }
         return EntityHolder.getInstance().getEntities();
