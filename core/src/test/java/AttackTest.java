@@ -10,15 +10,26 @@ public class AttackTest {
 
     FireAttack fire = new FireAttack(630,100);
 
+
+    /**
+     * Checks if the fireAttack is moving from right to left along the X-axis on the screen by comparing its previous
+     * position to the current one.
+     */
     @Test
-    public void testMovement(){
-        float oldPositionX = fire.getX();
+    public void testMovementX() {
+        float posX = fire.getX();
         fire.move();
-        for (int i = 1; i <= 630; i++) {
-            if (oldPositionX >= fire.getX()) {
-                assertTrue(true);
-            }
-            oldPositionX = oldPositionX - (float) 0.5;
-        }
+        assertTrue(fire.getX() < posX);
+    }
+
+
+    /**
+     * Checks if the fireAttack is not moving in the Y-direction and therefore is staying on the same level as the enemy.
+     */
+    @Test
+    public void testMovementY() {
+        float posY = fire.getY();
+        fire.move();
+        assertEquals(fire.getY(), posY);
     }
 }

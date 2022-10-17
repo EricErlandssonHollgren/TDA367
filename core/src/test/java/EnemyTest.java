@@ -32,28 +32,20 @@ public class EnemyTest {
      */
     @Test
     public void testMovementX() {
-        float oldPositionX = enemy.getPosX();
+        float posX = enemy.getPosX();
         enemy.moveEnemy();
-        for (int i = 1; i <= 630; i++) {
-            if (oldPositionX >= enemy.getPosX()) {
-                assertTrue(true);
-            }
-            oldPositionX = oldPositionX - (float) 0.5;
-        }
+        assertTrue(enemy.getPosX() < posX);
     }
+
 
     /**
      * Checks if the enemy is not moving in the Y-direction and therefore is staying on the "ground".
      */
     @Test
     public void testMovementY() {
-        float oldPositionY = enemy.getPosY();
+        float posY = enemy.getPosY();
         enemy.moveEnemy();
-        for (int i = 1; i <= 780; i++) {
-            if (oldPositionY == enemy.getPosX()) {
-                assertTrue(true);
-            }
-        }
+        assertEquals(enemy.getPosY(), posY);
     }
 
     /**
@@ -63,6 +55,8 @@ public class EnemyTest {
     public void testNumberOfEnemiesInQueue() {
         assertEquals(wave.addEnemies().size(), 10);
     }
+
+
 
 
     @Test
