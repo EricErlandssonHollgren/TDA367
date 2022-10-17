@@ -75,13 +75,16 @@ public class App extends ApplicationAdapter {
 		IView buttonView = new ButtonView(towerController, tower);
 		IView healthBarView = new HealthBarView(player.healthBar);
 		IView background = new BackgroundView();
+		IView statsView = new StatsView();
 		IView projectileView = new ProjectileView(projectileController);
+    
 		player.positionSubscriber((IEntitySubscriber) playerView);
 
 		//Add views to list and they will be rendered. Views must implement IView
 		views = new ViewHolder();
 		views.addView(background);
 		views.addView(worldBoundariesView);
+		views.addView(statsView);
 		views.addView(playerView);
 		views.addView(towerView);
 		views.addView(buttonView);
