@@ -1,7 +1,10 @@
 import Model.*;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.ReflectionUtils;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -73,7 +76,7 @@ public class EnemyTest {
     }
 
     @Test
-    public void EnemyIsDead(){
+    public void EnemyIsDead() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
        EntityHolder.getInstance().addEntity(enemy);
        PointHandler.addPoints(20);
        Goldhandler.addGold(20);
@@ -81,7 +84,8 @@ public class EnemyTest {
        int initialPoints = PointHandler.getPoints();
        int initialGold = Goldhandler.getGold();
 
-       enemy.enemyDead();
+
+       testPrivateMethodUsingReflection();
        int enemiesAfter = EntityHolder.getInstance().getEntities().size();
        int pointsIsAdded = PointHandler.getPoints();
        int goldIsAdded = Goldhandler.getGold();
@@ -90,5 +94,14 @@ public class EnemyTest {
         assertTrue(initialsizeOfEnemies > enemiesAfter);
         assertTrue(initialPoints < pointsIsAdded);
         assertTrue(initialGold < goldIsAdded);
+    }
+
+
+    @Test
+    public void testPrivateMethodUsingReflection() throws NoSuchMethodException, SecurityException,
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        Method method = Enemy.class.getDeclaredMethod("enemyDead");
+        method.setAccessible(true);
+        method.invoke(enemy);
     }
 }
