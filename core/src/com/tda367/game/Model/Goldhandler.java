@@ -23,5 +23,5 @@ public class Goldhandler extends MainHandler {
     }
 
     // Returns gold
-    public int getGold() {return gold;}
+    public static int getGold() {return gold;}
 }
