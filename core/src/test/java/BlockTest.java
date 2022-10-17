@@ -17,7 +17,7 @@ public class BlockTest {
 
         //Check to see that they do not have the same x-value
         assertTrue(block1PosX != block2PosX);
-        assertTrue(block1PosX != block3PosX);
+        assertEquals(block1PosX, block3PosX);
         assertFalse(block2PosX == block3PosX);
     }
 
@@ -30,7 +30,7 @@ public class BlockTest {
         //Check to see that they do not have the same y-val
         assertTrue(block1PosY != block2PosY);
         assertTrue(block1PosY != block3PosY);
-        assertFalse(block2PosY == block3PosY);
+        assertEquals(block2PosY,block3PosY);
     }
 
     @Test
