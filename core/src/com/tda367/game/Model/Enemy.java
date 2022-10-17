@@ -67,7 +67,7 @@ public class Enemy extends Entity{
      * When enemy's health is zero the entity holder should remove it from the list
      * , points is added based on the enemy's worth and so is gold.
      */
-    public void enemyDead(){
+    private void enemyDead(){
         EntityHolder.getInstance().removeEntity(this);
         PointHandler.addPoints(worth);
         Goldhandler.addGold(worth);
