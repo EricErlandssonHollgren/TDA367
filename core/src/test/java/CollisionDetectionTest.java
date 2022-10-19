@@ -51,7 +51,7 @@ public class CollisionDetectionTest {
     @Test
     public void playerWillCollideWithEnemy(){
         Player player = new Player(200, 0, 50 ,37,125);
-        Entity enemy = new Enemy(200,0,10,AttackFactory.createFireFlame(),125);
+        Entity enemy = new Enemy(200,0,10,AttackFactory.createFireFlame(200,0),125);
 
         EntityHolder.getInstance().addEntity(enemy);
         Map<Entity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
@@ -64,7 +64,7 @@ public class CollisionDetectionTest {
     public void playerWillNotCollideWithEnemy(){
         Player player = new Player(500,500, 50 ,37,125);
 
-        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(),125);
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(630,100),125);
 
         EntityHolder.getInstance().addEntity(enemy);
 
@@ -75,7 +75,7 @@ public class CollisionDetectionTest {
     @Test
     public void enemyAndProjectileCollides(){
 
-        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(),125);
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(630,100),125);
         EntityHolder eh = EntityHolder.getInstance();
         eh.addEntity(enemy);
 
@@ -88,7 +88,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void enemyAndTowerCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        Entity enemy = new Enemy(0,100,10,AttackFactory.createFireFlame(),125);
+        Entity enemy = new Enemy(0,100,10,AttackFactory.createFireFlame(0,100),125);
         Tower tower = new Tower(new Goldhandler());
 
         towerandEnemyisCollidingMethod(tower, enemy);
@@ -98,7 +98,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void enemyAndTowerDoNotCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        Entity enemy = new Enemy(200,100,10,AttackFactory.createFireFlame(), 125);
+        Entity enemy = new Enemy(200,100,10,AttackFactory.createFireFlame(200,100), 125);
         Tower tower = new Tower(new Goldhandler());
 
         towerandEnemyisCollidingMethod(tower, enemy);

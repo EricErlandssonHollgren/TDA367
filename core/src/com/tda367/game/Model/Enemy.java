@@ -14,6 +14,8 @@ public class Enemy extends Entity{
     public final IEnemyAttack enemyAttack;
     private int damage;
     private boolean isAttacking;
+
+    private double velocity;
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
@@ -23,6 +25,7 @@ public class Enemy extends Entity{
         this.enemyAttack = enemyAttack;
         this.isAttacking = true;
         this.damage = 20;
+        this.velocity = 0.3;
     }
 
     public IEnemyAttack getEnemyAttack() {
@@ -33,9 +36,8 @@ public class Enemy extends Entity{
      * moves the enemy in x-direction only with a change of 0.2px.
      */
     public void moveEnemy() {
-        double speed = 0.5;
-        enemyAttack.move();
-        positionX -= speed;
+        enemyAttack.move(velocity);
+        positionX -= velocity;
     }
     /**
      * Enemy's getDamage method
