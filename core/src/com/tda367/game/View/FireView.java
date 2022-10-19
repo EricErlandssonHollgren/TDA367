@@ -24,7 +24,6 @@ public class FireView implements IView {
             if(enemy instanceof Enemy){
                 IEnemyAttack attack = ((Enemy) enemy).getEnemyAttack();
                 drawFacade.drawObject(attack.getX()-imgPositionFromEnemy, attack.getY(), attack.getWidth(), enemy.getHeight());
-
             }
         }
     }

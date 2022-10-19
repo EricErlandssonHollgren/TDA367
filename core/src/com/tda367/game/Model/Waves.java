@@ -4,15 +4,16 @@ import java.util.*;
 
 public class Waves {
 
-    private Queue<Enemy> queue = new LinkedList<>();
-    private List<Enemy> currentEnemiesRendered = new ArrayList<>();
-    private boolean wasRecentlySpawned = false;
+    private Queue<Enemy> queue;
+    private boolean wasRecentlySpawned;
 
     private List<Entity> enemiesInWave;
 
     public Waves() {
         this.enemiesInWave = new ArrayList<>();
-        addEnemies();
+        this.wasRecentlySpawned = false;
+        this.queue = new LinkedList<>();
+        //addEnemies();
     }
 
     /**
@@ -22,7 +23,6 @@ public class Waves {
     public Queue<Enemy> addEnemies() {
         for (int i = 0; i < 10; i++){
             Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame());
-            queue.add(tempEnemy);
         }
         return queue;
     }
@@ -39,13 +39,12 @@ public class Waves {
     /**
      * Takes the first enemy in the queue and returns it, as well as removes it from the queue.
      * @return the enemy that is first in line.
-     *//*
+     */
     private Enemy getEnemyFromQueue() {
-        //Enemy currentEnemy = addEnemies().poll();
-        return Objects.requireNonNull(currentEnemy);
+        return Objects.requireNonNull(addEnemies().poll());
     }
 
-/*
+
     /**
      * A method for rendering, and moving, an enemy across the screen every 30 seconds. After 30 seconds a new enemy is
      * to be spawned.
@@ -53,15 +52,17 @@ public class Waves {
      */
     public List<Entity> getEnemiesToRender() {
         double timer = Math.ceil(GameTimer.GetInstance().GetTime());
-            if (timer % 10 == 0 && !wasRecentlySpawned) {
-                Entity newEnemy = addEnemies().poll();
+        for (int i = 0; i <= 10; i++) {
+            if (timer % 3 == 0 && !wasRecentlySpawned) {
+                Entity newEnemy = getEnemyFromQueue();
                 EntityHolder.getInstance().addEntity(newEnemy);
                 wasRecentlySpawned = true;
+                System.out.println(queue.size());
             }
-            if (timer % 10 == 9) {
+            if (timer % 3 == 2) {
                 wasRecentlySpawned = false;
             }
-        System.out.println(EntityHolder.getInstance().entities.size());
+        }
         return EntityHolder.getInstance().entities;
     }
 }

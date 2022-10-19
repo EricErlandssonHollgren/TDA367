@@ -25,6 +25,7 @@ public class App extends ApplicationAdapter {
 	private MainHandler goldHandler;
 	private MainHandler pointsHandler;
 	private Tower tower;
+	private Waves wave;
 	private HealthBar healthBar;
 	private WorldBoundaries worldBoundaries;
 	private CollisionDetection collisionDetection;
@@ -46,7 +47,7 @@ public class App extends ApplicationAdapter {
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
-
+		wave = new Waves();
 
 		//Handlers
 		goldHandler = new Goldhandler();
@@ -73,7 +74,7 @@ public class App extends ApplicationAdapter {
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
-		IView wavesView = new WavesView();
+		IView wavesView = new WavesView(wave);
 		IView playerView = new PlayerView();
 		IView towerView = new TowerView(tower);
 		IView buttonView = new ButtonView(towerController, tower);
@@ -95,7 +96,7 @@ public class App extends ApplicationAdapter {
 		views.addView(wavesView);
 		views.addView(statsView);
 		views.addView(healthBarView);
-		views.addView(projectileView);
+		//views.addView(projectileView);
 	}
   
 	@Override
