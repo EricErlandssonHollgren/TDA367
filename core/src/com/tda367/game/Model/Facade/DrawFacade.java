@@ -17,22 +17,17 @@ public class DrawFacade {
     private ShapeRenderer shaperenderer;
     private double elapsedTime;
 
-    public DrawFacade(String texturePath){
+    public DrawFacade(){
         batch = new SpriteBatch();
-        img = new Texture(texturePath);
-        this.texturePath = texturePath;
         shaperenderer = new ShapeRenderer();
     }
 
     public Texture getTexture() {
         return img;
     }
-
-    public DrawFacade(){
-        batch = new SpriteBatch();
-        shaperenderer = new ShapeRenderer();
+    public void setTexture(String path){
+        img = new Texture(path);
     }
-
     public void drawObject(float x, float y, float imgWidth, float imgHeight){
         batch.begin();
         batch.draw(img, x,y,imgWidth,imgHeight);
@@ -53,9 +48,5 @@ public class DrawFacade {
     public void dispose(){
         batch.dispose();
         img.dispose();
-    }
-
-    public void destroy(){
-
     }
 }

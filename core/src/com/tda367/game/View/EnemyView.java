@@ -9,14 +9,15 @@ import java.util.List;
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
-public class EnemyView implements IView, IEntitySubscriber{
+public class EnemyView implements IView{
 
     private DrawFacade drawFacade;
     /**
      * A constructor for creating an Enemy.
      */
     public EnemyView() {
-        this.drawFacade = new DrawFacade("koopaTroopa.png");
+        this.drawFacade = new DrawFacade();
+        drawFacade.setTexture("koopaTroopa.png");
     }
 
 
@@ -37,15 +38,5 @@ public class EnemyView implements IView, IEntitySubscriber{
     @Override
     public void dispose() {
         drawFacade.dispose();
-    }
-
-    @Override
-    public void updatePosition(float x, float y) {
-
-    }
-
-    @Override
-    public void updateState(ActionEnum action) {
-
     }
 }

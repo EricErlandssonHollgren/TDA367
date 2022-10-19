@@ -1,5 +1,4 @@
 package View;
-import Interfaces.IEntitySubscriber;
 import Interfaces.IView;
 import Model.ActionEnum;
 import Model.Facade.AnimationFacade;
@@ -7,9 +6,8 @@ import Model.Facade.DrawFacade;
 import Model.Player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class PlayerView implements IView, IEntitySubscriber {
+public class PlayerView implements IView {
     private Batch batch;
     private DrawFacade drawFacade;
     private AnimationFacade animationFacade;
@@ -17,54 +15,25 @@ public class PlayerView implements IView, IEntitySubscriber {
     private Texture texture;
     private TextureRegion[] animationFrames;
     private Animation animation;
-
-    public Sprite playerSprite;
+    private Player player;
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
 
-    public PlayerView(){
-        drawFacade = new DrawFacade("adventurer-stand-01.png");
-        animationFacade = new AnimationFacade("adventurer-stand-01.png");
-        playerSprite = new Sprite();
-        idleAnimation();
+    public PlayerView(Player player){
+        drawFacade = new DrawFacade();
+        this.player = player;
     }
 
-    /**
-     * Updates the position of a player's sprite
-     * @param x is the player sprite's x-coordinate
-     * @param y is the player sprite's y-coordinate
-     */
-    @Override
-    public void updatePosition(float x, float y) {
-        playerSprite.setPosition(x, y);
-    }
-
-    @Override
-    public void updateState(ActionEnum action){
-        if (action == ActionEnum.ATTACKING) {
-            attackAnimation();
-        }
-        else if (action == ActionEnum.IDLE) {
-            idleAnimation();
-        }
-        else if (action == ActionEnum.LEFT) {
-            runningLeftAnimation();
-        }
-        else if (action == ActionEnum.RIGHT) {
-            runningRightAnimation();
-        }
-        else if (action == ActionEnum.DAMAGE) {
-            dieAnimation();
-        }
-    }
 
     /**
      * Render for the player sprite which paints the player sprite's texture
      */
     @Override
     public void render() {
+        drawFacade.setTexture("adventurer-stand-01.png");
+        drawFacade.drawObject(player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
         drawFacade.drawAnimation(animation, playerSprite.getX(), playerSprite.getY(), 64, 64);
     }
 

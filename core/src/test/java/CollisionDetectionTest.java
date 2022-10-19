@@ -15,7 +15,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerCollideswithLeftBlock(){
-        Player player = new Player(5, 100, 50,37);
+        Player player = new Player(5, 100, 50,37,125);
         Block block = new Block(0,40,1000,10);
 
         assertTrue(cd.CheckCollisionPlayerWithLeftBlock(block,player));
@@ -24,7 +24,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerCollideswithRightBlock(){
-        Player player = new Player(620, 100, 50 ,37);
+        Player player = new Player(620, 100, 50 ,37,125);
         Block block = new Block(630,40,1000,10);
 
         assertTrue(cd.CheckCollisionPlayerWithRightBlock(block,player));
@@ -33,7 +33,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerWillNotCollidewithLeftBlock(){
-        Player player = new Player(17, 100, 50 ,37);
+        Player player = new Player(17, 100, 50 ,37,125);
         Block block = new Block(0,40,1000,10);
 
         assertFalse(cd.CheckCollisionPlayerWithLeftBlock(block,player));
@@ -41,7 +41,7 @@ public class CollisionDetectionTest {
     }
     @Test
     public void playerWillNotCollidewithRightBlock(){
-        Player player = new Player(500, 100, 50 ,37);
+        Player player = new Player(500, 100, 50 ,37,125);
         Block block = new Block(630,40,1000,10);
 
         assertFalse(cd.CheckCollisionPlayerWithRightBlock(block,player));
@@ -50,8 +50,8 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerWillCollideWithEnemy(){
-        Player player = new Player(200, 0, 50 ,37);
-        Enemy enemy = new Enemy(200,0,10,AttackFactory.createFireFlame());
+        Player player = new Player(200, 0, 50 ,37,125);
+        Entity enemy = new Enemy(200,0,10,AttackFactory.createFireFlame(),125);
 
         EntityHolder.getInstance().addEntity(enemy);
         Map<Entity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
@@ -62,9 +62,9 @@ public class CollisionDetectionTest {
 
     @Test
     public void playerWillNotCollideWithEnemy(){
-        Player player = new Player(500,500, 50 ,37);
+        Player player = new Player(500,500, 50 ,37,125);
 
-        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(),125);
 
         EntityHolder.getInstance().addEntity(enemy);
 
@@ -75,7 +75,7 @@ public class CollisionDetectionTest {
     @Test
     public void enemyAndProjectileCollides(){
 
-        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame());
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(),125);
         EntityHolder eh = EntityHolder.getInstance();
         eh.addEntity(enemy);
 
@@ -88,7 +88,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void enemyAndTowerCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        Entity enemy = new Enemy(0,100,10,AttackFactory.createFireFlame());
+        Entity enemy = new Enemy(0,100,10,AttackFactory.createFireFlame(),125);
         Tower tower = new Tower(new Goldhandler());
 
         towerandEnemyisCollidingMethod(tower, enemy);
@@ -98,7 +98,7 @@ public class CollisionDetectionTest {
 
     @Test
     public void enemyAndTowerDoNotCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        Entity enemy = new Enemy(200,100,10,AttackFactory.createFireFlame());
+        Entity enemy = new Enemy(200,100,10,AttackFactory.createFireFlame(), 125);
         Tower tower = new Tower(new Goldhandler());
 
         towerandEnemyisCollidingMethod(tower, enemy);
@@ -112,6 +112,7 @@ public class CollisionDetectionTest {
            return (boolean) method.invoke(cd, tower, enemy);
 
     }
+
 
 }
 
