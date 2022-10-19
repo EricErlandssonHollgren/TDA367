@@ -146,6 +146,7 @@ public class CollisionDetection {
     public void checkCollisionPlayerAndFireAttack(Player player){
         for (IEnemyAttack enemyAttack : posHandler.getEnemyAttacks()) {
             if (PlayerAndFireAttackIsColliding(player, enemyAttack)) {
+                System.out.println("Colliding");
                 enemyAttack.fireAttackAtPlayer(player);
             }
         }
@@ -163,7 +164,7 @@ public class CollisionDetection {
      */
     public void CheckCollisionEnemyAndHitBox(Player player){
         List<Entity> collisions = new ArrayList<>();
-        float[] attackEdges = player.attackHitbox.getEdges();
+        float[] attackEdges = player.getAttackHitbox().getEdges();
         for (Entity entity: posHandler.entities) {
             if(entity instanceof Enemy){
                 if((attackEdges[1] > entity.getPosX()) &&
