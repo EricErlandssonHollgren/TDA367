@@ -24,8 +24,6 @@ public class WavesView implements IView {
         wave.getEnemiesToRender();
         enemyView.render();
         fireview.render();
-
-
     }
 
     @Override

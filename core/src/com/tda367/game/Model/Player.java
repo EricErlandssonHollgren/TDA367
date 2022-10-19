@@ -28,8 +28,8 @@ public class Player extends Entity implements IObservers {
      *  @param entityHeight represents the player's position on the y-axis
      */
 
-    public Player(float positionX, float positionY, float entityWidth, float entityHeight){
-        super(positionX, positionY, entityWidth, entityHeight);
+    public Player(float positionX, float positionY, float entityWidth, float entityHeight, int health){
+        super(positionX, positionY, entityWidth, entityHeight, health);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
         isAttacking  = true;

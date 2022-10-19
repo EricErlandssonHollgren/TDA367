@@ -6,20 +6,24 @@ public class Waves {
 
     private Queue<Enemy> queue;
     private boolean wasRecentlySpawned;
+    private RoundHandler roundHandler;
+    private GameTimer gameTimer;
 
     public Waves() {
-        this.wasRecentlySpawned = false;
-        this.queue = new LinkedList<>();
+        gameTimer = GameTimer.GetInstance();
+        roundHandler = new RoundHandler(gameTimer);
+        wasRecentlySpawned = false;
+        queue = new LinkedList<>();
         addEnemies();
     }
 
     /**
      * Adds 10 enemies to a queue to later be used for rendering.
-     * @return the queue containing all enemies in order of having been added.
+     *
      */
     public void addEnemies() {
         for (int i = 0; i < 10; i++){
-            Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame());
+            Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame(), (int)Math.ceil(125*roundHandler.getMultiplier()));
             queue.add(tempEnemy);
         }
     }
@@ -30,8 +34,8 @@ public class Waves {
      * wasRecentlySpawned: A check for making sure only one enemy is being spawned every 30 seconds.
      */
     public List<Entity> getEnemiesToRender() {
-        double timer = Math.ceil(GameTimer.GetInstance().GetTime());
-        for (int i = 0; i <= 10; i++) {
+        double timer = Math.ceil(gameTimer.GetTime());
+        for (int i = 0 ; i <=10; i++) {
             if (timer % 3 == 0 && !wasRecentlySpawned) {
                 Entity newEnemy = queue.poll();
                 EntityHolder.getInstance().addEntity(newEnemy);

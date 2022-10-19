@@ -7,17 +7,18 @@ public abstract class Entity {
     protected float positionY;
     public HealthBar healthBar;
     public ActionEnum state;
-    protected int health = 125;
+    protected int health;
     protected int damage;
     protected float width, height;
     protected boolean isDead;
 
 
-    public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
+    public Entity(float positionX, float positionY, float entityWidth, float entityHeight, int health) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.height = entityHeight;
         this.width = entityWidth;
+        this.health = health;
         this.isDead = false;
         this.healthBar = new HealthBar(positionX,positionY, 100f, entityWidth, entityHeight);
     }

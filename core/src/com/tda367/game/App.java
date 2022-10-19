@@ -42,8 +42,8 @@ public class App extends ApplicationAdapter {
 	 */
 	@Override
 	public void create () {
-		//Handlers
-		player = new Player(120,100, 50, 37);
+		//Objects
+		player = new Player(120,100, 50, 37, 125);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();
@@ -53,8 +53,6 @@ public class App extends ApplicationAdapter {
 		goldHandler = new Goldhandler();
 		pointsHandler = new PointHandler();
 		goldHandler.setSuccessor(pointsHandler);
-
-		roundHandler = RoundHandler.GetInstance(timer);
 
 
 		//Instantiates Tower, (needs to be done after instantiating Goldhandler).
@@ -96,7 +94,7 @@ public class App extends ApplicationAdapter {
 		views.addView(wavesView);
 		views.addView(statsView);
 		views.addView(healthBarView);
-		//views.addView(projectileView);
+		views.addView(projectileView);
 	}
   
 	@Override

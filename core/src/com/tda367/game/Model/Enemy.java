@@ -17,8 +17,8 @@ public class Enemy extends Entity{
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
-    public Enemy(float positionX, float positionY, int worth, IEnemyAttack enemyAttack) {
-        super(positionX, positionY, 70, 70);
+    public Enemy(float positionX, float positionY, int worth, IEnemyAttack enemyAttack, int health) {
+        super(positionX, positionY, 70, 70, health);
         this.worth = 20;
         this.enemyAttack = enemyAttack;
         this.isAttacking = true;
