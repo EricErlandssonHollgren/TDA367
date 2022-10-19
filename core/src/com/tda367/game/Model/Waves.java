@@ -23,7 +23,7 @@ public class Waves {
      */
     public void addEnemies() {
         for (int i = 0; i < 10; i++){
-            Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame(), (int)Math.ceil(125*roundHandler.getMultiplier()));
+            Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame(630,100), (int)Math.ceil(125*roundHandler.getMultiplier()));
             queue.add(tempEnemy);
         }
     }

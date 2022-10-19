@@ -1,17 +1,8 @@
 package Model;
 import Interfaces.IObservers;
-import Interfaces.IEntitySubscriber;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Player extends Entity implements IObservers {
-
-    /**
-     * The PlayerPositionSubscriber is an ArrayList which contains subscribers
-     */
-    List<IEntitySubscriber> subscriberList = new ArrayList<>();
     private static int damage = 25;
     private static final float velocity = 7;
     private boolean isAttacking;
@@ -38,18 +29,6 @@ public class Player extends Entity implements IObservers {
 
 
     /**
-     * A subscriber to handle the playerPosition. It should be updating its position
-     * @param subscriber for the subscriberList
-     */
-    public void positionSubscriber(IEntitySubscriber subscriber){
-        subscriberList.add(subscriber);
-        subscriber.updatePosition(positionX,positionY);
-        updateHealthBar();
-    }
-
-
-
-    /**
      * The moveLeft() method is allowing the character to move to the right side,
      * for each subscriber in a subscriber list.
      */
@@ -57,10 +36,7 @@ public class Player extends Entity implements IObservers {
         if(isAbleToMoveLeft) {
             positionX -= velocity;
             attackHitbox.setX(positionX);
-            for (IEntitySubscriber subscriber : subscriberList) {
-                subscriber.updatePosition(positionX, positionY);
-                updateHealthBar();
-            }
+            updateHealthBar();
         }
     }
 
@@ -72,22 +48,10 @@ public class Player extends Entity implements IObservers {
         if(isAbleToMoveRight){
             positionX += velocity;
             attackHitbox.setX(positionX);
-            for (IEntitySubscriber subscriber : subscriberList) {
-                subscriber.updatePosition(positionX,positionY);
-                updateHealthBar();
-            }
+            updateHealthBar();
         }
     }
 
-    /**
-     * ...
-     * @param action is what action state the player is in.
-     */
-    public void updateState(ActionEnum action) {
-        for (IEntitySubscriber subscriber : subscriberList) {
-            subscriber.updateState(action);
-        }
-    }
 
     /**
      * The setter enables the player to move right
@@ -123,12 +87,8 @@ public class Player extends Entity implements IObservers {
             isDead = true;
         }
     }
-    private void playerDead(){
-       /* for (IEntitySubscriber subscriber : subscriberList) {
-            subscriber.updateState();
-        }
 
-        */
+    private void playerDead(){
     }
 
     /**
@@ -145,6 +105,24 @@ public class Player extends Entity implements IObservers {
             }
         }
 
+    }
+
+
+    /**
+     * Updates the current state of the player
+     * @param action
+     */
+    private void updateState(ActionEnum action) {
+        this.state = action;
+    }
+
+    /**
+     * Returns the current state of the player.
+     * @return state
+     */
+
+    public ActionEnum getState() {
+        return this.state;
     }
 
     /**

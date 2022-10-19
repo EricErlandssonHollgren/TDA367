@@ -1,63 +1,26 @@
 package View;
-import Interfaces.IEntitySubscriber;
 import Interfaces.IView;
 import Model.ActionEnum;
-import Model.Facade.AnimationFacade;
 import Model.Facade.DrawFacade;
 import Model.Player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class PlayerView implements IView, IEntitySubscriber {
+public class PlayerView implements IView {
     private Batch batch;
     private DrawFacade drawFacade;
-    private AnimationFacade animationFacade;
-    private float elapsedTime;
-    private Texture texture;
+
     private TextureRegion[] animationFrames;
     private Animation animation;
-
-    public Sprite playerSprite;
+    private Player player;
     /**
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
 
-    public PlayerView(){
-        drawFacade = new DrawFacade("adventurer-stand-01.png");
-        animationFacade = new AnimationFacade("adventurer-stand-01.png");
-        playerSprite = new Sprite();
-        idleAnimation();
-    }
-
-    /**
-     * Updates the position of a player's sprite
-     * @param x is the player sprite's x-coordinate
-     * @param y is the player sprite's y-coordinate
-     */
-    @Override
-    public void updatePosition(float x, float y) {
-        playerSprite.setPosition(x, y);
-    }
-
-    @Override
-    public void updateState(ActionEnum action){
-        if (action == ActionEnum.ATTACKING) {
-            attackAnimation();
-        }
-        else if (action == ActionEnum.IDLE) {
-            idleAnimation();
-        }
-        else if (action == ActionEnum.LEFT) {
-            runningLeftAnimation();
-        }
-        else if (action == ActionEnum.RIGHT) {
-            runningRightAnimation();
-        }
-        else if (action == ActionEnum.DAMAGE) {
-            dieAnimation();
-        }
+    public PlayerView(Player player){
+        drawFacade = new DrawFacade();
+        this.player = player;
     }
 
     /**
@@ -65,7 +28,8 @@ public class PlayerView implements IView, IEntitySubscriber {
      */
     @Override
     public void render() {
-        drawFacade.drawAnimation(animation, playerSprite.getX(), playerSprite.getY(), 64, 64);
+        determinePlayerAnimation();
+        drawFacade.drawAnimation(animation, player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
     }
 
     @Override
@@ -73,6 +37,28 @@ public class PlayerView implements IView, IEntitySubscriber {
         drawFacade.dispose();
     }
 
+    /**
+     * Determines wich of players animation should be active.
+     */
+    private void determinePlayerAnimation() {
+        if (player.getState() == ActionEnum.IDLE)
+            idleAnimation();
+        else if (player.getState() == ActionEnum.LEFT)
+            runningLeftAnimation();
+        else if (player.getState() == ActionEnum.RIGHT)
+            runningRightAnimation();
+        else if (player.getState() == ActionEnum.DYING)
+            hurtAnimation();
+        else if (player.getState() == ActionEnum.DAMAGE)
+            dieAnimation();
+        else if (player.getState() == ActionEnum.ATTACKING)
+            attackAnimation();
+    }
+
+
+    /**
+     * Creates running right animation.
+     */
     void runningRightAnimation() {
         animationFrames = new TextureRegion[6];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-run-00.png"));
@@ -84,6 +70,9 @@ public class PlayerView implements IView, IEntitySubscriber {
         animation = new Animation(1f/3f, animationFrames);
     }
 
+    /**
+     * Creates running left animation.
+     */
     void runningLeftAnimation() {
         animationFrames = new TextureRegion[6];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-run-00.png"));
@@ -99,6 +88,9 @@ public class PlayerView implements IView, IEntitySubscriber {
         animation = new Animation(1f/3f, animationFrames);
     }
 
+    /**
+     * Creates the idle animation.
+     */
     void idleAnimation() {
         animationFrames = new TextureRegion[2];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-idle-00.png"));
@@ -106,6 +98,9 @@ public class PlayerView implements IView, IEntitySubscriber {
         animation = new Animation(1f/2f, animationFrames);
     }
 
+    /**
+     * Creates the attack animation.
+     */
     void attackAnimation() {
         animationFrames = new TextureRegion[5];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-attack1-00.png"));
@@ -116,13 +111,20 @@ public class PlayerView implements IView, IEntitySubscriber {
         animation = new Animation(1f/2f, animationFrames);
     }
 
-    void hurAnimation() {
+
+    /**
+     * Creates the animation for when the player is taking damage.
+     */
+    void hurtAnimation() {
         animationFrames = new TextureRegion[3];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-00.png"));
         animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-01.png"));
         animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-02.png"));
     }
 
+    /**
+     * Creates the dying animation.
+     */
     void dieAnimation() {
         animationFrames = new TextureRegion[5];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-die-00.png"));

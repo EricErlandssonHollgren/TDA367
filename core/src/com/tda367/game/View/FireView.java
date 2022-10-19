@@ -14,7 +14,8 @@ public class FireView implements IView {
 
     public FireView() {
         this.enemies = EntityHolder.getInstance().getEntities();
-        this.drawFacade = new DrawFacade("flame.png");
+        this.drawFacade = new DrawFacade();
+        drawFacade.setTexture("flame.png");
     }
 
     @Override

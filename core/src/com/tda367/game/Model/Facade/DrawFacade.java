@@ -20,10 +20,8 @@ public class DrawFacade {
     private double elapsedTime;
     private BitmapFont font;
 
-    public DrawFacade(String texturePath){
+    public DrawFacade(){
         batch = new SpriteBatch();
-        img = new Texture(texturePath);
-        this.texturePath = texturePath;
         shaperenderer = new ShapeRenderer();
         this.font = new BitmapFont();
 
@@ -32,13 +30,13 @@ public class DrawFacade {
     public Texture getTexture() {
         return img;
     }
-
-    public DrawFacade(){
-        batch = new SpriteBatch();
-        shaperenderer = new ShapeRenderer();
-        this.font = new BitmapFont();
-
+    public void setTexture(String path){
+        img = new Texture(path);
     }
+    public ShapeRenderer getShaperenderer() {
+        return shaperenderer;
+    }
+
 
     public void drawObject(float x, float y, float imgWidth, float imgHeight){
         batch.begin();
@@ -59,16 +57,8 @@ public class DrawFacade {
         batch.end();
     }
 
-    public ShapeRenderer getShaperenderer() {
-        return shaperenderer;
-    }
-
     public void dispose(){
         batch.dispose();
         img.dispose();
-    }
-
-    public void destroy(){
-
     }
 }
