@@ -52,7 +52,7 @@ public class EnemyTest {
      */
     @Test
     public void testNumberOfEnemiesInQueue() {
-        assertEquals(wave.addEnemies().size(), 10);
+        assertEquals(wave.getQueue().size(), 10);
     }
 
 
