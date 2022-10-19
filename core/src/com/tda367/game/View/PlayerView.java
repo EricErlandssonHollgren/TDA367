@@ -1,19 +1,24 @@
 package View;
+import Interfaces.IReSpawnable;
 import Interfaces.IView;
 import Model.ActionEnum;
 import Model.Facade.DrawFacade;
+import Model.GameTimer;
 import Model.Player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 
-public class PlayerView implements IView {
+public class PlayerView implements IView, IReSpawnable {
     private Batch batch;
     private DrawFacade drawFacade;
 
     private TextureRegion[] animationFrames;
     private Animation animation;
     private Player player;
+    GameTimer gameTimer;
+    double c;
     /**
+     *
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
@@ -21,6 +26,8 @@ public class PlayerView implements IView {
     public PlayerView(Player player){
         drawFacade = new DrawFacade();
         this.player = player;
+        gameTimer = GameTimer.GetInstance();
+        c = gameTimer.GetTime();
     }
 
     /**
@@ -28,8 +35,10 @@ public class PlayerView implements IView {
      */
     @Override
     public void render() {
-        determinePlayerAnimation();
-        drawFacade.drawAnimation(animation, player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
+        if (!player.isdead()) {
+            determinePlayerAnimation();
+            drawFacade.drawAnimation(animation, player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
+        }
     }
 
     @Override
@@ -135,5 +144,12 @@ public class PlayerView implements IView {
         animationFrames[5] = new TextureRegion(new Texture("adventurer-die-05.png"));
         animationFrames[6] = new TextureRegion(new Texture("adventurer-die-06.png"));
         animation = new Animation(1f/2f, animationFrames);
+    }
+
+    @Override
+    public void respawn(double respawnColdown) {
+        if (player.canRespawn(respawnColdown)){
+
+        }
     }
 }

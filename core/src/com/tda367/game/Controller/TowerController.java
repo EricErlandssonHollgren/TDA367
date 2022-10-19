@@ -38,8 +38,10 @@ public class TowerController {
 
     }
     public void sellTurret() {
-            for (IObservers o : observers) {
+        for (IObservers o : observers) {
                 o.actionHandle(ActionEnum.SELL);
-            }
         }
     }
+}
+
+

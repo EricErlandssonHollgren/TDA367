@@ -19,8 +19,8 @@ public abstract class Entity {
         this.height = entityHeight;
         this.width = entityWidth;
         this.health = health;
-        this.isDead = false;
-        this.healthBar = new HealthBar(positionX,positionY, 100f, entityWidth, entityHeight);
+        this.isDead = true;
+        this.healthBar = new HealthBar(positionX,positionY, health, entityWidth, entityHeight);
     }
 
     /**
@@ -50,6 +50,10 @@ public abstract class Entity {
 
     public int getHealth() {
         return health;
+    }
+
+    public HealthBar getHealthBar() {
+        return healthBar;
     }
 
     /**

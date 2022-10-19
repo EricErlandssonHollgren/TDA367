@@ -1,8 +1,9 @@
 package Model;
 import Interfaces.IObservers;
+import Interfaces.IReSpawnable;
 
 
-public class Player extends Entity implements IObservers {
+public class Player extends Entity implements IObservers, IReSpawnable {
     private static int damage = 25;
     private static final float velocity = 7;
     private boolean isAttacking;
@@ -10,6 +11,9 @@ public class Player extends Entity implements IObservers {
     private boolean isAbleToMoveLeft;
     private long latestAttackTime;
     final AttackHitbox attackHitbox;
+    private int maxHealth;
+    private double timeAtDeath;
+    private GameTimer gameTimer;
 
     /**
      * When creating a player it should have two variables which defines its position.
@@ -25,6 +29,9 @@ public class Player extends Entity implements IObservers {
         isAbleToMoveRight = true;
         isAttacking  = true;
         attackHitbox = new AttackHitbox(positionX+width,positionY);
+        maxHealth = health;
+        gameTimer = GameTimer.GetInstance();
+
     }
 
 
@@ -81,6 +88,7 @@ public class Player extends Entity implements IObservers {
      * @param damage is the input for dealing damage
      */
     public void takeDamage(int damage){
+        System.out.println(damage);
         health -= damage;
         if(health <= 0){
             playerDead();
@@ -88,7 +96,8 @@ public class Player extends Entity implements IObservers {
         }
     }
 
-    private void playerDead(){
+    void playerDead(){
+        timeAtDeath = GameTimer.GetInstance().GetTime();
     }
 
     /**
@@ -104,7 +113,6 @@ public class Player extends Entity implements IObservers {
                 latestAttackTime = currentAttackTime;
             }
         }
-
     }
 
 
@@ -143,6 +151,7 @@ public class Player extends Entity implements IObservers {
 
         if(action == ActionEnum.DAMAGE) {
             isAttacking = true;
+
         } else if (action == ActionEnum.DYING) {
             playerDead();
             isAttacking = false;
@@ -150,4 +159,24 @@ public class Player extends Entity implements IObservers {
 
     }
 
+    public boolean canRespawn(double respawnColdown) {
+        if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isdead() {
+        return isDead;
+    }
+
+
+    @Override
+    public void respawn(double respawnColdown) {
+        System.out.println(gameTimer.GetTime() - timeAtDeath);
+        if (canRespawn(respawnColdown)){
+            health = maxHealth;
+            isDead = false;
+        }
+    }
 }

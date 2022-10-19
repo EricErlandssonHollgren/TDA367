@@ -35,7 +35,6 @@ public class PlayerController {
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
             for (IObservers o : observers){
                 o.actionHandle(ActionEnum.DAMAGE);
-
             }
         }
     }

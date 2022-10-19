@@ -1,5 +1,6 @@
 package com.tda367.game;
 
+import Controller.PlayerSpawnController;
 import Controller.ProjectileController;
 import Controller.TowerController;
 import Interfaces.IProjectile;
@@ -32,6 +33,7 @@ public class App extends ApplicationAdapter {
 	private TowerController towerController;
 	private PlayerController playerController;
 	private ProjectileController projectileController;
+	private PlayerSpawnController playerSpawnController;
 
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
@@ -65,13 +67,15 @@ public class App extends ApplicationAdapter {
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		projectileController = new ProjectileController(entityHolder,collisionDetection,timer);
+		playerSpawnController = new PlayerSpawnController();
+		playerSpawnController.addSubscribers(player);
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
 		IView wavesView = new WavesView(wave);
 		IView playerView = new PlayerView(player);
 		IView towerView = new TowerView(tower);
-		IView buttonView = new ButtonView(towerController, tower);
+		IView buttonView = new ButtonView(towerController, tower, playerSpawnController, player);
 		IView healthBarView = new HealthBarView(player.healthBar);
 		IView statsView = new StatsView();
 		IView background = new BackgroundView();
