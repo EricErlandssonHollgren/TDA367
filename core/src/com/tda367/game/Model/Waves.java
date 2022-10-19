@@ -7,10 +7,7 @@ public class Waves {
     private Queue<Enemy> queue;
     private boolean wasRecentlySpawned;
 
-    private List<Entity> enemiesInWave;
-
     public Waves() {
-        this.enemiesInWave = new ArrayList<>();
         this.wasRecentlySpawned = false;
         this.queue = new LinkedList<>();
         addEnemies();
