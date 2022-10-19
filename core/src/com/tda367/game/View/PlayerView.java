@@ -21,7 +21,7 @@ public class PlayerView implements IView, IEntitySubscriber {
      */
 
     public PlayerView(){
-        drawFacade = new DrawFacade("adventurer-stand-01.png");
+        drawFacade = new DrawFacade();
         playerSprite = new Sprite();
     }
 
@@ -45,6 +45,7 @@ public class PlayerView implements IView, IEntitySubscriber {
      */
     @Override
     public void render() {
+        drawFacade.setTexture("adventurer-stand-01.png");
         drawFacade.drawObject(playerSprite.getX(), playerSprite.getY(), 64, 64);
     }
 

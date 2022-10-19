@@ -16,7 +16,8 @@ public class EnemyView implements IView, IEntitySubscriber{
      * A constructor for creating an Enemy.
      */
     public EnemyView() {
-        this.drawFacade = new DrawFacade("koopaTroopa.png");
+        this.drawFacade = new DrawFacade();
+        drawFacade.setTexture("koopaTroopa.png");
     }
 
 

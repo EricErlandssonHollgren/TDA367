@@ -6,7 +6,8 @@ import Model.Facade.DrawFacade;
 public class BackgroundView implements IView {
     private DrawFacade drawFacade;
     public BackgroundView(){
-        drawFacade = new DrawFacade("Game_Background_175.png");
+        drawFacade = new DrawFacade();
+        drawFacade.setTexture("Game_Background_175.png");
     }
     @Override
     public void render() {
