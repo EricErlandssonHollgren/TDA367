@@ -1,6 +1,7 @@
 package View;
 
 import Model.Facade.DrawFacade;
+import Model.GameTimer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
@@ -24,10 +25,11 @@ public class GameOverView extends ScreenAdapter {
     private DrawFacade facade;
 
     public GameOverView(App game) {
-        facade = new DrawFacade("gameOver.png");
+        facade = new DrawFacade();
+        facade.setTexture("gameOver.png");
+
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
-
     }
 
     @Override

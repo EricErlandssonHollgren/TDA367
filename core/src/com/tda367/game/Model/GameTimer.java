@@ -22,4 +22,6 @@ public class GameTimer {
         return this.timer;
     }
 
+    public void ResetTime() {timer = 0;}
+
 }

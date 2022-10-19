@@ -41,8 +41,12 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
     }
 
     public void show () {
-        //Objects
+        createWorld();
 
+    }
+
+    private void createWorld( ){
+        //Objects
         player = new Player(120,100, 50, 37, 125);
         healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
         worldBoundaries = new WorldBoundaries();
@@ -72,7 +76,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         //Create views and objects
         IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
         IView wavesView = new WavesView(wave);
-        IView playerView = new PlayerView();
+        IView playerView = new PlayerView(player);
         IView towerView = new TowerView(tower);
         IView buttonView = new ButtonView(towerController, tower);
         IView healthBarView = new HealthBarView(player.healthBar);
@@ -81,8 +85,6 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         IView projectileView = new ProjectileView(projectileController);
         IView messageView = new MessageView();
 
-
-        player.positionSubscriber((IEntitySubscriber) playerView);
         tower.messageSubscriber((IMessageSubscriber) messageView);
         tower.gameOverSubscriber((IGameOverSubscriber) this);
 
@@ -99,7 +101,6 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         views.addView(healthBarView);
         views.addView(projectileView);
         views.addView(messageView);
-
     }
 
 
@@ -129,7 +130,16 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
 
     @Override
     public void updateScreen() {
-        System.out.println("here2");
+        updateWorld();
         game.setScreen((Screen) new GameOverView(game));
     }
+
+    private void updateWorld() {
+        wave = new Waves();
+        entityHolder = new EntityHolder();
+        projectileController = new ProjectileController(entityHolder,collisionDetection,timer);
+        views.removeAllViews();
+        createWorld();
+    }
+
 }

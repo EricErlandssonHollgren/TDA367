@@ -29,7 +29,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
      */
     public Tower(Goldhandler gold){
         this.level = 1;
-        this.health = 500;
+        this.health = 50;
         positionX = 0;
         positionY = 100;
         width = 100;

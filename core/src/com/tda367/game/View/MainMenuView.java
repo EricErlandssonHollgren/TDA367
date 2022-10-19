@@ -23,7 +23,8 @@ public class MainMenuView extends ScreenAdapter {
 
 
     public MainMenuView(App game) {
-        facade = new DrawFacade("title.png");
+        facade = new DrawFacade();
+        facade.setTexture("title.png");
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
     }

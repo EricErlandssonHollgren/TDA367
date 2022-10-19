@@ -25,6 +25,7 @@ public class ViewHolder {
     public void removeView(IView view){
         views.remove(view);
     }
+    public void removeAllViews() {views = new ArrayList<>();}
     public void render(){
         for (IView views: views) {
             views.render();
