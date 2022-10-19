@@ -13,24 +13,32 @@ import java.util.List;
 public class TowerController {
     private List<IObservers> observers;
 
-    //A constructor for the controller that holds a list of observers that calls them to handle different actions.
+    /**
+     * A constructor for the controller that holds a list of observers that calls them to handle different actions.
+     */
     public TowerController() {
         observers = new ArrayList<>();
     }
 
-    //Adds an observer to this controller.
+    /**
+     * Adds an observer to this controller.
+     */
     public void addSubscribers(IObservers observer) {
         observers.add(observer);
     }
 
-    //Tells tower to upgrade itself.
+    /**
+     * Tells an observing tower to upgrade itself.
+     */
     public void upgradeTower() {
         for (IObservers o : observers) {
             o.actionHandle(ActionEnum.UPGRADE);
         }
     }
 
-    //Tells tower to build a turret.
+    /**
+     * Tells an observing tower to build a turret.
+     */
     public void buildTurret() {
         for (IObservers o : observers) {
             o.actionHandle(ActionEnum.BUILD);
@@ -38,14 +46,10 @@ public class TowerController {
 
     }
 
-    public void sellTurret() {
-        for (IObservers o : observers) {
-            o.actionHandle(ActionEnum.SELL);
-        }
-
-    }
-
-    //Tells tower to upgrade a specific turret.
+    /**
+     * Tells an observing tower to upgrade a specific turret.
+     * @param i specifies the turret.
+     */
     public void upgradeTurret(int i) {
         if (i == 1) {
             for (IObservers o : observers) {
