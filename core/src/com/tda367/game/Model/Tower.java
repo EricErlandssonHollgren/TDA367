@@ -1,9 +1,8 @@
 package Model;
-import Interfaces.IBuild;
-import Interfaces.IObservers;
-import Interfaces.IUpgradeable;
+import Interfaces.*;
 
 import java.util.ArrayList;
+import java.util.List;
 /*
 A player base
  */
@@ -12,13 +11,17 @@ A player base
 public class Tower implements IBuild, IUpgradeable, IObservers {
 
     private int level;
-    private double health;
+    public double health;
     private final float positionX;
     private final float positionY;
     private final float width;
     private int maxCapacity;
     private final ArrayList turrets;
     private Goldhandler gold;
+    private boolean canTakeDamage = true;
+    List<IMessageSubscriber> messageSubscriberList = new ArrayList<>();
+    List<IGameOverSubscriber> gameOverSubscriberList = new ArrayList<>();
+
 
 
     /*
@@ -33,6 +36,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         this.maxCapacity = 1;
         this.turrets = new ArrayList<Turret>();
         this.gold = gold;
+        takeDamage(0);
     }
 
     /*
@@ -47,6 +51,8 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         }
         else{
             System.out.println("Not enough gold");
+            sendMessage("Not enough gold");
+
         }
     }
 
@@ -60,6 +66,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         }
         else{
             System.out.println("Not enough gold");
+            sendMessage("Not enough gold");
         }
     }
 
@@ -71,6 +78,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
             this.turrets.remove(turret);
         }
         else{
+            sendMessage("You don't have any turrets to be sold");
             throw new IllegalStateException("You don't have any turrets to be sold");
         }
     }
@@ -86,6 +94,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
             this.incrementMaxCapacity();
         }
         else{
+            sendMessage("Not enough gold");
             System.out.println("Not enough gold");
         }
 
@@ -173,13 +182,38 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         return turrets.size() == getMaxCapacity();
     }
 
+
+
     public void takeDamage(int damage){
         health -= damage;
         System.out.println(health);
-        if(health == 0){
-            //TODO: Gameover.
+        if(health <= 0f && canTakeDamage){
+            updateGameOverSubscribers();
+            canTakeDamage = false;
         }
     }
+
+    public void gameOverSubscriber(IGameOverSubscriber subscriber) {
+        System.out.println(subscriber);
+        gameOverSubscriberList.add(subscriber);
+    }
+
+    private void updateGameOverSubscribers() {
+        for (IGameOverSubscriber subscriber : gameOverSubscriberList) {
+            subscriber.updateScreen();
+        }
+    }
+
+    public void messageSubscriber(IMessageSubscriber subscriber){
+        messageSubscriberList.add(subscriber);
+    }
+
+    private void sendMessage(String message) {
+        for (IMessageSubscriber subscriber : messageSubscriberList) {
+            subscriber.UpdateMessage(message);
+        }
+    }
+
 
     /*
     Handles different tasks given by controller to update the state of Tower.
@@ -187,6 +221,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     @Override
     public void actionHandle(ActionEnum action) {
         if(action == ActionEnum.UPGRADE){
+            sendMessage("Upgraded");
             System.out.println("Upgrade");
             upgrade();
         }

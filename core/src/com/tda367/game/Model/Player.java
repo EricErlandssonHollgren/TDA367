@@ -79,6 +79,10 @@ public class Player extends Entity implements IObservers {
         }
     }
 
+    /**
+     * ...
+     * @param action is what action state the player is in.
+     */
     public void updateState(ActionEnum action) {
         for (IEntitySubscriber subscriber : subscriberList) {
             subscriber.updateState(action);

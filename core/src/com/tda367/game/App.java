@@ -7,7 +7,6 @@ import Interfaces.IView;
 import Controller.PlayerController;
 import Interfaces.IEntitySubscriber;
 import Model.*;
-import Model.Enemy.EnemyFactory;
 import View.*;
 import View.*;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -52,7 +51,6 @@ public class App extends Game {
 		/*
 
 		player = new Player(120,100, 50, 37, 125);
-		player = new Player(120,100, 50, 37);
 		healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
 		worldBoundaries = new WorldBoundaries();
 		timer = GameTimer.GetInstance();

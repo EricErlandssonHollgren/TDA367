@@ -3,11 +3,11 @@ package Model;
 public class GameTimer {
     private static GameTimer instance;
     private double timer;
-    private GameTimer(){
+    public GameTimer(){
         this.timer = 0;
     }
 
-    public static GameTimer GetInstance(){
+    public static GameTimer GetInstance() {
         if(instance == null){
             instance = new GameTimer();
         }
