@@ -45,7 +45,7 @@ public class EnemyView implements IView, IEntitySubscriber{
     }
 
     @Override
-    public void updateState() {
+    public void updateState(ActionEnum action) {
 
     }
 }

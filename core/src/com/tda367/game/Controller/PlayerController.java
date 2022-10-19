@@ -44,7 +44,7 @@ public class PlayerController {
 
         if (!(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) && !(Gdx.input.isKeyJustPressed(Input.Keys.D)) && !(Gdx.input.isKeyPressed(Input.Keys.LEFT)) && !(Gdx.input.isKeyPressed(Input.Keys.A))) {
             for (IObservers o: observers) {
-                o.actionHandle(ActionEnum.NOTPRESSED);
+                o.actionHandle(ActionEnum.IDLE);
             }
         }
 

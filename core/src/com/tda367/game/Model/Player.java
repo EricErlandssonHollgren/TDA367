@@ -48,6 +48,7 @@ public class Player extends Entity implements IObservers {
     }
 
 
+
     /**
      * The moveLeft() method is allowing the character to move to the right side,
      * for each subscriber in a subscriber list.
@@ -75,6 +76,12 @@ public class Player extends Entity implements IObservers {
                 subscriber.updatePosition(positionX,positionY);
                 updateHealthBar();
             }
+        }
+    }
+
+    public void updateState(ActionEnum action) {
+        for (IEntitySubscriber subscriber : subscriberList) {
+            subscriber.updateState(action);
         }
     }
 
@@ -142,6 +149,7 @@ public class Player extends Entity implements IObservers {
      */
     @Override
     public void actionHandle(ActionEnum action) {
+        updateState(action);
         if(action == ActionEnum.LEFT){
             moveLeft();
             isAttacking = false;

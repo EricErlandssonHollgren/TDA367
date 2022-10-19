@@ -2,6 +2,8 @@ package Model.Facade;
 
 import Model.GameTimer;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -43,16 +45,6 @@ public class DrawFacade {
         batch.draw((TextureRegion) animation.getKeyFrame((float) elapsedTime, true),x ,y ,imgWidth , imgHeight);
         batch.end();
     }
-
-    /*
-    public void drawtext(float x, float y) {
-        batch.begin();
-        batch.draw(texturePath, x,y);
-        batch.end();
-    }
-
-     */
-
 
     public ShapeRenderer getShaperenderer() {
         return shaperenderer;

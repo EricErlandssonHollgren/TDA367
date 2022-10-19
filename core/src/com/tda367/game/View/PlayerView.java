@@ -1,6 +1,7 @@
 package View;
 import Interfaces.IEntitySubscriber;
 import Interfaces.IView;
+import Model.ActionEnum;
 import Model.Facade.AnimationFacade;
 import Model.Facade.DrawFacade;
 import Model.Player;
@@ -27,6 +28,7 @@ public class PlayerView implements IView, IEntitySubscriber {
         drawFacade = new DrawFacade("adventurer-stand-01.png");
         animationFacade = new AnimationFacade("adventurer-stand-01.png");
         playerSprite = new Sprite();
+        idleAnimation();
     }
 
     /**
@@ -40,8 +42,22 @@ public class PlayerView implements IView, IEntitySubscriber {
     }
 
     @Override
-    public void updateState(){
-        //TODO: Uppdatera playerSprite här ?
+    public void updateState(ActionEnum action){
+        if (action == ActionEnum.ATTACKING) {
+            attackAnimation();
+        }
+        else if (action == ActionEnum.IDLE) {
+            idleAnimation();
+        }
+        else if (action == ActionEnum.LEFT) {
+            runningLeftAnimation();
+        }
+        else if (action == ActionEnum.RIGHT) {
+            runningRightAnimation();
+        }
+        else if (action == ActionEnum.DAMAGE) {
+            dieAnimation();
+        }
     }
 
     /**
@@ -49,7 +65,7 @@ public class PlayerView implements IView, IEntitySubscriber {
      */
     @Override
     public void render() {
-        drawFacade.drawObject(playerSprite.getX(), playerSprite.getY(), 64, 64);
+        drawFacade.drawAnimation(animation, playerSprite.getX(), playerSprite.getY(), 64, 64);
     }
 
     @Override
@@ -66,7 +82,6 @@ public class PlayerView implements IView, IEntitySubscriber {
         animationFrames[4] = new TextureRegion(new Texture("adventurer-run-04.png"));
         animationFrames[5] = new TextureRegion(new Texture("adventurer-run-05.png"));
         animation = new Animation(1f/3f, animationFrames);
-
     }
 
     void runningLeftAnimation() {
