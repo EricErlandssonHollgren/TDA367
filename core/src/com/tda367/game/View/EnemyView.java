@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
-public class EnemyView implements IView, IEntitySubscriber{
+public class EnemyView implements IView{
 
     private DrawFacade drawFacade;
     /**
@@ -40,13 +40,4 @@ public class EnemyView implements IView, IEntitySubscriber{
         drawFacade.dispose();
     }
 
-    @Override
-    public void updatePosition(float x, float y) {
-
-    }
-
-    @Override
-    public void updateState() {
-
-    }
 }

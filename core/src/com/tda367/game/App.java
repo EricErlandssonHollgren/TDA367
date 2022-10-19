@@ -5,7 +5,6 @@ import Controller.TowerController;
 import Interfaces.IProjectile;
 import Interfaces.IView;
 import Controller.PlayerController;
-import Interfaces.IEntitySubscriber;
 import Model.*;
 import View.*;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -70,15 +69,13 @@ public class App extends ApplicationAdapter {
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
 		IView wavesView = new WavesView(wave);
-		IView playerView = new PlayerView();
+		IView playerView = new PlayerView(player);
 		IView towerView = new TowerView(tower);
 		IView buttonView = new ButtonView(towerController, tower);
 		IView healthBarView = new HealthBarView(player.healthBar);
 		IView statsView = new StatsView();
 		IView background = new BackgroundView();
 		IView projectileView = new ProjectileView(projectileController);
-    
-		player.positionSubscriber((IEntitySubscriber) playerView);
 
 		//Add views to list and they will be rendered. Views must implement IView
 		views = new ViewHolder();
