@@ -1,7 +1,6 @@
 package View;
 import Interfaces.IView;
 import Model.ActionEnum;
-import Model.Facade.AnimationFacade;
 import Model.Facade.DrawFacade;
 import Model.Player;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,9 +9,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 public class PlayerView implements IView {
     private Batch batch;
     private DrawFacade drawFacade;
-    private AnimationFacade animationFacade;
-    private float elapsedTime;
-    private Texture texture;
+
     private TextureRegion[] animationFrames;
     private Animation animation;
     private Player player;
@@ -26,15 +23,13 @@ public class PlayerView implements IView {
         this.player = player;
     }
 
-
     /**
      * Render for the player sprite which paints the player sprite's texture
      */
     @Override
     public void render() {
-        drawFacade.setTexture("adventurer-stand-01.png");
-        drawFacade.drawObject(player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
-        drawFacade.drawAnimation(animation, playerSprite.getX(), playerSprite.getY(), 64, 64);
+        determinePlayerAnimation();
+        drawFacade.drawAnimation(animation, player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
     }
 
     @Override
@@ -42,6 +37,28 @@ public class PlayerView implements IView {
         drawFacade.dispose();
     }
 
+    /**
+     * Determines wich of players animation should be active.
+     */
+    private void determinePlayerAnimation() {
+        if (player.getState() == ActionEnum.IDLE)
+            idleAnimation();
+        else if (player.getState() == ActionEnum.LEFT)
+            runningLeftAnimation();
+        else if (player.getState() == ActionEnum.RIGHT)
+            runningRightAnimation();
+        else if (player.getState() == ActionEnum.DYING)
+            hurtAnimation();
+        else if (player.getState() == ActionEnum.DAMAGE)
+            dieAnimation();
+        else if (player.getState() == ActionEnum.ATTACKING)
+            attackAnimation();
+    }
+
+
+    /**
+     * Creates running right animation.
+     */
     void runningRightAnimation() {
         animationFrames = new TextureRegion[6];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-run-00.png"));
@@ -53,6 +70,9 @@ public class PlayerView implements IView {
         animation = new Animation(1f/3f, animationFrames);
     }
 
+    /**
+     * Creates running left animation.
+     */
     void runningLeftAnimation() {
         animationFrames = new TextureRegion[6];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-run-00.png"));
@@ -68,6 +88,9 @@ public class PlayerView implements IView {
         animation = new Animation(1f/3f, animationFrames);
     }
 
+    /**
+     * Creates the idle animation.
+     */
     void idleAnimation() {
         animationFrames = new TextureRegion[2];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-idle-00.png"));
@@ -75,6 +98,9 @@ public class PlayerView implements IView {
         animation = new Animation(1f/2f, animationFrames);
     }
 
+    /**
+     * Creates the attack animation.
+     */
     void attackAnimation() {
         animationFrames = new TextureRegion[5];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-attack1-00.png"));
@@ -85,13 +111,20 @@ public class PlayerView implements IView {
         animation = new Animation(1f/2f, animationFrames);
     }
 
-    void hurAnimation() {
+
+    /**
+     * Creates the animation for when the player is taking damage.
+     */
+    void hurtAnimation() {
         animationFrames = new TextureRegion[3];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-00.png"));
         animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-01.png"));
         animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-02.png"));
     }
 
+    /**
+     * Creates the dying animation.
+     */
     void dieAnimation() {
         animationFrames = new TextureRegion[5];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-die-00.png"));

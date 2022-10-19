@@ -52,11 +52,6 @@ public class Player extends Entity implements IObservers {
         }
     }
 
-    public void updateState(ActionEnum action) {
-        for (IEntitySubscriber subscriber : subscriberList) {
-            subscriber.updateState(action);
-        }
-    }
 
     /**
      * The setter enables the player to move right
@@ -92,6 +87,7 @@ public class Player extends Entity implements IObservers {
             isDead = true;
         }
     }
+
     private void playerDead(){
     }
 
@@ -109,6 +105,24 @@ public class Player extends Entity implements IObservers {
             }
         }
 
+    }
+
+
+    /**
+     * Updates the current state of the player
+     * @param action
+     */
+    private void updateState(ActionEnum action) {
+        this.state = action;
+    }
+
+    /**
+     * Returns the current state of the player.
+     * @return state
+     */
+
+    public ActionEnum getState() {
+        return this.state;
     }
 
     /**

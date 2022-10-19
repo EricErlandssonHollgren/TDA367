@@ -28,6 +28,11 @@ public class DrawFacade {
     public void setTexture(String path){
         img = new Texture(path);
     }
+    public ShapeRenderer getShaperenderer() {
+        return shaperenderer;
+    }
+
+
     public void drawObject(float x, float y, float imgWidth, float imgHeight){
         batch.begin();
         batch.draw(img, x,y,imgWidth,imgHeight);
@@ -39,10 +44,6 @@ public class DrawFacade {
         batch.begin();
         batch.draw((TextureRegion) animation.getKeyFrame((float) elapsedTime, true),x ,y ,imgWidth , imgHeight);
         batch.end();
-    }
-
-    public ShapeRenderer getShaperenderer() {
-        return shaperenderer;
     }
 
     public void dispose(){

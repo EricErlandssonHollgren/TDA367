@@ -69,7 +69,6 @@ public class PlayerJunitTest {
         player.playerAttack(enemy);
         int newEnemyHealth = enemy.getHealth();
         assertTrue(initialEnemyHealth > newEnemyHealth);
-
     }
 
 }
