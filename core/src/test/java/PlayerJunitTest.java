@@ -60,7 +60,7 @@ public class PlayerJunitTest {
     @Test
     public void dealingDamage() throws InterruptedException {
         Player player = new Player(200, 100, 50, 37,125);
-        Enemy enemy = new Enemy(630, 100,10,AttackFactory.createFireFlame(),125);
+        Enemy enemy = new Enemy(630, 100,10,AttackFactory.createFireFlame(630,100),125);
         EntityHolder.getInstance().addEntity(enemy);
         int initialEnemyHealth = enemy.getHealth();
 

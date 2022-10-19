@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class EnemyTest {
-    Enemy enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(),125);
+    Enemy enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(630,100),125);
     Waves wave = new Waves();
     /**
      * Checks if the enemy is being rendered at the right position on the screen.

@@ -13,9 +13,9 @@ public class FireAttack implements IEnemyAttack {
 
     private final int damage;
 
-    public FireAttack() {
-        this.x = 630;
-        this.y = 100;
+    public FireAttack(float x, float y) {
+        this.x = x;
+        this.y = y;
         this.imgWidth = 70;
         this.imgHeight = 70;
         this.damage = 20;
