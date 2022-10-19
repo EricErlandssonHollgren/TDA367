@@ -9,6 +9,12 @@ public enum ActionEnum {
     UPGRADETURRET2,
     BUILD,
     SELL,
-    ENEMYMOVE
-
+    ATTACKING,
+    RUNNINGLEFT,
+    RUNNINGRIGHT,
+    IDLE,
+    DYING,
+    ENEMYMOVE,
+    NOTPRESSED,
+    DAMAGE
 }

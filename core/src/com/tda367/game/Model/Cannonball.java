@@ -3,7 +3,9 @@ package Model;
 import Interfaces.IProjectile;
 
 public class Cannonball implements IProjectile {
-    private float x,y,vx,vy,gravity, damage, radius;
+    private float x,y,vx,vy,gravity, radius;
+    private int damage;
+    private long latestAttackTime;
 
     public Cannonball(float x, float y, float vx, float vy, float gravity, float damage, float radius){
         this.gravity = gravity;
@@ -12,12 +14,18 @@ public class Cannonball implements IProjectile {
         this.y = y;
         this.vx = vx;
         this.vy = vy;
-        this.damage = damage;
+        this.damage = 10;
     }
 
     @Override
-    public float getDamage() {
-        return this.damage;
+    public void projectileAttack(Entity enemy) {
+        long currentAttackTime = System.currentTimeMillis();
+        long minIntervalbetweenAttack = 1000;
+        if (currentAttackTime > latestAttackTime + minIntervalbetweenAttack) {
+            enemy.takeDamage(damage);
+            latestAttackTime = currentAttackTime;
+        }
+
     }
     @Override
     public float getX(){

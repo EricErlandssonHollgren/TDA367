@@ -1,29 +1,50 @@
 package Model;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
+import Interfaces.IObject;
 
-public abstract class Entity{
-
+public abstract class Entity {
     protected float positionX;
     protected float positionY;
     public HealthBar healthBar;
-    protected Texture entityImg;
-    protected STATE state;
-    protected int health = 100;
+    public ActionEnum state;
+    protected int health;
+    protected int damage;
+    protected float width, height;
+    protected boolean isDead;
 
-    public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
+
+    public Entity(float positionX, float positionY, float entityWidth, float entityHeight, int health) {
         this.positionX = positionX;
         this.positionY = positionY;
-        this.state = STATE.IDLE;
+        this.height = entityHeight;
+        this.width = entityWidth;
+        this.health = health;
+        this.isDead = false;
         this.healthBar = new HealthBar(positionX,positionY, 100f, entityWidth, entityHeight);
     }
+
+    /**
+     * Getter for width
+     * @return float for width
+     */
+    public float getWidth(){
+        return width;
+    }
+
+    /**
+     * Getter for height
+     * @return float for height
+     */
+    public float getHeight(){
+        return height;
+    }
+
 
     public void updateHealthBar() {
         healthBar.updatePosition(positionX,positionY);
     }
 
-    public STATE getState() {
+    public ActionEnum getState() {
         return state;
     }
 
@@ -37,7 +58,7 @@ public abstract class Entity{
      */
 
     public float getPosY(){
-        return positionX;
+        return positionY;
     }
 
     /**
@@ -45,7 +66,7 @@ public abstract class Entity{
      * @return x-coordinate of the object
      */
     public float getPosX(){
-        return positionY;
+        return positionX;
     }
 
     public void takeDamage(int damage){

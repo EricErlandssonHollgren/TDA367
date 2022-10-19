@@ -19,8 +19,8 @@ public class WorldBoundariesView implements IView {
     public void render() {
         drawFacade.getShaperenderer().begin(ShapeType.Filled);
         for(Block block : worldBoundaries.getBlocks()){
-            int rectX = block.getX();
-            int rectY = block.getY();
+            float rectX = block.getX();
+            float rectY = block.getY();
             drawFacade.getShaperenderer().setColor(new Color(Color.BROWN));
            drawFacade.getShaperenderer().rect(rectX,rectY, block.getWidth(), block.getHeight());
         }
