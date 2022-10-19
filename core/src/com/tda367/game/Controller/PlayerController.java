@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PlayerListener {
+public class PlayerController {
     private List<IObservers> observers = new ArrayList<>();
 
     public void addSubscribers(IObservers observer){
@@ -35,14 +35,12 @@ public class PlayerListener {
         if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
             for (IObservers o : observers){
                 o.actionHandle(ActionEnum.DAMAGE);
+
             }
         }
     }
 
     public void UpdatePlayerState(){
-        for(IObservers o : observers){
-            o.actionHandle(ActionEnum.DYING);
-        }
 
         if (!(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) && !(Gdx.input.isKeyJustPressed(Input.Keys.D)) && !(Gdx.input.isKeyPressed(Input.Keys.LEFT)) && !(Gdx.input.isKeyPressed(Input.Keys.A))) {
             for (IObservers o: observers) {

@@ -23,7 +23,7 @@ public class StatsView implements IView {
         font.setColor(Color.RED);
         h1.setSuccessor(h2);
         // Send requests to the chain
-        h1.handleRequest(new Request(HandlerItemDefiners.POINTS, 0));
+        h1.handleRequest(new Request(HandlerItemDefiners.POINTS, 100));
     }
 
     @Override
@@ -36,7 +36,6 @@ public class StatsView implements IView {
 
     public void dispose() {
         batch.dispose();
-        img.dispose();
         font.dispose();
     }
 }

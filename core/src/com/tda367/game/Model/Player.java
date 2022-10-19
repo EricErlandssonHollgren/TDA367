@@ -1,7 +1,6 @@
 package Model;
 import Interfaces.IObservers;
 import Interfaces.IEntitySubscriber;
-import com.badlogic.gdx.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +13,12 @@ public class Player extends Entity implements IObservers {
      */
     List<IEntitySubscriber> subscriberList = new ArrayList<>();
     private static int damage = 25;
-    private static float velocity = 7;
+    private static final float velocity = 7;
     private boolean isAttacking;
-    private int width;
-    private int height;
-
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
     private long latestAttackTime;
-    public AttackHitbox attackHitbox;
+    final AttackHitbox attackHitbox;
 
     /**
      * When creating a player it should have two variables which defines its position.
@@ -32,8 +28,8 @@ public class Player extends Entity implements IObservers {
      *  @param entityHeight represents the player's position on the y-axis
      */
 
-    public Player(float positionX, float positionY, float entityWidth, float entityHeight){
-        super(positionX, positionY, entityWidth, entityHeight);
+    public Player(float positionX, float positionY, float entityWidth, float entityHeight, int health){
+        super(positionX, positionY, entityWidth, entityHeight, health);
         isAbleToMoveLeft = true;
         isAbleToMoveRight = true;
         isAttacking  = true;
@@ -67,7 +63,6 @@ public class Player extends Entity implements IObservers {
         }
     }
 
-
     /**
      * The moveRight() method is allowing the character to move to the right side,
      * for each subscriber in a subscriber list.
@@ -85,19 +80,25 @@ public class Player extends Entity implements IObservers {
 
     /**
      * The setter enables the player to move right
+     *
      * @param ableToMoveRight is a boolean to allow the player move right.
+     * @return ableToMoveRight
      */
-    public void setAbleToMoveRight(boolean ableToMoveRight) {
+    public boolean setAbleToMoveRight(boolean ableToMoveRight) {
         isAbleToMoveRight = ableToMoveRight;
+        return ableToMoveRight;
     }
 
 
     /**
      * The setter enbles the player to move left.
+     *
      * @param ableToMoveLeft is a boolean to allow the player move left.
+     * @return ableToMoveLeft
      */
-    public void setAbleToMoveLeft(boolean ableToMoveLeft) {
+    public boolean setAbleToMoveLeft(boolean ableToMoveLeft) {
         isAbleToMoveLeft = ableToMoveLeft;
+        return ableToMoveLeft;
     }
 
     /**
@@ -108,44 +109,55 @@ public class Player extends Entity implements IObservers {
         health -= damage;
         if(health <= 0){
             playerDead();
+            isDead = true;
         }
     }
     private void playerDead(){
-        for (IEntitySubscriber subscriber : subscriberList) {
+       /* for (IEntitySubscriber subscriber : subscriberList) {
             subscriber.updateState();
         }
+
+        */
     }
 
-
+    /**
+     * The playerAttack-method enables the player to deal damage within 1 seconds intervals.
+     * @param enemy is a parameter of the class Entity.
+     */
     public void playerAttack(Entity enemy){
         long currentAttackTime = System.currentTimeMillis();
         long minIntervalbetweenAttack = 1000;
-        if(isAttacking){
+        if(isAttacking) {
             if (currentAttackTime > latestAttackTime + minIntervalbetweenAttack) {
-                System.out.println("Damage :)");
                 enemy.takeDamage(damage);
                 latestAttackTime = currentAttackTime;
             }
         }
+
     }
 
     /**
-     * The method allows the player to move left or right depending on the key that is pressed.
-     * @param action uses the moveLeft() or moveRight() method
+     * The method checks which method to use whenever an action is called.
+     * @param action uses different methods depending on the action.
      */
     @Override
     public void actionHandle(ActionEnum action) {
         if(action == ActionEnum.LEFT){
             moveLeft();
+            isAttacking = false;
         }
-        if(action == ActionEnum.RIGHT){
+        if(action == ActionEnum.RIGHT) {
             moveRight();
+            isAttacking = false;
         }
-        if(action == ActionEnum.DYING){
-            playerDead();
-        }
-        isAttacking = action == ActionEnum.DAMAGE;
-    }
 
+        if(action == ActionEnum.DAMAGE) {
+            isAttacking = true;
+        } else if (action == ActionEnum.DYING) {
+            playerDead();
+            isAttacking = false;
+        }
+
+    }
 
 }

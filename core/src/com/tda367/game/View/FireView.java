@@ -1,27 +1,33 @@
 package View;
 
+import Interfaces.IEnemyAttack;
 import Interfaces.IView;
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
+import Model.*;
 import Model.Facade.DrawFacade;
-import Model.FireAttack;
+
+import java.util.List;
 
 public class FireView implements IView {
-    Enemy enemy;
-    FireAttack fireAttack;
-    DrawFacade drawFacade;
+
+    private List<Entity> enemies;
+    private DrawFacade drawFacade;
 
     public FireView() {
-        this.fireAttack = new FireAttack(630,100);
-        this.enemy = EnemyFactory.createEnemy1();
+        this.enemies = EntityHolder.getInstance().getEntities();
         this.drawFacade = new DrawFacade("flame.png");
     }
+
     @Override
     public void render() {
         float imgPositionFromEnemy = 60;
-        drawFacade.drawObject(enemy.getPosX()-imgPositionFromEnemy, enemy.getPosY(), fireAttack.getWidth(), fireAttack.getHeight());
-        fireAttack.updatePosition(enemy.getUpdatedPosition(), enemy.getPosY());
+        for (Entity enemy: enemies) {
+            if(enemy instanceof Enemy){
+                IEnemyAttack attack = ((Enemy) enemy).getEnemyAttack();
+                drawFacade.drawObject(attack.getX()-imgPositionFromEnemy, attack.getY(), attack.getWidth(), enemy.getHeight());
+            }
+        }
     }
+
 
     @Override
     public void dispose() {

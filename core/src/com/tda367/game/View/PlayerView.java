@@ -24,7 +24,6 @@ public class PlayerView implements IView, IEntitySubscriber {
      */
 
     public PlayerView(){
-        texture = new Texture("adventurer-stand-01.png");
         drawFacade = new DrawFacade("adventurer-stand-01.png");
         animationFacade = new AnimationFacade("adventurer-stand-01.png");
         playerSprite = new Sprite();

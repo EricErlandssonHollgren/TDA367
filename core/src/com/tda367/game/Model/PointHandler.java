@@ -18,7 +18,6 @@ public class PointHandler extends MainHandler {
 
     // adds the bonus points
     public static void addPoints(int amount){
-        System.out.println(amount);
         points+=amount;
     }
 

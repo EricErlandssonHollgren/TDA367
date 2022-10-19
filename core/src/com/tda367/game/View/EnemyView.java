@@ -1,24 +1,21 @@
 package View;
 
 import Interfaces.*;
-import Model.Enemy.Enemy;
+import Model.*;
 import Model.Facade.DrawFacade;
-import Model.Waves;
+
+import java.util.List;
 
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */
 public class EnemyView implements IView, IEntitySubscriber{
 
-    private Waves wave;
     private DrawFacade drawFacade;
-
-
     /**
      * A constructor for creating an Enemy.
      */
     public EnemyView() {
-        this.wave = new Waves();
         this.drawFacade = new DrawFacade("koopaTroopa.png");
     }
 
@@ -29,16 +26,17 @@ public class EnemyView implements IView, IEntitySubscriber{
      */
     @Override
     public void render() {
-        for (Enemy enemy: wave.getEnemiesToRender()) {
-            float imgWidth = (float) Math.ceil(drawFacade.getTexture().getWidth()*0.15);
-            float imgHeight = (float) Math.ceil(drawFacade.getTexture().getHeight()*0.10);
-            enemy.moveEnemy();
-            drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), imgWidth, imgHeight);
+        for (Entity enemy: EntityHolder.getInstance().getEntities()) {
+            if(enemy instanceof Enemy){
+                ((Enemy) enemy).moveEnemy();
+                drawFacade.drawObject(enemy.getPosX(), enemy.getPosY(), enemy.getWidth(), enemy.getHeight());
+            }
         }
     }
+
     @Override
     public void dispose() {
-
+        drawFacade.dispose();
     }
 
     @Override
@@ -48,7 +46,6 @@ public class EnemyView implements IView, IEntitySubscriber{
 
     @Override
     public void updateState() {
-        drawFacade.dispose();
 
     }
 }

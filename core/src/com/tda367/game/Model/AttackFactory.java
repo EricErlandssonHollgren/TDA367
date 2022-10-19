@@ -1,11 +1,12 @@
 package Model;
 
-
-import Interfaces.IObject;
+import Interfaces.IEnemyAttack;
 
 public class AttackFactory {
 
-    public static IObject createFireFlame(float x, float y){
-        return new FireAttack(x,y);
+    public static IEnemyAttack createFireFlame(){
+        FireAttack fireAttack = new FireAttack();
+        EntityHolder.getInstance().addFireAttack(fireAttack);
+        return fireAttack;
     }
 }

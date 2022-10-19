@@ -3,21 +3,23 @@ package Model;
 import Interfaces.IObject;
 
 public abstract class Entity {
-    public float positionX;
-    public float positionY;
+    protected float positionX;
+    protected float positionY;
     public HealthBar healthBar;
     public ActionEnum state;
-    public int health = 100;
+    protected int health;
     protected int damage;
-    public float width, height;
+    protected float width, height;
+    protected boolean isDead;
 
 
-    public Entity(float positionX, float positionY, float entityWidth, float entityHeight) {
+    public Entity(float positionX, float positionY, float entityWidth, float entityHeight, int health) {
         this.positionX = positionX;
         this.positionY = positionY;
-        this.entityHeight = entityHeight;
-        this.entityWidth = entityWidth;
-        this.state = STATE.IDLE;
+        this.height = entityHeight;
+        this.width = entityWidth;
+        this.health = health;
+        this.isDead = false;
         this.healthBar = new HealthBar(positionX,positionY, 100f, entityWidth, entityHeight);
     }
 
