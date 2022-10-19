@@ -9,7 +9,7 @@ public class PlayerJunitTest {
 
     @Test
     public void playerMoveLeftShouldBeLessThanCurrentPositionIfMoveLeft(){
-        Player player = new Player(200,100, 50 ,37);
+        Player player = new Player(200,100, 50 ,37, 125);
 
         float posX = player.getPosX();
         player.moveLeft();
@@ -20,7 +20,7 @@ public class PlayerJunitTest {
 
     @Test
     public void playerMoveRightShouldBeMoreThanCurrentPositionIfMoveRight(){
-        Player player = new Player(9,100, 50 ,37);
+        Player player = new Player(9,100, 50 ,37, 125);
 
         float posX = player.getPosX();
         player.moveRight();
@@ -31,7 +31,7 @@ public class PlayerJunitTest {
     public void notableToMoveRight(){
         boolean isAbleToMoveRight = false;
 
-        Player player = new Player(200, 100, 50, 37);
+        Player player = new Player(200, 100, 50, 37,125);
 
         boolean checkPlayerMoveRight= player.setAbleToMoveRight(isAbleToMoveRight);
         assertFalse(player.setAbleToMoveRight(checkPlayerMoveRight));
@@ -41,7 +41,7 @@ public class PlayerJunitTest {
     public void notableToMoveLeft(){
         boolean isAbleToMoveLeft = false;
 
-        Player player = new Player(200, 100, 50, 37);
+        Player player = new Player(200, 100, 50, 37,125);
 
         boolean checkPlayerMoveLeft= player.setAbleToMoveLeft(isAbleToMoveLeft);
         assertFalse(player.setAbleToMoveRight(checkPlayerMoveLeft));
@@ -50,7 +50,7 @@ public class PlayerJunitTest {
 
     @Test
     public void playerTakingDamage(){
-        Player player = new Player(200, 100, 50, 37);
+        Player player = new Player(200, 100, 50, 37,125);
         int initialHealth = player.getHealth();
         player.takeDamage(20);
         int newHealth = player.getHealth();
@@ -59,8 +59,8 @@ public class PlayerJunitTest {
 
     @Test
     public void dealingDamage() throws InterruptedException {
-        Player player = new Player(200, 100, 50, 37);
-        Enemy enemy = new Enemy(630, 100,10,AttackFactory.createFireFlame());
+        Player player = new Player(200, 100, 50, 37,125);
+        Enemy enemy = new Enemy(630, 100,10,AttackFactory.createFireFlame(),125);
         EntityHolder.getInstance().addEntity(enemy);
         int initialEnemyHealth = enemy.getHealth();
 
