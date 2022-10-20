@@ -31,7 +31,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
         attackHitbox = new AttackHitbox(positionX+width,positionY);
         maxHealth = health;
         gameTimer = GameTimer.GetInstance();
-
     }
 
     /**
@@ -97,14 +96,15 @@ public class Player extends Entity implements IObservers, IReSpawnable {
      */
     public void takeDamage(int damage){
         health -= damage;
+        updateHealthBar();
         if(health <= 0){
             playerDead();
-            isDead = true;
         }
     }
 
     void playerDead(){
         timeAtDeath = GameTimer.GetInstance().GetTime();
+        isDead = true;
     }
 
     /**
@@ -178,7 +178,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
 
     @Override
     public void respawn(double respawnColdown) {
-        System.out.println(gameTimer.GetTime() - timeAtDeath);
         if (canRespawn(respawnColdown)){
             health = maxHealth;
             isDead = false;

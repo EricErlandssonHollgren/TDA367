@@ -32,14 +32,14 @@ public class PlayerController {
                 o.actionHandle(ActionEnum.RIGHT);
             }
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            for (IObservers o : observers){
-                o.actionHandle(ActionEnum.ATTACKING);
-            }
-        }
         if (!(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) && !(Gdx.input.isKeyJustPressed(Input.Keys.D)) && !(Gdx.input.isKeyPressed(Input.Keys.LEFT)) && !(Gdx.input.isKeyPressed(Input.Keys.A))) {
             for (IObservers o: observers) {
                 o.actionHandle(ActionEnum.IDLE);
+            }
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+            for (IObservers o : observers){
+                o.actionHandle(ActionEnum.ATTACKING);
             }
         }
     }

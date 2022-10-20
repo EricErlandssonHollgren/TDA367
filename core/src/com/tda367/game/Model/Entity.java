@@ -19,7 +19,7 @@ public abstract class Entity {
         this.height = entityHeight;
         this.width = entityWidth;
         this.health = health;
-        this.isDead = true;
+        this.isDead = false;
         this.healthBar = new HealthBar(positionX,positionY, health, entityWidth, entityHeight);
     }
 
@@ -41,6 +41,7 @@ public abstract class Entity {
 
 
     public void updateHealthBar() {
+        healthBar.updateHealth(health);
         healthBar.updatePosition(positionX,positionY);
     }
 

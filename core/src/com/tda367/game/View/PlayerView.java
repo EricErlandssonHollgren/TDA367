@@ -1,15 +1,12 @@
 package View;
-import Interfaces.IReSpawnable;
 import Interfaces.IView;
 import Model.ActionEnum;
 import Model.Facade.DrawFacade;
-import Model.GameTimer;
 import Model.Player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 
-public class PlayerView implements IView, IReSpawnable {
-    private Batch batch;
+public class PlayerView implements IView {
     private DrawFacade drawFacade;
 
     private TextureRegion[] animationFrames;
@@ -141,12 +138,5 @@ public class PlayerView implements IView, IReSpawnable {
         animationFrames[5] = new TextureRegion(new Texture("adventurer-die-05.png"));
         animationFrames[6] = new TextureRegion(new Texture("adventurer-die-06.png"));
         animation = new Animation(1f/2f, animationFrames);
-    }
-
-    @Override
-    public void respawn(double respawnColdown) {
-        if (player.canRespawn(respawnColdown)){
-
-        }
     }
 }
