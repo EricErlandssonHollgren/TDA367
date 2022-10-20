@@ -111,4 +111,10 @@ public class EnemyTest {
         method.setAccessible(true);
         method.invoke(enemy);
     }
+
+    @Test
+    public void enemyDead(){
+        enemy.takeDamage(125);
+        assertTrue(enemy.isdead());
+    }
 }

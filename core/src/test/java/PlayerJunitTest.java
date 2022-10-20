@@ -3,8 +3,8 @@ import Interfaces.IEnemyAttack;
 import Model.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class PlayerJunitTest {
 
     @Test
@@ -69,6 +69,47 @@ public class PlayerJunitTest {
         player.playerAttack(enemy);
         int newEnemyHealth = enemy.getHealth();
         assertTrue(initialEnemyHealth > newEnemyHealth);
+    }
+
+    @Test
+    public void playerDead(){
+        Player player = new Player(200, 100, 50, 37,125);
+        player.takeDamage(126);
+        assertTrue(player.isdead());
+    }
+
+    @Test
+    public void playerRespawns(){
+        Player player = new Player(200, 100, 50, 37,125);
+        player.takeDamage(126);
+        GameTimer.GetInstance().UpdateTime(10);
+        player.respawn(5);
+        assertFalse(player.isdead());
+    }
+
+    @Test
+    public void playerDosentRespawn(){
+        Player player = new Player(200, 100, 50, 37,125);
+        player.takeDamage(126);
+        GameTimer.GetInstance().UpdateTime(2);
+        player.respawn(5);
+        assertTrue(player.isdead());
+    }
+
+    @Test
+    public void testStates(){
+        Player player = new Player(200, 100, 50, 37,125);
+        player.actionHandle(ActionEnum.ATTACKING);
+        assertSame(ActionEnum.ATTACKING, player.getState());
+
+        player.actionHandle(ActionEnum.DYING);
+        assertSame(ActionEnum.DYING, player.getState());
+
+        player.actionHandle(ActionEnum.LEFT);
+        assertSame(ActionEnum.LEFT, player.getState());
+
+        player.actionHandle(ActionEnum.RIGHT);
+        assertSame(ActionEnum.RIGHT, player.getState());
     }
 
 }

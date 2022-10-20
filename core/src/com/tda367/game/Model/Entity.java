@@ -97,10 +97,6 @@ public abstract class Entity {
         return health;
     }
 
-    public HealthBar getHealthBar() {
-        return healthBar;
-    }
-
     /**
      * Gets the y-coordinate of the object of float
      * @return y-coordinate of the object
@@ -122,9 +118,14 @@ public abstract class Entity {
      * The entity is able to receive damage and the health will decrement for each time
      * @param damage is of type int
      */
+    public abstract void takeDamage(int damage);
 
-    public void takeDamage(int damage){
-        health -= damage;
+    /**
+     * Checks if the entetie is dead
+     * @return isDead if the player is dead.
+     */
+    public boolean isdead() {
+        return isDead;
     }
 
 }
