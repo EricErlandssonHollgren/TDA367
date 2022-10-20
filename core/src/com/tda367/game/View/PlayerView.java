@@ -44,7 +44,6 @@ public class PlayerView implements IView {
      * Determines wich of players animation should be active.
      */
     private void determinePlayerAnimation() {
-        System.out.println(player.getState());
         if (player.getState() == ActionEnum.DAMAGE)
             hurtAnimation();
         else if (player.getState() == ActionEnum.DYING)

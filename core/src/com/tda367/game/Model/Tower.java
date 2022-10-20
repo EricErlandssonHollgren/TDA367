@@ -1,10 +1,8 @@
 package Model;
-import Interfaces.IBuild;
-import Interfaces.IObservers;
-import Interfaces.IUpgradeable;
-import Interfaces.IShoot;
+import Interfaces.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
@@ -17,7 +15,6 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
     private int maxCapacity;
     private ArrayList<Turret> turrets;
     private Goldhandler gold;
-    private boolean canTakeDamage = true;
     List<IMessageSubscriber> messageSubscriberList = new ArrayList<>();
     List<IGameOverSubscriber> gameOverSubscriberList = new ArrayList<>();
     private boolean isGamePaused;
@@ -28,7 +25,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
      */
     public Tower(Goldhandler gold){
         this.level = 1;
-        this.health = 200;
+        this.health = 1;
         positionX = 0;
         positionY = 100;
         width = 100;
@@ -168,8 +165,6 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
         return turrets.size() == getMaxCapacity();
     }
 
-
-
     /**
      * Tower is able to take damage. For each time it is taking damage the health decrements.
      * If the health is less or equal to zero it should die.
@@ -178,9 +173,8 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
     public void takeDamage(int damage){
         if (!isGamePaused) {
             health -= damage;
-            if (health <= 0 && canTakeDamage) {
+            if (health <= 0) {
                 updateGameOverSubscribers();
-                canTakeDamage = false;
             }
         }
     }

@@ -64,7 +64,6 @@ public class App extends Game {
 
 		//Instantiates Tower, (needs to be done after instantiating Goldhandler).
 		tower = new Tower((Goldhandler) goldHandler);
-
 		entityHolder = EntityHolder.getInstance();
 		collisionDetection = CollisionDetection.getInstance();
 
