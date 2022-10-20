@@ -104,30 +104,37 @@ public class ButtonView implements IView {
         this.upgradeButtonTower.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                System.out.println("upgradeButtonTower");
                 controller.upgradeTower();
             }
         });
         this.upgradeButtonTurret.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                System.out.println("upgradeButtonTurret");
                 controller.upgradeTurret(1);
             }
         });
         this.upgradeButtonTurret2.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y){
+                    System.out.println("upgradeButtonTurret2");
+
                     controller.upgradeTurret(2);
                 }
         });
         this.buildButtonTurret.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
+                System.out.println("buildButtonTurret");
+
                 controller.buildTurret();
             }
         });
         this.respawnPlayerButton.addListener((ClickListener) new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                System.out.println("respawnPlayerButton");
                 playerSpawnController.respawn();
             }
         });
