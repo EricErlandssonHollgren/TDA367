@@ -17,7 +17,8 @@ public class PlayerSpawnController {
     }
 
     /**
-     * Adds an observer to this controller.
+     * Add observer to the respawnable list
+     * @param observer object that should be added
      */
     public void addSubscribers(IReSpawnable observer){
         observers.add(observer);
