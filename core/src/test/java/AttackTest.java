@@ -32,4 +32,22 @@ public class AttackTest {
         fire.move(0.3);
         assertEquals(fire.getY(), posY);
     }
+
+    @Test
+    public void testImgHeight() {
+        float height = fire.getHeight();
+        assertEquals(height,70);
+    }
+
+    @Test
+    public void testImgWidth() {
+        float width = fire.getWidth();
+        assertEquals(width, 70);
+    }
+
+    @Test
+    public void testDamage() {
+        float damage = fire.getDamage();
+        assertEquals(damage, 20);
+    }
 }
