@@ -14,6 +14,11 @@ public class WorldBoundaries {
         createWalls();
 
     }
+
+    /**
+     * Getter for blocks
+     * @return a list with blocks
+     */
     public List<Block> getBlocks(){
         return blocks;
     }

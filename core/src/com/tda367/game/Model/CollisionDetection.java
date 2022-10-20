@@ -19,6 +19,11 @@ public class CollisionDetection {
         this.wb = new WorldBoundaries();
     }
 
+    /**
+     * Method should be getting an instance of CollisionDetection
+     * @return an instance
+     */
+
     public static CollisionDetection getInstance() {
         if (instance == null) {
             instance = new CollisionDetection();
@@ -120,12 +125,17 @@ public class CollisionDetection {
     }
 
 
+    /**
+     * Method will check the collision with tower and enemy's fire attack. If the fire attack collides
+     * with tower, tower will take damage.
+     * @param tower is colliding with enemy's attack
+     */
     public void CheckCollisionTowerAndFireAttack(Tower tower) {
        List<IEnemyAttack> collisions = new ArrayList<>();
         for (IEnemyAttack enemyAttack : posHandler.getEnemyAttacks()) {
             if(TowerAndFireAttackisColliding(tower, enemyAttack)){
                 collisions.add(enemyAttack);
-                enemyAttack.fireAttackAtTower(tower);
+                enemyAttack.attackAtTower(tower);
             }
         }
         for (IEnemyAttack enemyAttack : collisions) {
@@ -146,7 +156,7 @@ public class CollisionDetection {
     public void checkCollisionPlayerAndFireAttack(Player player){
         for (IEnemyAttack enemyAttack : posHandler.getEnemyAttacks()) {
             if (PlayerAndFireAttackIsColliding(player, enemyAttack)) {
-                enemyAttack.fireAttackAtPlayer(player);
+                enemyAttack.attackAtPlayer(player);
             }
         }
     }

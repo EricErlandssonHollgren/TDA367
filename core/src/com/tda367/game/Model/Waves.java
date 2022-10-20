@@ -9,6 +9,9 @@ public class Waves {
     private RoundHandler roundHandler;
     private GameTimer gameTimer;
 
+    /**
+     * Constructor for a wave
+     */
     public Waves() {
         gameTimer = GameTimer.GetInstance();
         roundHandler = new RoundHandler(gameTimer);

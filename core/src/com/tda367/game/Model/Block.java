@@ -8,6 +8,14 @@ public class Block implements IObject {
     private float width;
     private float height;
 
+    /**
+     * When creating a block it should have four parameters which
+     * defines it.
+     * @param x represents the block's x-coordinate
+     * @param y represents the block's y-coordinate
+     * @param height represents the height of the block
+     * @param width represents the width of the block
+     */
     public Block(int x, int y, int height, int width){
         this.x = x;
         this.y = y;

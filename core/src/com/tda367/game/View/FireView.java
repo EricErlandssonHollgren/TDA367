@@ -12,6 +12,9 @@ public class FireView implements IView {
     private List<Entity> enemies;
     private DrawFacade drawFacade;
 
+    /**
+     * Constructor for fire view
+     */
     public FireView() {
         this.enemies = EntityHolder.getInstance().getEntities();
         this.drawFacade = new DrawFacade();

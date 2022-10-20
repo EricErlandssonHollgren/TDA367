@@ -17,6 +17,9 @@ public class StatsView implements IView {
     private MainHandler h1 = new Goldhandler();
     private MainHandler h2 = new PointHandler();
 
+    /**
+     * Constructor for the statsview
+     */
     public StatsView(){
         batch = new SpriteBatch();
         font = new BitmapFont();

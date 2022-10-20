@@ -1,6 +1,8 @@
 package Model;
 
-// For the request description to evaluate if it is the correct handler.
+/**
+ * Enum for chain of responsibility
+ */
 public enum HandlerItemDefiners {
     GOLD, POINTS
 }

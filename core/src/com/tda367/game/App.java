@@ -65,7 +65,7 @@ public class App extends ApplicationAdapter {
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		playerController = new PlayerController();
-		playerController.addSubscribers(player);
+		playerController.addObserver(player);
 		playerSpawnController = new PlayerSpawnController();
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
@@ -97,7 +97,10 @@ public class App extends ApplicationAdapter {
 		views.addView(healthBarView);
 		views.addView(projectileView);
 	}
-  
+
+	/**
+	 * Called 60 times per second, renders the application
+	 */
 	@Override
 	public void render () {
 		timer.UpdateTime(Gdx.graphics.getDeltaTime());
@@ -117,7 +120,10 @@ public class App extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}
-	
+
+	/**
+	 * Disposes the objects in the application
+	 */
 	@Override
 	public void dispose () {
 		views.dispose();

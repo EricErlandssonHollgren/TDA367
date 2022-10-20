@@ -10,10 +10,14 @@ import java.util.List;
 
 public class WavesView implements IView {
 
-    Waves wave;
-    EnemyView enemyView;
-    FireView fireview;
+    private Waves wave;
+    private EnemyView enemyView;
+    private FireView fireview;
 
+    /**
+     * Constructor for waves view
+     * @param wave reference to the wave object
+     */
     public WavesView(Waves wave){
         this.enemyView = new EnemyView();
         this.fireview = new FireView();

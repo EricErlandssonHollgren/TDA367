@@ -16,7 +16,8 @@ public class Player extends Entity implements IObservers, IReSpawnable {
     private GameTimer gameTimer;
 
     /**
-     * When creating a player it should have two variables which defines its position.
+     * When creating a player it should have four parameters which will define
+     * it.
      *  @param positionX represents the player's position on the x-axis
      *  @param positionY represents the player's position on the y-axis
      *  @param entityWidth represents the player's
@@ -44,7 +45,7 @@ public class Player extends Entity implements IObservers, IReSpawnable {
 
     /**
      * The moveLeft() method is allowing the character to move to the right side,
-     * for each subscriber in a subscriber list.
+     * should also be updating the healthBar's position.
      */
     public void moveLeft(){
         if(isAbleToMoveLeft) {
@@ -56,7 +57,7 @@ public class Player extends Entity implements IObservers, IReSpawnable {
 
     /**
      * The moveRight() method is allowing the character to move to the right side,
-     * for each subscriber in a subscriber list.
+     * should also be updating the healthbar's position.
      */
     public void moveRight(){
         if(isAbleToMoveRight){
@@ -69,7 +70,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
 
     /**
      * The setter enables the player to move right
-     *
      * @param ableToMoveRight is a boolean to allow the player move right.
      * @return ableToMoveRight
      */
@@ -80,8 +80,7 @@ public class Player extends Entity implements IObservers, IReSpawnable {
 
 
     /**
-     * The setter enbles the player to move left.
-     *
+     * The setter enables the player to move left.
      * @param ableToMoveLeft is a boolean to allow the player move left.
      * @return ableToMoveLeft
      */
@@ -102,11 +101,9 @@ public class Player extends Entity implements IObservers, IReSpawnable {
         }
     }
 
-    void playerDead(){
-        if (!isDead) {
-            timeAtDeath = GameTimer.GetInstance().GetTime();
-            isDead = true;
-        }
+        void playerDead(){
+        timeAtDeath = GameTimer.GetInstance().GetTime();
+        isDead = true;
     }
 
     /**
@@ -127,7 +124,7 @@ public class Player extends Entity implements IObservers, IReSpawnable {
 
     /**
      * Updates the current state of the player
-     * @param action
+     * @param action determines which state the player is taking.
      */
     private void updateState(ActionEnum action) {
         this.state = action;
@@ -165,6 +162,11 @@ public class Player extends Entity implements IObservers, IReSpawnable {
 
     }
 
+    /**
+     * Checks if the player is able to respawn
+     * @param respawnColdown is the time it takes to respawn
+     * @return true if the player is dead and the time is less than respawnCooldown
+     */
     public boolean canRespawn(double respawnColdown) {
         if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
             return true;
@@ -172,15 +174,23 @@ public class Player extends Entity implements IObservers, IReSpawnable {
         return false;
     }
 
+    /**
+     * Checks if the player is dead
+     * @return isDead if the player is dead.
+     */
     public boolean isdead() {
         return isDead;
     }
 
 
+    /**
+     * When respawning the health goes back to maxHealth, the player's boolean check 'isDead' should
+     * be false, and the updateHealthBar should reset.
+     * @param respawnColdown player is able to respawn.
+     */
     @Override
     public void respawn(double respawnColdown) {
         if (canRespawn(respawnColdown)){
-
             health = maxHealth;
             isDead = false;
             updateHealthBar();

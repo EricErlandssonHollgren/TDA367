@@ -11,7 +11,11 @@ import java.util.List;
 public class PlayerController {
     private List<IObservers> observers = new ArrayList<>();
 
-    public void addSubscribers(IObservers observer){
+    /**
+     * Add an observer to the observer list
+     * @param observer observer that should be added
+     */
+    public void addObserver(IObservers observer){
         observers.add(observer);
     }
     
