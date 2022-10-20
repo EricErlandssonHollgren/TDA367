@@ -19,7 +19,6 @@ public class TowerView implements IView {
         this.tower = tower;
         this.texturePath = "basicTowerSprite.png";
         this.drawFacade = new DrawFacade();
-        drawFacade.setTexture(texturePath);
     }
 
     /**
@@ -28,6 +27,7 @@ public class TowerView implements IView {
     @Override
     public void render() {
         updateTexturePath();
+        drawFacade.setTexture(texturePath);
         drawFacade.drawObject(tower.getPositionX(),tower.getPositionY(),115,200);
     }
 
