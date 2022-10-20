@@ -35,7 +35,7 @@ public class App extends ApplicationAdapter {
 	private PlayerController playerController;
 	private PlayerSpawnController playerSpawnController;
 	private ProjectileHandler projectileHandler;
-	private PlayerSpawnController playerSpawnController;
+
 
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
