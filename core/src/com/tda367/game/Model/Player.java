@@ -181,6 +181,8 @@ public class Player extends Entity implements IObservers, IReSpawnable {
         if (canRespawn(respawnColdown)){
             health = maxHealth;
             isDead = false;
+            updateHealthBar();
+
         }
     }
 }
