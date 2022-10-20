@@ -1,13 +1,16 @@
 package Model;
 
+import Interfaces.IPaus;
+
 import java.util.*;
 
-public class Waves {
+public class Waves implements IPaus {
 
     private Queue<Enemy> queue;
     private boolean wasRecentlySpawned;
     private RoundHandler roundHandler;
     private GameTimer gameTimer;
+    private boolean isGamePaused = false;
 
     public Waves() {
         gameTimer = GameTimer.GetInstance();
@@ -34,18 +37,20 @@ public class Waves {
      * wasRecentlySpawned: A check for making sure only one enemy is being spawned every 30 seconds.
      */
     public List<Entity> getEnemiesToRender() {
-        double timer = Math.ceil(gameTimer.GetTime());
-        for (int i = 0 ; i <=10; i++) {
-            if (timer % 3 == 0 && !wasRecentlySpawned) {
-                Entity newEnemy = queue.poll();
-                EntityHolder.getInstance().addEntity(newEnemy);
-                wasRecentlySpawned = true;
-            }
-            if (timer % 3 == 2) {
-                wasRecentlySpawned = false;
+        if (!isGamePaused) {
+            double timer = Math.ceil(gameTimer.GetTime());
+            for (int i = 0; i <= 10; i++) {
+                if (timer % 3 == 0 && !wasRecentlySpawned) {
+                    Entity newEnemy = queue.poll();
+                    EntityHolder.getInstance().addEntity(newEnemy);
+                    wasRecentlySpawned = true;
+                }
+                if (timer % 3 == 2) {
+                    wasRecentlySpawned = false;
+                }
             }
         }
-        return EntityHolder.getInstance().entities;
+            return EntityHolder.getInstance().entities;
     }
 
     /**
@@ -54,6 +59,11 @@ public class Waves {
      */
     public Queue<Enemy> getQueue() {
         return queue;
+    }
+
+    @Override
+    public void IsGamePaused(boolean isGamePaused) {
+        this.isGamePaused = isGamePaused;
     }
 }
 

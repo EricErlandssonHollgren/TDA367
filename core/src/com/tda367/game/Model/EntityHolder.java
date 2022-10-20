@@ -55,4 +55,10 @@ public class EntityHolder {
         projectiles.remove(projectile);
     }
 
+    public void clearAll() {
+        entities = new ArrayList<>();
+        projectiles = new ArrayList<>();
+        enemyAttacks = new ArrayList<>();
+    }
+
 }

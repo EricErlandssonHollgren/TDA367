@@ -8,12 +8,13 @@ import Model.*;
  */
 
 
-public class Enemy extends Entity{
+public class Enemy extends Entity implements IPaus{
 
     private int worth;
     public final IEnemyAttack enemyAttack;
     private int damage;
     private boolean isAttacking;
+    private boolean isGamePaused = false;
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
@@ -33,9 +34,11 @@ public class Enemy extends Entity{
      * moves the enemy in x-direction only with a change of 0.2px.
      */
     public void moveEnemy() {
-        double speed = 0.5;
-        enemyAttack.move();
-        positionX -= speed;
+        if (!isGamePaused) {
+            double speed = 0.5;
+            enemyAttack.move();
+            positionX -= speed;
+        }
     }
     /**
      * Enemy's getDamage method
@@ -52,10 +55,12 @@ public class Enemy extends Entity{
      */
 
     public void takeDamage(int damage) {
-        health -= damage;
-        if(health <= 0){
-            enemyDead();
-            isDead = true;
+        if (!isGamePaused) {
+            health -= damage;
+            if (health <= 0) {
+                enemyDead();
+                isDead = true;
+            }
         }
     }
 
@@ -69,4 +74,8 @@ public class Enemy extends Entity{
         Goldhandler.addGold(worth);
     }
 
+    @Override
+    public void IsGamePaused(boolean isGamePaused) {
+        this.isGamePaused = isGamePaused;
+    }
 }

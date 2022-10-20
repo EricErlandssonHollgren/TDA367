@@ -1,8 +1,9 @@
 package Model;
 import Interfaces.IObservers;
+import Interfaces.IPaus;
 
 
-public class Player extends Entity implements IObservers {
+public class Player extends Entity implements IObservers, IPaus {
     private static int damage = 25;
     private static final float velocity = 7;
     private boolean isAttacking;
@@ -10,6 +11,7 @@ public class Player extends Entity implements IObservers {
     private boolean isAbleToMoveLeft;
     private long latestAttackTime;
     final AttackHitbox attackHitbox;
+    private boolean isGamePaused = false;
 
     /**
      * When creating a player it should have two variables which defines its position.
@@ -81,10 +83,12 @@ public class Player extends Entity implements IObservers {
      * @param damage is the input for dealing damage
      */
     public void takeDamage(int damage){
-        health -= damage;
-        if(health <= 0){
-            playerDead();
-            isDead = true;
+        if (!isGamePaused) {
+            health -= damage;
+            if (health <= 0) {
+                playerDead();
+                isDead = true;
+            }
         }
     }
 
@@ -131,23 +135,29 @@ public class Player extends Entity implements IObservers {
      */
     @Override
     public void actionHandle(ActionEnum action) {
-        updateState(action);
-        if(action == ActionEnum.LEFT){
-            moveLeft();
-            isAttacking = false;
-        }
-        if(action == ActionEnum.RIGHT) {
-            moveRight();
-            isAttacking = false;
-        }
+        if (!isGamePaused) {
+            updateState(action);
+            if (action == ActionEnum.LEFT) {
+                moveLeft();
+                isAttacking = false;
+            }
+            if (action == ActionEnum.RIGHT) {
+                moveRight();
+                isAttacking = false;
+            }
 
-        if(action == ActionEnum.DAMAGE) {
-            isAttacking = true;
-        } else if (action == ActionEnum.DYING) {
-            playerDead();
-            isAttacking = false;
+            if (action == ActionEnum.DAMAGE) {
+                isAttacking = true;
+            } else if (action == ActionEnum.DYING) {
+                playerDead();
+                isAttacking = false;
+            }
         }
-
     }
 
+
+    @Override
+    public void IsGamePaused(boolean isGamePaused) {
+        this.isGamePaused = isGamePaused;
+    }
 }

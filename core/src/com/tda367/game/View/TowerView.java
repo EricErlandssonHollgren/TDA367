@@ -26,7 +26,6 @@ public class TowerView implements IView {
     public void render() {
         updateTexturePath();
         drawFacade.drawObject(tower.getPositionX(),tower.getPositionY(),115,200);
-        System.out.println(tower.getHealth());
     }
 
     @Override

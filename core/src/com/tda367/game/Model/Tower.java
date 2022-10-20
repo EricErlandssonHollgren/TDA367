@@ -8,7 +8,7 @@ A player base
  */
 
 
-public class Tower implements IBuild, IUpgradeable, IObservers {
+public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
 
     private int level;
     public double health;
@@ -21,7 +21,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     private boolean canTakeDamage = true;
     List<IMessageSubscriber> messageSubscriberList = new ArrayList<>();
     List<IGameOverSubscriber> gameOverSubscriberList = new ArrayList<>();
-
+    private boolean isGamePaused;
 
 
     /*
@@ -185,16 +185,16 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
 
 
     public void takeDamage(int damage){
-        health -= damage;
-        System.out.println(health);
-        if(health <= 0f && canTakeDamage){
-            updateGameOverSubscribers();
-            canTakeDamage = false;
+        if (!isGamePaused) {
+            health -= damage;
+            if(health <= 0f && canTakeDamage){
+                updateGameOverSubscribers();
+                canTakeDamage = false;
+            }
         }
     }
 
     public void gameOverSubscriber(IGameOverSubscriber subscriber) {
-        System.out.println(subscriber);
         gameOverSubscriberList.add(subscriber);
     }
 
@@ -243,5 +243,10 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
 
         }
 
+    }
+
+    @Override
+    public void IsGamePaused(boolean isGamePaused) {
+        this.isGamePaused = isGamePaused;
     }
 }

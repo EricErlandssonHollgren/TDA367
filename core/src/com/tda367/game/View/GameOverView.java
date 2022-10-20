@@ -56,7 +56,6 @@ public class GameOverView extends ScreenAdapter {
                 Gdx.app.exit();
             }
         });
-
     }
 
     private void createQuitButton() {
@@ -64,7 +63,6 @@ public class GameOverView extends ScreenAdapter {
         this.QuitButton = new ImageButton(getTxrDrawable(textureQuitButton));
         this.QuitButton.setSize(textureQuitButton.getWidth()*0.25f,textureQuitButton.getHeight()*0.25f);
         this.QuitButton.setPosition(Gdx.graphics.getWidth() * 0.5f - textureQuitButton.getWidth()*0.25f/2, Gdx.graphics.getHeight() * 0.2f);
-
     }
 
     private void createPlayAgainButton() {
@@ -72,7 +70,6 @@ public class GameOverView extends ScreenAdapter {
         this.PlayAgain = new ImageButton(getTxrDrawable(textureStartbutton));
         this.PlayAgain.setSize(textureStartbutton.getWidth()*0.25f,textureStartbutton.getHeight()*0.25f);
         this.PlayAgain.setPosition(Gdx.graphics.getWidth() * 0.5f - textureStartbutton.getWidth()*0.25f/2, Gdx.graphics.getHeight() * 0.4f);
-
     }
 
     @Override

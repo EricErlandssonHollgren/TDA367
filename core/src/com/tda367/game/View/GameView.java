@@ -1,5 +1,6 @@
 package View;
 
+import Controller.PausController;
 import Controller.PlayerController;
 import Controller.ProjectileController;
 import Controller.TowerController;
@@ -34,7 +35,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
     private TowerController towerController;
     private PlayerController playerController;
     private ProjectileController projectileController;
-    private static GameView gameView;
+    private PausController pausController;
 
     public GameView(App game) {
         this.game = game;
@@ -67,11 +68,13 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         //Controllers
         towerController = new TowerController();
         towerController.addSubscribers(tower);
+        tower.gameOverSubscriber(this);
+
         playerController = new PlayerController();
         playerController.addSubscribers(player);
-        towerController = new TowerController();
-        towerController.addSubscribers(tower);
+
         projectileController = new ProjectileController(entityHolder,collisionDetection,timer);
+        pausController = new PausController();
 
         //Create views and objects
         IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
@@ -84,9 +87,13 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         IView background = new BackgroundView();
         IView projectileView = new ProjectileView(projectileController);
         IView messageView = new MessageView();
+        IView pausView = new PausView();
 
         tower.messageSubscriber((IMessageSubscriber) messageView);
-        tower.gameOverSubscriber((IGameOverSubscriber) this);
+        pausController.addSubscribers((IPaus) pausView);
+        pausController.addSubscribers((IPaus) player);
+        pausController.addSubscribers((IPaus) timer);
+        pausController.addSubscribers((IPaus) wave);
 
         //Add views to list and they will be rendered. Views must implement IView
         views = new ViewHolder();
@@ -101,6 +108,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         views.addView(healthBarView);
         views.addView(projectileView);
         views.addView(messageView);
+        views.addView(pausView);
     }
 
 
@@ -117,9 +125,18 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         List<IProjectile> projectileGround = collisionDetection.checkCollisionProjectileGround();
         Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();
         playerController.UpdatePlayerMovement();
+        pausController.updatePausMenu();
         projectileController.updateProjectiles(projectileEnemy,projectileGround);
         playerController.UpdatePlayerState();
         ScreenUtils.clear(0, 0, 0, 0);
+
+        for (Entity entity : entityHolder.getEntities()) {
+            pausController.addSubscribers((IPaus) entity);
+        }
+        for (IProjectile projectile : entityHolder.getProjectiles()) {
+            pausController.addSubscribers((IPaus) projectile);
+        }
+
         views.render();
     }
 
@@ -136,8 +153,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
 
     private void updateWorld() {
         wave = new Waves();
-        entityHolder = new EntityHolder();
-        projectileController = new ProjectileController(entityHolder,collisionDetection,timer);
+        EntityHolder.getInstance().clearAll();
         views.removeAllViews();
         createWorld();
     }
