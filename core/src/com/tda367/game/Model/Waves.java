@@ -32,12 +32,12 @@ public class Waves {
     public List<Entity> getEnemiesToRender() {
         double timer = Math.ceil(gameTimer.GetTime());
         for (int i = 0 ; i <=10; i++) {
-            if (timer % 30 == 0 && !wasRecentlySpawned) {
+            if (timer % 10 == 0 && !wasRecentlySpawned) {
                 Entity newEnemy = queue.poll();
                 EntityHolder.getInstance().addEntity(newEnemy);
                 wasRecentlySpawned = true;
             }
-            if (timer % 30 == 9) {
+            if (timer % 10 == 9) {
                 wasRecentlySpawned = false;
             }
         }

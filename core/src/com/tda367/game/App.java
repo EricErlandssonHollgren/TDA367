@@ -71,7 +71,7 @@ public class App extends ApplicationAdapter {
 		IView wavesView = new WavesView(wave);
 		IView playerView = new PlayerView(player);
 		IView towerView = new TowerView(tower);
-		IView buttonView = new ButtonView(towerController, tower);
+		IView buttonView = new ButtonView(towerController, tower, playerSpawnController, player);
 		IView healthBarView = new HealthBarView(player.healthBar);
 		IView statsView = new StatsView();
 		IView background = new BackgroundView();

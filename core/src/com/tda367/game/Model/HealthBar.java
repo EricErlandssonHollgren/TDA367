@@ -14,7 +14,7 @@ public class HealthBar  {
         this.entityHeight = entityHeight;
         this.entityWidth = entityWidth;
         this.maxHealth = health;
-        this.health = 80;
+        this.health = health;
         updatePosition(x,y);
     }
 
