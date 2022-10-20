@@ -37,6 +37,8 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
     private PausController pausController;
     private PlayerSpawnController playerSpawnController;
     private ProjectileHandler projectileHandler;
+    private MessageSender messageSender;
+    private GameOverInstantiator gameOverInstantiator;
 
     public GameView(App game) {
         this.game = game;
@@ -53,18 +55,18 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         worldBoundaries = new WorldBoundaries();
         timer = GameTimer.GetInstance();
         wave = new Waves();
+        messageSender = MessageSender.GetInstance();
+        gameOverInstantiator = GameOverInstantiator.GetInstance();
 
         //Handlers
         goldHandler = new Goldhandler();
         pointsHandler = new PointHandler();
         goldHandler.setSuccessor(pointsHandler);
 
-
         //Instantiates Tower, (needs to be done after instantiating Goldhandler).
         tower = new Tower((Goldhandler) goldHandler);
         entityHolder = EntityHolder.getInstance();
         collisionDetection = CollisionDetection.getInstance();
-        tower.gameOverSubscriber(this);
 
         //Controllers
         towerController = new TowerController();
@@ -93,8 +95,8 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         IView pausView = new PausView();
         IView buttonView = new ButtonView(towerController, tower, playerSpawnController, player);
 
-
-        tower.messageSubscriber((IMessageSubscriber) messageView);
+        messageSender.addSubscribers((IMessageSubscriber) messageView);
+        gameOverInstantiator.addSubscribers(this);
         pausController.addSubscribers((IPaus) pausView);
         pausController.addSubscribers((IPaus) player);
         pausController.addSubscribers((IPaus) timer);
@@ -257,7 +259,6 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         wave = new Waves();
         EntityHolder.getInstance().clearAll();
         views.removeAllViews();
-        createWorld();
     }
 
 }

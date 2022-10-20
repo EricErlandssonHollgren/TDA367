@@ -16,6 +16,7 @@ public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
     private double timeAtDeath;
     private GameTimer gameTimer;
     private boolean isGamePaused = false;
+    private MessageSender messageSender;
 
     /**
      * When creating a player it should have four parameters which will define
@@ -34,6 +35,7 @@ public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
         attackHitbox = new AttackHitbox(positionX+width,positionY);
         maxHealth = health;
         gameTimer = GameTimer.GetInstance();
+        messageSender = MessageSender.GetInstance();
     }
 
     /**
@@ -105,9 +107,11 @@ public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
         }
     }
 
-        void playerDead(){
-        timeAtDeath = GameTimer.GetInstance().GetTime();
-        isDead = true;
+    private void playerDead(){
+        if (!isDead) {
+            timeAtDeath = GameTimer.GetInstance().GetTime();
+            isDead = true;
+        }
     }
 
     /**
@@ -176,6 +180,12 @@ public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
         if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
             return true;
         }
+        else if (isDead) {
+            messageSender.sendMessage(String.valueOf((int)(respawnColdown - (gameTimer.GetTime() - timeAtDeath))) + "seconds until respawn is available");
+        }
+        else {
+            messageSender.sendMessage("Player is not dead");
+        }
         return false;
     }
 
@@ -199,6 +209,7 @@ public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
             health = maxHealth;
             isDead = false;
             updateHealthBar();
+            messageSender.sendMessage("Respawned");
         }
     }
 

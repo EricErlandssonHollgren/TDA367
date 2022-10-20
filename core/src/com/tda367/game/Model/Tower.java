@@ -15,9 +15,9 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
     private int maxCapacity;
     private ArrayList<Turret> turrets;
     private Goldhandler gold;
-    List<IMessageSubscriber> messageSubscriberList = new ArrayList<>();
-    List<IGameOverSubscriber> gameOverSubscriberList = new ArrayList<>();
     private boolean isGamePaused;
+    private MessageSender messageSender;
+    private GameOverInstantiator gameOverInstantiator;
 
     /**
      * This creates a Tower, which requires arguments for its health, location and maximum turrets capacity.
@@ -32,6 +32,8 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
         this.maxCapacity = 1;
         this.turrets = new ArrayList<>();
         this.gold = gold;
+        messageSender = MessageSender.GetInstance();
+        gameOverInstantiator = GameOverInstantiator.GetInstance();
     }
 
     /**
@@ -44,7 +46,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
             gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -1000));
         }
         else {
-            sendMessage("Not enough gold");
+            messageSender.sendMessage("Not enough gold");
         }
     }
 
@@ -54,12 +56,12 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
      */
     public void upgradeTurret(int index){
         if(gold.getGold() >=1000){
-            sendMessage("Upgraded");
+            messageSender.sendMessage("Upgraded");
             getTurrets().get(index).upgrade();
             gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -1000));
         }
         else {
-            sendMessage("Not enough gold");
+            messageSender.sendMessage("Not enough gold");
         }
     }
 
@@ -68,14 +70,14 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
      */
     public void upgrade(){
         if (gold.getGold() >= 3000) {
-            sendMessage("Upgraded");
+            messageSender.sendMessage("Upgraded");
             this.incrementLevel();
             this.incrementHealth();
             this.incrementMaxCapacity();
             gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -3000));
         }
         else{
-            sendMessage("Not enough gold");
+            messageSender.sendMessage("Not enough gold");
         }
 
 
@@ -176,7 +178,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
         if (!isGamePaused) {
             health -= damage;
             if (health <= 0) {
-                updateGameOverSubscribers();
+                gameOverInstantiator.updateGameOverSubscribers();
             }
         }
     }
@@ -211,26 +213,6 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
             upgradeTurret(1);
         }
 
-    }
-
-    public void gameOverSubscriber(IGameOverSubscriber subscriber) {
-        gameOverSubscriberList.add(subscriber);
-    }
-
-    private void updateGameOverSubscribers() {
-        for (IGameOverSubscriber subscriber : gameOverSubscriberList) {
-            subscriber.updateScreen();
-        }
-    }
-
-    public void messageSubscriber(IMessageSubscriber subscriber){
-        messageSubscriberList.add(subscriber);
-    }
-
-    private void sendMessage(String message) {
-        for (IMessageSubscriber subscriber : messageSubscriberList) {
-            subscriber.UpdateMessage(message);
-        }
     }
 
     @Override

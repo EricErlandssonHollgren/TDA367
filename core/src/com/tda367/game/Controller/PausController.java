@@ -22,18 +22,14 @@ public class PausController {
         observers.add(observer);
     }
 
+    /**
+     * Opens or closes the paus menu and sends a boolean to the observers to notify its current state.
+     */
     public void updatePausMenu() {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             timesPressed++;
-            if (timesPressed % 2 == 1) {
-                for (IPaus observer : observers) {
-                    observer.IsGamePaused(true);
-                }
-            }
-            if (timesPressed % 2 == 0) {
-                for (IPaus observer : observers) {
-                    observer.IsGamePaused(false);
-                }
+            for (IPaus observer : observers) {
+                observer.IsGamePaused(timesPressed % 2 == 1);
             }
         }
     }

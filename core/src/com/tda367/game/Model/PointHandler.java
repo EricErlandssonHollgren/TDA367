@@ -4,9 +4,6 @@ public class PointHandler extends MainHandler {
     private static int points = 200;
     private GameTimer gameTimer;
 
-
-    public PointHandler() {}
-
     /**
      * Checks if the request is meant for this handler. If it's correct the handler will add the points.
      * If it isn't the correct handler it will give it to the next handler-

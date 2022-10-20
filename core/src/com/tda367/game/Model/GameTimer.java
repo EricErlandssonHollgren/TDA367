@@ -5,10 +5,10 @@ import Interfaces.IPaus;
 public class GameTimer implements IPaus {
     private static GameTimer instance;
     private double timer;
-    public GameTimer(){
+    private boolean isGamePaused = false;
+    private GameTimer(){
         this.timer = 0;
     }
-    private boolean isGamePaused = false;
 
     /**
      * Creates instance of game timer
@@ -39,6 +39,9 @@ public class GameTimer implements IPaus {
         return this.timer;
     }
 
+    /**
+     * Resets the timer.
+     */
     public void ResetTime() {timer = 0;}
 
     @Override
