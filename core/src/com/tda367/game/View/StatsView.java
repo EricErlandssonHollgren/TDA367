@@ -36,7 +36,6 @@ public class StatsView implements IView {
 
     public void dispose() {
         batch.dispose();
-        img.dispose();
         font.dispose();
     }
 }

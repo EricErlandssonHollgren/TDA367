@@ -11,8 +11,9 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     private double health;
     private final float positionX;
     private final float positionY;
+    private final float width;
     private int maxCapacity;
-    private ArrayList turrets;
+    private final ArrayList turrets;
     private Goldhandler gold;
 
 
@@ -25,6 +26,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         this.health = 500;
         positionX = 0;
         positionY = 100;
+        width = 100;
         this.maxCapacity = 1;
         this.turrets = new ArrayList<Turret>();
         this.gold = gold;
@@ -37,7 +39,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     public void buildTurret(Turret turret){
         if (!this.isFull() && gold.getGold() >= 1000){
             turrets.add(turret);
-            gold.handleRequest(new Request(HandlerItemDefiners.LOSEGOLD, 1000));
+            gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -1000));
         }
     }
 
@@ -47,7 +49,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     public void upgradeTurret(int index){
         if(gold.getGold() >=1000){
             getTurrets().get(index).upgrade();
-            gold.handleRequest(new Request(HandlerItemDefiners.LOSEGOLD, 1000));
+            gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -1000));
         }
     }
 
@@ -59,7 +61,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
             this.incrementLevel();
             this.incrementHealth();
             this.incrementMaxCapacity();
-            gold.handleRequest(new Request(HandlerItemDefiners.LOSEGOLD, 3000));
+            gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -3000));
         }
     }
 
@@ -114,6 +116,12 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
      */
     public ArrayList<Turret> getTurrets() { return turrets;}
 
+    /**
+     * Should be getting the tower's width
+     * @return tower's width
+     */
+    public float getWidth(){return width;}
+
     /*
     Sets the level of the Tower.
      */
@@ -136,6 +144,13 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         return turrets.size() == getMaxCapacity();
     }
 
+    public void takeDamage(int damage){
+        health -= damage;
+        System.out.println(health);
+        if(health <= 0){
+            //TODO: Gameover.
+        }
+    }
 
     /**
      * Handles different tasks given by controller to update the state of Tower.

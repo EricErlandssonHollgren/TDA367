@@ -32,7 +32,7 @@ public class TowerJUnitTest {
     @Test
     public void testTowerContainsATurret() {
         Goldhandler gold = new Goldhandler();
-        gold.handleRequest(new Request(HandlerItemDefiners.ADDGOLD, 1000));
+        gold.handleRequest(new Request(HandlerItemDefiners.GOLD, 1000));
         Tower tower3 = new Tower(gold);
         tower3.actionHandle(ActionEnum.BUILD);
         assertEquals(1, tower3.getTurrets().size());
@@ -41,7 +41,7 @@ public class TowerJUnitTest {
     @Test
     public void testTowerUpgrades(){
         Goldhandler gold2 = new Goldhandler();
-        gold2.handleRequest(new Request(HandlerItemDefiners.ADDGOLD, 5000));
+        gold2.handleRequest(new Request(HandlerItemDefiners.GOLD, 5000));
         Tower tower4 = new Tower(gold2);
         tower4.actionHandle(ActionEnum.UPGRADE);
         tower4.actionHandle(ActionEnum.BUILD);
@@ -53,7 +53,7 @@ public class TowerJUnitTest {
     @Test
     public void testTowerUpgradesTurret(){
         Goldhandler gold3 = new Goldhandler();
-        gold3.handleRequest(new Request(HandlerItemDefiners.ADDGOLD, 7000));
+        gold3.handleRequest(new Request(HandlerItemDefiners.GOLD, 7000));
         Tower tower5 = new Tower(gold3);
         tower5.actionHandle(ActionEnum.UPGRADE);
         tower5.actionHandle(ActionEnum.BUILD);

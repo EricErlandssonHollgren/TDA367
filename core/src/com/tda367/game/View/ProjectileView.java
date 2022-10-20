@@ -15,13 +15,14 @@ public class ProjectileView implements IView{
     private DrawFacade drawFacade;
     private ProjectileController controller;
     public ProjectileView(ProjectileController controller) {
-        drawFacade = new DrawFacade("Cannonball.png");
         this.controller = controller;
+        this.drawFacade = new DrawFacade();
     }
     @Override
     public void render() {
         for (IProjectile p: controller.getCurrentProjectiles()) {
             p.move();
+            drawFacade.setTexture(p.getTexturePath());
             drawFacade.drawObject(p.getX(), p.getY(), 32, 32);
         }
     }

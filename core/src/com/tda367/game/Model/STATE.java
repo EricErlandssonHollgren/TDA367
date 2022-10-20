@@ -1,5 +1,0 @@
-package Model;
-
-public enum STATE {
-    ATTACKING, RUNNINGLEFT, RUNNINGRIGHT, IDLE, DYING
-}

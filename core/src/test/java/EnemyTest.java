@@ -1,7 +1,10 @@
-import Model.Enemy.Enemies.Enemy1;
-import Model.Enemy.Enemy;
-import Model.Waves;
+import Model.*;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.ReflectionUtils;
+
+import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,16 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class EnemyTest {
-    Enemy enemy = new Enemy1();
-
+    Enemy enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(630,100),125);
     Waves wave = new Waves();
     /**
      * Checks if the enemy is being rendered at the right position on the screen.
+     * The actual values are taken from WorldBoundaries and in which position the walls and ground are created
      */
     @Test
     public void testPosition() {
-        assertEquals(enemy.getX(), new Vector(1560,0).getX());
-        assertEquals(enemy.getY(), new Vector(0,0).getY());
+        assertEquals(enemy.getPosX(), 630);
+        assertEquals(enemy.getPosY(), 100);
     }
 
     /**
@@ -28,28 +31,20 @@ public class EnemyTest {
      */
     @Test
     public void testMovementX() {
-        float oldPositionX = enemy.getX();
+        float posX = enemy.getPosX();
         enemy.moveEnemy();
-        for (int i = 1; i <= 1560; i++) {
-            if (oldPositionX >= enemy.getX()) {
-                assertTrue(true);
-            }
-            oldPositionX = oldPositionX - (float) 0.5;
-        }
+        assertTrue(enemy.getPosX() < posX);
     }
+
 
     /**
      * Checks if the enemy is not moving in the Y-direction and therefore is staying on the "ground".
      */
     @Test
     public void testMovementY() {
-        float oldPositionY = enemy.getY();
+        float posY = enemy.getPosY();
         enemy.moveEnemy();
-        for (int i = 1; i <= 780; i++) {
-            if (oldPositionY == enemy.getX()) {
-                assertTrue(true);
-            }
-        }
+        assertEquals(enemy.getPosY(), posY);
     }
 
     /**
@@ -57,7 +52,48 @@ public class EnemyTest {
      */
     @Test
     public void testNumberOfEnemiesInQueue() {
-        assertEquals(wave.addEnemies().size(), 10);
+        assertEquals(wave.getQueue().size(), 10);
     }
 
+
+
+
+    @Test
+    public void enemyTakeDamage(){
+        int initialHealth = enemy.getHealth();
+        enemy.takeDamage(20);
+        int newHealth = enemy.getHealth();
+
+        assertTrue(initialHealth > newHealth);
+
+    }
+
+    @Test
+    public void EnemyIsDead() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+       EntityHolder.getInstance().addEntity(enemy);
+       PointHandler.addPoints(20);
+       Goldhandler.addGold(20);
+       int initialsizeOfEnemies = EntityHolder.getInstance().getEntities().size();
+       int initialPoints = PointHandler.getPoints();
+       int initialGold = Goldhandler.getGold();
+
+
+       testPrivateMethodUsingReflection();
+       int enemiesAfter = EntityHolder.getInstance().getEntities().size();
+       int pointsIsAdded = PointHandler.getPoints();
+       int goldIsAdded = Goldhandler.getGold();
+
+
+        assertTrue(initialsizeOfEnemies > enemiesAfter);
+        assertTrue(initialPoints < pointsIsAdded);
+        assertTrue(initialGold < goldIsAdded);
+    }
+
+
+    public void testPrivateMethodUsingReflection() throws NoSuchMethodException, SecurityException,
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        Method method = Enemy.class.getDeclaredMethod("enemyDead");
+        method.setAccessible(true);
+        method.invoke(enemy);
+    }
 }

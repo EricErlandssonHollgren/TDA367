@@ -1,18 +1,15 @@
 package Model;
 
 public class Goldhandler extends MainHandler {
-    private int gold = 0;
+    private static int gold = 100;
 
     // Checks if the request is meant for this handler.
     // If it´s the correct handler it will add the gold.
     // If isn't it will give it to the next handler.
     public void handleRequest(Request request){
 
-        if (request.getDescription() == HandlerItemDefiners.ADDGOLD) {
+        if (request.getDescription() == HandlerItemDefiners.GOLD) {
             addGold(request.getValue());
-        }
-        if (request.getDescription() == HandlerItemDefiners.LOSEGOLD) {
-            loseGold(request.getValue());
         }
         else if (m_successor != null)
         {
@@ -21,15 +18,10 @@ public class Goldhandler extends MainHandler {
     }
 
     // Adds gold to the total
-    private void addGold(int amount){
-        this.gold+=amount;
-    }
-
-    // Adds gold to the total
-    private void loseGold(int amount){
-        this.gold-=amount;
+    public static void addGold(int amount){
+        gold+=amount;
     }
 
     // Returns gold
-    public int getGold() {return gold;}
+    public static int getGold() {return gold;}
 }
