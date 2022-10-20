@@ -20,6 +20,7 @@ public class PlayerView implements IView {
 
     public PlayerView(Player player){
         drawFacade = new DrawFacade();
+        idleAnimation();
         this.player = player;
         idleAnimation();
     }
@@ -111,7 +112,7 @@ public class PlayerView implements IView {
         animationFrames[2] = new TextureRegion(new Texture("adventurer-attack1-02.png"));
         animationFrames[3] = new TextureRegion(new Texture("adventurer-attack1-03.png"));
         animationFrames[4] = new TextureRegion(new Texture("adventurer-attack1-04.png"));
-        animation = new Animation(1f/2f, animationFrames);
+        animation = new Animation(1f/10f, animationFrames);
     }
 
 

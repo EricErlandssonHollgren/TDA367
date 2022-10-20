@@ -1,5 +1,7 @@
 package Interfaces;
 
+import Model.ProjectileHandler;
+
 /**
  * A class with this interface should be able to shoot projectiles
  */
