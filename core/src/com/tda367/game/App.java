@@ -33,8 +33,9 @@ public class App extends ApplicationAdapter {
 	private EntityHolder entityHolder;
 	private TowerController towerController;
 	private PlayerController playerController;
-	private ProjectileHandler projectileHandler;
 	private PlayerSpawnController playerSpawnController;
+	private ProjectileHandler projectileHandler;
+
 
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
@@ -65,6 +66,7 @@ public class App extends ApplicationAdapter {
 		towerController.addSubscribers(tower);
 		playerController = new PlayerController();
 		playerController.addSubscribers(player);
+		playerSpawnController = new PlayerSpawnController();
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		projectileHandler = new ProjectileHandler(entityHolder,collisionDetection,timer);
