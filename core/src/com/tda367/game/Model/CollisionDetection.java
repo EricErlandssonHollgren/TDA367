@@ -69,7 +69,7 @@ public class CollisionDetection {
     public Map<Entity, Boolean> CheckCollisionPlayerAndEnemy(Player player) {
         Map<Entity, Boolean> collided = new HashMap<>();
         List<Entity> attackedEnemies = new ArrayList<>();
-        for (Entity entity : posHandler.entities) {
+        for (Entity entity : posHandler.getEntities()) {
             if (entity instanceof Enemy) {
                 if (EnemyAndPlayerColliding(entity, player)) {
                     collided.put(entity, true);
@@ -97,7 +97,7 @@ public class CollisionDetection {
      */
     public void CheckCollisionTowerAndEnemy(Tower tower) {
         List<Entity> collisions = new ArrayList<>();
-        for (Entity entity : posHandler.entities) {
+        for (Entity entity : posHandler.getEntities()) {
             if (entity instanceof Enemy) {
                 if (TowerAndEnemyisColliding(tower, entity)) {
                     collisions.add(entity);
@@ -128,7 +128,6 @@ public class CollisionDetection {
                 enemyAttack.fireAttackAtTower(tower);
             }
         }
-
         for (IEnemyAttack enemyAttack : collisions) {
             posHandler.removeFireAttack(enemyAttack);
         }
@@ -138,14 +137,34 @@ public class CollisionDetection {
         return tower.getPositionX() + tower.getWidth() > enemyAttack.getX() &&
                 tower.getPositionX() <= enemyAttack.getX() + enemyAttack.getWidth();
     }
+
+
+    /**
+     * Checks if the player and Fire Attack is at the same position and therefore colliding.
+     * @param player: The player which will take damage from the attacks.
+     */
+    public void checkCollisionPlayerAndFireAttack(Player player){
+        for (IEnemyAttack enemyAttack : posHandler.getEnemyAttacks()) {
+            if (PlayerAndFireAttackIsColliding(player, enemyAttack)) {
+                enemyAttack.fireAttackAtPlayer(player);
+            }
+        }
+    }
+
+
+    private boolean PlayerAndFireAttackIsColliding(Player player, IEnemyAttack enemyAttack) {
+        return player.getPosX() + player.getWidth() > enemyAttack.getX() &&
+                player.getPosX() <= enemyAttack.getX() + enemyAttack.getWidth();
+    }
+
     /**
      * Checks if a player should deal damage to an enemy through its hitbox
      * @param player checks if an enemy is colliding with player's hitbox
      */
     public void CheckCollisionEnemyAndHitBox(Player player){
         List<Entity> collisions = new ArrayList<>();
-        float[] attackEdges = player.attackHitbox.getEdges();
-        for (Entity entity: posHandler.entities) {
+        float[] attackEdges = player.getAttackHitbox().getEdges();
+        for (Entity entity: posHandler.getEntities()) {
             if(entity instanceof Enemy){
                 if((attackEdges[1] > entity.getPosX()) &&
                         attackEdges[0] <= entity.getWidth() + entity.getPosX()){
@@ -166,7 +185,7 @@ public class CollisionDetection {
         Map<Entity, IProjectile> collided = new HashMap<>();
         List<Entity> attackedEnemies = new ArrayList<>();
         for (IProjectile projectile: posHandler.getProjectiles()) {
-            for(Entity entity : posHandler.entities) {
+            for(Entity entity : posHandler.getEntities()) {
                 if(entity instanceof Enemy){
                     if(isColliding(entity,projectile)){
                         attackedEnemies.add(entity);
@@ -205,6 +224,4 @@ public class CollisionDetection {
         }
         return collisions;
     }
-
-
 }

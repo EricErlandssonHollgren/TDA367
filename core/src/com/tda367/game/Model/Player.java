@@ -10,7 +10,7 @@ public class Player extends Entity implements IObservers, IReSpawnable {
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
     private long latestAttackTime;
-    final AttackHitbox attackHitbox;
+    private final AttackHitbox attackHitbox;
     private int maxHealth;
     private double timeAtDeath;
     private GameTimer gameTimer;
@@ -34,6 +34,14 @@ public class Player extends Entity implements IObservers, IReSpawnable {
 
     }
 
+    /**
+     * The getAttackHitbox() method gets a hitbox for a player
+     * @return an attackHitbox
+     */
+
+    public AttackHitbox getAttackHitbox() {
+        return attackHitbox;
+    }
 
     /**
      * The moveLeft() method is allowing the character to move to the right side,
@@ -88,7 +96,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
      * @param damage is the input for dealing damage
      */
     public void takeDamage(int damage){
-        System.out.println(damage);
         health -= damage;
         if(health <= 0){
             playerDead();
@@ -148,10 +155,8 @@ public class Player extends Entity implements IObservers, IReSpawnable {
             moveRight();
             isAttacking = false;
         }
-
-        if(action == ActionEnum.DAMAGE) {
+        if(action == ActionEnum.ATTACKING) {
             isAttacking = true;
-
         } else if (action == ActionEnum.DYING) {
             playerDead();
             isAttacking = false;

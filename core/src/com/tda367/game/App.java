@@ -104,12 +104,12 @@ public class App extends ApplicationAdapter {
 		collisionDetection.CheckCollisionEnemyAndHitBox(player);
 		collisionDetection.CheckCollisionTowerAndEnemy(tower);
 		collisionDetection.CheckCollisionTowerAndFireAttack(tower);
+		collisionDetection.checkCollisionPlayerAndFireAttack(player);
 
 		List<IProjectile> projectileGround = collisionDetection.checkCollisionProjectileGround();
 		Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();
 		playerController.UpdatePlayerMovement();
 		projectileController.updateProjectiles(projectileEnemy,projectileGround);
-		playerController.UpdatePlayerState();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}

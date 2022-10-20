@@ -15,10 +15,8 @@ public class PlayerView implements IView, IReSpawnable {
     private TextureRegion[] animationFrames;
     private Animation animation;
     private Player player;
-    GameTimer gameTimer;
-    double c;
+
     /**
-     *
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
@@ -26,8 +24,7 @@ public class PlayerView implements IView, IReSpawnable {
     public PlayerView(Player player){
         drawFacade = new DrawFacade();
         this.player = player;
-        gameTimer = GameTimer.GetInstance();
-        c = gameTimer.GetTime();
+        idleAnimation();
     }
 
     /**
@@ -57,10 +54,10 @@ public class PlayerView implements IView, IReSpawnable {
         else if (player.getState() == ActionEnum.RIGHT)
             runningRightAnimation();
         else if (player.getState() == ActionEnum.DYING)
-            hurtAnimation();
-        else if (player.getState() == ActionEnum.DAMAGE)
             dieAnimation();
-        else if (player.getState() == ActionEnum.ATTACKING)
+        else if (player.getState() == ActionEnum.DAMAGE)
+            hurtAnimation();
+        if (player.getState() == ActionEnum.ATTACKING)
             attackAnimation();
     }
 
@@ -127,15 +124,15 @@ public class PlayerView implements IView, IReSpawnable {
     void hurtAnimation() {
         animationFrames = new TextureRegion[3];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-00.png"));
-        animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-01.png"));
-        animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-02.png"));
+        animationFrames[1] = new TextureRegion(new Texture("adventurer-hurt-01.png"));
+        animationFrames[2] = new TextureRegion(new Texture("adventurer-hurt-02.png"));
     }
 
     /**
      * Creates the dying animation.
      */
     void dieAnimation() {
-        animationFrames = new TextureRegion[5];
+        animationFrames = new TextureRegion[7];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-die-00.png"));
         animationFrames[1] = new TextureRegion(new Texture("adventurer-die-01.png"));
         animationFrames[2] = new TextureRegion(new Texture("adventurer-die-02.png"));
