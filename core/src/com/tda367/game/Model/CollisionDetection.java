@@ -146,7 +146,6 @@ public class CollisionDetection {
     public void checkCollisionPlayerAndFireAttack(Player player){
         for (IEnemyAttack enemyAttack : posHandler.getEnemyAttacks()) {
             if (PlayerAndFireAttackIsColliding(player, enemyAttack)) {
-                System.out.println("Colliding");
                 enemyAttack.fireAttackAtPlayer(player);
             }
         }

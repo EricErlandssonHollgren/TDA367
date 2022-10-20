@@ -14,6 +14,8 @@ public class Enemy extends Entity{
     public final IEnemyAttack enemyAttack;
     private int damage;
     private double velocity;
+    private MainHandler goldHandler;
+    private MainHandler pointsHandler;
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
@@ -23,6 +25,9 @@ public class Enemy extends Entity{
         this.enemyAttack = enemyAttack;
         this.damage = 20;
         this.velocity = 0.3;
+        goldHandler = new Goldhandler();
+        pointsHandler = new PointHandler();
+        goldHandler.setSuccessor(pointsHandler);
     }
 
     public IEnemyAttack getEnemyAttack() {
@@ -64,8 +69,9 @@ public class Enemy extends Entity{
      */
     private void enemyDead(){
         EntityHolder.getInstance().removeEntity(this);
-        PointHandler.addPoints(worth);
-        Goldhandler.addGold(worth);
+        goldHandler.handleRequest(new Request(HandlerItemDefiners.GOLD, worth));
+        goldHandler.handleRequest(new Request(HandlerItemDefiners.POINTS, worth));
+
     }
 
 }
