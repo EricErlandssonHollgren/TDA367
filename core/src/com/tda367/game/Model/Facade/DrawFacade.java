@@ -23,9 +23,6 @@ public class DrawFacade {
         shaperenderer = new ShapeRenderer();
     }
 
-    public Texture getTexture() {
-        return img;
-    }
     public void setTexture(String path){
         img = new Texture(path);
     }

@@ -16,7 +16,8 @@ public class Player extends Entity implements IObservers, IReSpawnable {
     private GameTimer gameTimer;
 
     /**
-     * When creating a player it should have two variables which defines its position.
+     * When creating a player it should have four parameters which will define
+     * it.
      *  @param positionX represents the player's position on the x-axis
      *  @param positionY represents the player's position on the y-axis
      *  @param entityWidth represents the player's
@@ -125,7 +126,7 @@ public class Player extends Entity implements IObservers, IReSpawnable {
 
     /**
      * Updates the current state of the player
-     * @param action
+     * @param action determines which state the player is taking.
      */
     private void updateState(ActionEnum action) {
         this.state = action;

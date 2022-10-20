@@ -120,6 +120,11 @@ public class CollisionDetection {
     }
 
 
+    /**
+     * Method will check the collision with tower and enemy's fire attack. If the fire attack collides
+     * with tower, tower will take damage.
+     * @param tower is colliding with enemy's attack
+     */
     public void CheckCollisionTowerAndFireAttack(Tower tower) {
        List<IEnemyAttack> collisions = new ArrayList<>();
         for (IEnemyAttack enemyAttack : posHandler.getEnemyAttacks()) {
