@@ -65,7 +65,7 @@ public class App extends ApplicationAdapter {
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		playerController = new PlayerController();
-		playerController.addSubscribers(player);
+		playerController.addObserver(player);
 		playerSpawnController = new PlayerSpawnController();
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
