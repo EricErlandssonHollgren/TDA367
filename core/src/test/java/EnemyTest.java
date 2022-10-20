@@ -55,8 +55,10 @@ public class EnemyTest {
         assertEquals(wave.getQueue().size(), 10);
     }
 
-
-
+    @Test
+    public void testEnemyAttack() {
+        assertTrue(enemy.getEnemyAttack() instanceof FireAttack);
+    }
 
     @Test
     public void enemyTakeDamage(){

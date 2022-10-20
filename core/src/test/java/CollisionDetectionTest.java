@@ -279,6 +279,8 @@ public class CollisionDetectionTest {
     public void playerAndFireAttackWillCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         IEnemyAttack attack = AttackFactory.createFireFlame(100, 100);
         Player player = new Player(100, 100, 50,37,125);
+        cd.checkCollisionPlayerAndFireAttack(player);
+        playerAndFireAttackCollidingMethod(player,attack);
         assertTrue(playerAndFireAttackCollidingMethod(player,attack));
     }
 
@@ -286,6 +288,8 @@ public class CollisionDetectionTest {
     public void playerAndFireAttackWillNotCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         IEnemyAttack attack = AttackFactory.createFireFlame(400,100);
         Player player = new Player(100, 100, 50,37,125);
+        cd.checkCollisionPlayerAndFireAttack(player);
+        playerAndFireAttackCollidingMethod(player,attack);
         assertFalse(playerAndFireAttackCollidingMethod(player, attack));
     }
 
