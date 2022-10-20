@@ -88,7 +88,7 @@ public class PlayerJunitTest {
     }
 
     @Test
-    public void playerDosentRespawn(){
+    public void playerDoesNotRespawn(){
         Player player = new Player(200, 100, 50, 37,125);
         player.takeDamage(126);
         GameTimer.GetInstance().UpdateTime(2);

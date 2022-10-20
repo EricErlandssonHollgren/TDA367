@@ -267,7 +267,7 @@ public class CollisionDetectionTest {
     }
 
     @Test
-    public void fireAttackWillNotBeRemoved(){
+    public void fireAttackWillNotBeRemovedAfterCollidingWithTower(){
         IEnemyAttack attack = AttackFactory.createFireFlame(630,100);
         Tower tower = new Tower(new Goldhandler());
 
@@ -292,9 +292,6 @@ public class CollisionDetectionTest {
         playerAndFireAttackCollidingMethod(player,attack);
         assertFalse(playerAndFireAttackCollidingMethod(player, attack));
     }
-
-
-
 
     /*
     These methods are used to be able to reach a private method.

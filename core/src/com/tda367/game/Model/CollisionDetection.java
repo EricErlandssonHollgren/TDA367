@@ -154,14 +154,10 @@ public class CollisionDetection {
      * @param player: The player which will take damage from the attacks.
      */
     public void checkCollisionPlayerAndFireAttack(Player player){
-        List<IEnemyAttack> collisions = new ArrayList<>();
         for (IEnemyAttack enemyAttack : posHandler.getEnemyAttacks()) {
             if (PlayerAndFireAttackIsColliding(player, enemyAttack)) {
                 enemyAttack.attackAtPlayer(player);
             }
-        }
-        for (IEnemyAttack enemyAttack : collisions) {
-            posHandler.removeFireAttack(enemyAttack);
         }
     }
 
