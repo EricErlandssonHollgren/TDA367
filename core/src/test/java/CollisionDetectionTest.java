@@ -96,7 +96,6 @@ public class CollisionDetectionTest {
         assertTrue(collision.containsValue(projectile));
     }
 
-
     @Test
     public void enemyAndTowerCollideTowerShouldTakeDamage() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         Entity enemy = new Enemy(0,100,10,AttackFactory.createFireFlame(630,100),125);
@@ -111,9 +110,6 @@ public class CollisionDetectionTest {
         assertFalse(EntityHolder.getInstance().getEntities().contains(enemy));
         assertTrue(towerInitialHealth > towerHealthAfterColliding);
         assertTrue(towerandEnemyisCollidingMethod(tower, enemy));
-
-
-
     }
 
     @Test
@@ -187,6 +183,19 @@ public class CollisionDetectionTest {
         assertFalse(towerAndFireAttackCollidingMethod(tower,attack));
         assertTrue(EntityHolder.getInstance().getEnemyAttacks().contains(attack));
     }
+    @Test
+    public void playerAndFireAttackWillCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        IEnemyAttack attack = AttackFactory.createFireFlame(100, 100);
+        Player player = new Player(100, 100, 50,37,125);
+        assertTrue(playerAndFireAttackCollidingMethod(player,attack));
+    }
+
+    @Test
+    public void playerAndFireAttackWillNotCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        IEnemyAttack attack = AttackFactory.createFireFlame(400,100);
+        Player player = new Player(100, 100, 50,37,125);
+        assertFalse(playerAndFireAttackCollidingMethod(player, attack));
+    }
 
     public boolean towerandEnemyisCollidingMethod(Tower tower, Entity enemy) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
             Method method = CollisionDetection.class.getDeclaredMethod("TowerAndEnemyisColliding", Tower.class, Entity.class);
@@ -205,6 +214,12 @@ public class CollisionDetectionTest {
         Method method = CollisionDetection.class.getDeclaredMethod("TowerAndFireAttackisColliding", Tower.class, IEnemyAttack.class);
         method.setAccessible(true);
         return (boolean) method.invoke(cd, tower, enemyAttack);
+    }
+
+    public boolean playerAndFireAttackCollidingMethod(Player player, IEnemyAttack enemyAttack) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = CollisionDetection.class.getDeclaredMethod("PlayerAndFireAttackIsColliding", Player.class, IEnemyAttack.class);
+        method.setAccessible(true);
+        return (boolean) method.invoke(cd, player, enemyAttack);
     }
 
 }
