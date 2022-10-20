@@ -103,8 +103,10 @@ public class Player extends Entity implements IObservers, IReSpawnable {
     }
 
     void playerDead(){
-        timeAtDeath = GameTimer.GetInstance().GetTime();
-        isDead = true;
+        if (!isDead) {
+            timeAtDeath = GameTimer.GetInstance().GetTime();
+            isDead = true;
+        }
     }
 
     /**
@@ -178,6 +180,7 @@ public class Player extends Entity implements IObservers, IReSpawnable {
     @Override
     public void respawn(double respawnColdown) {
         if (canRespawn(respawnColdown)){
+
             health = maxHealth;
             isDead = false;
             updateHealthBar();
