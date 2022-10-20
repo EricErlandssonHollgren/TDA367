@@ -9,7 +9,8 @@ public class Player extends Entity implements IObservers {
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
     private long latestAttackTime;
-    final AttackHitbox attackHitbox;
+
+    private AttackHitbox attackHitbox;
 
     /**
      * When creating a player it should have two variables which defines its position.
@@ -27,6 +28,14 @@ public class Player extends Entity implements IObservers {
         attackHitbox = new AttackHitbox(positionX+width,positionY);
     }
 
+    /**
+     * The getAttackHitbox() method gets a hitbox for a player
+     * @return an attackHitbox
+     */
+
+    public AttackHitbox getAttackHitbox() {
+        return attackHitbox;
+    }
 
     /**
      * The moveLeft() method is allowing the character to move to the right side,
