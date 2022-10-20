@@ -2,6 +2,7 @@ package View;
 import Interfaces.IView;
 import Model.ActionEnum;
 import Model.Facade.DrawFacade;
+import Model.GameTimer;
 import Model.Player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -13,7 +14,10 @@ public class PlayerView implements IView {
     private TextureRegion[] animationFrames;
     private Animation animation;
     private Player player;
+    GameTimer gameTimer;
+    double c;
     /**
+     *
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
@@ -21,6 +25,9 @@ public class PlayerView implements IView {
     public PlayerView(Player player){
         drawFacade = new DrawFacade();
         this.player = player;
+        gameTimer = GameTimer.GetInstance();
+        c = gameTimer.GetTime();
+        idleAnimation();
     }
 
     /**
@@ -28,8 +35,8 @@ public class PlayerView implements IView {
      */
     @Override
     public void render() {
-        determinePlayerAnimation();
-        drawFacade.drawAnimation(animation, player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
+            determinePlayerAnimation();
+            drawFacade.drawAnimation(animation, player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
     }
 
     @Override
@@ -48,10 +55,10 @@ public class PlayerView implements IView {
         else if (player.getState() == ActionEnum.RIGHT)
             runningRightAnimation();
         else if (player.getState() == ActionEnum.DYING)
-            hurtAnimation();
-        else if (player.getState() == ActionEnum.DAMAGE)
             dieAnimation();
-        else if (player.getState() == ActionEnum.ATTACKING)
+        else if (player.getState() == ActionEnum.DAMAGE)
+            hurtAnimation();
+        if (player.getState() == ActionEnum.ATTACKING)
             attackAnimation();
     }
 
@@ -118,15 +125,15 @@ public class PlayerView implements IView {
     void hurtAnimation() {
         animationFrames = new TextureRegion[3];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-00.png"));
-        animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-01.png"));
-        animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-02.png"));
+        animationFrames[1] = new TextureRegion(new Texture("adventurer-hurt-01.png"));
+        animationFrames[2] = new TextureRegion(new Texture("adventurer-hurt-02.png"));
     }
 
     /**
      * Creates the dying animation.
      */
     void dieAnimation() {
-        animationFrames = new TextureRegion[5];
+        animationFrames = new TextureRegion[7];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-die-00.png"));
         animationFrames[1] = new TextureRegion(new Texture("adventurer-die-01.png"));
         animationFrames[2] = new TextureRegion(new Texture("adventurer-die-02.png"));
@@ -136,4 +143,5 @@ public class PlayerView implements IView {
         animationFrames[6] = new TextureRegion(new Texture("adventurer-die-06.png"));
         animation = new Animation(1f/2f, animationFrames);
     }
+
 }
