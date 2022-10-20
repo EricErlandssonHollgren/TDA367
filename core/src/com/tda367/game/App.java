@@ -1,5 +1,6 @@
 package com.tda367.game;
 
+import Controller.PlayerSpawnController;
 import Model.ProjectileHandler;
 import Controller.TowerController;
 import Interfaces.IProjectile;
@@ -31,6 +32,7 @@ public class App extends ApplicationAdapter {
 	private EntityHolder entityHolder;
 	private TowerController towerController;
 	private PlayerController playerController;
+	private PlayerSpawnController playerSpawnController;
 	private ProjectileHandler projectileHandler;
 
 	/**
@@ -62,6 +64,7 @@ public class App extends ApplicationAdapter {
 		towerController.addSubscribers(tower);
 		playerController = new PlayerController();
 		playerController.addSubscribers(player);
+		playerSpawnController = new PlayerSpawnController();
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		projectileHandler = new ProjectileHandler(entityHolder,collisionDetection,timer);

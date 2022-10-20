@@ -3,18 +3,15 @@ package Model;
 import Interfaces.IShoot;
 import Interfaces.IUpgradeable;
 
-/**
- * A Turret class which can shoot projectiles and can be upgraded.
- */
-
 public class Turret implements IShoot, IUpgradeable {
     private int level;
     private double damage;
     private double shootingSpeed;
     private GameTimer timer;
     private boolean hasSpawned;
-    /*
-    A constructor for the turret.
+    /**
+     * A constructor for the turret.
+     * Turret can shoot projectiles and can be upgraded to be stronger.
      */
     public Turret(){
         this.hasSpawned = false;
@@ -28,11 +25,11 @@ public class Turret implements IShoot, IUpgradeable {
      * This is going to be a method for the Turret to shoot a projectile
      */
     public void shootProjectile(){
-        if(Math.ceil(timer.GetTime())%3 == 0 && !hasSpawned){
+        if(Math.ceil(timer.GetTime()) % getShootingSpeed() == 0 && !hasSpawned){
             ProjectileFactory.createCannonball(50,250,14,3,10);
             hasSpawned = true;
         }
-        if(Math.ceil(timer.GetTime())%3 == 2) hasSpawned = false;
+        if(Math.ceil(timer.GetTime()) % getShootingSpeed() == 2) hasSpawned = false;
     }
 
     /**
@@ -46,16 +43,19 @@ public class Turret implements IShoot, IUpgradeable {
 
     /**
      * Gets the current Turret level.
+     * @return the turrets current level.
      */
     public int getLevel(){return this.level;}
 
     /**
      * Gets the current Turret damage.
+     * @return the turrets current damage.
      */
     public double getDamage() {return damage;}
 
     /**
      * Gets the current Turret shooting speed.
+     * @return the turrets current shooting speed.
      */
     public double getShootingSpeed() {return shootingSpeed;}
 

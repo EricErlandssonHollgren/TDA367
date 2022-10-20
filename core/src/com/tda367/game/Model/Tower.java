@@ -2,12 +2,9 @@ package Model;
 import Interfaces.IBuild;
 import Interfaces.IObservers;
 import Interfaces.IUpgradeable;
+import Interfaces.IShoot;
 
 import java.util.ArrayList;
-import java.util.List;
-/*
-A player base
- */
 
 
 public class Tower implements IBuild, IUpgradeable, IObservers {
@@ -20,7 +17,6 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     private int maxCapacity;
     private ArrayList<Turret> turrets;
     private Goldhandler gold;
-
 
     /**
      * This creates a Tower, which requires arguments for its health, location and maximum turrets capacity.
@@ -50,6 +46,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
 
     /**
      * Upgrades a selected Turret.
+     * @param index, specification of the turret.
      */
     public void upgradeTurret(int index){
         if(gold.getGold() >=1000){
@@ -93,31 +90,37 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
 
     /**
      * Gets the current Tower level
+     * @return towers current level.
      */
     public int getLevel(){ return level;}
 
     /**
      * Gets the current Tower health
+     * @return towers current health.
      */
     public double getHealth(){ return health;}
 
     /**
      * Gets the current maximum Turret capacity
+     * @return  towers max capacity.
      */
     public int getMaxCapacity(){ return maxCapacity;}
 
     /**
      * Gets the Tower position x
+     * @return towers X-position.
      */
     public float getPositionX(){ return positionX;}
 
     /**
      * Gets the Tower position y
+     * @return towers Y-position.
      */
     public float getPositionY(){ return positionY;}
 
     /**
      * Gets the ArrayList of Turrets that Tower has.
+     * @return towers turrets.
      */
     public ArrayList<Turret> getTurrets() { return turrets;}
 
@@ -149,6 +152,11 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         return turrets.size() == getMaxCapacity();
     }
 
+    /**
+     * Tower is able to take damage. For each time it is taking damage the health decrements.
+     * If the health is less or equal to zero it should die.
+     * @param damage represents the damage taken from an enemy.
+     */
     public void takeDamage(int damage){
         health -= damage;
         System.out.println(health);
@@ -156,13 +164,16 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
             //TODO: Gameover.
         }
     }
+
+    /**
+     * Tower fires turrets on a timer.
+     * Tower checks its turrets and calls their shoot-methods.
+     */
     public void fireTurrets(){
         for (IShoot t: turrets) {
             t.shootProjectile();
         }
     }
-    /*
-    Handles different tasks given by controller to update the state of Tower.
 
     /**
      * Handles different tasks given by controller to update the state of Tower.
