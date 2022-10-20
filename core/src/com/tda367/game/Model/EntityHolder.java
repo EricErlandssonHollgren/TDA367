@@ -80,15 +80,24 @@ public class EntityHolder {
 
     /**
      * A list of entity is being fetched
-     * @return
+     * @return entities of this class
      */
     public List<Entity> getEntities(){
         return this.entities;
     }
 
+    /**
+     * Adding a projectile to a list
+     * @param projectile is of IProjectile
+     */
     public void addProjectile(IProjectile projectile){
         projectiles.add(projectile);
     }
+
+    /**
+     * Removing a projectile to a list
+     * @param projectile is of IProjectile
+     */
     public void removeProjectile(IProjectile projectile){
         projectiles.remove(projectile);
     }
