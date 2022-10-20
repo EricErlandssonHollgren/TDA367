@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Enums corresponding to different actions in the game
+ */
 public enum ActionEnum {
 
     LEFT,
