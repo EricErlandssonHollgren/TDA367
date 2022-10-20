@@ -135,7 +135,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
      * Returns the current state of the player.
      * @return state
      */
-
     public ActionEnum getState() {
         return this.state;
     }
@@ -165,6 +164,8 @@ public class Player extends Entity implements IObservers, IReSpawnable {
     }
 
     public boolean canRespawn(double respawnColdown) {
+        System.out.println(gameTimer.GetTime() - timeAtDeath);
+        System.out.println(isDead);
         if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
             return true;
         }
@@ -182,7 +183,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
             health = maxHealth;
             isDead = false;
             updateHealthBar();
-
         }
     }
 }
