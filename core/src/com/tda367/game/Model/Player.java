@@ -164,8 +164,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
     }
 
     public boolean canRespawn(double respawnColdown) {
-        System.out.println(gameTimer.GetTime() - timeAtDeath);
-        System.out.println(isDead);
         if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
             return true;
         }
