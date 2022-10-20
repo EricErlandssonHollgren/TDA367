@@ -8,14 +8,19 @@ import Model.Facade.DrawFacade;
 public class ProjectileView implements IView{
 
     private DrawFacade drawFacade;
-    private ProjectileHandler controller;
-    public ProjectileView(ProjectileHandler controller) {
-        this.controller = controller;
+    private ProjectileHandler handler;
+
+    /**
+     * Constructor for projectile view
+     * @param handler reference to the projectile handler
+     */
+    public ProjectileView(ProjectileHandler handler) {
+        this.handler = handler;
         this.drawFacade = new DrawFacade();
     }
     @Override
     public void render() {
-        for (IProjectile p: controller.getCurrentProjectiles()) {
+        for (IProjectile p: handler.getCurrentProjectiles()) {
             p.move();
             drawFacade.setTexture(p.getTexturePath());
             drawFacade.drawObject(p.getX(), p.getY(), 32, 32);

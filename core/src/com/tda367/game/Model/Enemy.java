@@ -18,8 +18,14 @@ public class Enemy extends Entity implements IPaus{
     private double velocity;
     private MainHandler goldHandler;
     private MainHandler pointsHandler;
+
     /**
-     * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
+     * Constructor for creating an enemy with its related values.
+     * @param positionX the set position for enemy along the x-axis.
+     * @param positionY the set position for enemy along the y-axis.
+     * @param worth what the enemy is worth. when killed by player this value will be turned into points.
+     * @param enemyAttack the type of attack that the enemy can do.
+     * @param health the number of health points the enemy has, when zero the enemy dies.
      */
     public Enemy(float positionX, float positionY, int worth, IEnemyAttack enemyAttack, int health) {
         super(positionX, positionY, 70, 70, health);
@@ -32,12 +38,16 @@ public class Enemy extends Entity implements IPaus{
         goldHandler.setSuccessor(pointsHandler);
     }
 
+    /**
+     * A getter for returning the specific attack of an enemy
+     * @return the enemy attack
+     */
     public IEnemyAttack getEnemyAttack() {
         return enemyAttack;
     }
 
     /**
-     * moves the enemy in x-direction only with a change of 0.2px.
+     * moves the enemy in x-direction with a change of value that is set in the constructor.
      */
     public void moveEnemy() {
         if (!isGamePaused) {

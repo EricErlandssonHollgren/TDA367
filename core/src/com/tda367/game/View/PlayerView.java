@@ -62,7 +62,7 @@ public class PlayerView implements IView {
     /**
      * Creates running right animation.
      */
-    void runningRightAnimation() {
+    private void runningRightAnimation() {
         animationFrames = new TextureRegion[6];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-run-00.png"));
         animationFrames[1] = new TextureRegion(new Texture("adventurer-run-01.png"));
@@ -76,7 +76,7 @@ public class PlayerView implements IView {
     /**
      * Creates running left animation.
      */
-    void runningLeftAnimation() {
+    private void runningLeftAnimation() {
         animationFrames = new TextureRegion[6];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-run-00.png"));
         animationFrames[1] = new TextureRegion(new Texture("adventurer-run-01.png"));
@@ -94,7 +94,7 @@ public class PlayerView implements IView {
     /**
      * Creates the idle animation.
      */
-    void idleAnimation() {
+    private void idleAnimation() {
         animationFrames = new TextureRegion[2];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-idle-00.png"));
         animationFrames[1] = new TextureRegion(new Texture("adventurer-idle-01.png"));
@@ -104,7 +104,7 @@ public class PlayerView implements IView {
     /**
      * Creates the attack animation.
      */
-    void attackAnimation() {
+    private void attackAnimation() {
         animationFrames = new TextureRegion[5];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-attack1-00.png"));
         animationFrames[1] = new TextureRegion(new Texture("adventurer-attack1-01.png"));
@@ -118,7 +118,7 @@ public class PlayerView implements IView {
     /**
      * Creates the animation for when the player is taking damage.
      */
-    void hurtAnimation() {
+    private void hurtAnimation() {
         animationFrames = new TextureRegion[3];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-hurt-00.png"));
         animationFrames[1] = new TextureRegion(new Texture("adventurer-hurt-01.png"));
@@ -128,7 +128,7 @@ public class PlayerView implements IView {
     /**
      * Creates the dying animation.
      */
-    void dieAnimation() {
+    private void dieAnimation() {
         animationFrames = new TextureRegion[7];
         animationFrames[0] = new TextureRegion(new Texture("adventurer-die-00.png"));
         animationFrames[1] = new TextureRegion(new Texture("adventurer-die-01.png"));

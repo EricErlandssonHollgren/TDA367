@@ -11,6 +11,10 @@ public class WorldBoundariesView implements IView {
     private WorldBoundaries worldBoundaries;
     private DrawFacade drawFacade;
 
+    /**
+     * Constructor for the worldboundariesview
+     * @param worldBoundaries reference to the worldboundaries object
+     */
     public WorldBoundariesView(WorldBoundaries worldBoundaries){
         this.worldBoundaries = worldBoundaries;
         drawFacade = new DrawFacade();

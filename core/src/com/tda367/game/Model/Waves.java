@@ -12,6 +12,9 @@ public class Waves implements IPaus {
     private GameTimer gameTimer;
     private boolean isGamePaused = false;
 
+    /**
+     * Constructor for a wave
+     */
     public Waves() {
         gameTimer = GameTimer.GetInstance();
         roundHandler = new RoundHandler(gameTimer);

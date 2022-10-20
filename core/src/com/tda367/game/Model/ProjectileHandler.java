@@ -13,6 +13,12 @@ public class ProjectileHandler {
     private GameTimer timer;
     private boolean hasSpawned;
 
+    /**
+     * Constructor for projectileHandler
+     * @param entityHolder instance of the entityHolder
+     * @param collisionDetection instance of the CollisionDetection
+     * @param timer instance of the in game timer
+     */
     public ProjectileHandler(EntityHolder entityHolder, CollisionDetection collisionDetection, GameTimer timer){
         this.hasSpawned = false;
         this.entityHolder = entityHolder;

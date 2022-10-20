@@ -71,7 +71,7 @@ public class App extends Game {
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		playerController = new PlayerController();
-		playerController.addSubscribers(player);
+		playerController.addObserver(player);
 		playerSpawnController = new PlayerSpawnController();
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
@@ -105,7 +105,10 @@ public class App extends Game {
 
 		 */
 	}
-  
+
+	/**
+	 * Called 60 times per second, renders the application
+	 */
 	@Override
 	public void render () {
 		super.render();
@@ -130,7 +133,10 @@ public class App extends Game {
 
 		 */
 	}
-	
+
+	/**
+	 * Disposes the objects in the application
+	 */
 	@Override
 	public void dispose () {
 

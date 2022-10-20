@@ -13,14 +13,15 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class DrawFacade {
     private SpriteBatch batch;
-    private Sprite sprite;
     private Texture img;
-    private String texturePath;
     private ShapeRenderer shaperenderer;
     private double elapsedTime;
     private BitmapFont font;
     private boolean showTextureRegion = true;
 
+    /**
+     * Constructor for the draw facade
+     */
     public DrawFacade(){
         batch = new SpriteBatch();
         shaperenderer = new ShapeRenderer();
@@ -28,18 +29,29 @@ public class DrawFacade {
 
     }
 
-    public Texture getTexture() {
-        return img;
-    }
+    /**
+     * Sets the image variable to a specific file path
+     * @param path the image path
+     */
     public void setTexture(String path){
         img = new Texture(path);
     }
+
+    /**
+     * Getter for getting the shape renderer
+     * @return the shape renderer
+     */
     public ShapeRenderer getShaperenderer() {
         return shaperenderer;
     }
-    public void hideTexture(boolean b) { }
 
-
+    /**
+     * Method for drawing an object on the screen
+     * @param x the x-position at which the object is rendered
+     * @param y the y-position at which the object is rendered
+     * @param imgWidth the imgWidth of the object to be rendered
+     * @param imgHeight the imgHeight of the object to be rendered
+     */
     public void drawObject(float x, float y, float imgWidth, float imgHeight){
         batch.begin();
         batch.draw(img, x,y,imgWidth,imgHeight);
@@ -59,6 +71,9 @@ public class DrawFacade {
         batch.end();
     }
 
+    /**
+     * Disposes the batch and image
+     */
     public void dispose(){
         batch.dispose();
         img.dispose();

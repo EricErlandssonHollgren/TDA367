@@ -42,6 +42,12 @@ public class Turret implements IShoot, IUpgradeable {
     }
 
     /**
+     * Gets the boolean value that shows if the turret has recently spawned a projectile.
+     * @return true/false if turret spawned projectile last render.
+     */
+    public boolean getHasSpawned() {return hasSpawned;}
+
+    /**
      * Gets the current Turret level.
      * @return the turrets current level.
      */

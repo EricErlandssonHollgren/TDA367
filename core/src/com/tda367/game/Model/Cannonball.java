@@ -9,6 +9,16 @@ public class Cannonball implements IProjectile, IPaus {
     private String texturePath;
     private boolean IsGamePaused = false;
 
+    /**
+     * Constructor for Cannonball
+     * @param x horizontal position
+     * @param y vertical position
+     * @param vx horizontal velocity
+     * @param vy vertical velocity
+     * @param gravity vertical gravity
+     * @param damage damage done by projectile
+     * @param radius radius of the projectile
+     */
     public Cannonball(float x, float y, float vx, float vy, float gravity, int damage, float radius){
         this.gravity = gravity;
         this.radius = radius;
@@ -27,51 +37,31 @@ public class Cannonball implements IProjectile, IPaus {
         this.texturePath = path;
     }
 
-    /**
-     * Getter for a potential texture that is used
-     * @return String with path to a texture
-     */
+    @Override
     public String getTexturePath(){
         return this.texturePath;
     }
 
-    /**
-     * Deals damage to the enemy in the parameter corresponding to the projectiles damage
-     * @param enemy that should receive damage
-     */
     @Override
     public void projectileAttack(Entity enemy) {
         enemy.takeDamage(this.damage);
     }
 
-    /**
-     * Getter for position X
-     * @return float with position X
-     */
     @Override
     public float getX(){
         return this.x;
     }
-    /**
-     * Getter for position Y
-     * @return float with position Y
-     */
+
     @Override
     public float getY(){
         return this.y;
     }
-    /**
-     * Getter for radius
-     * @return float with radius
-     */
+
     @Override
     public float getRadius() {
         return this.radius;
     }
 
-    /**
-     * Moves the projectile according to the velocities
-     */
     @Override
     public void move(){
         if (!IsGamePaused){

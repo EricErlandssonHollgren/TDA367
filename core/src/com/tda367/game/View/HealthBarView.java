@@ -11,6 +11,10 @@ public class HealthBarView implements IView {
     private Texture healthBarHolderImg;
     private Texture healthBarImg;
 
+    /**
+     * Constructor for healthbar view
+     * @param healthBar a reference to the healthbar object
+     */
     public HealthBarView(HealthBar healthBar) {
         this.healthBar = healthBar;
         batch = new SpriteBatch();
