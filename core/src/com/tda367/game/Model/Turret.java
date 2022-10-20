@@ -11,21 +11,28 @@ public class Turret implements IShoot, IUpgradeable {
     private int level;
     private double damage;
     private double shootingSpeed;
-
-    /**
-     * A constructor for the Turret.
+    private GameTimer timer;
+    private boolean hasSpawned;
+    /*
+    A constructor for the turret.
      */
     public Turret(){
+        this.hasSpawned = false;
         this.level = 1;
         this.damage = 10;
         this.shootingSpeed = 5;
+        this.timer = GameTimer.GetInstance();
     }
 
     /**
      * This is going to be a method for the Turret to shoot a projectile
      */
-    public void shootProjectile() {
-
+    public void shootProjectile(){
+        if(Math.ceil(timer.GetTime())%3 == 0 && !hasSpawned){
+            ProjectileFactory.createCannonball(50,250,14,3,10);
+            hasSpawned = true;
+        }
+        if(Math.ceil(timer.GetTime())%3 == 2) hasSpawned = false;
     }
 
     /**

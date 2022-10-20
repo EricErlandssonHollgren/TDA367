@@ -1,4 +1,4 @@
-package Controller;
+package Model;
 
 import Interfaces.IProjectile;
 import Model.*;
@@ -6,14 +6,14 @@ import Model.*;
 import java.util.List;
 import java.util.Map;
 
-public class ProjectileController {
+public class ProjectileHandler {
 
     private EntityHolder entityHolder;
     private CollisionDetection collisionDetection;
     private GameTimer timer;
     private boolean hasSpawned;
 
-    public ProjectileController(EntityHolder entityHolder, CollisionDetection collisionDetection, GameTimer timer){
+    public ProjectileHandler(EntityHolder entityHolder, CollisionDetection collisionDetection, GameTimer timer){
         this.hasSpawned = false;
         this.entityHolder = entityHolder;
         this.timer = timer;
@@ -40,12 +40,5 @@ public class ProjectileController {
         for(IProjectile p : collisionsGround){
             entityHolder.removeProjectile(p);
         }
-
-        if(Math.ceil(timer.GetTime())%3 == 0 && !hasSpawned){
-            ProjectileFactory.createCannonball(50,250,14,3,10);
-            hasSpawned = true;
-
-        }
-        if(Math.ceil(timer.GetTime())%3 == 2) hasSpawned = false;
     }
 }

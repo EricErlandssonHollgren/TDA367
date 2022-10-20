@@ -2,13 +2,11 @@ package View;
 import Interfaces.IView;
 import Model.ActionEnum;
 import Model.Facade.DrawFacade;
-import Model.GameTimer;
 import Model.Player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 
 public class PlayerView implements IView {
-    private Batch batch;
     private DrawFacade drawFacade;
 
     private TextureRegion[] animationFrames;
@@ -16,13 +14,13 @@ public class PlayerView implements IView {
     private Player player;
 
     /**
-     *
      * A constructor for the playerView. When creating a new playerView it should contain
      * the sprite for the player.
      */
 
     public PlayerView(Player player){
         drawFacade = new DrawFacade();
+        idleAnimation();
         this.player = player;
         idleAnimation();
     }
@@ -32,8 +30,10 @@ public class PlayerView implements IView {
      */
     @Override
     public void render() {
+        if (!player.isdead()) {
             determinePlayerAnimation();
             drawFacade.drawAnimation(animation, player.getPosX(), player.getPosY(), player.getWidth(), player.getHeight());
+        }
     }
 
     @Override
@@ -112,7 +112,7 @@ public class PlayerView implements IView {
         animationFrames[2] = new TextureRegion(new Texture("adventurer-attack1-02.png"));
         animationFrames[3] = new TextureRegion(new Texture("adventurer-attack1-03.png"));
         animationFrames[4] = new TextureRegion(new Texture("adventurer-attack1-04.png"));
-        animation = new Animation(1f/2f, animationFrames);
+        animation = new Animation(1f/10f, animationFrames);
     }
 
 
@@ -140,5 +140,4 @@ public class PlayerView implements IView {
         animationFrames[6] = new TextureRegion(new Texture("adventurer-die-06.png"));
         animation = new Animation(1f/2f, animationFrames);
     }
-
 }

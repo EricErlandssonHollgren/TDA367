@@ -20,10 +20,12 @@ public class HealthBarView implements IView {
 
     @Override
     public void render() {
-        batch.begin();
-        batch.draw(healthBarHolderImg, healthBar.getPositionX(), healthBar.getPositionY(), healthBarHolderImg.getWidth(), healthBarHolderImg.getHeight());
-        batch.draw(healthBarImg, healthBar.getPositionX(), healthBar.getPositionY(), healthBarImg.getWidth() * healthBar.getHealthWidth(), healthBarImg.getHeight());
-        batch.end();
+        if (healthBar.getHealth() > 0) {
+            batch.begin();
+            batch.draw(healthBarHolderImg, healthBar.getPositionX(), healthBar.getPositionY(), healthBarHolderImg.getWidth(), healthBarHolderImg.getHeight());
+            batch.draw(healthBarImg, healthBar.getPositionX(), healthBar.getPositionY(), healthBarImg.getWidth() * healthBar.getHealthWidth(), healthBarImg.getHeight());
+            batch.end();
+        }
     }
     @Override
     public void dispose() {
