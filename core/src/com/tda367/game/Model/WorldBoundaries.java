@@ -21,15 +21,15 @@ public class WorldBoundaries {
     /**
      * Creating the ground by adding a block with preferred values.
      */
-    public void createGround(){
+    private void createGround(){
         blocks.add(new Block(0,0, 100, 780));
     }
 
 
     /**
-     * Creating walls by adding a block with preferred values.
+     * Creating walls by adding blocks with preferred values.
      */
-    public void createWalls(){
+    private void createWalls(){
         blocks.add(new Block(630, 40, 1000, 10));
         blocks.add(new Block(0,40,1000,10));
     }

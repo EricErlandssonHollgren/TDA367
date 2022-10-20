@@ -32,7 +32,7 @@ public class TowerJUnitTest {
     @Test
     public void testTowerContainsSpecifiedTurret() {
         Goldhandler gold = new Goldhandler();
-        gold.handleRequest(new Request(HandlerItemDefiners.ADDGOLD, 1000));
+        gold.handleRequest(new Request(HandlerItemDefiners.GOLD, 1000));
         Tower tower3 = new Tower(gold);
         Turret turret1 = new Turret();
         tower3.buildTurret(turret1);
@@ -42,7 +42,7 @@ public class TowerJUnitTest {
     @Test
     public void testTowerUpgrades(){
         Goldhandler gold2 = new Goldhandler();
-        gold2.handleRequest(new Request(HandlerItemDefiners.ADDGOLD, 3000));
+        gold2.handleRequest(new Request(HandlerItemDefiners.GOLD, 3000));
         Tower tower4 = new Tower(gold2);
         tower4.upgrade();
         Turret turret1 = new Turret();
@@ -56,7 +56,7 @@ public class TowerJUnitTest {
     @Test
     public void testTowerUpgradesTurret(){
         Goldhandler gold3 = new Goldhandler();
-        gold3.handleRequest(new Request(HandlerItemDefiners.ADDGOLD, 7000));
+        gold3.handleRequest(new Request(HandlerItemDefiners.GOLD, 7000));
         Tower tower4 = new Tower(gold3);
         tower4.upgrade();
         Turret turret1 = new Turret();

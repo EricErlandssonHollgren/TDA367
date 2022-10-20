@@ -1,35 +1,27 @@
 package Model;
 
-import Model.Enemy.Enemy;
-import Model.Enemy.EnemyFactory;
-
 import java.util.*;
 
 public class Waves {
 
-    Queue<Enemy> queue = new LinkedList<>();
-    List<Enemy> currentEnemiesRendered = new ArrayList<>();
-    private boolean wasRecentlySpawned = false;
+    private Queue<Enemy> queue;
+    private boolean wasRecentlySpawned;
+    private RoundHandler roundHandler;
+    private GameTimer gameTimer;
 
-    /**
-     * Adds 10 enemies to a queue to later be used for rendering.
-     * @return the queue containing all enemies in order of having been added.
-     */
-    public Queue<Enemy> addEnemies() {
-        for (int i = 0; i < 10; i++){
-            Enemy tempEnemy = EnemyFactory.createEnemy1();
-            queue.add(tempEnemy);
-        }
-        return queue;
+    public Waves() {
+        gameTimer = GameTimer.GetInstance();
+        roundHandler = new RoundHandler(gameTimer);
+        wasRecentlySpawned = false;
+        queue = new LinkedList<>();
+        addEnemies();
     }
 
-    /**
-     * Takes the first enemy in the queue and returns it, as well as removes it from the queue.
-     * @return the enemy that is first in line.
-     */
-    public Enemy getEnemyFromQueue() {
-        Enemy currentEnemy = addEnemies().poll();
-        return Objects.requireNonNull(currentEnemy);
+    private void addEnemies() {
+        for (int i = 0; i < 10; i++){
+            Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame(630,100), (int)Math.ceil(125*roundHandler.getMultiplier()));
+            queue.add(tempEnemy);
+        }
     }
 
     /**
@@ -37,18 +29,27 @@ public class Waves {
      * to be spawned.
      * wasRecentlySpawned: A check for making sure only one enemy is being spawned every 30 seconds.
      */
-    public List<Enemy> getEnemiesToRender() {
-        double timer = Math.ceil(GameTimer.GetInstance().GetTime() );
-        if (timer % 30 == 0 && !wasRecentlySpawned) {
-            Enemy newEnemy = getEnemyFromQueue();
-            currentEnemiesRendered.add(newEnemy);
-            EntityHolder.getInstance().addEntity(newEnemy);
-            wasRecentlySpawned = true;
+    public List<Entity> getEnemiesToRender() {
+        double timer = Math.ceil(gameTimer.GetTime());
+        for (int i = 0 ; i <=10; i++) {
+            if (timer % 30 == 0 && !wasRecentlySpawned) {
+                Entity newEnemy = queue.poll();
+                EntityHolder.getInstance().addEntity(newEnemy);
+                wasRecentlySpawned = true;
+            }
+            if (timer % 30 == 9) {
+                wasRecentlySpawned = false;
+            }
         }
-        if (timer % 30 == 9){
-            wasRecentlySpawned = false;
-        }
-        return currentEnemiesRendered;
+        return EntityHolder.getInstance().getEntities();
+    }
+
+    /**
+     * Getter for returning the queue.
+     * @return the queue with all current enemies in wave.
+     */
+    public Queue<Enemy> getQueue() {
+        return queue;
     }
 }
 
