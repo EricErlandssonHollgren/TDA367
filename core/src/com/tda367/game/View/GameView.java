@@ -70,7 +70,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         towerController = new TowerController();
         towerController.addSubscribers(tower);
         playerController = new PlayerController();
-        playerController.addSubscribers(player);
+        playerController.addObserver(player);
         playerSpawnController = new PlayerSpawnController();
         towerController = new TowerController();
         towerController.addSubscribers(tower);
@@ -85,13 +85,14 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         IView wavesView = new WavesView(wave);
         IView playerView = new PlayerView(player);
         IView towerView = new TowerView(tower);
-        IView buttonView = new ButtonView(towerController, tower, playerSpawnController, player);
         IView healthBarView = new HealthBarView(player.healthBar);
         IView statsView = new StatsView();
         IView background = new BackgroundView();
         IView projectileView = new ProjectileView(projectileHandler);
         IView messageView = new MessageView();
         IView pausView = new PausView();
+        IView buttonView = new ButtonView(towerController, tower, playerSpawnController, player);
+
 
         tower.messageSubscriber((IMessageSubscriber) messageView);
         pausController.addSubscribers((IPaus) pausView);
@@ -106,13 +107,14 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         views.addView(statsView);
         views.addView(playerView);
         views.addView(towerView);
-        views.addView(buttonView);
         views.addView(wavesView);
         views.addView(statsView);
         views.addView(healthBarView);
         views.addView(projectileView);
         views.addView(messageView);
         views.addView(pausView);
+        views.addView(buttonView);
+
 
 
         /*

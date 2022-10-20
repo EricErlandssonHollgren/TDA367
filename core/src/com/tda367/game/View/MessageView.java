@@ -40,7 +40,6 @@ public class MessageView implements IView, IMessageSubscriber {
 
     @Override
     public void UpdateMessage(String message) {
-        System.out.println("recieved message");
         this.message = message;
         messageTime = gameTimer.GetTime();
     }

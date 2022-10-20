@@ -39,7 +39,6 @@ public class PausView implements IView, IPaus {
 
     @Override
     public void render() {
-        //System.out.println(screenActive);
         if (isGamePaused) {
             facade.drawObject(Gdx.graphics.getWidth() * 0.5f - 200, Gdx.graphics.getHeight() * 0.5f - 200, 400, 400);
             facade.drawText("Game Paused", 270, 350);
@@ -63,7 +62,6 @@ public class PausView implements IView, IPaus {
         this.QuitButton = new ImageButton(getTxrDrawable(textureQuitButton));
         this.QuitButton.setSize(textureQuitButton.getWidth() * 0.25f, textureQuitButton.getHeight() * 0.25f);
         this.QuitButton.setPosition(Gdx.graphics.getWidth() * 0.5f - textureQuitButton.getWidth() * 0.25f / 2, Gdx.graphics.getHeight() * 0.2f );
-        System.out.println(this.QuitButton);
     }
 
 
@@ -83,7 +81,6 @@ public class PausView implements IView, IPaus {
         this.PlayAgain.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("playagain");
             }
         });
 

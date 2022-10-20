@@ -1,5 +1,6 @@
 package Model.Facade;
 
+import Model.Entity;
 import Model.GameTimer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -77,5 +78,9 @@ public class DrawFacade {
     public void dispose(){
         batch.dispose();
         img.dispose();
+    }
+
+    public Texture getTexture() {
+        return img;
     }
 }

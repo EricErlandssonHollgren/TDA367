@@ -4,9 +4,8 @@ public class PointHandler extends MainHandler {
     private static int points = 200;
     private GameTimer gameTimer;
 
-    public PointHandler() {
-        gameTimer = GameTimer.GetInstance();
-    }
+
+    public PointHandler() {}
 
     /**
      * Checks if the request is meant for this handler. If it's correct the handler will add the points.
@@ -36,6 +35,6 @@ public class PointHandler extends MainHandler {
      * @return the current number of points
      */
     public static int getPoints() {
-        return points + (int) gameTimer.GetTime() ;
+        return points;
     }
 }

@@ -25,7 +25,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
      */
     public Tower(Goldhandler gold){
         this.level = 1;
-        this.health = 1;
+        this.health = 400;
         positionX = 0;
         positionY = 100;
         width = 100;
@@ -54,6 +54,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
      */
     public void upgradeTurret(int index){
         if(gold.getGold() >=1000){
+            sendMessage("Upgraded");
             getTurrets().get(index).upgrade();
             gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -1000));
         }
@@ -67,6 +68,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
      */
     public void upgrade(){
         if (gold.getGold() >= 3000) {
+            sendMessage("Upgraded");
             this.incrementLevel();
             this.incrementHealth();
             this.incrementMaxCapacity();
@@ -179,27 +181,6 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
         }
     }
 
-    public void gameOverSubscriber(IGameOverSubscriber subscriber) {
-        gameOverSubscriberList.add(subscriber);
-    }
-
-    private void updateGameOverSubscribers() {
-        for (IGameOverSubscriber subscriber : gameOverSubscriberList) {
-            subscriber.updateScreen();
-        }
-    }
-
-    public void messageSubscriber(IMessageSubscriber subscriber){
-        messageSubscriberList.add(subscriber);
-    }
-
-    private void sendMessage(String message) {
-        for (IMessageSubscriber subscriber : messageSubscriberList) {
-            subscriber.UpdateMessage(message);
-        }
-    }
-
-
     /**
      * Tower fires turrets on a timer.
      * Tower checks its turrets and calls their shoot-methods.
@@ -218,7 +199,6 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
     public void actionHandle(ActionEnum action) {
         if(action == ActionEnum.UPGRADE){
             upgrade();
-            sendMessage("Upgraded");
         }
         if(action == ActionEnum.BUILD){
             Turret t = new Turret();
@@ -231,6 +211,26 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
             upgradeTurret(1);
         }
 
+    }
+
+    public void gameOverSubscriber(IGameOverSubscriber subscriber) {
+        gameOverSubscriberList.add(subscriber);
+    }
+
+    private void updateGameOverSubscribers() {
+        for (IGameOverSubscriber subscriber : gameOverSubscriberList) {
+            subscriber.updateScreen();
+        }
+    }
+
+    public void messageSubscriber(IMessageSubscriber subscriber){
+        messageSubscriberList.add(subscriber);
+    }
+
+    private void sendMessage(String message) {
+        for (IMessageSubscriber subscriber : messageSubscriberList) {
+            subscriber.UpdateMessage(message);
+        }
     }
 
     @Override
