@@ -12,56 +12,62 @@ public class TowerJUnitTest {
 
     @Test
     public void testTowerHasLevel() {
-        Tower tower = new Tower(new Goldhandler());
-        assertEquals(1, tower.getLevel());
+        Tower tower1 = new Tower(new Goldhandler());
+        assertEquals(1, tower1.getLevel());
     }
 
     @Test
     public void testTowerHasSpecifiedLocation() {
-        Tower tower1 = new Tower(new Goldhandler());
-        assertEquals(tower1.getPositionX(), 0);
-        assertEquals(tower1.getPositionY(), 100);
+        Tower tower2 = new Tower(new Goldhandler());
+        assertEquals(tower2.getPositionX(), 0);
+        assertEquals(tower2.getPositionY(), 100);
     }
 
     @Test
     public void testTowerHasSpecifiedHealth() {
-        Tower tower2 = new Tower(new Goldhandler());
-        assertEquals(500, tower2.getHealth());
+        Tower tower3 = new Tower(new Goldhandler());
+        assertEquals(500, tower3.getHealth());
+    }
+
+    @Test
+    public void testTowerHasWidth() {
+        Tower tower4 = new Tower(new Goldhandler());
+        assertEquals(100, tower4.getWidth());
     }
 
     @Test
     public void testTowerContainsATurret() {
         Goldhandler gold = new Goldhandler();
         gold.handleRequest(new Request(HandlerItemDefiners.GOLD, 1000));
-        Tower tower3 = new Tower(gold);
-        tower3.actionHandle(ActionEnum.BUILD);
-        assertEquals(1, tower3.getTurrets().size());
+        Tower tower5 = new Tower(gold);
+        tower5.actionHandle(ActionEnum.BUILD);
+        assertEquals(1, tower5.getTurrets().size());
     }
 
     @Test
     public void testTowerUpgrades(){
         Goldhandler gold2 = new Goldhandler();
         gold2.handleRequest(new Request(HandlerItemDefiners.GOLD, 5000));
-        Tower tower4 = new Tower(gold2);
-        tower4.actionHandle(ActionEnum.UPGRADE);
-        tower4.actionHandle(ActionEnum.BUILD);
-        tower4.actionHandle(ActionEnum.BUILD);
-        assertEquals(2, tower4.getLevel());
-        assertEquals(2, tower4.getTurrets().size());
-        assertEquals(700, tower4.getHealth());
+        Tower tower6 = new Tower(gold2);
+        tower6.actionHandle(ActionEnum.UPGRADE);
+        tower6.actionHandle(ActionEnum.BUILD);
+        tower6.actionHandle(ActionEnum.BUILD);
+        assertEquals(2, tower6.getLevel());
+        assertEquals(2, tower6.getTurrets().size());
+        assertEquals(700, tower6.getHealth());
     }
     @Test
     public void testTowerUpgradesTurret(){
         Goldhandler gold3 = new Goldhandler();
         gold3.handleRequest(new Request(HandlerItemDefiners.GOLD, 7000));
-        Tower tower5 = new Tower(gold3);
-        tower5.actionHandle(ActionEnum.UPGRADE);
-        tower5.actionHandle(ActionEnum.BUILD);
-        tower5.actionHandle(ActionEnum.UPGRADETURRET1);
-        tower5.actionHandle(ActionEnum.BUILD);
-        tower5.actionHandle(ActionEnum.UPGRADETURRET2);
-        assertEquals(tower5.getTurrets().get(0).getLevel(), 2);
-        assertEquals(tower5.getTurrets().get(1).getLevel(), 2);
+        Tower tower7 = new Tower(gold3);
+        tower7.actionHandle(ActionEnum.UPGRADE);
+        tower7.actionHandle(ActionEnum.BUILD);
+        tower7.actionHandle(ActionEnum.UPGRADETURRET1);
+        tower7.actionHandle(ActionEnum.BUILD);
+        tower7.actionHandle(ActionEnum.UPGRADETURRET2);
+        assertEquals(tower7.getTurrets().get(0).getLevel(), 2);
+        assertEquals(tower7.getTurrets().get(1).getLevel(), 2);
     }
 
 
