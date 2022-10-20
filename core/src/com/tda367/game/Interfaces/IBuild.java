@@ -12,8 +12,4 @@ public interface IBuild<T extends Turret>{
          */
         void buildTurret(T Turret);
 
-        /**
-         * sellTurret should sell a Turret that has been built
-         */
-        void sellTurret(T Turret);
     }

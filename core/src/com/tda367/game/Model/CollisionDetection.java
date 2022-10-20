@@ -135,7 +135,7 @@ public class CollisionDetection {
         for (IEnemyAttack enemyAttack : posHandler.getEnemyAttacks()) {
             if(TowerAndFireAttackisColliding(tower, enemyAttack)){
                 collisions.add(enemyAttack);
-                enemyAttack.fireAttackAtTower(tower);
+                enemyAttack.attackAtTower(tower);
             }
         }
         for (IEnemyAttack enemyAttack : collisions) {
@@ -156,7 +156,7 @@ public class CollisionDetection {
     public void checkCollisionPlayerAndFireAttack(Player player){
         for (IEnemyAttack enemyAttack : posHandler.getEnemyAttacks()) {
             if (PlayerAndFireAttackIsColliding(player, enemyAttack)) {
-                enemyAttack.fireAttackAtPlayer(player);
+                enemyAttack.attackAtPlayer(player);
             }
         }
     }

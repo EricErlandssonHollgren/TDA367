@@ -134,7 +134,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
      * Returns the current state of the player.
      * @return state
      */
-
     public ActionEnum getState() {
         return this.state;
     }
@@ -195,7 +194,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
             health = maxHealth;
             isDead = false;
             updateHealthBar();
-
         }
     }
 }
