@@ -2,8 +2,11 @@ import Interfaces.IProjectile;
 import Model.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectileHandlerTest {
     private static EntityHolder eh;
@@ -26,8 +29,20 @@ public class ProjectileHandlerTest {
     }
 
     @Test
-    public void updateProjectilesTest(){
-        IProjectile p = ProjectileFactory.createCannonball(1,1,1,1,1);
+    public void ProjectilesAreBeingRemovedAfterUpdating(){
+        IProjectile p = ProjectileFactory.createCannonball(10,10,10,10,10);
+        ProjectileHandler handler = new ProjectileHandler(EntityHolder.getInstance(), CollisionDetection.getInstance(),GameTimer.GetInstance());
+
+        EntityHolder.getInstance().addProjectile(p);
+        List<IProjectile> projectileGround = cd.checkCollisionProjectileGround();
+        Map<Entity,IProjectile> projectileEnemy = cd.checkCollisionProjectileAndEnemy();
+
+        cd.checkCollisionProjectileGround();
+        cd.checkCollisionProjectileAndEnemy();
+        handler.updateProjectiles(projectileEnemy, projectileGround);
+
+        assertFalse(EntityHolder.getInstance().getProjectiles().contains(p));
+
 
     }
 }

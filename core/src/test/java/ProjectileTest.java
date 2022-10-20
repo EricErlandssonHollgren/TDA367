@@ -1,9 +1,11 @@
 import Interfaces.IProjectile;
-import Model.ProjectileFactory;
+import Model.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectileTest {
     @Test
