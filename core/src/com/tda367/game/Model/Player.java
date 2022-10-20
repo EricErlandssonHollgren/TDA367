@@ -1,16 +1,19 @@
 package Model;
 import Interfaces.IObservers;
+import Interfaces.IReSpawnable;
 
 
-public class Player extends Entity implements IObservers {
+public class Player extends Entity implements IObservers, IReSpawnable {
     private static int damage = 25;
     private static final float velocity = 7;
     private boolean isAttacking;
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
     private long latestAttackTime;
-
-    private AttackHitbox attackHitbox;
+    private final AttackHitbox attackHitbox;
+    private int maxHealth;
+    private double timeAtDeath;
+    private GameTimer gameTimer;
 
     /**
      * When creating a player it should have two variables which defines its position.
@@ -26,6 +29,8 @@ public class Player extends Entity implements IObservers {
         isAbleToMoveRight = true;
         isAttacking  = true;
         attackHitbox = new AttackHitbox(positionX+width,positionY);
+        maxHealth = health;
+        gameTimer = GameTimer.GetInstance();
     }
 
     /**
@@ -91,13 +96,15 @@ public class Player extends Entity implements IObservers {
      */
     public void takeDamage(int damage){
         health -= damage;
+        updateHealthBar();
         if(health <= 0){
             playerDead();
-            isDead = true;
         }
     }
 
-    private void playerDead(){
+    void playerDead(){
+        timeAtDeath = GameTimer.GetInstance().GetTime();
+        isDead = true;
     }
 
     /**
@@ -113,7 +120,6 @@ public class Player extends Entity implements IObservers {
                 latestAttackTime = currentAttackTime;
             }
         }
-
     }
 
 
@@ -155,6 +161,26 @@ public class Player extends Entity implements IObservers {
             playerDead();
             isAttacking = false;
         }
+
     }
 
+    public boolean canRespawn(double respawnColdown) {
+        if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isdead() {
+        return isDead;
+    }
+
+
+    @Override
+    public void respawn(double respawnColdown) {
+        if (canRespawn(respawnColdown)){
+            health = maxHealth;
+            isDead = false;
+        }
+    }
 }
