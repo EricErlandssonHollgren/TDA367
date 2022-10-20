@@ -40,7 +40,4 @@ public class PlayerController {
         }
     }
 
-    public void UpdatePlayerState(){
-
-    }
 }

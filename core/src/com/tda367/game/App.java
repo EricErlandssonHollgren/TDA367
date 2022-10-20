@@ -106,7 +106,6 @@ public class App extends ApplicationAdapter {
 		Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();
 		playerController.UpdatePlayerMovement();
 		projectileController.updateProjectiles(projectileEnemy,projectileGround);
-		playerController.UpdatePlayerState();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}
