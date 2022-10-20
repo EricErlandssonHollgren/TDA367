@@ -19,6 +19,11 @@ public class CollisionDetection {
         this.wb = new WorldBoundaries();
     }
 
+    /**
+     * Method should be getting an instance of CollisionDetection
+     * @return an instance
+     */
+
     public static CollisionDetection getInstance() {
         if (instance == null) {
             instance = new CollisionDetection();
