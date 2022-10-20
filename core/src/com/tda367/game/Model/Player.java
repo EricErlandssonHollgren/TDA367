@@ -27,7 +27,6 @@ public class Player extends Entity implements IObservers {
         attackHitbox = new AttackHitbox(positionX+width,positionY);
     }
 
-
     /**
      * The moveLeft() method is allowing the character to move to the right side,
      * for each subscriber in a subscriber list.
@@ -140,14 +139,12 @@ public class Player extends Entity implements IObservers {
             moveRight();
             isAttacking = false;
         }
-
         if(action == ActionEnum.DAMAGE) {
             isAttacking = true;
         } else if (action == ActionEnum.DYING) {
             playerDead();
             isAttacking = false;
         }
-
     }
 
 }
