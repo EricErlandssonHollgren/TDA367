@@ -1,6 +1,6 @@
 package com.tda367.game;
 
-import Controller.ProjectileController;
+import Model.ProjectileHandler;
 import Controller.TowerController;
 import Interfaces.IProjectile;
 import Interfaces.IView;
@@ -31,7 +31,7 @@ public class App extends ApplicationAdapter {
 	private EntityHolder entityHolder;
 	private TowerController towerController;
 	private PlayerController playerController;
-	private ProjectileController projectileController;
+	private ProjectileHandler projectileHandler;
 
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
@@ -64,7 +64,7 @@ public class App extends ApplicationAdapter {
 		playerController.addSubscribers(player);
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
-		projectileController = new ProjectileController(entityHolder,collisionDetection,timer);
+		projectileHandler = new ProjectileHandler(entityHolder,collisionDetection,timer);
 
 		//Create views and objects
 		IView worldBoundariesView = new WorldBoundariesView(worldBoundaries);
@@ -75,7 +75,7 @@ public class App extends ApplicationAdapter {
 		IView healthBarView = new HealthBarView(player.healthBar);
 		IView statsView = new StatsView();
 		IView background = new BackgroundView();
-		IView projectileView = new ProjectileView(projectileController);
+		IView projectileView = new ProjectileView(projectileHandler);
 
 		//Add views to list and they will be rendered. Views must implement IView
 		views = new ViewHolder();
@@ -105,7 +105,8 @@ public class App extends ApplicationAdapter {
 		List<IProjectile> projectileGround = collisionDetection.checkCollisionProjectileGround();
 		Map<Entity,IProjectile> projectileEnemy = collisionDetection.checkCollisionProjectileAndEnemy();
 		playerController.UpdatePlayerMovement();
-		projectileController.updateProjectiles(projectileEnemy,projectileGround);
+		projectileHandler.updateProjectiles(projectileEnemy,projectileGround);
+		tower.fireTurrets();
 		ScreenUtils.clear(0, 0, 0, 0);
 		views.render();
 	}

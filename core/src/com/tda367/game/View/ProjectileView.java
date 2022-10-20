@@ -1,20 +1,15 @@
 package View;
 
-import Controller.ProjectileController;
+import Model.ProjectileHandler;
 import Interfaces.IProjectile;
 import Interfaces.IView;
-import Model.Entity;
-import Model.EntityHolder;
 import Model.Facade.DrawFacade;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProjectileView implements IView{
 
     private DrawFacade drawFacade;
-    private ProjectileController controller;
-    public ProjectileView(ProjectileController controller) {
+    private ProjectileHandler controller;
+    public ProjectileView(ProjectileHandler controller) {
         this.controller = controller;
         this.drawFacade = new DrawFacade();
     }

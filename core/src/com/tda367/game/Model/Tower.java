@@ -1,9 +1,11 @@
 package Model;
 import Interfaces.IBuild;
 import Interfaces.IObservers;
+import Interfaces.IShoot;
 import Interfaces.IUpgradeable;
 
 import java.util.ArrayList;
+import java.util.List;
 /*
 A player base
  */
@@ -17,7 +19,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     private final float positionY;
     private final float width;
     private int maxCapacity;
-    private final ArrayList turrets;
+    private ArrayList<Turret> turrets;
     private Goldhandler gold;
 
 
@@ -31,7 +33,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
         positionY = 100;
         width = 100;
         this.maxCapacity = 1;
-        this.turrets = new ArrayList<Turret>();
+        this.turrets = new ArrayList<>();
         this.gold = gold;
     }
 
@@ -180,7 +182,11 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
             //TODO: Gameover.
         }
     }
-
+    public void fireTurrets(){
+        for (IShoot t: turrets) {
+            t.shootProjectile();
+        }
+    }
     /*
     Handles different tasks given by controller to update the state of Tower.
      */
@@ -191,7 +197,9 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
             upgrade();
         }
         if(action == ActionEnum.BUILD){
-            buildTurret(new Turret());
+            Turret t = new Turret();
+            buildTurret(t);
+            turrets.add(t);
         }
 
         if(action == ActionEnum.SELL){
