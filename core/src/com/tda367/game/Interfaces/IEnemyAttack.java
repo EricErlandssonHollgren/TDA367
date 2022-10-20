@@ -10,8 +10,8 @@ public interface IEnemyAttack {
 
     float getWidth();
     float getHeight();
-
-    void move();
+    int getDamage();
+    void move(double velocity);
     void fireAttackAtPlayer(Entity player);
     void fireAttackAtTower(Tower tower);
 }

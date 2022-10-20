@@ -1,6 +1,8 @@
 package View;
 
+import Controller.PlayerSpawnController;
 import Controller.TowerController;
+import Model.Player;
 import Model.Tower;
 import Interfaces.IView;
 import com.badlogic.gdx.Gdx;
@@ -20,21 +22,28 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class ButtonView implements IView {
     private TowerController controller;
+    private PlayerSpawnController playerSpawnController;
     private Tower tower;
+    private Player player;
     private ImageButton upgradeButtonTower;
     private ImageButton upgradeButtonTurret;
     private ImageButton upgradeButtonTurret2;
     private ImageButton buildButtonTurret;
+    private ImageButton respawnPlayerButton;
 
     private Stage stage;
 
      /**
       * A constructor for ButtonView.
-      * This creates buttons that when clicked, upgrades Tower with Turrets and upgrades them.'
+      * This creates buttons that when clicked, upgrades Tower with Turrets and upgrades them.
+      * @param towerController, the controller that is notified when a specific button is clicked.
+      * @param tower, the object that is viewed. Depending on it, different buttons are rendered.
       */
-    public ButtonView(TowerController towerController, Tower tower) {
+    public ButtonView(TowerController towerController, Tower tower, PlayerSpawnController playerSpawnController, Player player) {
         this.controller = towerController;
         this.tower = tower;
+        this.playerSpawnController = playerSpawnController;
+        this.player = player;
         initButtons();
         addListeners();
 
@@ -43,6 +52,7 @@ public class ButtonView implements IView {
         stage.addActor(upgradeButtonTurret);
         stage.addActor(upgradeButtonTurret2);
         stage.addActor(buildButtonTurret);
+        stage.addActor(respawnPlayerButton);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -80,6 +90,11 @@ public class ButtonView implements IView {
         this.buildButtonTurret = new ImageButton(getTxrDrawable(textureBuildTurret));
         this.buildButtonTurret.setSize(70,40);
         this.buildButtonTurret.setPosition(150,40);
+
+        Texture texturerespawnPlayer = new Texture("badlogic.jpg");
+        this.respawnPlayerButton = new ImageButton((getTxrDrawable(texturerespawnPlayer)));
+        this.respawnPlayerButton.setSize(70,40);
+        this.respawnPlayerButton.setPosition(200, 40);
     }
 
     /*
@@ -90,27 +105,30 @@ public class ButtonView implements IView {
             @Override
             public void clicked(InputEvent event, float x, float y){
                 controller.upgradeTower();
-                System.out.println("uTower");
             }
         });
         this.upgradeButtonTurret.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                controller.upgradeTower();
-                System.out.println("uTurret1");}
+                controller.upgradeTurret(1);
+            }
         });
         this.upgradeButtonTurret2.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y){
-                    controller.upgradeTower();
-                    System.out.println("uTurret2");
+                    controller.upgradeTurret(2);
                 }
         });
         this.buildButtonTurret.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
                 controller.buildTurret();
-                System.out.println("bTurret");
+            }
+        });
+        this.respawnPlayerButton.addListener((ClickListener) new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                playerSpawnController.respawn();
             }
         });
     }
@@ -127,12 +145,18 @@ public class ButtonView implements IView {
         }
     }
 
+     /**
+      * Renders buttons. Begins with updating visibility of buttons.
+      */
     @Override
     public void render() {
         updateButtonVisibility();
         stage.draw();
     }
 
+     /**
+      * Disposes any buttons rendered.
+      */
     @Override
     public void dispose() {
         stage.dispose();

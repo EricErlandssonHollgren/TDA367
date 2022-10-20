@@ -11,9 +11,10 @@ public class TowerView implements IView {
     private DrawFacade drawFacade;
     private String texturePath;
 
-    /*
-        A constructor for creating a view for the model of a Tower.
-    */
+    /**
+     * A constructor for creating a view for the model of a Tower.
+     * @param tower , the Tower object that the class views.
+     */
     public TowerView(Tower tower){
         this.tower = tower;
         this.texturePath = "basicTowerSprite.png";
@@ -21,13 +22,18 @@ public class TowerView implements IView {
         drawFacade.setTexture(texturePath);
     }
 
-
+    /**
+     * Renders Tower. Begins with updating for proper tower texture.
+     */
     @Override
     public void render() {
         updateTexturePath();
         drawFacade.drawObject(tower.getPositionX(),tower.getPositionY(),115,200);
     }
 
+    /**
+     * Disposes the rendered Tower.
+     */
     @Override
     public void dispose() {
         drawFacade.dispose();

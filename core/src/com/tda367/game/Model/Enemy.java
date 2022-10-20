@@ -15,6 +15,9 @@ public class Enemy extends Entity implements IPaus{
     private int damage;
     private boolean isAttacking;
     private boolean isGamePaused = false;
+    private double velocity;
+    private MainHandler goldHandler;
+    private MainHandler pointsHandler;
     /**
      * @param worth  = is what the enemy is "worth". Points will be transferred to the player when the enemy has been killed
      */
@@ -22,8 +25,11 @@ public class Enemy extends Entity implements IPaus{
         super(positionX, positionY, 70, 70, health);
         this.worth = 20;
         this.enemyAttack = enemyAttack;
-        this.isAttacking = true;
         this.damage = 20;
+        this.velocity = 0.3;
+        goldHandler = new Goldhandler();
+        pointsHandler = new PointHandler();
+        goldHandler.setSuccessor(pointsHandler);
     }
 
     public IEnemyAttack getEnemyAttack() {
@@ -35,9 +41,8 @@ public class Enemy extends Entity implements IPaus{
      */
     public void moveEnemy() {
         if (!isGamePaused) {
-            double speed = 0.5;
-            enemyAttack.move();
-            positionX -= speed;
+            enemyAttack.move(velocity);
+            positionX -= velocity;
         }
     }
     /**
@@ -70,8 +75,9 @@ public class Enemy extends Entity implements IPaus{
      */
     private void enemyDead(){
         EntityHolder.getInstance().removeEntity(this);
-        PointHandler.addPoints(worth);
-        Goldhandler.addGold(worth);
+        goldHandler.handleRequest(new Request(HandlerItemDefiners.GOLD, worth));
+        goldHandler.handleRequest(new Request(HandlerItemDefiners.POINTS, worth));
+
     }
 
     @Override

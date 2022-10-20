@@ -28,11 +28,9 @@ public class FireAttack implements IEnemyAttack {
     public float getY() {
         return this.y;
     }
-
     @Override
-    public void move() {
-        double speed = 0.5;
-        this.x -= speed;
+    public void move(double velocity) {
+        this.x -= velocity;
     }
 
     @Override
@@ -43,6 +41,11 @@ public class FireAttack implements IEnemyAttack {
     @Override
     public float getHeight(){
         return imgHeight;
+    }
+
+    @Override
+    public int getDamage(){
+        return damage;
     }
 
     @Override

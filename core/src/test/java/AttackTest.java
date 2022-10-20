@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AttackTest {
 
-    FireAttack fire = new FireAttack(3,3);
+    FireAttack fire = new FireAttack(630,100);
 
 
     /**
@@ -18,7 +18,7 @@ public class AttackTest {
     @Test
     public void testMovementX() {
         float posX = fire.getX();
-        fire.move();
+        fire.move(0.3);
         assertTrue(fire.getX() < posX);
     }
 
@@ -29,7 +29,7 @@ public class AttackTest {
     @Test
     public void testMovementY() {
         float posY = fire.getY();
-        fire.move();
+        fire.move(0.3);
         assertEquals(fire.getY(), posY);
     }
 }

@@ -19,6 +19,7 @@ public class DrawFacade {
     private ShapeRenderer shaperenderer;
     private double elapsedTime;
     private BitmapFont font;
+    private boolean showTextureRegion = true;
 
     public DrawFacade(){
         batch = new SpriteBatch();
@@ -36,6 +37,7 @@ public class DrawFacade {
     public ShapeRenderer getShaperenderer() {
         return shaperenderer;
     }
+    public void hideTexture(boolean b) { }
 
 
     public void drawObject(float x, float y, float imgWidth, float imgHeight){

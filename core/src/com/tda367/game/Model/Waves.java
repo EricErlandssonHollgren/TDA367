@@ -20,11 +20,7 @@ public class Waves implements IPaus {
         addEnemies();
     }
 
-    /**
-     * Adds 10 enemies to a queue to later be used for rendering.
-     *
-     */
-    public void addEnemies() {
+    private void addEnemies() {
         for (int i = 0; i < 10; i++){
             Enemy tempEnemy = new Enemy(630,100,10, AttackFactory.createFireFlame(630,100), (int)Math.ceil(125*roundHandler.getMultiplier()));
             queue.add(tempEnemy);
@@ -40,17 +36,17 @@ public class Waves implements IPaus {
         if (!isGamePaused) {
             double timer = Math.ceil(gameTimer.GetTime());
             for (int i = 0; i <= 10; i++) {
-                if (timer % 3 == 0 && !wasRecentlySpawned) {
+                if (timer % 10 == 0 && !wasRecentlySpawned) {
                     Entity newEnemy = queue.poll();
                     EntityHolder.getInstance().addEntity(newEnemy);
                     wasRecentlySpawned = true;
                 }
-                if (timer % 3 == 2) {
+                if (timer % 10 == 9) {
                     wasRecentlySpawned = false;
                 }
             }
         }
-            return EntityHolder.getInstance().entities;
+        return EntityHolder.getInstance().getEntities();
     }
 
     /**

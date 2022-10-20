@@ -1,16 +1,20 @@
 package Model;
 import Interfaces.IObservers;
 import Interfaces.IPaus;
+import Interfaces.IReSpawnable;
 
 
-public class Player extends Entity implements IObservers, IPaus {
+public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
     private static int damage = 25;
     private static final float velocity = 7;
     private boolean isAttacking;
     private boolean isAbleToMoveRight;
     private boolean isAbleToMoveLeft;
     private long latestAttackTime;
-    final AttackHitbox attackHitbox;
+    private final AttackHitbox attackHitbox;
+    private int maxHealth;
+    private double timeAtDeath;
+    private GameTimer gameTimer;
     private boolean isGamePaused = false;
 
     /**
@@ -27,8 +31,18 @@ public class Player extends Entity implements IObservers, IPaus {
         isAbleToMoveRight = true;
         isAttacking  = true;
         attackHitbox = new AttackHitbox(positionX+width,positionY);
+        maxHealth = health;
+        gameTimer = GameTimer.GetInstance();
     }
 
+    /**
+     * The getAttackHitbox() method gets a hitbox for a player
+     * @return an attackHitbox
+     */
+
+    public AttackHitbox getAttackHitbox() {
+        return attackHitbox;
+    }
 
     /**
      * The moveLeft() method is allowing the character to move to the right side,
@@ -85,14 +99,18 @@ public class Player extends Entity implements IObservers, IPaus {
     public void takeDamage(int damage){
         if (!isGamePaused) {
             health -= damage;
+            updateHealthBar();
             if (health <= 0) {
                 playerDead();
-                isDead = true;
             }
         }
     }
 
-    private void playerDead(){
+    void playerDead(){
+        if (!isDead) {
+            timeAtDeath = GameTimer.GetInstance().GetTime();
+            isDead = true;
+        }
     }
 
     /**
@@ -108,7 +126,6 @@ public class Player extends Entity implements IObservers, IPaus {
                 latestAttackTime = currentAttackTime;
             }
         }
-
     }
 
 
@@ -124,7 +141,6 @@ public class Player extends Entity implements IObservers, IPaus {
      * Returns the current state of the player.
      * @return state
      */
-
     public ActionEnum getState() {
         return this.state;
     }
@@ -145,8 +161,7 @@ public class Player extends Entity implements IObservers, IPaus {
                 moveRight();
                 isAttacking = false;
             }
-
-            if (action == ActionEnum.DAMAGE) {
+            if (action == ActionEnum.ATTACKING) {
                 isAttacking = true;
             } else if (action == ActionEnum.DYING) {
                 playerDead();
@@ -155,6 +170,27 @@ public class Player extends Entity implements IObservers, IPaus {
         }
     }
 
+    public boolean canRespawn(double respawnColdown) {
+        if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isdead() {
+        return isDead;
+    }
+
+
+    @Override
+    public void respawn(double respawnColdown) {
+        if (canRespawn(respawnColdown)){
+
+            health = maxHealth;
+            isDead = false;
+            updateHealthBar();
+        }
+    }
 
     @Override
     public void IsGamePaused(boolean isGamePaused) {

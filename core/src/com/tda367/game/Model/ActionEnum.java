@@ -8,7 +8,6 @@ public enum ActionEnum {
     UPGRADETURRET1,
     UPGRADETURRET2,
     BUILD,
-    SELL,
     ATTACKING,
     RUNNINGLEFT,
     RUNNINGRIGHT,

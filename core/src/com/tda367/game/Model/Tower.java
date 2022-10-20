@@ -1,101 +1,82 @@
 package Model;
-import Interfaces.*;
+import Interfaces.IBuild;
+import Interfaces.IObservers;
+import Interfaces.IUpgradeable;
+import Interfaces.IShoot;
 
 import java.util.ArrayList;
-import java.util.List;
-/*
-A player base
- */
 
 
 public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
 
     private int level;
-    public double health;
+    private double health;
     private final float positionX;
     private final float positionY;
     private final float width;
     private int maxCapacity;
-    private final ArrayList turrets;
+    private ArrayList<Turret> turrets;
     private Goldhandler gold;
     private boolean canTakeDamage = true;
     List<IMessageSubscriber> messageSubscriberList = new ArrayList<>();
     List<IGameOverSubscriber> gameOverSubscriberList = new ArrayList<>();
     private boolean isGamePaused;
 
-
-    /*
-    This creates a player base, which requires arguments for its health, location and maximum turrets capacity
+    /**
+     * This creates a Tower, which requires arguments for its health, location and maximum turrets capacity.
+     * @param gold , uses gold to check if conditions are met for different methods of Tower.
      */
     public Tower(Goldhandler gold){
         this.level = 1;
-        this.health = 50;
+        this.health = 200;
         positionX = 0;
         positionY = 100;
         width = 100;
         this.maxCapacity = 1;
-        this.turrets = new ArrayList<Turret>();
+        this.turrets = new ArrayList<>();
         this.gold = gold;
-        takeDamage(0);
     }
 
-    /*
-        Builds a turret on the base if the base has available space for a turret
+    /**
+     * Builds a Turret on the Tower if the Tower has available space for a Turret
+     * @param turret , builds the Turret sent as argument to the method.
      */
     public void buildTurret(Turret turret){
-        if (this.isFull()){
-            System.out.println("Not enough space");
-        }
-        else if (gold.getGold() >= 1000){
+        if (!this.isFull() && gold.getGold() >= 1000){
             turrets.add(turret);
+            gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -1000));
         }
-        else{
-            System.out.println("Not enough gold");
+        else {
             sendMessage("Not enough gold");
-
         }
     }
 
-    /*
-    Upgrades a selected turret.
+    /**
+     * Upgrades a selected Turret.
+     * @param index, specification of the turret.
      */
     public void upgradeTurret(int index){
         if(gold.getGold() >=1000){
             getTurrets().get(index).upgrade();
-            System.out.println("Turret Upgraded");
+            gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -1000));
         }
-        else{
-            System.out.println("Not enough gold");
+        else {
             sendMessage("Not enough gold");
         }
     }
 
-    /*
-    Removes a turret from the base
-     */
-    public void sellTurret(Turret turret){
-        if (this.turrets.contains(turret)){
-            this.turrets.remove(turret);
-        }
-        else{
-            sendMessage("You don't have any turrets to be sold");
-            throw new IllegalStateException("You don't have any turrets to be sold");
-        }
-    }
-
-
-    /*
-    Upgrades the level of the tower to have more health and more turret-capacity.
+    /**
+     * Upgrades the level of the Tower to have more health and more turret-capacity.
      */
     public void upgrade(){
         if (gold.getGold() >= 3000) {
             this.incrementLevel();
             this.incrementHealth();
             this.incrementMaxCapacity();
+            gold.handleRequest(new Request(HandlerItemDefiners.GOLD, -3000));
         }
         else{
             sendMessage("Not enough gold");
-            System.out.println("Not enough gold");
         }
 
 
@@ -121,33 +102,43 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
      */
     private void incrementMaxCapacity(){
         setMaxCapacity(getMaxCapacity() + 1);
-
     }
 
-    /*
-    Gets the current tower level
+    /**
+     * Gets the current Tower level
+     * @return towers current level.
      */
-    public int getLevel(){return level;}
+    public int getLevel(){ return level;}
 
-    /*
-    Gets the current tower health
+    /**
+     * Gets the current Tower health
+     * @return towers current health.
      */
-    public double getHealth(){return health;}
+    public double getHealth(){ return health;}
 
-    /*
-    Gets the current maximum turret capacity
+    /**
+     * Gets the current maximum Turret capacity
+     * @return  towers max capacity.
      */
-    public int getMaxCapacity(){return maxCapacity;}
+    public int getMaxCapacity(){ return maxCapacity;}
 
-    /*
-    Gets the tower position x
+    /**
+     * Gets the Tower position x
+     * @return towers X-position.
      */
-    public float getPositionX(){return positionX;}
+    public float getPositionX(){ return positionX;}
 
-    /*
-    Gets the tower position y
+    /**
+     * Gets the Tower position y
+     * @return towers Y-position.
      */
-    public float getPositionY(){return positionY;}
+    public float getPositionY(){ return positionY;}
+
+    /**
+     * Gets the ArrayList of Turrets that Tower has.
+     * @return towers turrets.
+     */
+    public ArrayList<Turret> getTurrets() { return turrets;}
 
     /**
      * Should be getting the tower's width
@@ -156,27 +147,22 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
     public float getWidth(){return width;}
 
     /*
-    Gets the ArrayList of turrets that tower has.
-    */
-    public ArrayList<Turret> getTurrets() {return turrets;}
-
-    /*
-    Sets the level of the tower.
+    Sets the level of the Tower.
      */
-    private void setLevel(int newLevel){this.level = newLevel;}
+    private void setLevel(int newLevel){ this.level = newLevel;}
 
     /*
-    Sets the health of the tower.
+    Sets the health of the Tower.
      */
-    private void setHealth(double newHealth){this.health = newHealth;}
+    private void setHealth(double newHealth){ this.health = newHealth;}
 
     /*
-    Sets the maxCapacity of turrets for the tower.
+    Sets the maxCapacity of Turrets for the Tower.
      */
-    private void setMaxCapacity(int newMaxCapacity){this.maxCapacity = newMaxCapacity;}
+    private void setMaxCapacity(int newMaxCapacity){ this.maxCapacity = newMaxCapacity;}
 
     /*
-    Checks if the base is at max capacity
+    Checks if the Tower is at max capacity.
      */
     private boolean isFull(){
         return turrets.size() == getMaxCapacity();
@@ -184,10 +170,15 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
 
 
 
+    /**
+     * Tower is able to take damage. For each time it is taking damage the health decrements.
+     * If the health is less or equal to zero it should die.
+     * @param damage represents the damage taken from an enemy.
+     */
     public void takeDamage(int damage){
         if (!isGamePaused) {
             health -= damage;
-            if(health <= 0f && canTakeDamage){
+            if (health <= 0 && canTakeDamage) {
                 updateGameOverSubscribers();
                 canTakeDamage = false;
             }
@@ -215,32 +206,35 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
     }
 
 
-    /*
-    Handles different tasks given by controller to update the state of Tower.
+    /**
+     * Tower fires turrets on a timer.
+     * Tower checks its turrets and calls their shoot-methods.
+     */
+    public void fireTurrets(){
+        for (IShoot t: turrets) {
+            t.shootProjectile();
+        }
+    }
+
+    /**
+     * Handles different tasks given by controller to update the state of Tower.
+     * @param action , calls to different tasks depending on what action.
      */
     @Override
     public void actionHandle(ActionEnum action) {
         if(action == ActionEnum.UPGRADE){
-            sendMessage("Upgraded");
-            System.out.println("Upgrade");
             upgrade();
+            sendMessage("Upgraded");
         }
         if(action == ActionEnum.BUILD){
-            buildTurret(new Turret());
-        }
-
-        if(action == ActionEnum.SELL){
-            /*sellTurret();
-
-             */
+            Turret t = new Turret();
+            buildTurret(t);
         }
         if(action == ActionEnum.UPGRADETURRET1){
             upgradeTurret(0);
         }
-
         if(action == ActionEnum.UPGRADETURRET2){
             upgradeTurret(1);
-
         }
 
     }
