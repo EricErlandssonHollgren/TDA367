@@ -37,9 +37,9 @@ public class TowerJUnitTest {
 
     @Test
     public void testTowerContainsATurret() {
-        Goldhandler gold = new Goldhandler();
-        gold.handleRequest(new Request(HandlerItemDefiners.GOLD, 1000));
-        Tower tower5 = new Tower(gold);
+        Goldhandler gold1 = new Goldhandler();
+        gold1.handleRequest(new Request(HandlerItemDefiners.GOLD, 1000));
+        Tower tower5 = new Tower(gold1);
         tower5.actionHandle(ActionEnum.BUILD);
         assertEquals(1, tower5.getTurrets().size());
     }
@@ -56,6 +56,7 @@ public class TowerJUnitTest {
         assertEquals(2, tower6.getTurrets().size());
         assertEquals(700, tower6.getHealth());
     }
+
     @Test
     public void testTowerUpgradesTurret(){
         Goldhandler gold3 = new Goldhandler();
@@ -70,5 +71,16 @@ public class TowerJUnitTest {
         assertEquals(tower7.getTurrets().get(1).getLevel(), 2);
     }
 
-
+    @Test
+    public void testTowerFiresTurrets(){
+        Goldhandler gold4 = new Goldhandler();
+        gold4.handleRequest(new Request(HandlerItemDefiners.GOLD, 5000));
+        Tower tower8 = new Tower(gold4);
+        Turret turret = new Turret();
+        tower8.buildTurret(turret);
+        GameTimer testTimer = GameTimer.GetInstance();
+        testTimer.UpdateTime(5);
+        tower8.fireTurrets();
+        assertTrue(turret.getHasSpawned());
+    }
 }
