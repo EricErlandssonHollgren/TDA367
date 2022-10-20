@@ -10,9 +10,13 @@ public class FireAttack implements IEnemyAttack {
     private long latestAttackTime;
     private final float imgWidth;
     private final float imgHeight;
-
     private final int damage;
 
+    /**
+     * Constructor for creating a fire attack at a specific position.
+     * @param x the x-position for the fire attack
+     * @param y the y-position for the fire attack
+     */
     public FireAttack(float x, float y) {
         this.x = x;
         this.y = y;
@@ -20,6 +24,7 @@ public class FireAttack implements IEnemyAttack {
         this.imgHeight = 70;
         this.damage = 20;
     }
+
     @Override
     public float getX() {
         return this.x;
@@ -49,7 +54,7 @@ public class FireAttack implements IEnemyAttack {
     }
 
     @Override
-    public void fireAttackAtPlayer(Entity player){
+    public void attackAtPlayer(Entity player){
         long currentAttackTime = System.currentTimeMillis();
         long minIntervalbetweenAttack = 3000;
         if (currentAttackTime > latestAttackTime + minIntervalbetweenAttack) {
@@ -59,7 +64,7 @@ public class FireAttack implements IEnemyAttack {
     }
 
     @Override
-    public void fireAttackAtTower(Tower tower){
+    public void attackAtTower(Tower tower){
         long currentAttackTime = System.currentTimeMillis();
         long minIntervalbetweenAttack = 3000;
         if(currentAttackTime > latestAttackTime + minIntervalbetweenAttack){
