@@ -61,6 +61,7 @@ public class Player extends Entity implements IObservers {
         }
     }
 
+
     /**
      * The setter enables the player to move right
      *
@@ -95,6 +96,7 @@ public class Player extends Entity implements IObservers {
             isDead = true;
         }
     }
+
     private void playerDead(){
     }
 
@@ -114,12 +116,31 @@ public class Player extends Entity implements IObservers {
 
     }
 
+
+    /**
+     * Updates the current state of the player
+     * @param action
+     */
+    private void updateState(ActionEnum action) {
+        this.state = action;
+    }
+
+    /**
+     * Returns the current state of the player.
+     * @return state
+     */
+
+    public ActionEnum getState() {
+        return this.state;
+    }
+
     /**
      * The method checks which method to use whenever an action is called.
      * @param action uses different methods depending on the action.
      */
     @Override
     public void actionHandle(ActionEnum action) {
+        updateState(action);
         if(action == ActionEnum.LEFT){
             moveLeft();
             isAttacking = false;
@@ -128,14 +149,12 @@ public class Player extends Entity implements IObservers {
             moveRight();
             isAttacking = false;
         }
-
         if(action == ActionEnum.DAMAGE) {
             isAttacking = true;
         } else if (action == ActionEnum.DYING) {
             playerDead();
             isAttacking = false;
         }
-
     }
 
 }

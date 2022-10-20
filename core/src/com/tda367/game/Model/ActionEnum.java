@@ -4,7 +4,6 @@ public enum ActionEnum {
 
     LEFT,
     RIGHT,
-    DAMAGE,
     UPGRADE,
     UPGRADETURRET1,
     UPGRADETURRET2,
@@ -14,5 +13,8 @@ public enum ActionEnum {
     RUNNINGLEFT,
     RUNNINGRIGHT,
     IDLE,
-    DYING
+    DYING,
+    ENEMYMOVE,
+    NOTPRESSED,
+    DAMAGE
 }

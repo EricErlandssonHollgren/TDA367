@@ -28,7 +28,6 @@ public class StatsView implements IView {
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
         batch.begin();
         font.draw(batch, String.valueOf(((Goldhandler)h1).getGold()), 20, 430);
         font.draw(batch, String.valueOf(((PointHandler)h2).getPoints()), 20, 450);

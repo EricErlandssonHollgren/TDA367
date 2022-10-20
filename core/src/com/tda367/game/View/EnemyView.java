@@ -39,5 +39,4 @@ public class EnemyView implements IView{
     public void dispose() {
         drawFacade.dispose();
     }
-
 }
