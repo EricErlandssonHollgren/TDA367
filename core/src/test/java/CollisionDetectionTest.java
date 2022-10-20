@@ -1,3 +1,4 @@
+import Interfaces.IEnemyAttack;
 import Interfaces.IProjectile;
 import Model.*;
 import Model.Enemy;
@@ -5,10 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CollisionDetectionTest {
     CollisionDetection cd = CollisionDetection.getInstance();
@@ -49,33 +51,42 @@ public class CollisionDetectionTest {
     }
 
     @Test
-    public void playerWillCollideWithEnemy(){
+    public void playerWillCollideWithEnemyAndEnemyTakesDamage() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, InterruptedException {
         Player player = new Player(200, 0, 50 ,37,125);
-        Entity enemy = new Enemy(200,0,10,AttackFactory.createFireFlame(),125);
+        Entity enemy = new Enemy(200,0,10,AttackFactory.createFireFlame(630,100),125);
+
+        int enemyInitalHealth = enemy.getHealth();
 
         EntityHolder.getInstance().addEntity(enemy);
-        Map<Entity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
+        enemyAndPlayerCollidingMethod(player, enemy);
+        Thread.sleep(1000);
+        player.actionHandle(ActionEnum.DAMAGE);
+        player.playerAttack(enemy);
+        cd.CheckCollisionPlayerAndEnemy(player);
 
-        //TODO: Should be a collision. Make it false for now to check test-coverage.
-        assertFalse(collision.get(enemy));
+        int enemyHealthAfterColliding = enemy.getHealth();
+
+        assertTrue(enemyInitalHealth > enemyHealthAfterColliding);
+        assertTrue(enemyAndPlayerCollidingMethod(player, enemy));
     }
 
     @Test
-    public void playerWillNotCollideWithEnemy(){
+    public void playerWillNotCollideWithEnemyAndEnemyWillNotTakeDamage() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Player player = new Player(500,500, 50 ,37,125);
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(630,100),125);
 
-        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(),125);
-
-        EntityHolder.getInstance().addEntity(enemy);
-
-        Map<Entity, Boolean> collision = cd.CheckCollisionPlayerAndEnemy(player);
-        assertFalse(collision.get(enemy));
+        int enemyInitialHealth = enemy.getHealth();
+        enemyAndPlayerCollidingMethod(player, enemy);
+        cd.CheckCollisionPlayerAndEnemy(player);
+        int enemyHealthAfterNotColliding = enemy.getHealth();
+        assertEquals(enemyInitialHealth, enemyHealthAfterNotColliding);
+        assertFalse(enemyAndPlayerCollidingMethod(player, enemy));
     }
 
     @Test
     public void enemyAndProjectileCollides(){
 
-        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(),125);
+        Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(630,100),125);
         EntityHolder eh = EntityHolder.getInstance();
         eh.addEntity(enemy);
 
@@ -85,25 +96,105 @@ public class CollisionDetectionTest {
         assertTrue(collision.containsValue(projectile));
     }
 
-
     @Test
-    public void enemyAndTowerCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        Entity enemy = new Enemy(0,100,10,AttackFactory.createFireFlame(),125);
+    public void enemyAndTowerCollideTowerShouldTakeDamage() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        Entity enemy = new Enemy(0,100,10,AttackFactory.createFireFlame(630,100),125);
         Tower tower = new Tower(new Goldhandler());
 
-        towerandEnemyisCollidingMethod(tower, enemy);
+        double towerInitialHealth = tower.getHealth();
+        EntityHolder.getInstance().addEntity(enemy);
+
+        cd.CheckCollisionTowerAndEnemy(tower);
+        double towerHealthAfterColliding = tower.getHealth();
+
+        assertFalse(EntityHolder.getInstance().getEntities().contains(enemy));
+        assertTrue(towerInitialHealth > towerHealthAfterColliding);
         assertTrue(towerandEnemyisCollidingMethod(tower, enemy));
+    }
+
+    @Test
+    public void enemyAndTowerDoNotCollideTowerShouldNotTakeDamage() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        Entity enemy = new Enemy(200,100,10,AttackFactory.createFireFlame(630,100), 125);
+        Tower tower = new Tower(new Goldhandler());
+
+        double towerInitialHealth = tower.getHealth();
+        EntityHolder.getInstance().addEntity(enemy);
+
+        cd.CheckCollisionTowerAndEnemy(tower);
+        double towerHealthAfterNotColliding = tower.getHealth();
+        towerandEnemyisCollidingMethod(tower, enemy);
+
+        assertFalse(towerandEnemyisCollidingMethod(tower, enemy));
+        assertEquals(towerInitialHealth, towerHealthAfterNotColliding);
+        assertTrue(EntityHolder.getInstance().getEntities().contains(enemy));
+    }
+
+    @Test
+    public void enemyCollidingWithHitBoxAndTakingDamage() throws InterruptedException {
+        Entity enemy = new Enemy(370,100,10,AttackFactory.createFireFlame(630,100), 125);
+        Player player = new Player(320,100, 50 ,37,125);
+
+        EntityHolder.getInstance().addEntity(enemy);
+
+        int enemyInitialHealth  = enemy.getHealth();
+        Thread.sleep(1000);
+        player.actionHandle(ActionEnum.DAMAGE);
+        player.playerAttack(enemy);
+        cd.CheckCollisionEnemyAndHitBox(player);
+        int enemyHealthAfterColliding = enemy.getHealth();
+
+        assertTrue(EntityHolder.getInstance().getEntities().contains(enemy));
+        assertTrue(enemyInitialHealth > enemyHealthAfterColliding);
+
+    }
+    @Test
+    public void enemyisNotCollidingWithHitBoxAndNotTakingDamage() throws InterruptedException {
+        Entity enemy = new Enemy(370,100,10,AttackFactory.createFireFlame(630,100), 125);
+        Player player = new Player(100,100, 50 ,37,125);
+
+        EntityHolder.getInstance().addEntity(enemy);
+
+        int enemyInitialHealth  = enemy.getHealth();
+        cd.CheckCollisionEnemyAndHitBox(player);
+        int enemyHealthAfterNotColliding = enemy.getHealth();
+
+        //assertFalse(EntityHolder.getInstance().getEntities().contains(enemy));
+        assertEquals(enemyInitialHealth, enemyHealthAfterNotColliding);
+    }
+    @Test
+    public void towerAndFireAttackWillCollideAttackWillBeRemoved() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        IEnemyAttack attack = AttackFactory.createFireFlame(0, 100);
+        Tower tower = new Tower(new Goldhandler());
+
+        cd.CheckCollisionTowerAndFireAttack(tower);
+        towerAndFireAttackCollidingMethod(tower,attack);
+        assertTrue(towerAndFireAttackCollidingMethod(tower,attack));
+        assertFalse(EntityHolder.getInstance().getEnemyAttacks().contains(attack));
 
     }
 
     @Test
-    public void enemyAndTowerDoNotCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        Entity enemy = new Enemy(200,100,10,AttackFactory.createFireFlame(), 125);
+    public void towerAndFireAttackWillNotCollideAttackWillNotBeRemoved() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        IEnemyAttack attack = AttackFactory.createFireFlame(630,100);
         Tower tower = new Tower(new Goldhandler());
 
-        towerandEnemyisCollidingMethod(tower, enemy);
-        assertFalse(towerandEnemyisCollidingMethod(tower, enemy));
+        cd.CheckCollisionTowerAndFireAttack(tower);
+        towerAndFireAttackCollidingMethod(tower,attack);
+        assertFalse(towerAndFireAttackCollidingMethod(tower,attack));
+        assertTrue(EntityHolder.getInstance().getEnemyAttacks().contains(attack));
+    }
+    @Test
+    public void playerAndFireAttackWillCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        IEnemyAttack attack = AttackFactory.createFireFlame(100, 100);
+        Player player = new Player(100, 100, 50,37,125);
+        assertTrue(playerAndFireAttackCollidingMethod(player,attack));
+    }
 
+    @Test
+    public void playerAndFireAttackWillNotCollide() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        IEnemyAttack attack = AttackFactory.createFireFlame(400,100);
+        Player player = new Player(100, 100, 50,37,125);
+        assertFalse(playerAndFireAttackCollidingMethod(player, attack));
     }
 
     public boolean towerandEnemyisCollidingMethod(Tower tower, Entity enemy) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -113,6 +204,23 @@ public class CollisionDetectionTest {
 
     }
 
+    public boolean enemyAndPlayerCollidingMethod(Player player, Entity enemy) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        Method method = CollisionDetection.class.getDeclaredMethod("EnemyAndPlayerColliding", Entity.class, Player.class);
+        method.setAccessible(true);
+        return (boolean) method.invoke(cd, enemy, player);
+    }
+
+    public boolean towerAndFireAttackCollidingMethod(Tower tower, IEnemyAttack enemyAttack) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = CollisionDetection.class.getDeclaredMethod("TowerAndFireAttackisColliding", Tower.class, IEnemyAttack.class);
+        method.setAccessible(true);
+        return (boolean) method.invoke(cd, tower, enemyAttack);
+    }
+
+    public boolean playerAndFireAttackCollidingMethod(Player player, IEnemyAttack enemyAttack) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = CollisionDetection.class.getDeclaredMethod("PlayerAndFireAttackIsColliding", Player.class, IEnemyAttack.class);
+        method.setAccessible(true);
+        return (boolean) method.invoke(cd, player, enemyAttack);
+    }
 
 }
 

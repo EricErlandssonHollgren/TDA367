@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityHolder {
-    List<Entity> entities;
+    private List<Entity> entities;
     private List<IProjectile> projectiles;
     private List<IEnemyAttack> enemyAttacks;
 
@@ -23,6 +23,7 @@ public class EntityHolder {
         }
         return instance;
     }
+
     public void addEntity(Entity entity){
         entities.add(entity);
     }

@@ -176,7 +176,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers {
     public void takeDamage(int damage){
         health -= damage;
         System.out.println(health);
-        if(health == 0){
+        if(health <= 0){
             //TODO: Gameover.
         }
     }
