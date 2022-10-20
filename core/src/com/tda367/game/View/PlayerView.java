@@ -14,8 +14,7 @@ public class PlayerView implements IView {
     private TextureRegion[] animationFrames;
     private Animation animation;
     private Player player;
-    GameTimer gameTimer;
-    double c;
+
     /**
      *
      * A constructor for the playerView. When creating a new playerView it should contain
@@ -25,8 +24,6 @@ public class PlayerView implements IView {
     public PlayerView(Player player){
         drawFacade = new DrawFacade();
         this.player = player;
-        gameTimer = GameTimer.GetInstance();
-        c = gameTimer.GetTime();
         idleAnimation();
     }
 
