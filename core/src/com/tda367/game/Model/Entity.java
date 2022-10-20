@@ -84,7 +84,6 @@ public abstract class Entity {
      * Will get the state for an entity
      * @return its state
      */
-
     public ActionEnum getState() {
         return state;
     }
@@ -97,15 +96,10 @@ public abstract class Entity {
         return health;
     }
 
-    public HealthBar getHealthBar() {
-        return healthBar;
-    }
-
     /**
      * Gets the y-coordinate of the object of float
      * @return y-coordinate of the object
      */
-
     public float getPosY(){
         return positionY;
     }
@@ -122,7 +116,6 @@ public abstract class Entity {
      * The entity is able to receive damage and the health will decrement for each time
      * @param damage is of type int
      */
-
     public void takeDamage(int damage){
         health -= damage;
     }
