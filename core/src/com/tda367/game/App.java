@@ -33,6 +33,7 @@ public class App extends ApplicationAdapter {
 	private EntityHolder entityHolder;
 	private TowerController towerController;
 	private PlayerController playerController;
+	private PlayerSpawnController playerSpawnController;
 	private ProjectileHandler projectileHandler;
 	private PlayerSpawnController playerSpawnController;
 
@@ -65,6 +66,7 @@ public class App extends ApplicationAdapter {
 		towerController.addSubscribers(tower);
 		playerController = new PlayerController();
 		playerController.addSubscribers(player);
+		playerSpawnController = new PlayerSpawnController();
 		towerController = new TowerController();
 		towerController.addSubscribers(tower);
 		projectileHandler = new ProjectileHandler(entityHolder,collisionDetection,timer);
