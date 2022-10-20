@@ -5,6 +5,8 @@ import org.junit.platform.commons.util.ReflectionUtils;
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Queue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,6 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EnemyTest {
     Enemy enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(630,100),125);
     Waves wave = new Waves();
+
+    GameTimer timer = GameTimer.GetInstance();
+
     /**
      * Checks if the enemy is being rendered at the right position on the screen.
      * The actual values are taken from WorldBoundaries and in which position the walls and ground are created
@@ -60,6 +65,14 @@ public class EnemyTest {
         assertTrue(enemy.getEnemyAttack() instanceof FireAttack);
     }
 
+    @Test
+    public void testEnemiesToRender() {
+        double nrOfEnemiesAtStart = EntityHolder.getInstance().getEntities().size();
+        wave.getEnemiesToRender();
+        timer.UpdateTime(10);
+        double nrOfEnemiesAtEnd =  EntityHolder.getInstance().getEntities().size();
+        assertTrue(nrOfEnemiesAtStart < nrOfEnemiesAtEnd);
+    }
     @Test
     public void enemyTakeDamage(){
         int initialHealth = enemy.getHealth();
