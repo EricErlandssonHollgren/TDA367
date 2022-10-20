@@ -41,7 +41,7 @@ public class Waves {
                 wasRecentlySpawned = false;
             }
         }
-        return EntityHolder.getInstance().entities;
+        return EntityHolder.getInstance().getEntities();
     }
 
     /**

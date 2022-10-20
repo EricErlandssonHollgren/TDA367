@@ -69,7 +69,7 @@ public class CollisionDetection {
     public Map<Entity, Boolean> CheckCollisionPlayerAndEnemy(Player player) {
         Map<Entity, Boolean> collided = new HashMap<>();
         List<Entity> attackedEnemies = new ArrayList<>();
-        for (Entity entity : posHandler.entities) {
+        for (Entity entity : posHandler.getEntities()) {
             if (entity instanceof Enemy) {
                 if (EnemyAndPlayerColliding(entity, player)) {
                     collided.put(entity, true);
@@ -97,7 +97,7 @@ public class CollisionDetection {
      */
     public void CheckCollisionTowerAndEnemy(Tower tower) {
         List<Entity> collisions = new ArrayList<>();
-        for (Entity entity : posHandler.entities) {
+        for (Entity entity : posHandler.getEntities()) {
             if (entity instanceof Enemy) {
                 if (TowerAndEnemyisColliding(tower, entity)) {
                     collisions.add(entity);
@@ -165,7 +165,7 @@ public class CollisionDetection {
     public void CheckCollisionEnemyAndHitBox(Player player){
         List<Entity> collisions = new ArrayList<>();
         float[] attackEdges = player.getAttackHitbox().getEdges();
-        for (Entity entity: posHandler.entities) {
+        for (Entity entity: posHandler.getEntities()) {
             if(entity instanceof Enemy){
                 if((attackEdges[1] > entity.getPosX()) &&
                         attackEdges[0] <= entity.getWidth() + entity.getPosX()){
@@ -186,7 +186,7 @@ public class CollisionDetection {
         Map<Entity, IProjectile> collided = new HashMap<>();
         List<Entity> attackedEnemies = new ArrayList<>();
         for (IProjectile projectile: posHandler.getProjectiles()) {
-            for(Entity entity : posHandler.entities) {
+            for(Entity entity : posHandler.getEntities()) {
                 if(entity instanceof Enemy){
                     if(isColliding(entity,projectile)){
                         attackedEnemies.add(entity);
