@@ -1,7 +1,5 @@
 package Model;
 
-import Interfaces.IObject;
-
 public abstract class Entity {
 
     /**

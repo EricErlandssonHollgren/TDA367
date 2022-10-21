@@ -1,7 +1,6 @@
 package View;
 
 import Model.Facade.DrawFacade;
-import Model.GameTimer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;

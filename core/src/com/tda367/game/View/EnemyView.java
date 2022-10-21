@@ -4,8 +4,6 @@ import Interfaces.*;
 import Model.*;
 import Model.Facade.DrawFacade;
 
-import java.util.List;
-
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.
  */

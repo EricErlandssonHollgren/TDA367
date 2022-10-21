@@ -9,7 +9,6 @@ import Model.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tda367.game.App;
 
@@ -19,11 +18,9 @@ import java.util.Map;
 
 public class GameView extends ScreenAdapter implements IGameOverSubscriber {
     private final App game;
-    private SpriteBatch batch;
     private GameTimer timer;
     private ViewHolder views;
     private Player player;
-    private RoundHandler roundHandler;
     private MainHandler goldHandler;
     private MainHandler pointsHandler;
     private Tower tower;
@@ -76,7 +73,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         playerSpawnController = new PlayerSpawnController();
         towerController = new TowerController();
         towerController.addSubscribers(tower);
-        projectileHandler = new ProjectileHandler(entityHolder,collisionDetection,timer);
+        projectileHandler = new ProjectileHandler(entityHolder);
         playerSpawnController = new PlayerSpawnController();
         playerSpawnController.addSubscribers((IReSpawnable) player);
         pausController = new PausController();

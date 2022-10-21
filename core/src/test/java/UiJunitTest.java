@@ -1,21 +1,8 @@
-import Controller.PausController;
-import Interfaces.IMessageSubscriber;
-import Interfaces.IPaus;
-import Interfaces.IView;
-import View.GameView;
-import View.MessageView;
-import View.PausView;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import Model.*;
-
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class UiJunitTest {
 
@@ -102,7 +89,7 @@ public class UiJunitTest {
     }
     
     @Test
-    public void sendARequest2(){
+    public void sendARequest3(){
         MainHandler h2 = new Goldhandler();
         MainHandler h1 = new PointHandler();
         int goldBefore = ((Goldhandler) h2).getGold();
@@ -110,4 +97,6 @@ public class UiJunitTest {
         h1.handleRequest(new Request(HandlerItemDefiners.GOLD, 100));
         assertTrue(goldBefore+100 == ((PointHandler)h2).getPoints());
     }
+
+
 }
