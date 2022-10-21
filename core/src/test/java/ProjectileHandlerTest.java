@@ -23,7 +23,8 @@ public class ProjectileHandlerTest {
         cd = CollisionDetection.getInstance();
         timer = GameTimer.GetInstance();
         ph = new ProjectileHandler(eh,cd,timer);
-        //Reset entityHolder
+        //Resets
+        timer.resetTimer();
         for (IProjectile p: eh.getProjectiles()) {
             eh.removeProjectile(p);
         }
