@@ -57,6 +57,14 @@ public class Enemy extends Entity implements IPaus{
     }
 
     /**
+     * Enemy's getDamage method
+     * @return damage to other objects
+     */
+    public int getDamage(){
+        return damage;
+    }
+
+    /**
      * Enemy is able to take damage. For each time it is taking damage the health decrements.
      * If the health is less or equal to zero it should die.
      * @param damage represents the damage taken from either a player or cannonball.
