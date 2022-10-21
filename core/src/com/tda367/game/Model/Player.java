@@ -101,7 +101,7 @@ public class Player extends Entity implements IObservers, IReSpawnable {
         }
     }
 
-        void playerDead(){
+    private void playerDead(){
         timeAtDeath = GameTimer.GetInstance().GetTime();
         isDead = true;
     }
@@ -128,14 +128,6 @@ public class Player extends Entity implements IObservers, IReSpawnable {
      */
     private void updateState(ActionEnum action) {
         this.state = action;
-    }
-
-    /**
-     * Returns the current state of the player.
-     * @return state
-     */
-    public ActionEnum getState() {
-        return this.state;
     }
 
     /**
@@ -168,20 +160,8 @@ public class Player extends Entity implements IObservers, IReSpawnable {
      * @return true if the player is dead and the time is less than respawnCooldown
      */
     public boolean canRespawn(double respawnColdown) {
-        if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
-            return true;
-        }
-        return false;
+        return isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown;
     }
-
-    /**
-     * Checks if the player is dead
-     * @return isDead if the player is dead.
-     */
-    public boolean isdead() {
-        return isDead;
-    }
-
 
     /**
      * When respawning the health goes back to maxHealth, the player's boolean check 'isDead' should

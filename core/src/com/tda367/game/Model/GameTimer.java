@@ -34,4 +34,11 @@ public class GameTimer {
         return this.timer;
     }
 
+    /**
+     * Resets the timer
+     */
+    public void resetTimer(){
+        this.timer = 0;
+    }
+
 }

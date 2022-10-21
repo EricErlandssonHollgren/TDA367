@@ -68,6 +68,7 @@ public class EnemyTest {
     @Test
     public void testEnemiesToRender() {
         double nrOfEnemiesAtStart = EntityHolder.getInstance().getEntities().size();
+        timer.resetTimer();
         wave.getEnemiesToRender();
         timer.UpdateTime(10);
         double nrOfEnemiesAtEnd =  EntityHolder.getInstance().getEntities().size();
@@ -110,5 +111,11 @@ public class EnemyTest {
         Method method = Enemy.class.getDeclaredMethod("enemyDead");
         method.setAccessible(true);
         method.invoke(enemy);
+    }
+
+    @Test
+    public void enemyDead(){
+        enemy.takeDamage(125);
+        assertTrue(enemy.isdead());
     }
 }

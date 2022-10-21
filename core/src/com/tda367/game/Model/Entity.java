@@ -116,8 +116,14 @@ public abstract class Entity {
      * The entity is able to receive damage and the health will decrement for each time
      * @param damage is of type int
      */
-    public void takeDamage(int damage){
-        health -= damage;
+    public abstract void takeDamage(int damage);
+
+    /**
+     * Checks if the entetie is dead
+     * @return isDead if the player is dead.
+     */
+    public boolean isdead() {
+        return isDead;
     }
 
 }
