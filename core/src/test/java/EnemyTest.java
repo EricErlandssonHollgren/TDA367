@@ -68,6 +68,7 @@ public class EnemyTest {
     @Test
     public void testEnemiesToRender() {
         double nrOfEnemiesAtStart = EntityHolder.getInstance().getEntities().size();
+        timer.resetTimer();
         wave.getEnemiesToRender();
         timer.UpdateTime(10);
         double nrOfEnemiesAtEnd =  EntityHolder.getInstance().getEntities().size();

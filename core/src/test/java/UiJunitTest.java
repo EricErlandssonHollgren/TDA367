@@ -8,6 +8,8 @@ import View.PausView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import Model.*;
 
@@ -97,31 +99,15 @@ public class UiJunitTest {
         enemy.IsGamePaused(true);
         enemy.takeDamage(100);
         assertTrue(enemy.getHealth() == 100);
-
     }
     
-
-    // Förstår inte varför de inte funkar????????
-    //@Test
-    //public void messeges() {
-
-        //MessageSender messageSender = MessageSender.GetInstance();
-
-        //IView messageView = new MessageView();
-        //System.out.println("1");
-        //System.out.println("here");
-/*
-        messageSender.addSubscribers(messageview);
-        System.out.println("here1");
-
-        messageSender.sendMessage("this is message");
-        System.out.println("here2");
-
-        String s = ((MessageView) messageview).getMessage();
-        System.out.println("here");
-        System.out.println(s);
-        assertTrue(s == "this is message");
-
- */
-   // }
+    @Test
+    public void sendARequest2(){
+        MainHandler h2 = new Goldhandler();
+        MainHandler h1 = new PointHandler();
+        int goldBefore = ((Goldhandler) h2).getGold();
+        h1.setSuccessor(h2);
+        h1.handleRequest(new Request(HandlerItemDefiners.GOLD, 100));
+        assertTrue(goldBefore+100 == ((PointHandler)h2).getPoints());
+    }
 }

@@ -88,21 +88,7 @@ public class CollisionDetectionTest {
     }
 
     @Test
-    public void enemyTakesDamage() throws InterruptedException {
-        Player player = new Player(200, 0, 50 ,37,125);
-        Entity enemy = new Enemy(200,0,10,AttackFactory.createFireFlame(630,100),125);
-
-        int enemyInitalHealth = enemy.getHealth();
-        EntityHolder.getInstance().addEntity(enemy);
-        Thread.sleep(1000);
-        player.actionHandle(ActionEnum.DAMAGE);
-        player.playerAttack(enemy);
-        int enemyHealthAfterColliding = enemy.getHealth();
-        assertTrue(enemyInitalHealth > enemyHealthAfterColliding);
-    }
-
-    @Test
-    public void playerWillNotCollideWithEnemyAndEnemyWillNotTakeDamage() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+    public void PlayerAndEnemyIsNotColliding() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Player player = new Player(500,500, 50 ,37,125);
         Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(630,100),125);
 
@@ -111,7 +97,7 @@ public class CollisionDetectionTest {
     }
 
     @Test
-    public void playerWillNotTakeDamage(){
+    public void EnemyWillNotTakeDamage(){
         Player player = new Player(500,500, 50 ,37,125);
         Entity enemy = new Enemy(630,100,10,AttackFactory.createFireFlame(630,100),125);
 
@@ -119,6 +105,24 @@ public class CollisionDetectionTest {
         cd.CheckCollisionPlayerAndEnemy(player);
         int enemyHealthAfterNotColliding = enemy.getHealth();
         assertEquals(enemyInitialHealth, enemyHealthAfterNotColliding);
+
+    }
+
+    @Test
+    public void enemyTakesDamage() throws InterruptedException {
+        Player player = new Player(500,500, 50 ,37,125);
+        Entity enemy = new Enemy(500,100,10,AttackFactory.createFireFlame(630,100),125);
+
+        EntityHolder.getInstance().getEntities().add(enemy);
+
+        int initialHealth = enemy.getHealth();
+        Thread.sleep(1000);
+        player.actionHandle(ActionEnum.DAMAGE);
+        cd.CheckCollisionPlayerAndEnemy(player);
+        int healthAfterCollide = enemy.getHealth();
+
+        assertTrue(initialHealth > healthAfterCollide);
+
 
     }
 
