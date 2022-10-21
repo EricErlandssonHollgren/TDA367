@@ -9,7 +9,15 @@ import java.util.List;
 
 
 public class PlayerController {
-    private List<IObservers> observers = new ArrayList<>();
+    private List<IObservers> observers;
+
+    /**
+     * A constructor for PlayerController.
+     * Holds a list of observers that calls them to handle different actions.
+     */
+    public PlayerController(){
+        observers = new ArrayList<>();
+    }
 
     /**
      * Add an observer to the observer list

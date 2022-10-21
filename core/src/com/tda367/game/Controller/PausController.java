@@ -1,8 +1,6 @@
 package Controller;
 
-import Interfaces.IObservers;
 import Interfaces.IPaus;
-import View.PausView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
