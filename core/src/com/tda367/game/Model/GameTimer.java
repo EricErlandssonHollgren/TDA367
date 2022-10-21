@@ -40,9 +40,11 @@ public class GameTimer implements IPaus {
     }
 
     /**
-     * Resets the timer.
-     */
-    public void ResetTime() {timer = 0;}
+    * Resets the timer
+    */
+    public void resetTimer(){
+        this.timer = 0;
+    }
 
     @Override
     public void IsGamePaused(boolean isGamePaused) {

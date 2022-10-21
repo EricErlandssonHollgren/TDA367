@@ -79,6 +79,7 @@ public class TowerJUnitTest {
         Turret turret = new Turret();
         tower8.buildTurret(turret);
         GameTimer testTimer = GameTimer.GetInstance();
+        testTimer.resetTimer();
         testTimer.UpdateTime(5);
         tower8.fireTurrets();
         assertTrue(turret.getHasSpawned());
