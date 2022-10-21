@@ -55,13 +55,6 @@ public class Enemy extends Entity implements IPaus{
             positionX -= velocity;
         }
     }
-    /**
-     * Enemy's getDamage method
-     * @return damage to other objects
-     */
-    public int getDamage(){
-        return damage;
-    }
 
     /**
      * Enemy is able to take damage. For each time it is taking damage the health decrements.
@@ -85,6 +78,7 @@ public class Enemy extends Entity implements IPaus{
      */
     private void enemyDead(){
         EntityHolder.getInstance().removeEntity(this);
+        EntityHolder.getInstance().removeFireAttack(enemyAttack);
         goldHandler.handleRequest(new Request(HandlerItemDefiners.GOLD, worth));
         goldHandler.handleRequest(new Request(HandlerItemDefiners.POINTS, worth));
 

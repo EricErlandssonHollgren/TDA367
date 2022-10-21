@@ -1,3 +1,4 @@
+import Interfaces.IEnemyAttack;
 import Model.*;
 import org.junit.jupiter.api.Test;
 
@@ -83,20 +84,25 @@ public class EnemyTest {
     @Test
     public void EnemyIsDead() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
        EntityHolder.getInstance().addEntity(enemy);
+       EntityHolder.getInstance().addFireAttack(enemy.getEnemyAttack());
        PointHandler.addPoints(20);
        Goldhandler.addGold(20);
+
        int initialsizeOfEnemies = EntityHolder.getInstance().getEntities().size();
+       int initialsizeOfAttack = EntityHolder.getInstance().getEnemyAttacks().size();
        int initialPoints = PointHandler.getPoints();
        int initialGold = Goldhandler.getGold();
 
 
        testPrivateMethodUsingReflection();
        int enemiesAfter = EntityHolder.getInstance().getEntities().size();
+       int attackAfter = EntityHolder.getInstance().getEnemyAttacks().size();
        int pointsIsAdded = PointHandler.getPoints();
        int goldIsAdded = Goldhandler.getGold();
 
 
         assertTrue(initialsizeOfEnemies > enemiesAfter);
+        assertTrue(initialsizeOfAttack > attackAfter);
         assertTrue(initialPoints < pointsIsAdded);
         assertTrue(initialGold < goldIsAdded);
     }
