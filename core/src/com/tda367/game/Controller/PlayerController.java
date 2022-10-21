@@ -15,9 +15,7 @@ public class PlayerController {
      * A constructor for PlayerController.
      * Holds a list of observers that calls them to handle different actions.
      */
-    public PlayerController(){
-        observers = new ArrayList<>();
-    }
+    public PlayerController(){observers = new ArrayList<>();}
 
     /**
      * Add an observer to the observer list
