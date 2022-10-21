@@ -1,7 +1,11 @@
 import Interfaces.IProjectile;
-import Model.ProjectileFactory;
+import Model.*;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectileTest {
     @Test
@@ -10,5 +14,11 @@ public class ProjectileTest {
         p.move();
         p.move();
         assertTrue(p.getX() != 10 && p.getY() != 10);
+    }
+
+    @Test
+    public void cheackTexture(){
+        IProjectile p = ProjectileFactory.createCannonball(10,10,10,10,10);
+        assertSame( "Cannonball.png", p.getTexturePath());
     }
 }
