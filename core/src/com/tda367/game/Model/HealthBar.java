@@ -23,11 +23,6 @@ public class HealthBar  {
         positionY = y + entityHeight;
     }
 
-    public void updateEntitySize(float entityWidth, float entityHeight) {
-        this.entityWidth = entityWidth;
-        this.entityHeight = entityHeight;
-    }
-
     public void updateHealth(int currentHeahlth) {
         health = currentHeahlth;
     }

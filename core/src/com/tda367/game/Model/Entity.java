@@ -84,7 +84,6 @@ public abstract class Entity {
      * Will get the state for an entity
      * @return its state
      */
-
     public ActionEnum getState() {
         return state;
     }
@@ -101,7 +100,6 @@ public abstract class Entity {
      * Gets the y-coordinate of the object of float
      * @return y-coordinate of the object
      */
-
     public float getPosY(){
         return positionY;
     }
