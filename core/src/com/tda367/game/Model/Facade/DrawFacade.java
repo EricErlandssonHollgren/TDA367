@@ -1,26 +1,32 @@
 package Model.Facade;
 
+import Model.Entity;
 import Model.GameTimer;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class DrawFacade {
     private SpriteBatch batch;
     private Texture img;
     private ShapeRenderer shaperenderer;
     private double elapsedTime;
+    private BitmapFont font;
 
     /**
      * Constructor for the draw facade
      */
     public DrawFacade(){
-        batch = new SpriteBatch();
         shaperenderer = new ShapeRenderer();
+        this.font = new BitmapFont();
+        batch = new SpriteBatch();
+
     }
 
     /**
@@ -52,6 +58,12 @@ public class DrawFacade {
         batch.end();
     }
 
+    public void drawText(String str,float x, float y) {
+        batch.begin();
+        font.draw(batch,str, x,y);
+        batch.end();
+    }
+
     public void drawAnimation(Animation animation, float x, float y, float imgWidth, float imgHeight){
         elapsedTime = GameTimer.GetInstance().GetTime();
         batch.begin();
@@ -65,5 +77,9 @@ public class DrawFacade {
     public void dispose(){
         batch.dispose();
         img.dispose();
+    }
+
+    public Texture getTexture() {
+        return img;
     }
 }

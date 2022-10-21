@@ -20,7 +20,6 @@ public class PlayerView implements IView {
 
     public PlayerView(Player player){
         drawFacade = new DrawFacade();
-        idleAnimation();
         this.player = player;
         idleAnimation();
     }
@@ -45,18 +44,18 @@ public class PlayerView implements IView {
      * Determines wich of players animation should be active.
      */
     private void determinePlayerAnimation() {
-        if (player.getState() == ActionEnum.IDLE)
+        if (player.getState() == ActionEnum.DAMAGE)
+            hurtAnimation();
+        else if (player.getState() == ActionEnum.DYING)
+            dieAnimation();
+        else if (player.getState() == ActionEnum.ATTACKING)
+            attackAnimation();
+        else if (player.getState() == ActionEnum.IDLE)
             idleAnimation();
         else if (player.getState() == ActionEnum.LEFT)
             runningLeftAnimation();
         else if (player.getState() == ActionEnum.RIGHT)
             runningRightAnimation();
-        else if (player.getState() == ActionEnum.DYING)
-            dieAnimation();
-        else if (player.getState() == ActionEnum.DAMAGE)
-            hurtAnimation();
-        if (player.getState() == ActionEnum.ATTACKING)
-            attackAnimation();
     }
 
 

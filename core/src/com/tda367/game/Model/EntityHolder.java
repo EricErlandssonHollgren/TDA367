@@ -11,7 +11,11 @@ public class EntityHolder {
     private List<IProjectile> projectiles;
     private List<IEnemyAttack> enemyAttacks;
     private static EntityHolder instance;
-    private EntityHolder(){
+
+    /**
+     * Instantiate the arraylists for entities, projectiles and enemyAttacks,
+     */
+    public EntityHolder(){
         entities = new ArrayList<>();
         projectiles = new ArrayList<>();
         enemyAttacks = new ArrayList<>();
@@ -99,6 +103,15 @@ public class EntityHolder {
      */
     public void removeProjectile(IProjectile projectile){
         projectiles.remove(projectile);
+    }
+
+    /**
+     * Clear the arraylists for entities, projectiles och enemyAttacks.
+     */
+    public void clearAll() {
+        entities = new ArrayList<>();
+        projectiles = new ArrayList<>();
+        enemyAttacks = new ArrayList<>();
     }
 
 }

@@ -1,8 +1,11 @@
 package Model;
 
-public class GameTimer {
+import Interfaces.IPaus;
+
+public class GameTimer implements IPaus {
     private static GameTimer instance;
     private double timer;
+    private boolean isGamePaused = false;
     private GameTimer(){
         this.timer = 0;
     }
@@ -23,7 +26,9 @@ public class GameTimer {
      * @param deltaTime the difference in time
      */
     public void UpdateTime(double deltaTime){
-        timer += deltaTime;
+        if (!isGamePaused) {
+            timer += deltaTime;
+        }
     }
 
     /**
@@ -35,10 +40,14 @@ public class GameTimer {
     }
 
     /**
-     * Resets the timer
-     */
+    * Resets the timer
+    */
     public void resetTimer(){
         this.timer = 0;
     }
 
+    @Override
+    public void IsGamePaused(boolean isGamePaused) {
+        this.isGamePaused = isGamePaused;
+    }
 }

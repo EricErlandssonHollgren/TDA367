@@ -2,6 +2,7 @@ package Model;
 
 public class PointHandler extends MainHandler {
     private static int points = 200;
+    private GameTimer gameTimer;
 
     /**
      * Checks if the request is meant for this handler. If it's correct the handler will add the points.

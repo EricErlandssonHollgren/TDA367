@@ -118,4 +118,14 @@ public class EnemyTest {
         enemy.takeDamage(125);
         assertTrue(enemy.isdead());
     }
+
+    @Test
+    public void ClearEntityHolder() {
+        EntityHolder entityHolder = EntityHolder.getInstance();
+        entityHolder.addEntity(new Player(10,10,10,10,10));
+        int count = entityHolder.getEntities().size();
+        entityHolder.clearAll();
+        assertFalse(entityHolder.getEntities().size() == count);
+    }
+
 }

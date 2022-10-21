@@ -1,9 +1,10 @@
 package Model;
 import Interfaces.IObservers;
+import Interfaces.IPaus;
 import Interfaces.IReSpawnable;
 
 
-public class Player extends Entity implements IObservers, IReSpawnable {
+public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
     private static int damage = 25;
     private static final float velocity = 7;
     private boolean isAttacking;
@@ -14,6 +15,8 @@ public class Player extends Entity implements IObservers, IReSpawnable {
     private int maxHealth;
     private double timeAtDeath;
     private GameTimer gameTimer;
+    private boolean isGamePaused = false;
+    private MessageSender messageSender;
 
     /**
      * When creating a player it should have four parameters which will define
@@ -32,6 +35,7 @@ public class Player extends Entity implements IObservers, IReSpawnable {
         attackHitbox = new AttackHitbox(positionX+width,positionY);
         maxHealth = health;
         gameTimer = GameTimer.GetInstance();
+        messageSender = MessageSender.GetInstance();
     }
 
     /**
@@ -94,16 +98,20 @@ public class Player extends Entity implements IObservers, IReSpawnable {
      * @param damage is the input for dealing damage
      */
     public void takeDamage(int damage){
-        health -= damage;
-        updateHealthBar();
-        if(health <= 0){
-            playerDead();
+        if (!isGamePaused) {
+            health -= damage;
+            updateHealthBar();
+            if (health <= 0) {
+                playerDead();
+            }
         }
     }
 
     private void playerDead(){
-        timeAtDeath = GameTimer.GetInstance().GetTime();
-        isDead = true;
+        if (!isDead) {
+            timeAtDeath = GameTimer.GetInstance().GetTime();
+            isDead = true;
+        }
     }
 
     /**
@@ -136,22 +144,23 @@ public class Player extends Entity implements IObservers, IReSpawnable {
      */
     @Override
     public void actionHandle(ActionEnum action) {
-        updateState(action);
-        if(action == ActionEnum.LEFT){
-            moveLeft();
-            isAttacking = false;
+        if (!isGamePaused) {
+            updateState(action);
+            if (action == ActionEnum.LEFT) {
+                moveLeft();
+                isAttacking = false;
+            }
+            if (action == ActionEnum.RIGHT) {
+                moveRight();
+                isAttacking = false;
+            }
+            if (action == ActionEnum.ATTACKING) {
+                isAttacking = true;
+            } else if (action == ActionEnum.DYING) {
+                playerDead();
+                isAttacking = false;
+            }
         }
-        if(action == ActionEnum.RIGHT) {
-            moveRight();
-            isAttacking = false;
-        }
-        if(action == ActionEnum.ATTACKING) {
-            isAttacking = true;
-        } else if (action == ActionEnum.DYING) {
-            playerDead();
-            isAttacking = false;
-        }
-
     }
 
     /**
@@ -160,7 +169,16 @@ public class Player extends Entity implements IObservers, IReSpawnable {
      * @return true if the player is dead and the time is less than respawnCooldown
      */
     public boolean canRespawn(double respawnColdown) {
-        return isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown;
+        if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
+            return true;
+        }
+        else if (isDead) {
+            messageSender.sendMessage(String.valueOf((int)(respawnColdown - (gameTimer.GetTime() - timeAtDeath))) + "seconds until respawn is available");
+        }
+        else {
+            messageSender.sendMessage("Player is not dead");
+        }
+        return false;
     }
 
     /**
@@ -174,6 +192,16 @@ public class Player extends Entity implements IObservers, IReSpawnable {
             health = maxHealth;
             isDead = false;
             updateHealthBar();
+            messageSender.sendMessage("Respawned");
         }
+    }
+
+    /**
+     *
+     * @param isGamePaused
+     */
+    @Override
+    public void IsGamePaused(boolean isGamePaused) {
+        this.isGamePaused = isGamePaused;
     }
 }

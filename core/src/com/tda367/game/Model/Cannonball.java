@@ -1,11 +1,13 @@
 package Model;
 
+import Interfaces.IPaus;
 import Interfaces.IProjectile;
 
-public class Cannonball implements IProjectile {
+public class Cannonball implements IProjectile, IPaus {
     private float x,y,vx,vy,gravity, radius;
     private final int damage;
     private String texturePath;
+    private boolean IsGamePaused = false;
 
     /**
      * Constructor for Cannonball
@@ -62,8 +64,16 @@ public class Cannonball implements IProjectile {
 
     @Override
     public void move(){
-        vy += gravity;
-        x += vx;
-        y += vy;
+        if (!IsGamePaused){
+            vy += gravity;
+            x += vx;
+            y += vy;
+        }
+
+    }
+
+    @Override
+    public void IsGamePaused(boolean isGamePaused) {
+        this.IsGamePaused = isGamePaused;
     }
 }

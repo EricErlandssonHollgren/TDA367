@@ -8,11 +8,13 @@ import Model.*;
  */
 
 
-public class Enemy extends Entity{
+public class Enemy extends Entity implements IPaus{
 
     private int worth;
     public final IEnemyAttack enemyAttack;
     private int damage;
+    private boolean isAttacking;
+    private boolean isGamePaused = false;
     private double velocity;
     private MainHandler goldHandler;
     private MainHandler pointsHandler;
@@ -48,8 +50,10 @@ public class Enemy extends Entity{
      * moves the enemy in x-direction with a change of value that is set in the constructor.
      */
     public void moveEnemy() {
-        enemyAttack.move(velocity);
-        positionX -= velocity;
+        if (!isGamePaused) {
+            enemyAttack.move(velocity);
+            positionX -= velocity;
+        }
     }
     /**
      * Enemy's getDamage method
@@ -66,10 +70,12 @@ public class Enemy extends Entity{
      */
 
     public void takeDamage(int damage) {
-        health -= damage;
-        if(health <= 0){
-            enemyDead();
-            isDead = true;
+        if (!isGamePaused) {
+            health -= damage;
+            if (health <= 0) {
+                enemyDead();
+                isDead = true;
+            }
         }
     }
 
@@ -84,4 +90,8 @@ public class Enemy extends Entity{
 
     }
 
+    @Override
+    public void IsGamePaused(boolean isGamePaused) {
+        this.isGamePaused = isGamePaused;
+    }
 }

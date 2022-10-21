@@ -22,8 +22,8 @@ public class PlayerController {
 
     /**
      * UpdatePlayerPosition listens to inputs depending on which key is pressed.
-     * When being listened it tells the player to either use moveLeft()-
-     * or moveRight()-method.
+     * When being listened it tells the player to either attack, moveLeft()
+     * or moveRight(). The action also sets the state of the player.
      */
     public void UpdatePlayerMovement(){
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){

@@ -24,6 +24,8 @@ public class ViewHolder {
         views.add(view);
     }
 
+    public void removeAllViews() {views = new ArrayList<>();}
+
     /**
      * Renders the views in ViewHolders list.
      */
