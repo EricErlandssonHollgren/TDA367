@@ -18,7 +18,6 @@ public class MessageView implements IView, IMessageSubscriber {
         clickedTime = 10f;
         gameTimer = GameTimer.GetInstance();
         facade = new DrawFacade();
-        System.out.println("here");
     }
 
     @Override
