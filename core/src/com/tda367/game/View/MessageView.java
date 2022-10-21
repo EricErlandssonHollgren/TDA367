@@ -17,10 +17,11 @@ public class MessageView implements IView, IMessageSubscriber {
     private double messageTime, clickedTime;
 
     public MessageView() {
-        facade = new DrawFacade();
         message = null;
-        gameTimer = GameTimer.GetInstance();
         clickedTime = 10f;
+        gameTimer = GameTimer.GetInstance();
+        facade = new DrawFacade();
+        System.out.println("here");
     }
 
     @Override
@@ -42,6 +43,10 @@ public class MessageView implements IView, IMessageSubscriber {
     public void UpdateMessage(String message) {
         this.message = message;
         messageTime = gameTimer.GetTime();
+    }
+
+    public String getMessage(){
+        return message;
     }
 
 }

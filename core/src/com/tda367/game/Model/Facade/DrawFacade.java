@@ -18,15 +18,14 @@ public class DrawFacade {
     private ShapeRenderer shaperenderer;
     private double elapsedTime;
     private BitmapFont font;
-    private boolean showTextureRegion = true;
 
     /**
      * Constructor for the draw facade
      */
     public DrawFacade(){
-        batch = new SpriteBatch();
         shaperenderer = new ShapeRenderer();
         this.font = new BitmapFont();
+        batch = new SpriteBatch();
 
     }
 

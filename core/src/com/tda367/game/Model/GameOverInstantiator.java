@@ -33,7 +33,6 @@ public class GameOverInstantiator {
      *  Notify all subscribers to update.
      */
     public void updateGameOverSubscribers() {
-        System.out.println(gameOverSubscriberList.size());
         for (IGameOverSubscriber subscriber : gameOverSubscriberList) {
             subscriber.updateScreen();
         }

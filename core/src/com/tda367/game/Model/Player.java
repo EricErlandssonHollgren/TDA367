@@ -169,7 +169,6 @@ public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
      * @return true if the player is dead and the time is less than respawnCooldown
      */
     public boolean canRespawn(double respawnColdown) {
-        return isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown;
         if (isDead && gameTimer.GetTime() - timeAtDeath > respawnColdown) {
             return true;
         }
@@ -197,6 +196,10 @@ public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
         }
     }
 
+    /**
+     *
+     * @param isGamePaused
+     */
     @Override
     public void IsGamePaused(boolean isGamePaused) {
         this.isGamePaused = isGamePaused;

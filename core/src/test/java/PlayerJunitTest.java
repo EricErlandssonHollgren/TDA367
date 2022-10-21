@@ -88,13 +88,23 @@ public class PlayerJunitTest {
     }
 
     @Test
-    public void playerDoesNotRespawn(){
+    public void playerIsDeadAndDoesNotRespawn(){
         Player player = new Player(200, 100, 50, 37,125);
         player.takeDamage(126);
         GameTimer.GetInstance().UpdateTime(2);
         player.respawn(5);
         assertTrue(player.isdead());
     }
+
+    @Test
+    public void playerIsAliveAndDoesNotSpawn(){
+        Player player = new Player(200, 100, 50, 37,125);
+        player.canRespawn(5);
+        assertFalse(player.isdead());
+    }
+
+
+
 
     @Test
     public void testStates(){

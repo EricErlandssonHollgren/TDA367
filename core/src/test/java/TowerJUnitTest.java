@@ -26,7 +26,7 @@ public class TowerJUnitTest {
     @Test
     public void testTowerHasSpecifiedHealth() {
         Tower tower3 = new Tower(new Goldhandler());
-        assertEquals(500, tower3.getHealth());
+        assertEquals(400, tower3.getHealth());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class TowerJUnitTest {
         tower6.actionHandle(ActionEnum.BUILD);
         assertEquals(2, tower6.getLevel());
         assertEquals(2, tower6.getTurrets().size());
-        assertEquals(700, tower6.getHealth());
+        assertEquals(600, tower6.getHealth());
     }
 
     @Test
