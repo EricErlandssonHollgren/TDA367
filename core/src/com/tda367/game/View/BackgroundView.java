@@ -5,6 +5,10 @@ import Model.Facade.DrawFacade;
 
 public class BackgroundView implements IView {
     private DrawFacade drawFacade;
+
+    /**
+     * A constructor for the view of the background of the application.
+     */
     public BackgroundView(){
         drawFacade = new DrawFacade();
         drawFacade.setTexture("Game_Background_175.png");
