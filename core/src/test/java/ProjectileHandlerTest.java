@@ -1,6 +1,7 @@
 import Interfaces.IProjectile;
 import Model.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class ProjectileHandlerTest {
     private static GameTimer timer;
     private static ProjectileHandler ph;
 
-    @BeforeAll
-    public static void init(){
+    @BeforeEach
+    public void init(){
         eh = EntityHolder.getInstance();
         cd = CollisionDetection.getInstance();
         timer = GameTimer.GetInstance();
