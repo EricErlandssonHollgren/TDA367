@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProjectileHandlerTest {
     private static EntityHolder eh;
@@ -20,6 +22,10 @@ public class ProjectileHandlerTest {
         cd = CollisionDetection.getInstance();
         timer = GameTimer.GetInstance();
         ph = new ProjectileHandler(eh,cd,timer);
+        //Reset entityHolder
+        for (IProjectile p: eh.getProjectiles()) {
+            eh.removeProjectile(p);
+        }
     }
 
     @Test
@@ -29,20 +35,18 @@ public class ProjectileHandlerTest {
     }
 
     @Test
-    public void ProjectilesAreBeingRemovedAfterUpdating(){
-        IProjectile p = ProjectileFactory.createCannonball(10,10,10,10,10);
-        ProjectileHandler handler = new ProjectileHandler(EntityHolder.getInstance(), CollisionDetection.getInstance(),GameTimer.GetInstance());
+    public void updateProjectilesTest(){
+        IProjectile p1 = ProjectileFactory.createCannonball(1,1,1,1,1);
+        IProjectile p2 = ProjectileFactory.createCannonball(1,1,1,1,1);
 
-        EntityHolder.getInstance().addProjectile(p);
-        List<IProjectile> projectileGround = cd.checkCollisionProjectileGround();
-        Map<Entity,IProjectile> projectileEnemy = cd.checkCollisionProjectileAndEnemy();
+        Map<Entity, IProjectile> input1 = new HashMap<>();
+        List<IProjectile> input2 = new ArrayList<>();
 
-        cd.checkCollisionProjectileGround();
-        cd.checkCollisionProjectileAndEnemy();
-        handler.updateProjectiles(projectileEnemy, projectileGround);
+        input1.put(new Enemy(1,1,1,null,1),p1);
+        input2.add(p2);
 
-        assertFalse(EntityHolder.getInstance().getProjectiles().contains(p));
+        ph.updateProjectiles(input1,input2);
 
-
+        assertEquals(0,eh.getProjectiles().size());
     }
 }
