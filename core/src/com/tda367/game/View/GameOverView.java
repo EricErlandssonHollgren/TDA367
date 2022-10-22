@@ -28,7 +28,6 @@ public class GameOverView extends ScreenAdapter {
 
     /**
      * Constructs the gameover view
-     *
      */
     public GameOverView() {
         facade = new DrawFacade();

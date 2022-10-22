@@ -19,15 +19,14 @@ public class MainMenuView extends ScreenAdapter {
     private ImageButton QuitButton;
     private Stage stage;
 
+    /**
+     * Constructs the main menu view.
+     */
     public MainMenuView() {
         System.out.println("here");
         facade = new DrawFacade();
         facade.setTexture("title.png");
         this.stage = new Stage(new ScreenViewport());
-    }
-
-    @Override
-    public void show(){
         createPlayButton();
         createQuitButton();
         addListeners();
@@ -36,9 +35,12 @@ public class MainMenuView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Renders the main menu
+     * @param delta
+     */
     @Override
     public void render(float delta) {
-        System.out.println("rendering");
         Gdx.gl.glClearColor(0, .25f, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         facade.drawObject(Gdx.graphics.getWidth() * .5f - facade.getTexture().getWidth()*0.3f/2, Gdx.graphics.getHeight() * .65f, facade.getTexture().getWidth()*0.3f, facade.getTexture().getHeight()*0.3f);
@@ -53,7 +55,6 @@ public class MainMenuView extends ScreenAdapter {
     @Override
     public void dispose() {
         stage.dispose();
-
     }
 
     private TextureRegionDrawable getTxrDrawable(Texture tx){

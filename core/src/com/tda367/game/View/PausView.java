@@ -62,9 +62,7 @@ public class PausView implements IView, IPaus {
     }
 
     @Override
-    public void dispose() {
-
-    }
+    public void dispose() {}
 
     private void createQuitButton() {
         Texture textureQuitButton = new Texture("quit button.png");
@@ -90,6 +88,7 @@ public class PausView implements IView, IPaus {
         this.PlayAgain.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
             }
         });
 

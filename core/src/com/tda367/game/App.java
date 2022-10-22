@@ -6,8 +6,6 @@ import com.badlogic.gdx.Game;
 
 
 public class App extends Game {
-
-
 	/**
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
@@ -16,10 +14,10 @@ public class App extends Game {
 		this.setScreen(new MainMenuView());
 	}
 
+	/**
+	 * Renders the game
+	 */
 	public void render() {
 		super.render();
 	}
-
-
-
 }

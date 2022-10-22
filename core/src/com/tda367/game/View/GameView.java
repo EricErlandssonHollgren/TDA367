@@ -38,13 +38,13 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
     private MessageSender messageSender;
     private GameOverInstantiator gameOverInstantiator;
 
-    public GameView() {
-        createWorld();
-    }
 
     /**
      * Creates the game when first constructed.
      */
+    public GameView() {
+        createWorld();
+    }
 
 
     private void createWorld( ){
@@ -118,7 +118,10 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
 
     }
 
-
+    /**
+     * Renders the world and updates components.
+     * @param delta
+     */
     @Override
     public void render(float delta) {
         timer.UpdateTime(Gdx.graphics.getDeltaTime());
