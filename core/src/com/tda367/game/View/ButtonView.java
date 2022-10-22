@@ -24,7 +24,6 @@ public class ButtonView implements IView {
     private TowerController controller;
     private PlayerSpawnController playerSpawnController;
     private Tower tower;
-    private Player player;
     private ImageButton upgradeButtonTower;
     private ImageButton upgradeButtonTurret;
     private ImageButton upgradeButtonTurret2;
@@ -38,12 +37,12 @@ public class ButtonView implements IView {
       * This creates buttons that when clicked, upgrades Tower with Turrets and upgrades them.
       * @param towerController, the controller that is notified when a specific button is clicked.
       * @param tower, the object that is viewed. Depending on it, different buttons are rendered.
+      * @param playerSpawnController, the controller that tells the player to respawn
       */
-    public ButtonView(TowerController towerController, Tower tower, PlayerSpawnController playerSpawnController, Player player) {
+    public ButtonView(TowerController towerController, Tower tower, PlayerSpawnController playerSpawnController) {
         this.controller = towerController;
         this.tower = tower;
         this.playerSpawnController = playerSpawnController;
-        this.player = player;
         initButtons();
         addListeners();
 

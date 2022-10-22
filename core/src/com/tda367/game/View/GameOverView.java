@@ -1,7 +1,9 @@
 package View;
 
+import Interfaces.IObservers;
+import Model.ActionEnum;
 import Model.Facade.DrawFacade;
-import Model.GameTimer;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
@@ -14,24 +16,29 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.tda367.game.App;
 
 public class GameOverView extends ScreenAdapter {
 
-    private final App game;
     private Stage stage;
     private ImageButton PlayAgain;
     private ImageButton QuitButton;
     private DrawFacade facade;
 
-    public GameOverView(App game) {
+
+
+    /**
+     * Constructs the gameover view
+     *
+     */
+    public GameOverView() {
         facade = new DrawFacade();
         facade.setTexture("gameOver.png");
-
-        this.game = game;
         this.stage = new Stage(new ScreenViewport());
     }
 
+    /**
+     * Creates all buttons when the gameOverView is constructing.
+     */
     @Override
     public void show(){
         createPlayAgainButton();
@@ -42,11 +49,12 @@ public class GameOverView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
     }
 
+
     private void addListeners() {
         this.PlayAgain.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                game.setScreen((Screen) new GameView(game));
+                ((Game)Gdx.app.getApplicationListener()).setScreen((Screen) new GameView());
             }
         });
 
@@ -81,9 +89,7 @@ public class GameOverView extends ScreenAdapter {
     }
 
     @Override
-    public void dispose() {
-
-    }
+    public void dispose() {}
 
     private TextureRegionDrawable getTxrDrawable(Texture tx){
         TextureRegion txR = new TextureRegion(tx);

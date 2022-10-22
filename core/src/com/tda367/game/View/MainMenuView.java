@@ -11,21 +11,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.tda367.game.App;
 
 public class MainMenuView extends ScreenAdapter {
 
-    private final App game;
     private DrawFacade facade;
     private ImageButton StartButton;
     private ImageButton QuitButton;
     private Stage stage;
 
-
-    public MainMenuView(App game) {
+    public MainMenuView() {
+        System.out.println("here");
         facade = new DrawFacade();
         facade.setTexture("title.png");
-        this.game = game;
         this.stage = new Stage(new ScreenViewport());
     }
 
@@ -41,6 +38,7 @@ public class MainMenuView extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        System.out.println("rendering");
         Gdx.gl.glClearColor(0, .25f, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         facade.drawObject(Gdx.graphics.getWidth() * .5f - facade.getTexture().getWidth()*0.3f/2, Gdx.graphics.getHeight() * .65f, facade.getTexture().getWidth()*0.3f, facade.getTexture().getHeight()*0.3f);
@@ -81,7 +79,9 @@ public class MainMenuView extends ScreenAdapter {
         this.StartButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                game.setScreen((Screen) new GameView(game));
+
+                ((Game)Gdx.app.getApplicationListener()).setScreen((Screen) new GameView());
+
             }
         });
 
@@ -92,7 +92,6 @@ public class MainMenuView extends ScreenAdapter {
             }
         });
     }
-
 }
 
 

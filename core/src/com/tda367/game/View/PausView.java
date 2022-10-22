@@ -21,6 +21,9 @@ public class PausView implements IView, IPaus {
     private ImageButton PlayAgain;
     public boolean isGamePaused = false;
 
+    /**
+     * Constructs the PauseView.
+     */
     public PausView() {
         this.stage = new Stage(new ScreenViewport());
         facade = new DrawFacade();
@@ -28,6 +31,9 @@ public class PausView implements IView, IPaus {
         create();
     }
 
+    /**
+     * Creates the components for the PausView
+     */
     public void create() {
         createPlayAgainButton();
         createQuitButton();
@@ -37,6 +43,9 @@ public class PausView implements IView, IPaus {
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Renders the pausemenu if the game is paused.
+     */
     @Override
     public void render() {
         if (isGamePaused) {
