@@ -1,7 +1,7 @@
-# TDA367
-Project for course TDA367
+# Decennium of fight
 
-**Git:**\
-When developing a new feature create a new branch for that feature and use pull requests. **Do not develop in main branch**\
-**Naming conventions for new feature branch:** numberofuserstory/featureyouareworkingon \
-**Commits** should provide a breif description of what you have done
+<h2>How to run the game:</h2>
+- Install gradle https://gradle.org/install/<br>
+- Clone the directory<br>
+- Use the terminal and go to TDA367<br>
+- Use the command gradle run<br>
