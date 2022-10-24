@@ -23,7 +23,6 @@ public class MainMenuView extends ScreenAdapter {
      * Constructs the main menu view.
      */
     public MainMenuView() {
-        System.out.println("here");
         facade = new DrawFacade();
         facade.setTexture("title.png");
         this.stage = new Stage(new ScreenViewport());
@@ -49,7 +48,6 @@ public class MainMenuView extends ScreenAdapter {
 
     @Override
     public void hide(){
-        Gdx.input.setInputProcessor(null);
     }
 
     @Override
@@ -80,9 +78,7 @@ public class MainMenuView extends ScreenAdapter {
         this.StartButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-
                 ((Game)Gdx.app.getApplicationListener()).setScreen((Screen) new GameView());
-
             }
         });
 

@@ -100,6 +100,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         pausController.addSubscribers((IPaus) player);
         pausController.addSubscribers((IPaus) timer);
         pausController.addSubscribers((IPaus) wave);
+        pausController.addSubscribers((IPaus) buttonView);
 
         //Add views to list and they will be rendered. Views must implement IView
         views = new ViewHolder();
@@ -113,8 +114,9 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         views.addView(healthBarView);
         views.addView(projectileView);
         views.addView(messageView);
-        views.addView(pausView);
         views.addView(buttonView);
+        views.addView(pausView);
+
 
     }
 

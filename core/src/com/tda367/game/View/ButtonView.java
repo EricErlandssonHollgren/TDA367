@@ -2,6 +2,7 @@ package View;
 
 import Controller.PlayerSpawnController;
 import Controller.TowerController;
+import Interfaces.IPaus;
 import Model.Player;
 import Model.Tower;
 import Interfaces.IView;
@@ -20,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
   * @author Eric Erlandsson Hollgren <eric.e.hollgren@gmail.com>
  */
 
-public class ButtonView implements IView {
+public class ButtonView implements IView, IPaus {
     private TowerController controller;
     private PlayerSpawnController playerSpawnController;
     private Tower tower;
@@ -160,4 +161,18 @@ public class ButtonView implements IView {
     public void dispose() {
         stage.dispose();
     }
-}
+
+     @Override
+     public void IsGamePaused(boolean isGamePaused) {
+        if (!isGamePaused){
+            addListeners();
+            this.stage = new Stage(new ScreenViewport());
+            stage.addActor(upgradeButtonTower);
+            stage.addActor(upgradeButtonTurret);
+            stage.addActor(upgradeButtonTurret2);
+            stage.addActor(buildButtonTurret);
+            stage.addActor(respawnPlayerButton);
+            Gdx.input.setInputProcessor(stage);
+        }
+     }
+ }

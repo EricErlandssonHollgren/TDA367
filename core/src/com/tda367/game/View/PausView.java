@@ -3,6 +3,7 @@ package View;
 import Interfaces.IPaus;
 import Interfaces.IView;
 import Model.Facade.DrawFacade;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class PausView implements IView, IPaus {
-    private final Stage stage;
+    private Stage stage;
     DrawFacade facade;
     private ImageButton QuitButton;
     private ImageButton PlayAgain;
@@ -25,10 +26,16 @@ public class PausView implements IView, IPaus {
      * Constructs the PauseView.
      */
     public PausView() {
+        createPlayAgainButton();
+        createQuitButton();
+        addListeners();
         this.stage = new Stage(new ScreenViewport());
+        stage.addActor(PlayAgain);
+        stage.addActor(QuitButton);
+        Gdx.input.setInputProcessor(stage);
+
         facade = new DrawFacade();
         facade.setTexture("paus.png");
-        create();
     }
 
     /**
@@ -38,6 +45,7 @@ public class PausView implements IView, IPaus {
         createPlayAgainButton();
         createQuitButton();
         addListeners();
+        stage = new Stage(new ScreenViewport());
         stage.addActor(PlayAgain);
         stage.addActor(QuitButton);
         Gdx.input.setInputProcessor(stage);
@@ -51,18 +59,17 @@ public class PausView implements IView, IPaus {
         if (isGamePaused) {
             facade.drawObject(Gdx.graphics.getWidth() * 0.5f - 200, Gdx.graphics.getHeight() * 0.5f - 200, 400, 400);
             facade.drawText("Game Paused", 270, 350);
-            QuitButton.setVisible(true);
-            PlayAgain.setVisible(true);
             stage.draw();
-        }
-        else {
-            QuitButton.setVisible(false);
-            PlayAgain.setVisible(false);
         }
     }
 
+    /**
+     * Disposes any buttons rendered.
+     */
     @Override
-    public void dispose() {}
+    public void dispose() {
+        //stage.dispose();
+    }
 
     private void createQuitButton() {
         Texture textureQuitButton = new Texture("quit button.png");
@@ -88,7 +95,7 @@ public class PausView implements IView, IPaus {
         this.PlayAgain.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
+                ((Game)Gdx.app.getApplicationListener()).setScreen((Screen) new GameView());
             }
         });
 
@@ -100,9 +107,11 @@ public class PausView implements IView, IPaus {
         });
     }
 
-
     @Override
     public void IsGamePaused(boolean isGamePaused) {
         this.isGamePaused = isGamePaused;
+        if (isGamePaused){
+            create();
+        }
     }
 }
