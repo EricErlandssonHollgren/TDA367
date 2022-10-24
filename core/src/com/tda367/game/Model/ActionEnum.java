@@ -13,5 +13,8 @@ public enum ActionEnum {
     ATTACKING,
     IDLE,
     DYING,
-    DAMAGE
+    DAMAGE,
+    MAINMENU,
+    GAMUVIEW,
+    GAMEOVER
 }

@@ -13,6 +13,9 @@ public class MessageView implements IView, IMessageSubscriber {
     private GameTimer gameTimer;
     private double messageTime, clickedTime;
 
+    /**
+     *  Creates the view for the messeges.
+     */
     public MessageView() {
         message = null;
         clickedTime = 10f;
@@ -20,6 +23,9 @@ public class MessageView implements IView, IMessageSubscriber {
         facade = new DrawFacade();
     }
 
+    /**
+     * Renders a message if there is a message.
+     */
     @Override
     public void render() {
         if (message != null && gameTimer.GetTime() - messageTime <= 2 ) {
@@ -31,10 +37,12 @@ public class MessageView implements IView, IMessageSubscriber {
     }
 
     @Override
-    public void dispose() {
+    public void dispose() {}
 
-    }
-
+    /**
+     * Updates the current message
+     * @param message A string
+     */
     @Override
     public void UpdateMessage(String message) {
         this.message = message;

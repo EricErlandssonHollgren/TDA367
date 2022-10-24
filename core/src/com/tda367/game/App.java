@@ -10,15 +10,14 @@ public class App extends Game {
 	 * Initialises the model in the startup configuration, is called when the application starts
 	 */
 	@Override
-	public void create () {
-		setScreen(new MainMenuView(this));
+	public void create() {
+		this.setScreen(new MainMenuView());
 	}
 
 	/**
-	 * Called 60 times per second, renders the application
+	 * Renders the game
 	 */
-	@Override
-	public void render () {
+	public void render() {
 		super.render();
 
 	}

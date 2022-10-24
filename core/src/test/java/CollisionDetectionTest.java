@@ -296,6 +296,17 @@ public class CollisionDetectionTest {
         assertFalse(playerAndFireAttackCollidingMethod(player, attack));
     }
 
+    @Test
+    public void attackhitboxTests() {
+        AttackHitbox attackHitbox = new AttackHitbox(10,20);
+        attackHitbox.setX(20);
+        attackHitbox.setY(30);
+        assertTrue(attackHitbox.getX() == 20);
+        assertTrue(attackHitbox.getY() == 30);
+        assertTrue(attackHitbox.getWidth() == 120);
+        assertTrue(attackHitbox.getHeight() == 37);
+    }
+
     /*
     These methods are used to be able to reach a private method.
      */

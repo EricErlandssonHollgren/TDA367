@@ -71,6 +71,25 @@ public class EnemyTest {
         double nrOfEnemiesAtEnd =  EntityHolder.getInstance().getEntities().size();
         assertTrue(nrOfEnemiesAtStart < nrOfEnemiesAtEnd);
     }
+
+    @Test void testEnemiesNotToRender() {
+        double nrOfEnemiesAtStart = EntityHolder.getInstance().getEntities().size();
+        timer.resetTimer();
+        timer.UpdateTime(9);
+        wave.getEnemiesToRender();
+        double enemiesAtFiveSeconds =  EntityHolder.getInstance().getEntities().size();
+        assertTrue(nrOfEnemiesAtStart == enemiesAtFiveSeconds);
+    }
+
+/*
+    @Test
+    public void testEnemiesToRender() {
+        d
+    }
+
+ */
+
+
     @Test
     public void enemyTakeDamage(){
         int initialHealth = enemy.getHealth();

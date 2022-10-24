@@ -196,10 +196,6 @@ public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
         }
     }
 
-    /**
-     *
-     * @param isGamePaused
-     */
     @Override
     public void IsGamePaused(boolean isGamePaused) {
         this.isGamePaused = isGamePaused;

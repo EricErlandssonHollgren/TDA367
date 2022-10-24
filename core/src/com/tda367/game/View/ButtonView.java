@@ -2,6 +2,7 @@ package View;
 
 import Controller.PlayerSpawnController;
 import Controller.TowerController;
+import Interfaces.IPaus;
 import Model.Player;
 import Model.Tower;
 import Interfaces.IView;
@@ -20,11 +21,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
   * @author Eric Erlandsson Hollgren <eric.e.hollgren@gmail.com>
  */
 
-public class ButtonView implements IView {
+public class ButtonView implements IView, IPaus {
     private TowerController controller;
     private PlayerSpawnController playerSpawnController;
     private Tower tower;
-    private Player player;
     private ImageButton upgradeButtonTower;
     private ImageButton upgradeButtonTurret;
     private ImageButton upgradeButtonTurret2;
@@ -38,12 +38,12 @@ public class ButtonView implements IView {
       * This creates buttons that when clicked, upgrades Tower with Turrets and upgrades them.
       * @param towerController, the controller that is notified when a specific button is clicked.
       * @param tower, the object that is viewed. Depending on it, different buttons are rendered.
+      * @param playerSpawnController, the controller that tells the player to respawn
       */
-    public ButtonView(TowerController towerController, Tower tower, PlayerSpawnController playerSpawnController, Player player) {
+    public ButtonView(TowerController towerController, Tower tower, PlayerSpawnController playerSpawnController) {
         this.controller = towerController;
         this.tower = tower;
         this.playerSpawnController = playerSpawnController;
-        this.player = player;
         initButtons();
         addListeners();
 
@@ -161,4 +161,18 @@ public class ButtonView implements IView {
     public void dispose() {
         stage.dispose();
     }
-}
+
+     @Override
+     public void IsGamePaused(boolean isGamePaused) {
+        if (!isGamePaused){
+            addListeners();
+            this.stage = new Stage(new ScreenViewport());
+            stage.addActor(upgradeButtonTower);
+            stage.addActor(upgradeButtonTurret);
+            stage.addActor(upgradeButtonTurret2);
+            stage.addActor(buildButtonTurret);
+            stage.addActor(respawnPlayerButton);
+            Gdx.input.setInputProcessor(stage);
+        }
+     }
+ }

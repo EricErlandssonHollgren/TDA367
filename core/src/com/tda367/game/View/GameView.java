@@ -1,26 +1,27 @@
 package View;
 
-import Controller.PausController;
-import Controller.PlayerController;
-import Controller.PlayerSpawnController;
-import Controller.TowerController;
+import Controller.*;
 import Interfaces.*;
 import Model.*;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tda367.game.App;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
 public class GameView extends ScreenAdapter implements IGameOverSubscriber {
-    private final App game;
+    private SpriteBatch batch;
     private GameTimer timer;
     private ViewHolder views;
     private Player player;
+    private RoundHandler roundHandler;
     private MainHandler goldHandler;
     private MainHandler pointsHandler;
     private Tower tower;
@@ -37,13 +38,14 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
     private MessageSender messageSender;
     private GameOverInstantiator gameOverInstantiator;
 
-    public GameView(App game) {
-        this.game = game;
-    }
 
-    public void show () {
+    /**
+     * Creates the game when first constructed.
+     */
+    public GameView() {
         createWorld();
     }
+
 
     private void createWorld( ){
         //Objects
@@ -73,7 +75,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         playerSpawnController = new PlayerSpawnController();
         towerController = new TowerController();
         towerController.addSubscribers(tower);
-        projectileHandler = new ProjectileHandler(entityHolder);
+        projectileHandler = new ProjectileHandler(entityHolder,collisionDetection,timer);
         playerSpawnController = new PlayerSpawnController();
         playerSpawnController.addSubscribers((IReSpawnable) player);
         pausController = new PausController();
@@ -90,7 +92,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         IView projectileView = new ProjectileView(projectileHandler);
         IView messageView = new MessageView();
         IView pausView = new PausView();
-        IView buttonView = new ButtonView(towerController, tower, playerSpawnController, player);
+        IView buttonView = new ButtonView(towerController, tower, playerSpawnController);
 
         messageSender.addSubscribers((IMessageSubscriber) messageView);
         gameOverInstantiator.addSubscribers(this);
@@ -98,6 +100,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         pausController.addSubscribers((IPaus) player);
         pausController.addSubscribers((IPaus) timer);
         pausController.addSubscribers((IPaus) wave);
+        pausController.addSubscribers((IPaus) buttonView);
 
         //Add views to list and they will be rendered. Views must implement IView
         views = new ViewHolder();
@@ -111,15 +114,18 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         views.addView(healthBarView);
         views.addView(projectileView);
         views.addView(messageView);
-        views.addView(pausView);
         views.addView(buttonView);
+        views.addView(pausView);
+
 
     }
 
-
+    /**
+     * Renders the world and updates components.
+     * @param delta
+     */
     @Override
     public void render(float delta) {
-
         timer.UpdateTime(Gdx.graphics.getDeltaTime());
 
         collisionDetection.CheckCollisionPlayerAndEnemy(player);
@@ -143,10 +149,9 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         for (IProjectile projectile : entityHolder.getProjectiles()) {
             pausController.addSubscribers((IPaus) projectile);
         }
-
-
         views.render();
     }
+
 
     @Override
     public void dispose() {
@@ -156,7 +161,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
     @Override
     public void updateScreen() {
         updateWorld();
-        game.setScreen((Screen) new GameOverView(game));
+        ((Game)Gdx.app.getApplicationListener()).setScreen((Screen) new GameOverView());
     }
 
     private void updateWorld() {
