@@ -2,7 +2,7 @@ package View;
 
 import Interfaces.IMessageSubscriber;
 import Interfaces.IView;
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 import Model.GameTimer;
 import com.badlogic.gdx.Gdx;
 

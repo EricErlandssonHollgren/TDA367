@@ -2,7 +2,6 @@ package View;
 
 import Interfaces.IGameOverSubscriber;
 import Interfaces.IMessageSubscriber;
-import Interfaces.IView;
 
 /**
  * A view to test the observers

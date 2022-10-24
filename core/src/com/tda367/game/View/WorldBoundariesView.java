@@ -2,7 +2,7 @@ package View;
 
 import Interfaces.IView;
 import Model.Block;
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 import Model.WorldBoundaries;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;

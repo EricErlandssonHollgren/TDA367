@@ -1,8 +1,6 @@
 package View;
 
-import Interfaces.IObservers;
-import Model.ActionEnum;
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

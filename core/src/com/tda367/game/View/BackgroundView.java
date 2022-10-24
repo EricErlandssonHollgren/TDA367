@@ -1,7 +1,7 @@
 package View;
 
 import Interfaces.IView;
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 
 public class BackgroundView implements IView {
     private DrawFacade drawFacade;

@@ -1,6 +1,5 @@
 package Controller;
 
-import Interfaces.IObservers;
 import Interfaces.IReSpawnable;
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package View;
 import Model.ProjectileHandler;
 import Interfaces.IProjectile;
 import Interfaces.IView;
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 
 public class ProjectileView implements IView{
 

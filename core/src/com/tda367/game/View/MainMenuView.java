@@ -1,6 +1,6 @@
 package View;
 
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
