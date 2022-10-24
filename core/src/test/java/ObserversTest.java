@@ -25,7 +25,7 @@ public class ObserversTest {
         IMessageSubscriber messageSubscriber = new ObserverTestView();
         messageSender.addSubscribers(messageSubscriber);
         Goldhandler gh = new Goldhandler();
-        gh.handleRequest(new Request(HandlerItemDefiners.GOLD, -1000));
+        gh.handleRequest(new Request(HandlerItemDefiners.GOLD, -10000));
         Tower tower = new Tower(gh);
         tower.upgrade();
         assertTrue(((ObserverTestView)messageSubscriber).getMessage() == "Not enough gold");
