@@ -7,26 +7,20 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.tda367.game.App;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 
 public class GameView extends ScreenAdapter implements IGameOverSubscriber {
-    private SpriteBatch batch;
     private GameTimer timer;
     private ViewHolder views;
     private Player player;
-    private RoundHandler roundHandler;
     private MainHandler goldHandler;
     private MainHandler pointsHandler;
     private Tower tower;
     private Waves wave;
-    private HealthBar healthBar;
     private WorldBoundaries worldBoundaries;
     private CollisionDetection collisionDetection;
     private EntityHolder entityHolder;
@@ -50,7 +44,6 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
     private void createWorld( ){
         //Objects
         player = new Player(120,100, 50, 37, 125);
-        healthBar = new HealthBar(player.getPosX(), player.getPosY(), player.getHealth(), player.getWidth(), player.getHeight());
         worldBoundaries = new WorldBoundaries();
         timer = GameTimer.GetInstance();
         wave = new Waves();
@@ -75,7 +68,7 @@ public class GameView extends ScreenAdapter implements IGameOverSubscriber {
         playerSpawnController = new PlayerSpawnController();
         towerController = new TowerController();
         towerController.addSubscribers(tower);
-        projectileHandler = new ProjectileHandler(entityHolder,collisionDetection,timer);
+        projectileHandler = new ProjectileHandler(entityHolder);
         playerSpawnController = new PlayerSpawnController();
         playerSpawnController.addSubscribers((IReSpawnable) player);
         pausController = new PausController();
