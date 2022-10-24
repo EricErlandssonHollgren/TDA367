@@ -31,7 +31,7 @@ public class StatsView implements IView {
         font.draw(batch, String.valueOf(((PointHandler)h2).getPoints()), 20, 450);
         batch.end();
     }
-
+    @Override
     public void dispose() {
         batch.dispose();
         font.dispose();

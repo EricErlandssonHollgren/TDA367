@@ -24,6 +24,7 @@ public class Turret implements IShoot, IUpgradeable {
     /**
      * This is going to be a method for the Turret to shoot a projectile
      */
+    @Override
     public void shootProjectile(){
         if(Math.ceil(timer.GetTime()) % getShootingSpeed() == 0 && !hasSpawned){
             ProjectileFactory.createCannonball(50,250,14,3,10);
@@ -35,6 +36,7 @@ public class Turret implements IShoot, IUpgradeable {
     /**
      * An upgrade method that when called makes the Turret stronger.
      */
+    @Override
     public void upgrade(){
         incrementLevel();
         incrementDamage();

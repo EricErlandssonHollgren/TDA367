@@ -17,6 +17,7 @@ public class App extends Game {
 	/**
 	 * Renders the game
 	 */
+	@Override
 	public void render() {
 		super.render();
 

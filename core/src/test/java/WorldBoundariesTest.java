@@ -40,14 +40,14 @@ public class WorldBoundariesTest {
 
     }
 
-
+    @Test
     public void testPrivateMethodUsingReflectionCreateGround() throws NoSuchMethodException, SecurityException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Method method = WorldBoundaries.class.getDeclaredMethod("createGround");
         method.setAccessible(true);
         method.invoke(wb);
     }
-
+    @Test
     public void testPrivateMethodUsingReflectionCreateWalls() throws NoSuchMethodException, SecurityException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Method method = WorldBoundaries.class.getDeclaredMethod("createWalls");

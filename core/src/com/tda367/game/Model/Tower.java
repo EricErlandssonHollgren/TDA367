@@ -39,6 +39,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
      * Builds a Turret on the Tower if the Tower has available space for a Turret
      * @param turret , builds the Turret sent as argument to the method.
      */
+    @Override
     public void buildTurret(Turret turret){
         if (!this.isFull() && gold.getGold() >= 1000){
             turrets.add(turret);
@@ -67,6 +68,7 @@ public class Tower implements IBuild, IUpgradeable, IObservers, IPaus {
     /**
      * Upgrades the level of the Tower to have more health and more turret-capacity.
      */
+    @Override
     public void upgrade(){
         if (gold.getGold() >= 3000) {
             messageSender.sendMessage("Upgraded");

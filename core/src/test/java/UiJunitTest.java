@@ -1,21 +1,9 @@
-import Controller.PausController;
-import Interfaces.IMessageSubscriber;
-import Interfaces.IPaus;
-import Interfaces.IView;
-import View.GameView;
-import View.MessageView;
-import View.PausView;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import Model.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UiJunitTest {
 

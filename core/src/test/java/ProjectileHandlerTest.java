@@ -12,14 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProjectileHandlerTest {
     private static EntityHolder eh;
-    private static CollisionDetection cd;
     private static GameTimer timer;
     private static ProjectileHandler ph;
 
     @BeforeEach
     public void init(){
         eh = EntityHolder.getInstance();
-        cd = CollisionDetection.getInstance();
         timer = GameTimer.GetInstance();
         ph = new ProjectileHandler(eh);
         //Resets

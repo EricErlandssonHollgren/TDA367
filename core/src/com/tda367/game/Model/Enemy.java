@@ -13,7 +13,6 @@ public class Enemy extends Entity implements IPaus{
     private int worth;
     public final IEnemyAttack enemyAttack;
     private int damage;
-    private boolean isAttacking;
     private boolean isGamePaused = false;
     private double velocity;
     private MainHandler goldHandler;
@@ -29,7 +28,7 @@ public class Enemy extends Entity implements IPaus{
      */
     public Enemy(float positionX, float positionY, int worth, IEnemyAttack enemyAttack, int health) {
         super(positionX, positionY, 70, 70, health);
-        this.worth = 20;
+        this.worth = worth;
         this.enemyAttack = enemyAttack;
         this.damage = 20;
         this.velocity = 0.3;
@@ -69,7 +68,7 @@ public class Enemy extends Entity implements IPaus{
      * If the health is less or equal to zero it should die.
      * @param damage represents the damage taken from either a player or cannonball.
      */
-
+    @Override
     public void takeDamage(int damage) {
         if (!isGamePaused) {
             health -= damage;

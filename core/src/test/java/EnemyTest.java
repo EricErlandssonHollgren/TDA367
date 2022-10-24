@@ -1,4 +1,3 @@
-import Interfaces.IEnemyAttack;
 import Model.*;
 import org.junit.jupiter.api.Test;
 
@@ -126,7 +125,7 @@ public class EnemyTest {
         assertTrue(initialGold < goldIsAdded);
     }
 
-
+    @Test
     public void testPrivateMethodUsingReflection() throws NoSuchMethodException, SecurityException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Method method = Enemy.class.getDeclaredMethod("enemyDead");

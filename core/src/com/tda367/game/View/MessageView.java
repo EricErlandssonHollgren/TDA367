@@ -11,14 +11,13 @@ public class MessageView implements IView, IMessageSubscriber {
     private DrawFacade facade;
     private String message;
     private GameTimer gameTimer;
-    private double messageTime, clickedTime;
+    private double messageTime;
 
     /**
      *  Creates the view for the messeges.
      */
     public MessageView() {
         message = null;
-        clickedTime = 10f;
         gameTimer = GameTimer.GetInstance();
         facade = new DrawFacade();
     }
