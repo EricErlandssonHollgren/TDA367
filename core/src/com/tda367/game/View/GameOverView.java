@@ -85,7 +85,10 @@ public class GameOverView extends ScreenAdapter {
     }
 
     @Override
-    public void dispose() {}
+    public void dispose() {
+        facade.dispose();
+        stage.dispose();
+    }
 
     private TextureRegionDrawable getTxrDrawable(Texture tx){
         TextureRegion txR = new TextureRegion(tx);

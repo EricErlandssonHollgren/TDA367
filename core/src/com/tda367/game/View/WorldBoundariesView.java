@@ -34,6 +34,6 @@ public class WorldBoundariesView implements IView {
     @Override
     public void dispose() {
 
-        drawFacade.getShaperenderer().dispose();
+        drawFacade.dispose();
     }
 }

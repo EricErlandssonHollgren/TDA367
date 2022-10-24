@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class PausView implements IView, IPaus {
     private Stage stage;
-    DrawFacade facade;
+    private DrawFacade facade;
     private ImageButton QuitButton;
     private ImageButton PlayAgain;
     public boolean isGamePaused = false;
@@ -68,7 +68,8 @@ public class PausView implements IView, IPaus {
      */
     @Override
     public void dispose() {
-        //stage.dispose();
+        stage.dispose();
+        facade.dispose();
     }
 
     private void createQuitButton() {

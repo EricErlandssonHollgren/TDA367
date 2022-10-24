@@ -97,6 +97,7 @@ public class Player extends Entity implements IObservers, IPaus, IReSpawnable {
      * The method decrement player's health depending on the input of damage.
      * @param damage is the input for dealing damage
      */
+    @Override
     public void takeDamage(int damage){
         if (!isGamePaused) {
             health -= damage;

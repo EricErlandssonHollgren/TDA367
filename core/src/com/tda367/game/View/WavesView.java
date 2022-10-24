@@ -28,5 +28,6 @@ public class WavesView implements IView {
     @Override
     public void dispose() {
         enemyView.dispose();
+        fireview.dispose();
     }
 }

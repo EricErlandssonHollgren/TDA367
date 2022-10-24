@@ -1,7 +1,6 @@
 import Interfaces.IGameOverSubscriber;
 import Interfaces.IMessageSubscriber;
 import Model.*;
-import View.MessageView;
 import View.ObserverTestView;
 import org.junit.jupiter.api.Test;
 

@@ -8,6 +8,7 @@ public class Goldhandler extends MainHandler {
      * If it isn't it will give it to the next handler.
      * @param request
      */
+    @Override
     public void handleRequest(Request request){
 
         if (request.getDescription() == HandlerItemDefiners.GOLD) {

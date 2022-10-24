@@ -8,6 +8,7 @@ public class PointHandler extends MainHandler {
      * If it isn't the correct handler it will give it to the next handler-
      * @param request
      */
+    @Override
     public void handleRequest(Request request){
         if (request.getDescription() == HandlerItemDefiners.POINTS) {
             addPoints(request.getValue());

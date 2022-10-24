@@ -84,6 +84,7 @@ public class DrawFacade {
      * Disposes the batch and image
      */
     public void dispose(){
+        shaperenderer.dispose();
         batch.dispose();
         img.dispose();
     }
