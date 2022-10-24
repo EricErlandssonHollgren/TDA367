@@ -13,22 +13,4 @@ public class App extends Game {
 	public void create() {
 		this.setScreen(new MainMenuView());
 	}
-
-	/**
-	 * Renders the game
-	 */
-	@Override
-	public void render() {
-		super.render();
-
-	}
-
-	/**
-	 * Disposes the objects in the application
-	 */
-	@Override
-	public void dispose () {
-
-
-	}
 }
