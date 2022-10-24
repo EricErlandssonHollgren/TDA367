@@ -27,8 +27,8 @@ public class StatsView implements IView {
     @Override
     public void render() {
         batch.begin();
-        font.draw(batch, String.valueOf(((Goldhandler)h1).getGold()), 20, 430);
-        font.draw(batch, String.valueOf(((PointHandler)h2).getPoints()), 20, 450);
+        font.draw(batch,"Gold: " + ((Goldhandler)h1).getGold(), 20, 430);
+        font.draw(batch, "Points: " + ((PointHandler)h2).getPoints(), 20, 450);
         batch.end();
     }
     @Override
