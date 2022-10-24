@@ -11,11 +11,10 @@ public enum ActionEnum {
     UPGRADETURRET2,
     BUILD,
     ATTACKING,
-    RUNNINGLEFT,
-    RUNNINGRIGHT,
     IDLE,
     DYING,
-    ENEMYMOVE,
-    NOTPRESSED,
-    DAMAGE
+    DAMAGE,
+    MAINMENU,
+    GAMUVIEW,
+    GAMEOVER
 }

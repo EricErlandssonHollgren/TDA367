@@ -26,7 +26,6 @@ public class DrawFacade {
         shaperenderer = new ShapeRenderer();
         this.font = new BitmapFont();
         batch = new SpriteBatch();
-
     }
 
     /**
@@ -58,12 +57,26 @@ public class DrawFacade {
         batch.end();
     }
 
+    /**
+     * Draws the text on the screen.
+     * @param str the text that is drawn.
+     * @param x the x-position at which the text is rendered
+     * @param y the y-position at which the text is rendered
+     */
     public void drawText(String str,float x, float y) {
         batch.begin();
         font.draw(batch,str, x,y);
         batch.end();
     }
 
+    /**
+     * Draws the aniamtion on the screen.
+     * @param animation the animation frames.
+     * @param x the x-position at which the animation is rendered
+     * @param y the y-position at which the animation is rendered
+     * @param imgWidth the imgWidth of the animation to be rendered
+     * @param imgHeight the imgHeight of the animation to be rendered
+     */
     public void drawAnimation(Animation animation, float x, float y, float imgWidth, float imgHeight){
         elapsedTime = GameTimer.GetInstance().GetTime();
         batch.begin();
@@ -79,6 +92,10 @@ public class DrawFacade {
         img.dispose();
     }
 
+    /**
+     * Returns the texture.
+     * @return imgTexture
+     */
     public Texture getTexture() {
         return img;
     }

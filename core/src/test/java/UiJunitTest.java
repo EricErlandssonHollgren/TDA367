@@ -100,14 +100,4 @@ public class UiJunitTest {
         enemy.takeDamage(100);
         assertTrue(enemy.getHealth() == 100);
     }
-    
-    @Test
-    public void sendARequest2(){
-        MainHandler h2 = new Goldhandler();
-        MainHandler h1 = new PointHandler();
-        int goldBefore = ((Goldhandler) h2).getGold();
-        h1.setSuccessor(h2);
-        h1.handleRequest(new Request(HandlerItemDefiners.GOLD, 100));
-        assertTrue(goldBefore+100 == ((PointHandler)h2).getPoints());
-    }
 }

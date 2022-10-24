@@ -23,6 +23,8 @@ public class TowerJUnitTest {
         assertEquals(tower2.getPositionY(), 100);
     }
 
+
+
     @Test
     public void testTowerHasSpecifiedHealth() {
         Tower tower3 = new Tower(new Goldhandler());
@@ -43,6 +45,7 @@ public class TowerJUnitTest {
         tower5.actionHandle(ActionEnum.BUILD);
         assertEquals(1, tower5.getTurrets().size());
     }
+
 
     @Test
     public void testTowerUpgrades(){
