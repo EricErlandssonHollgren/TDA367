@@ -36,7 +36,7 @@ public class MessageView implements IView, IMessageSubscriber {
     }
 
     @Override
-    public void dispose() {}
+    public void dispose() {facade.dispose();}
 
     /**
      * Updates the current message
