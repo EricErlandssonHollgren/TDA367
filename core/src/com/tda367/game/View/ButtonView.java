@@ -68,29 +68,29 @@ public class ButtonView implements IView, IPaus {
     Sets up the buttons textures, sizes and positions.
      */
     private void initButtons(){
-        Texture textureUpgradeTower = new Texture("badlogic.jpg");
+        Texture textureUpgradeTower = new Texture("upgrade.png");
         this.upgradeButtonTower = new ImageButton(getTxrDrawable(textureUpgradeTower));
         this.upgradeButtonTower.setSize(70,40);
         this.upgradeButtonTower.setPosition(50,40);
 
-        Texture textureUpgradeTurret = new Texture("badlogic.jpg");
+        Texture textureUpgradeTurret = new Texture("upgrade.png");
         this.upgradeButtonTurret = new ImageButton(getTxrDrawable(textureUpgradeTurret));
         this.upgradeButtonTurret.setVisible(false);
         this.upgradeButtonTurret.setSize(30,30);
         this.upgradeButtonTurret.setPosition(120,200);
 
-        Texture textureUpgradeTurret2 = new Texture("badlogic.jpg");
+        Texture textureUpgradeTurret2 = new Texture("upgrade.png");
         this.upgradeButtonTurret2 = new ImageButton(getTxrDrawable(textureUpgradeTurret2));
         this.upgradeButtonTurret2.setVisible(false);
         this.upgradeButtonTurret2.setSize(30,30);
         this.upgradeButtonTurret2.setPosition(120,250);
 
-        Texture textureBuildTurret = new Texture("badlogic.jpg");
+        Texture textureBuildTurret = new Texture("build.png");
         this.buildButtonTurret = new ImageButton(getTxrDrawable(textureBuildTurret));
         this.buildButtonTurret.setSize(70,40);
         this.buildButtonTurret.setPosition(150,40);
 
-        Texture texturerespawnPlayer = new Texture("badlogic.jpg");
+        Texture texturerespawnPlayer = new Texture("respawn.png");
         this.respawnPlayerButton = new ImageButton((getTxrDrawable(texturerespawnPlayer)));
         this.respawnPlayerButton.setSize(70,40);
         this.respawnPlayerButton.setPosition(200, 40);
