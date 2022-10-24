@@ -36,8 +36,8 @@ public class CollisionDetection {
      * either move right or left depending on which wall it collides with.
      */
     public void CheckCollisionPlayerNextStep(Player player) {
-        boolean ableToMoveRight = true;
-        boolean ableToMoveLeft = true;
+        boolean ableToMoveRight;
+        boolean ableToMoveLeft;
 
         ableToMoveRight = !CheckCollisionPlayerWithRightBlock(wb.getBlocks().get(1), player);
         ableToMoveLeft = !CheckCollisionPlayerWithLeftBlock(wb.getBlocks().get(2), player);

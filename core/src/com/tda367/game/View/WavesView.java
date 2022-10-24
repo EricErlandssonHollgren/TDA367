@@ -1,12 +1,7 @@
 package View;
 
 import Interfaces.IView;
-import Model.AttackFactory;
-import Model.Enemy;
-import Model.Entity;
 import Model.Waves;
-
-import java.util.List;
 
 public class WavesView implements IView {
 

@@ -2,17 +2,12 @@ package View;
 
 import Interfaces.IView;
 import Model.*;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class StatsView implements IView {
     private SpriteBatch batch;
-    private Texture img;
     private BitmapFont font;
     private MainHandler h1 = new Goldhandler();
     private MainHandler h2 = new PointHandler();

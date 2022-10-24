@@ -1,8 +1,6 @@
 package Controller;
 
-import Interfaces.IObservers;
 import Interfaces.IPaus;
-import View.PausView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
@@ -11,8 +9,14 @@ import java.util.List;
 
 public class PausController {
 
-    private List<IPaus> observers = new ArrayList<>();
+    private List<IPaus> observers;
     private int timesPressed;
+
+    /**
+     * A constructor for PausController.
+     * Holds a list of observers that calls them to handle different actions.
+     */
+    public PausController(){ observers = new ArrayList<>();}
 
     /**
      * Takes the argument and adds it to the observerlist.

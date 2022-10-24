@@ -1,16 +1,12 @@
-package Model.Facade;
+package View.Facade;
 
-import Model.Entity;
 import Model.GameTimer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class DrawFacade {
     private SpriteBatch batch;

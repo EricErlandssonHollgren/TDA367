@@ -1,7 +1,6 @@
 package Model;
 
 import Interfaces.IProjectile;
-import Model.*;
 
 import java.util.List;
 import java.util.Map;
@@ -9,21 +8,13 @@ import java.util.Map;
 public class ProjectileHandler {
 
     private EntityHolder entityHolder;
-    private CollisionDetection collisionDetection;
-    private GameTimer timer;
-    private boolean hasSpawned;
 
     /**
      * Constructor for projectileHandler
      * @param entityHolder instance of the entityHolder
-     * @param collisionDetection instance of the CollisionDetection
-     * @param timer instance of the in game timer
      */
-    public ProjectileHandler(EntityHolder entityHolder, CollisionDetection collisionDetection, GameTimer timer){
-        this.hasSpawned = false;
+    public ProjectileHandler(EntityHolder entityHolder){
         this.entityHolder = entityHolder;
-        this.timer = timer;
-        this.collisionDetection = collisionDetection;
     }
 
     /**

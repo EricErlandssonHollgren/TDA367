@@ -2,9 +2,7 @@ package View;
 
 import Interfaces.*;
 import Model.*;
-import Model.Facade.DrawFacade;
-
-import java.util.List;
+import View.Facade.DrawFacade;
 
 /**
  * Is in charge of rendering an enemy on the screen according to LibGDX implementation.

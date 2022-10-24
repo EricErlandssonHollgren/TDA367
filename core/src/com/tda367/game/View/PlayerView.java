@@ -1,7 +1,7 @@
 package View;
 import Interfaces.IView;
 import Model.ActionEnum;
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 import Model.Player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;

@@ -14,11 +14,10 @@ public class TowerController {
     private List<IObservers> observers;
 
     /**
-     * A constructor for the controller that holds a list of observers that calls them to handle different actions.
+     * A constructor for TowerController.
+     * Holds a list of observers that calls them to handle different actions.
      */
-    public TowerController() {
-        observers = new ArrayList<>();
-    }
+    public TowerController() {observers = new ArrayList<>();}
 
     /**
      * Adds an observer to this controller.

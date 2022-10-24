@@ -1,7 +1,6 @@
 package Model;
 
 import Interfaces.IEnemyAttack;
-import Interfaces.IProjectile;
 
 public class FireAttack implements IEnemyAttack {
 

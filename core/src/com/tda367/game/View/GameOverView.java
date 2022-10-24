@@ -1,8 +1,6 @@
 package View;
 
-import Interfaces.IObservers;
-import Model.ActionEnum;
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -47,7 +45,6 @@ public class GameOverView extends ScreenAdapter {
         stage.addActor(QuitButton);
         Gdx.input.setInputProcessor(stage);
     }
-
 
     private void addListeners() {
         this.PlayAgain.addListener(new ClickListener(){

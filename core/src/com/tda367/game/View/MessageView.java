@@ -2,12 +2,9 @@ package View;
 
 import Interfaces.IMessageSubscriber;
 import Interfaces.IView;
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 import Model.GameTimer;
-import Model.Goldhandler;
-import Model.PointHandler;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class MessageView implements IView, IMessageSubscriber {
 

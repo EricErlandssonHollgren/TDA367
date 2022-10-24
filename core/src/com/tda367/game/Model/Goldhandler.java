@@ -1,7 +1,7 @@
 package Model;
 
 public class Goldhandler extends MainHandler {
-    private static int gold = 1000;
+    private static int gold = 10000;
 
     /**
      * Checks if the request is meant for this handler. If it's the correct handler it will add the gold.

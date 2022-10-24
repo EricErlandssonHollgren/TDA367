@@ -3,7 +3,6 @@ package View;
 import Controller.PlayerSpawnController;
 import Controller.TowerController;
 import Interfaces.IPaus;
-import Model.Player;
 import Model.Tower;
 import Interfaces.IView;
 import com.badlogic.gdx.Gdx;

@@ -3,7 +3,7 @@ package View;
 import Interfaces.IEnemyAttack;
 import Interfaces.IView;
 import Model.*;
-import Model.Facade.DrawFacade;
+import View.Facade.DrawFacade;
 
 import java.util.List;
 

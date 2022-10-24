@@ -1,6 +1,5 @@
 package Controller;
 
-import Interfaces.IObservers;
 import Interfaces.IReSpawnable;
 
 import java.util.ArrayList;
@@ -10,7 +9,8 @@ public class PlayerSpawnController {
     private List<IReSpawnable> observers;
 
     /**
-     * A constructor for the controller that holds a list of observers that calls them to handle different actions.
+     * A constructor for PlayerSpawnController.
+     * Holds a list of observers that calls them to handle different actions.
      */
     public PlayerSpawnController(){
         observers = new ArrayList<>();

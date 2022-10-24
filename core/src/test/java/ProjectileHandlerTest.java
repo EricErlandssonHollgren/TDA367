@@ -1,12 +1,11 @@
 import Interfaces.IProjectile;
 import Model.*;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +21,7 @@ public class ProjectileHandlerTest {
         eh = EntityHolder.getInstance();
         cd = CollisionDetection.getInstance();
         timer = GameTimer.GetInstance();
-        ph = new ProjectileHandler(eh,cd,timer);
+        ph = new ProjectileHandler(eh);
         //Resets
         timer.resetTimer();
         for (IProjectile p: eh.getProjectiles()) {
