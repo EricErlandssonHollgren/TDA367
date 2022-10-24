@@ -17,7 +17,7 @@ public class TowerJUnitTest {
     }
 
     @Test
-    public void testTowerHasSpecifiedLocation() {
+    public void testTowerHasLocation() {
         Tower tower2 = new Tower(new Goldhandler());
         assertEquals(tower2.getPositionX(), 0);
         assertEquals(tower2.getPositionY(), 100);
@@ -26,9 +26,9 @@ public class TowerJUnitTest {
 
 
     @Test
-    public void testTowerHasSpecifiedHealth() {
+    public void testTowerHasHealth() {
         Tower tower3 = new Tower(new Goldhandler());
-        assertEquals(400, tower3.getHealth());
+        assertEquals(50, tower3.getHealth());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class TowerJUnitTest {
         tower6.actionHandle(ActionEnum.BUILD);
         assertEquals(2, tower6.getLevel());
         assertEquals(2, tower6.getTurrets().size());
-        assertEquals(600, tower6.getHealth());
+        assertEquals(250, tower6.getHealth());
     }
 
     @Test
